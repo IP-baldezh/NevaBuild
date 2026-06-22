@@ -1,0 +1,13 @@
+# Caddy — автоматический HTTPS (Let's Encrypt).
+# Замените домен на ваш и укажите email для уведомлений ACME.
+# Запуск: docker compose --profile proxy up -d
+
+nevabuildexpo.ru, www.nevabuildexpo.ru {
+	encode zstd gzip
+	reverse_proxy app:3000
+}
+
+# Доп. домены (по необходимости) — редирект на основной:
+neva-build.ru, expo-neva.ru {
+	redir https://nevabuildexpo.ru{uri} permanent
+}

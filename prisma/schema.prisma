@@ -1,0 +1,443 @@
+// NEVA BUILD — схема базы данных
+// PostgreSQL + Prisma. Локализация контента — параллельными полями *Ru / *En.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ===========================================================================
+// Enums
+// ===========================================================================
+
+enum Role {
+  SUPER_ADMIN
+  CONTENT_MANAGER
+  SALES_MANAGER
+  VIEWER
+  EXHIBITOR // заготовка под будущий ЛК участника
+  ORGANIZER // заготовка под будущий ЛК организатора
+}
+
+enum ExhibitorStatus {
+  EXHIBITOR
+  PARTNER
+  SPONSOR
+  AMBASSADOR
+}
+
+enum SessionType {
+  PLENARY
+  MASTERCLASS
+  LECTURE
+  DISCUSSION
+  PRESENTATION
+  WORKSHOP
+}
+
+enum ContentStatus {
+  DRAFT
+  PUBLISHED
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  FAILED
+  CANCELLED
+  REFUNDED
+}
+
+enum TicketStatus {
+  VALID
+  USED
+  CANCELLED
+}
+
+enum LeadType {
+  PARTICIPATION // заявка на участие
+  CONTACT // обратная связь
+  SUBSCRIPTION // подписка на новости
+}
+
+enum LeadStatus {
+  NEW
+  IN_PROGRESS
+  CONTACTED
+  CLOSED
+}
+
+enum PartnerType {
+  AMBASSADOR
+  PARTNER
+  SPONSOR
+}
+
+// ===========================================================================
+// Пользователи / авторизация (Auth.js + Credentials)
+// ===========================================================================
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  passwordHash String?
+  name         String?
+  role         Role      @default(VIEWER)
+  isActive     Boolean   @default(true)
+  image        String?
+  emailVerified DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  accounts  Account[]
+  sessions  Session[]
+  auditLogs AuditLog[]
+
+  @@index([role])
+}
+
+// Стандартные модели Auth.js (на будущее: OAuth-провайдеры). Для Credentials не обязательны.
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ===========================================================================
+// Настройки события (singleton, редактируется в админке)
+// ===========================================================================
+
+model EventSettings {
+  id      String @id @default("default")
+  titleRu String
+  titleEn String
+
+  dateStart DateTime
+  dateEnd   DateTime
+
+  venueRu String
+  venueEn String
+  cityRu  String
+  cityEn  String
+
+  phone      String
+  email      String
+  addressRu  String
+  addressEn  String
+
+  // Основные цифры (редактируемые)
+  visitorCount       Int @default(0)
+  exhibitorCount     Int @default(0)
+  areaSize           Int @default(0)
+  programEventsCount Int @default(0)
+  programDays        Int @default(0)
+
+  // SEO
+  seoTitleRu       String?
+  seoTitleEn       String?
+  seoDescriptionRu String?
+  seoDescriptionEn String?
+
+  organizerRu String?
+  organizerEn String?
+
+  // Соцсети и домены (гибкие поля)
+  social  Json?
+  domains String[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ===========================================================================
+// Участники и категории
+// ===========================================================================
+
+model Exhibitor {
+  id            String          @id @default(cuid())
+  slug          String          @unique
+  name          String
+  logoUrl       String?
+  descriptionRu String?
+  descriptionEn String?
+  countryRu     String?
+  countryEn     String?
+  cityRu        String?
+  cityEn        String?
+  boothNumber   String?
+  website       String?
+  email         String?
+  phone         String?
+  status        ExhibitorStatus @default(EXHIBITOR)
+  isFeatured    Boolean         @default(false)
+  isPublished   Boolean         @default(true)
+  gallery       String[]
+  social        Json?
+  sortOrder     Int             @default(0)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  categories ExhibitorCategoryRelation[]
+
+  @@index([status])
+  @@index([isPublished])
+}
+
+model ExhibitorCategory {
+  id        String @id @default(cuid())
+  slug      String @unique
+  titleRu   String
+  titleEn   String
+  icon      String?
+  sortOrder Int    @default(0)
+
+  exhibitors ExhibitorCategoryRelation[]
+}
+
+model ExhibitorCategoryRelation {
+  exhibitor   Exhibitor         @relation(fields: [exhibitorId], references: [id], onDelete: Cascade)
+  exhibitorId String
+  category    ExhibitorCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId  String
+
+  @@id([exhibitorId, categoryId])
+  @@index([categoryId])
+}
+
+// ===========================================================================
+// Деловая программа
+// ===========================================================================
+
+model ProgramDay {
+  id        String   @id @default(cuid())
+  date      DateTime
+  titleRu   String
+  titleEn   String
+  sortOrder Int      @default(0)
+
+  sessions ProgramSession[]
+}
+
+model ProgramSession {
+  id            String      @id @default(cuid())
+  slug          String      @unique
+  dayId         String
+  titleRu       String
+  titleEn       String
+  descriptionRu String?
+  descriptionEn String?
+  startTime     DateTime
+  endTime       DateTime
+  hallRu        String?
+  hallEn        String?
+  type          SessionType @default(LECTURE)
+  tags          String[]
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  day      ProgramDay @relation(fields: [dayId], references: [id], onDelete: Cascade)
+  speakers Speaker[]  @relation("SessionSpeakers")
+
+  @@index([dayId])
+  @@index([type])
+}
+
+model Speaker {
+  id         String  @id @default(cuid())
+  nameRu     String
+  nameEn     String
+  positionRu String?
+  positionEn String?
+  company    String?
+  photoUrl   String?
+  bioRu      String?
+  bioEn      String?
+
+  sessions ProgramSession[] @relation("SessionSpeakers")
+}
+
+// ===========================================================================
+// Новости
+// ===========================================================================
+
+model News {
+  id            String        @id @default(cuid())
+  slug          String        @unique
+  titleRu       String
+  titleEn       String
+  excerptRu     String?
+  excerptEn     String?
+  contentRu     String?
+  contentEn     String?
+  coverImageUrl String?
+  categoryRu    String?
+  categoryEn    String?
+  status        ContentStatus @default(DRAFT)
+  publishedAt   DateTime?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([status, publishedAt])
+}
+
+// ===========================================================================
+// Билеты
+// ===========================================================================
+
+model TicketProduct {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  titleRu       String
+  titleEn       String
+  descriptionRu String?
+  descriptionEn String?
+  price         Int // в рублях
+  currency      String   @default("RUB")
+  benefitsRu    String[]
+  benefitsEn    String[]
+  isActive      Boolean  @default(true)
+  sortOrder     Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  orders TicketOrder[]
+}
+
+model TicketOrder {
+  id              String      @id @default(cuid())
+  orderNumber     String      @unique
+  ticketProductId String
+  fullName        String
+  email           String
+  phone           String
+  company         String?
+  position        String?
+  amount          Int
+  currency        String      @default("RUB")
+  status          OrderStatus @default(PENDING)
+  paymentProvider String      @default("yookassa")
+  paymentId       String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  ticketProduct TicketProduct @relation(fields: [ticketProductId], references: [id])
+  ticket        Ticket?
+
+  @@index([status])
+  @@index([email])
+}
+
+model Ticket {
+  id         String       @id @default(cuid())
+  orderId    String       @unique
+  ticketCode String       @unique
+  qrCodeUrl  String?
+  status     TicketStatus @default(VALID)
+  issuedAt   DateTime     @default(now())
+
+  order TicketOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+}
+
+// ===========================================================================
+// Заявки / обратная связь
+// ===========================================================================
+
+model Lead {
+  id             String     @id @default(cuid())
+  type           LeadType   @default(CONTACT)
+  company        String?
+  fullName       String
+  phone          String?
+  email          String
+  website        String?
+  category       String?
+  message        String?
+  status         LeadStatus @default(NEW)
+  managerComment String?
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+
+  @@index([type, status])
+}
+
+// ===========================================================================
+// Партнёры / амбассадоры
+// ===========================================================================
+
+model Partner {
+  id            String      @id @default(cuid())
+  type          PartnerType @default(PARTNER)
+  name          String
+  logoUrl       String?
+  photoUrl      String?
+  roleRu        String?
+  roleEn        String?
+  descriptionRu String?
+  descriptionEn String?
+  website       String?
+  sortOrder     Int         @default(0)
+  isActive      Boolean     @default(true)
+  createdAt     DateTime    @default(now())
+
+  @@index([type, isActive])
+}
+
+// ===========================================================================
+// Медиа и аудит
+// ===========================================================================
+
+model MediaAsset {
+  id        String   @id @default(cuid())
+  url       String
+  filename  String
+  mimeType  String
+  size      Int
+  createdAt DateTime @default(now())
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  action    String
+  entity    String
+  entityId  String?
+  createdAt DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([entity])
+  @@index([createdAt])
+}

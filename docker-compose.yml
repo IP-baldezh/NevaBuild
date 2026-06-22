@@ -1,0 +1,90 @@
+# ===== NEVA BUILD — docker-compose =====
+# Запуск:  docker compose up -d --build
+# Caddy (HTTPS) — опционально:  docker compose --profile proxy up -d --build
+# Redis    — опционально:        docker compose --profile cache up -d
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-neva}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-neva}
+      POSTGRES_DB: ${POSTGRES_DB:-nevabuild}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-neva} -d ${POSTGRES_DB:-nevabuild}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    # Порт наружу нужен только для отладки; в проде можно убрать.
+    ports:
+      - "5432:5432"
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      # БД (хост = имя сервиса postgres)
+      DATABASE_URL: postgresql://${POSTGRES_USER:-neva}:${POSTGRES_PASSWORD:-neva}@postgres:5432/${POSTGRES_DB:-nevabuild}?schema=public
+      NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:3000}
+      AUTH_SECRET: ${AUTH_SECRET}
+      AUTH_TRUST_HOST: "true"
+      # Бутстрап админа при первом запуске (выключите после первого старта)
+      BOOTSTRAP: ${BOOTSTRAP:-true}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@nevabuildexpo.ru}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-ChangeMe123!}
+      ADMIN_NAME: ${ADMIN_NAME:-Администратор}
+      # Email
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_FROM: ${SMTP_FROM:-NEVA BUILD <info@neva-expo.ru>}
+      ORGANIZER_EMAIL: ${ORGANIZER_EMAIL:-info@neva-expo.ru}
+      # ЮKassa
+      YOOKASSA_SHOP_ID: ${YOOKASSA_SHOP_ID:-}
+      YOOKASSA_SECRET_KEY: ${YOOKASSA_SECRET_KEY:-}
+      YOOKASSA_RETURN_URL: ${YOOKASSA_RETURN_URL:-}
+      REDIS_URL: ${REDIS_URL:-}
+    volumes:
+      # Сохранение загруженных медиа между перезапусками (dev-хранилище)
+      - uploads:/app/public/uploads
+    ports:
+      - "3000:3000"
+
+  # --- Опционально: Redis (кэш/rate-limit) ---
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    profiles: ["cache"]
+    volumes:
+      - redis-data:/data
+
+  # --- Опционально: Caddy (автоматический HTTPS) ---
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    profiles: ["proxy"]
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+
+volumes:
+  postgres-data:
+  uploads:
+  redis-data:
+  caddy-data:
+  caddy-config:

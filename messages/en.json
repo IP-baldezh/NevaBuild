@@ -1,0 +1,344 @@
+{
+  "Meta": {
+    "siteName": "NEVA BUILD",
+    "tagline": "Building Exhibition & Forum",
+    "defaultTitle": "NEVA BUILD — International Building & Interior Exhibition and Forum",
+    "defaultDescription": "NEVA BUILD is the largest building & interior exhibition in North-West Russia. Manufacturers, suppliers, architects and designers. Expoforum, Saint Petersburg."
+  },
+  "Nav": {
+    "about": "About",
+    "exhibit": "Exhibitors",
+    "visit": "Visitors",
+    "program": "Program",
+    "exhibitors": "Catalogue",
+    "news": "News",
+    "contacts": "Contacts",
+    "getTicket": "Get ticket",
+    "menu": "Menu",
+    "close": "Close"
+  },
+  "Common": {
+    "learnMore": "Learn more",
+    "aboutMore": "About the exhibition",
+    "allNews": "All news",
+    "allExhibitors": "All exhibitors",
+    "viewProgram": "View program",
+    "watchExhibitors": "View exhibitors",
+    "bookStand": "Book a stand",
+    "getTicket": "Get ticket",
+    "buyTicket": "Buy ticket",
+    "back": "Back",
+    "backToCatalog": "Back to catalogue",
+    "readMore": "Read more",
+    "loading": "Loading…",
+    "submit": "Submit",
+    "sending": "Sending…",
+    "required": "required"
+  },
+  "Hero": {
+    "badge": "13–15 April 2027 · Saint Petersburg",
+    "kicker": "International building exhibition",
+    "title": "International Building & Interior Exhibition and Forum",
+    "subtitle": "Building exhibition",
+    "tagline": "Ideas. Materials. Solutions.",
+    "ctaTicket": "Visit the exhibition",
+    "ctaStand": "Become an exhibitor",
+    "ctaExhibitors": "View exhibitors",
+    "venue": "Expoforum",
+    "slogan": "Ideas · Materials · Solutions",
+    "scroll": "Scroll down",
+    "features": {
+      "trendsTitle": "Trends",
+      "trendsSub": "of the future",
+      "programTitle": "Business program",
+      "programSub": "for professionals",
+      "pointTitle": "New point of attraction",
+      "pointSub": "for the industry"
+    }
+  },
+  "Stats": {
+    "title": "NEVA BUILD in numbers",
+    "visitors": "visitors",
+    "companies": "exhibiting companies",
+    "area": "exhibition area",
+    "events": "business program events",
+    "days": "days of business program"
+  },
+  "About": {
+    "label": "About",
+    "title": "The key event of the North-West building industry",
+    "text": "NEVA BUILD is the largest building & interior exhibition and forum in North-West Russia. A meeting point for industry professionals: manufacturers, suppliers, designers, architects and developers.",
+    "advantages": {
+      "suppliers": "New suppliers",
+      "connections": "Business connections",
+      "community": "Professional community",
+      "trends": "Building & interior trends",
+      "tech": "Materials & technology showcases"
+    }
+  },
+  "Sections": {
+    "label": "Sectors",
+    "title": "Exhibition sectors",
+    "description": "16 thematic sectors cover the full construction and finishing cycle — from foundation to interior.",
+    "more": "Details",
+    "cta": "All exhibition sectors",
+    "items": {
+      "construction": "Building materials",
+      "finishing": "Finishing materials",
+      "windows": "Windows & facades",
+      "engineering": "Engineering systems",
+      "roofing": "Roofing & insulation",
+      "tools": "Tools & equipment",
+      "design": "Design & architecture",
+      "smart": "Smart home & automation",
+      "interior": "Interior solutions",
+      "furniture": "Furniture & product design",
+      "light": "Lighting",
+      "decor": "Decor"
+    }
+  },
+  "ExhibitBlock": {
+    "label": "For exhibitors",
+    "title": "Present your brand to a professional audience",
+    "text": "Reach thousands of buyers, architects and contractors, close deals and strengthen your brand on the North-West market.",
+    "points": {
+      "audience": "Targeted B2B audience from the whole region",
+      "leads": "Direct leads and contracts",
+      "networking": "Networking with industry professionals",
+      "brand": "Brand and product showcase",
+      "media": "PR and media coverage"
+    }
+  },
+  "VisitBlock": {
+    "label": "For visitors",
+    "title": "Find materials, technology and partners",
+    "text": "Three days of industry novelties, a business program and live networking with suppliers and experts.",
+    "ctaProgram": "View program"
+  },
+  "CatalogPreview": {
+    "label": "Catalogue",
+    "title": "Companies already with us",
+    "cta": "All exhibitors",
+    "more": "Details"
+  },
+  "ProgramPreview": {
+    "label": "Business program",
+    "title": "Three days of talks, panels and masterclasses",
+    "cta": "View program"
+  },
+  "Partners": {
+    "label": "Partners",
+    "title": "Exhibitors and partners",
+    "description": "Leading building industry companies have already confirmed participation in NEVA BUILD.",
+    "ambassadors": "Ambassadors",
+    "sponsors": "Partners"
+  },
+  "NewsPreview": {
+    "label": "News",
+    "title": "Exhibition news",
+    "cta": "All news",
+    "readMore": "Read"
+  },
+  "Contacts": {
+    "label": "Contacts",
+    "title": "Get in touch",
+    "venue": "Venue",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "schedule": "Opening hours",
+    "scheduleValue": "Mon–Fri, 10:00–19:00",
+    "organizer": "Organizer",
+    "social": "Follow us",
+    "writeUs": "Write to us"
+  },
+  "Footer": {
+    "about": "International building & interior exhibition and forum in Saint Petersburg.",
+    "nav": "Menu",
+    "forVisitors": "For visitors",
+    "legal": "Legal",
+    "privacy": "Privacy policy",
+    "terms": "Terms of use",
+    "consent": "Personal data consent",
+    "offer": "Ticket purchase offer",
+    "rights": "All rights reserved.",
+    "newsletter": "Newsletter",
+    "newsletterText": "Get program announcements and exhibition news by email."
+  },
+  "AboutPage": {
+    "title": "About NEVA BUILD",
+    "lead": "Where the North-West building industry meets innovation.",
+    "descriptionTitle": "What is NEVA BUILD",
+    "audienceTitle": "Who it is for",
+    "audience": {
+      "architects": "Architects & designers",
+      "designers": "Interior designers",
+      "developers": "Developers",
+      "builders": "Construction companies",
+      "buyers": "Buyers & procurement",
+      "owners": "Business owners"
+    },
+    "whyCity": "Why Saint Petersburg",
+    "whyCityText": "North-West Russia is one of the country's largest construction markets, and Saint Petersburg is its business and architectural centre."
+  },
+  "ExhibitPage": {
+    "title": "Become a NEVA BUILD exhibitor",
+    "lead": "Bring your brand to a professional building & interior audience.",
+    "whyTitle": "Why exhibit",
+    "formatsTitle": "Participation formats",
+    "formats": {
+      "standard": "Standard stand",
+      "custom": "Custom stand",
+      "partner": "Partner package",
+      "speaker": "Speaking slot in the program",
+      "special": "Special project"
+    },
+    "benefitsTitle": "What you get",
+    "stepsTitle": "How to become an exhibitor",
+    "steps": {
+      "request": "Submit a request",
+      "consult": "Get a consultation",
+      "format": "Choose a format",
+      "contract": "Sign the contract",
+      "prepare": "Prepare your stand"
+    },
+    "formTitle": "Exhibitor application"
+  },
+  "VisitPage": {
+    "title": "Visit NEVA BUILD",
+    "lead": "Three days to find everything for your projects.",
+    "whyTitle": "Why attend",
+    "whyText": "NEVA BUILD brings together hundreds of suppliers, market novelties, a business program and networking in one place. In three days you will see what usually takes months to find.",
+    "whoTitle": "Who will be interested",
+    "who": {
+      "architects": "Architects",
+      "designers": "Designers",
+      "developers": "Developers",
+      "builders": "Builders",
+      "buyers": "Buyers",
+      "owners": "Business owners",
+      "private": "Private visitors"
+    },
+    "findTitle": "What you will find",
+    "find": {
+      "materials": "Materials",
+      "tech": "Technology",
+      "suppliers": "Suppliers",
+      "partners": "Partners",
+      "ideas": "Project ideas"
+    },
+    "faqTitle": "FAQ",
+    "faq": {
+      "q1": "How much is a ticket?",
+      "a1": "The price depends on the ticket type. Visitor Pass is basic entry, Business Pass gives access to all days and the business program, VIP Pass includes all privileges. See the tickets page for current prices.",
+      "q2": "Where is the exhibition held?",
+      "a2": "Expoforum, Saint Petersburg, Peterburgskoe shosse 64/1.",
+      "q3": "How do I get there?",
+      "a3": "Free shuttles run to Expoforum from Moskovskaya metro station, plus public transport. Parking is available for cars.",
+      "q4": "Can I buy a ticket on site?",
+      "a4": "Yes, but buying online is faster and queue-free: a ticket with a QR code is emailed to you right after payment."
+    }
+  },
+  "ExhibitorsPage": {
+    "title": "Exhibitor catalogue",
+    "lead": "Manufacturers, suppliers and partners of NEVA BUILD.",
+    "search": "Search by name",
+    "allCategories": "All categories",
+    "allCountries": "All countries",
+    "allStatuses": "All statuses",
+    "sortAz": "A to Z",
+    "booth": "Stand",
+    "notFound": "No exhibitors found",
+    "status": {
+      "EXHIBITOR": "Exhibitor",
+      "PARTNER": "Partner",
+      "SPONSOR": "Sponsor",
+      "AMBASSADOR": "Ambassador"
+    }
+  },
+  "ProgramPage": {
+    "title": "Business program",
+    "lead": "Talks, panels, masterclasses and presentations.",
+    "allTypes": "All formats",
+    "allHalls": "All halls",
+    "hall": "Hall",
+    "speakers": "Speakers",
+    "addToCalendar": "Add to calendar",
+    "type": {
+      "PLENARY": "Plenary session",
+      "MASTERCLASS": "Masterclass",
+      "LECTURE": "Lecture",
+      "DISCUSSION": "Discussion",
+      "PRESENTATION": "Presentation",
+      "WORKSHOP": "Workshop"
+    },
+    "empty": "No events for this day yet"
+  },
+  "NewsPage": {
+    "title": "News",
+    "lead": "Latest news and announcements from NEVA BUILD.",
+    "allCategories": "All categories",
+    "empty": "No news yet"
+  },
+  "ContactsPage": {
+    "title": "Contacts",
+    "lead": "We are here to answer your questions.",
+    "requisitesTitle": "Organizer details",
+    "domains": "Official domains"
+  },
+  "TicketsPage": {
+    "title": "NEVA BUILD tickets",
+    "lead": "Choose a ticket type and buy your pass online.",
+    "from": "from",
+    "buy": "Buy",
+    "benefits": "What's included",
+    "checkout": "Checkout",
+    "selectedTicket": "Selected ticket",
+    "total": "Total",
+    "pay": "Proceed to payment",
+    "successTitle": "Payment successful",
+    "successText": "Thank you! Your ticket has been emailed to you. Show the QR code at the entrance.",
+    "failTitle": "Payment failed",
+    "failText": "The payment was not completed. Please try again or contact us.",
+    "tryAgain": "Try again"
+  },
+  "Legal": {
+    "placeholder": "This document is being prepared. The official, lawyer-approved version will be published here. Replace this block with real content before going to production.",
+    "updated": "Last updated"
+  },
+  "Forms": {
+    "company": "Company name",
+    "fullName": "Contact person",
+    "name": "Name",
+    "phone": "Phone",
+    "email": "Email",
+    "website": "Company website",
+    "position": "Position",
+    "category": "Participation category",
+    "message": "Comment",
+    "consent": "I consent to the processing of my personal data",
+    "offerConsent": "I accept the terms of the offer",
+    "selectCategory": "Select a category",
+    "successTitle": "Request sent",
+    "successText": "Thank you! We will contact you shortly.",
+    "errorTitle": "Submission error",
+    "errorText": "Something went wrong. Please try again.",
+    "validation": {
+      "required": "This field is required",
+      "email": "Enter a valid email",
+      "phone": "Enter a valid phone number",
+      "consent": "Consent is required",
+      "min": "Value is too short"
+    }
+  },
+  "LangSwitcher": {
+    "label": "Language",
+    "ru": "Русский",
+    "en": "English"
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "text": "It may have been moved or deleted.",
+    "home": "Go home"
+  }
+}

@@ -1,0 +1,268 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Фирменные токены как утилиты Tailwind */
+  --color-lime: var(--lime);
+  --color-lime-foreground: var(--lime-foreground);
+  --color-brand-red: var(--brand-red);
+  --color-brand-acid: var(--brand-acid);
+  --color-brand-black: var(--brand-black);
+
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  /* NEVA BUILD — тёмная выставочная тема (референс) */
+  --radius: 0.25rem;
+
+  /* Фирменные сырые цвета */
+  --brand-acid: #b6ff00;
+  --lime: oklch(0.9 0.23 124);
+  --lime-foreground: oklch(0.16 0 0);
+  --brand-red: oklch(0.6 0.23 27);
+  --brand-black: #0a0a0a;
+
+  /* Тёмный фон */
+  --background: oklch(0.16 0 0);
+  --foreground: oklch(0.98 0 0);
+
+  --card: oklch(0.2 0 0);
+  --card-foreground: oklch(0.98 0 0);
+
+  --popover: oklch(0.18 0 0);
+  --popover-foreground: oklch(0.98 0 0);
+
+  /* primary = neon lime */
+  --primary: oklch(0.9 0.23 124);
+  --primary-foreground: oklch(0.16 0 0);
+
+  --secondary: oklch(0.24 0 0);
+  --secondary-foreground: oklch(0.98 0 0);
+
+  --muted: oklch(0.24 0 0);
+  --muted-foreground: oklch(0.68 0 0);
+
+  /* accent = lime (same as primary) */
+  --accent: oklch(0.9 0.23 124);
+  --accent-foreground: oklch(0.16 0 0);
+
+  --destructive: oklch(0.6 0.23 27);
+  --destructive-foreground: oklch(0.98 0 0);
+
+  --border: oklch(0.3 0 0);
+  --input: oklch(0.3 0 0);
+  --ring: oklch(0.9 0.23 124);
+
+  --chart-1: oklch(0.9 0.23 124);
+  --chart-2: oklch(0.6 0.23 27);
+  --chart-3: oklch(0.68 0 0);
+  --chart-4: oklch(0.45 0 0);
+  --chart-5: oklch(0.3 0 0);
+
+  /* Sidebar (admin) */
+  --sidebar: oklch(0.18 0 0);
+  --sidebar-foreground: oklch(0.98 0 0);
+  --sidebar-primary: oklch(0.9 0.23 124);
+  --sidebar-primary-foreground: oklch(0.16 0 0);
+  --sidebar-accent: oklch(0.24 0 0);
+  --sidebar-accent-foreground: oklch(0.98 0 0);
+  --sidebar-border: oklch(0.28 0 0);
+  --sidebar-ring: oklch(0.9 0.23 124);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: oklch(0.9 0.23 124);
+    color: oklch(0.16 0 0);
+  }
+}
+
+@layer utilities {
+  /* Контейнер страницы */
+  .container-neva {
+    @apply mx-auto w-full max-w-[1440px] px-5 md:px-10 lg:px-16;
+  }
+
+  /* Совместимость с компонентами использующими старые утилиты */
+  .bg-neva-gradient {
+    background-image: linear-gradient(120deg, oklch(0.9 0.23 124) 0%, oklch(0.85 0.2 155) 100%);
+  }
+  .bg-neva-gradient-soft {
+    background-color: oklch(0.2 0 0);
+    background-image: linear-gradient(135deg, oklch(0.24 0 0) 0%, oklch(0.22 0.02 150) 100%);
+  }
+  .bg-neva-dark {
+    background-color: oklch(0.2 0 0);
+  }
+  .text-neva-gradient {
+    background-image: linear-gradient(100deg, oklch(0.9 0.23 124), oklch(0.85 0.2 155));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .ring-outline {
+    box-shadow: inset 0 0 0 1px oklch(0.3 0 0);
+  }
+  .container-neva-old {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Blueprint grid — тонкая сетка поверх тёмного фона */
+  .bg-blueprint {
+    background-image:
+      linear-gradient(to right, oklch(0.3 0 0 / 0.35) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(0.3 0 0 / 0.35) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+  .bg-blueprint-sm {
+    background-image:
+      linear-gradient(to right, oklch(0.3 0 0 / 0.3) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(0.3 0 0 / 0.3) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  /* Фирменный neon-lime градиент (для акцентов) */
+  .bg-neva-gradient {
+    background-image: linear-gradient(
+      120deg,
+      oklch(0.9 0.23 124) 0%,
+      oklch(0.85 0.2 155) 100%
+    );
+  }
+
+  /* Marquee анимация */
+  .animate-marquee {
+    animation: neva-marquee 32s linear infinite;
+  }
+  .animate-marquee-fast {
+    animation: neva-marquee 20s linear infinite;
+  }
+
+  /* Lime scan-line — ТОЛЬКО transform/opacity, без top/left (compositor-only) */
+  .animate-scan-line {
+    animation: neva-scan 7s ease-in-out infinite;
+    will-change: transform, opacity;
+  }
+
+  /* Lime glow — тень для акцентных элементов */
+  .glow-lime {
+    box-shadow: 0 0 24px oklch(0.9 0.23 124 / 0.35), 0 0 8px oklch(0.9 0.23 124 / 0.2);
+  }
+  .glow-lime-sm {
+    box-shadow: 0 0 12px oklch(0.9 0.23 124 / 0.25);
+  }
+  .text-glow-lime {
+    text-shadow: 0 0 20px oklch(0.9 0.23 124 / 0.5);
+  }
+
+  /* Мигание для красной точки-акцента */
+  .animate-pulse-dot {
+    animation: neva-pulse-dot 2.5s ease-in-out infinite;
+    will-change: opacity, transform;
+  }
+
+  /* Fade-up для CSS-stagger (без JS IntersectionObserver) */
+  .animate-fade-up {
+    animation: neva-fade-up 0.45s ease-out both;
+    will-change: transform, opacity;
+  }
+
+  /* Stagger delays для CSS grid-анимаций */
+  .stagger-1  { animation-delay:  60ms; }
+  .stagger-2  { animation-delay: 120ms; }
+  .stagger-3  { animation-delay: 180ms; }
+  .stagger-4  { animation-delay: 240ms; }
+  .stagger-5  { animation-delay: 300ms; }
+  .stagger-6  { animation-delay: 360ms; }
+  .stagger-7  { animation-delay: 420ms; }
+  .stagger-8  { animation-delay: 480ms; }
+}
+
+@keyframes neva-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes neva-scan {
+  0%   { transform: translateY(0);    opacity: 0; }
+  5%   { opacity: 1; }
+  95%  { opacity: 0.4; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+@keyframes neva-fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes neva-pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.7); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

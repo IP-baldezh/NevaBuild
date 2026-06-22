@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/Fanare/.claude/**)",
+      "Bash(gh repo *)",
+      "WebFetch(domain:github.com)",
+      "Bash(ls -la \"C:\\\\Users\\\\Fanare\\\\.claude.json\" 2>&1; echo \"---\"; ls -la \"C:\\\\Users\\\\Fanare\\\\.claude\" 2>&1)",
+      "Bash(cd /tmp/ui-ux-pro-max-skill && head -50 .claude/skills/ui-ux-pro-max/SKILL.md && echo \"---size---\" && du -sh .claude/skills/ui-ux-pro-max)",
+      "Bash(mkdir -p \"/c/Users/Fanare/.claude/skills\")",
+      "Bash(cp -r /tmp/ui-ux-pro-max-skill/.claude/skills/ui-ux-pro-max \"/c/Users/Fanare/.claude/skills/\")",
+      "Read(//u//**)",
+      "Bash(rm -rf /tmp/ui-ux-pro-max-skill)",
+      "Bash(npm -v)",
+      "Bash(git --version)",
+      "Bash(docker --version)",
+      "Bash(npm install *)",
+      "Bash(npx prisma *)",
+      "Bash(npx next *)",
+      "Bash(echo \"---exit: $?---\")",
+      "Bash(mkdir -p prisma/migrations/0_init)",
+      "Bash(printf 'provider = \"postgresql\"\\\\n')",
+      "Bash(docker rm *)",
+      "Bash(docker run *)",
+      "Bash(docker exec *)",
+      "Bash(break)",
+      "Bash(npx tsx *)",
+      "Bash(npx tsc *)",
+      "Bash(curl -s -X POST http://localhost:3100/api/payments/create -H \"Content-Type: application/json\" -d '{\"ticketProductId\":\"cmq8i6wu0000stvog8r8hi3u4\",\"fullName\":\"Иван Тест\",\"email\":\"test@example.com\",\"phone\":\"+79990001122\",\"consent\":true,\"offerConsent\":true,\"locale\":\"ru\"}')",
+      "Bash(npm run *)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(npx vitest *)",
+      "mcp__magic__21st_magic_component_inspiration",
+      "Bash(python3 \"C:/Users/Fanare/.claude/skills/ui-ux-pro-max/scripts/search.py\" \"animation performance optimization framer motion scroll\" --domain ux -n 15)",
+      "Bash(python3 \"C:/Users/Fanare/.claude/skills/ui-ux-pro-max/scripts/search.py\" \"next.js bundle performance lazy load\" --domain react -n 10)",
+      "Bash(python \"C:/Users/Fanare/.claude/skills/ui-ux-pro-max/scripts/search.py\" \"animation performance framer motion\" --domain ux -n 10)",
+      "Bash(python \"C:/Users/Fanare/.claude/skills/ui-ux-pro-max/scripts/search.py\" \"animation performance transform opacity\" --domain ux -n 8)",
+      "PowerShell(head -20)",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\Fanare\\\\.claude\\\\skills\\\\ui-ux-pro-max\\\\\" -Recurse | Select-Object -First 20 | ForEach-Object { $_.FullName })",
+      "PowerShell($item = Get-Item \"C:\\\\Users\\\\Fanare\\\\.claude\\\\skills\\\\ui-ux-pro-max\\\\scripts\"; $item.Mode; $item.Target; python \"C:\\\\Users\\\\Fanare\\\\.claude\\\\skills\\\\ui-ux-pro-max\\\\scripts\" --help 2>&1 | Select-Object -First 5)",
+      "Bash(node -e \"const pkg = require\\('./node_modules/framer-motion/package.json'\\); console.log\\('framer-motion version:', pkg.version\\)\")"
+    ]
+  }
+}
