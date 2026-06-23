@@ -13,6 +13,8 @@ const nextConfig: NextConfig = {
       // TODO: добавить домен S3/CDN-хранилища при подключении объектного хранилища
       { protocol: "https", hostname: "**.nevabuildexpo.ru" },
       { protocol: "https", hostname: "images.unsplash.com" },
+      { protocol: "https", hostname: "picsum.photos" },
+      { protocol: "https", hostname: "fastly.picsum.photos" },
     ],
   },
   experimental: {

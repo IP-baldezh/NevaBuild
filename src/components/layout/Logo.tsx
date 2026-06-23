@@ -7,7 +7,7 @@ type LogoProps = {
 export function Logo({ className }: LogoProps) {
   return (
     <svg
-      viewBox="0 0 506.02667 582.96002"
+      viewBox="0 10 506.02667 165"
       xmlns="http://www.w3.org/2000/svg"
       className={cn("h-10 w-auto select-none", className)}
       aria-label="NEVA BUILD"
