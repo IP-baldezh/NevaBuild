@@ -41,10 +41,8 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
-        scrolled
-          ? "border-b border-border bg-background/90 backdrop-blur-md"
-          : "border-b border-transparent",
+        "fixed inset-x-0 top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border transition-shadow duration-300",
+        scrolled && "shadow-sm",
       )}
     >
       <div className="container-neva flex h-16 items-center justify-between gap-6 md:h-20">

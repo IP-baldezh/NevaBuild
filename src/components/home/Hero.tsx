@@ -142,9 +142,6 @@ export function Hero({ dateStart, dateEnd, venue, city }: HeroProps) {
         className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/65 via-black/20 to-transparent"
       />
 
-      {/* Subtle blueprint grid */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 bg-blueprint opacity-20" />
-
       {/* Main content */}
       <div className="container-neva relative flex h-full flex-col justify-end pb-28 pt-32">
         <AnimatePresence mode="wait" custom={dir}>
