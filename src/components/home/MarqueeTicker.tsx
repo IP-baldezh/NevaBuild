@@ -14,18 +14,18 @@ const ITEMS = [
 ];
 
 function Dot() {
-  return <span className="mx-6 size-1.5 shrink-0 bg-lime" aria-hidden />;
+  return <span className="mx-6 size-1.5 shrink-0 rounded-full bg-lime" aria-hidden />;
 }
 
 export function MarqueeTicker({ className }: { className?: string }) {
   return (
     <div className={className}>
-      <div className="border-y border-border bg-card py-4 overflow-hidden">
+      <div className="bg-foreground py-[13px] overflow-hidden">
         <Marquee speed="normal" pauseOnHover={false}>
           {ITEMS.map((item) => (
             <span
               key={item}
-              className="flex shrink-0 items-center text-xs font-bold uppercase tracking-[0.3em] text-muted-foreground"
+              className="flex shrink-0 items-center text-[11px] font-bold uppercase tracking-[0.35em] text-white/45"
             >
               {item}
               <Dot />

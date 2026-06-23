@@ -12,28 +12,34 @@ export type StatItem = {
 
 export function StatsGrid({ items }: { items: StatItem[] }) {
   return (
-    <StaggerReveal
-      stagger={0.07}
-      className="grid grid-cols-2 gap-px border border-border bg-border lg:grid-cols-5"
-    >
-      {items.map((s, i) => (
-        <StaggerItem key={s.label}>
-          <div className="group flex h-full flex-col bg-background p-8 transition-colors hover:bg-card md:p-10">
-            <span className="text-xs text-lime">{String(i + 1).padStart(2, "0")}</span>
-            <div className="mt-3 text-4xl font-black tracking-tight text-foreground transition-colors group-hover:text-lime md:text-5xl lg:text-6xl">
-              <AnimatedCounter
-                value={s.value}
-                suffix={s.suffix ?? ""}
-                locale={s.locale ?? "ru"}
-                duration={1600}
-              />
-            </div>
-            <div className="mt-1 text-sm uppercase tracking-wide text-muted-foreground">
-              {s.label}
-            </div>
-          </div>
-        </StaggerItem>
-      ))}
-    </StaggerReveal>
+    <section className="bg-foreground">
+      <div className="container-neva py-16 md:py-24">
+        <StaggerReveal
+          stagger={0.08}
+          className="grid grid-cols-2 gap-x-6 gap-y-14 sm:gap-x-10 lg:grid-cols-5 lg:gap-x-0 lg:divide-x lg:divide-white/10"
+        >
+          {items.map((s) => (
+            <StaggerItem key={s.label}>
+              <div className="flex flex-col lg:px-10 first:lg:pl-0 last:lg:pr-0">
+                <div
+                  className="font-black leading-[0.88] tracking-tight text-white"
+                  style={{ fontSize: "clamp(2.75rem, 6vw, 5rem)" }}
+                >
+                  <AnimatedCounter
+                    value={s.value}
+                    suffix={s.suffix ?? ""}
+                    locale={s.locale ?? "ru"}
+                    duration={1800}
+                  />
+                </div>
+                <div className="mt-3 text-[10px] font-bold uppercase tracking-[0.3em] text-lime/70">
+                  {s.label}
+                </div>
+              </div>
+            </StaggerItem>
+          ))}
+        </StaggerReveal>
+      </div>
+    </section>
   );
 }

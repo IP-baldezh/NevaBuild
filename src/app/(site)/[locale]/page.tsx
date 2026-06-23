@@ -71,9 +71,7 @@ export default async function HomePage({
       </GradientSection>
 
       {/* Ключевые цифры */}
-      <GradientSection variant="muted">
-        <StatsGrid items={stats} />
-      </GradientSection>
+      <StatsGrid items={stats} />
 
       {/* Секторы */}
       <GradientSection variant="plain" id="sectors">
@@ -123,34 +121,32 @@ export default async function HomePage({
       <MarqueeTicker />
 
       {/* Финальный CTA */}
-      <section className="relative overflow-hidden border-t border-border bg-card">
-        <div aria-hidden className="pointer-events-none absolute inset-0 bg-blueprint opacity-40" />
-        <span aria-hidden className="absolute left-0 top-0 h-1 w-full bg-lime" />
+      <section className="relative overflow-hidden bg-lime">
         <div className="container-neva relative py-24 md:py-32">
           <div className="flex items-center gap-3">
-            <span className="size-2 bg-brand-red" />
-            <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+            <span className="size-2 bg-black/40" />
+            <span className="text-xs uppercase tracking-[0.3em] text-black/55">
               {ev.city} · {ev.venue}
             </span>
           </div>
-          <h2 className="mt-8 max-w-4xl text-balance text-4xl font-black uppercase leading-[1.02] tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
+          <h2 className="mt-8 max-w-4xl text-balance text-4xl font-black uppercase leading-[1.02] tracking-tight text-black sm:text-5xl md:text-6xl lg:text-7xl">
             Станьте частью{" "}
-            <span className="text-lime">NEVA BUILD</span>
+            <span className="text-white/80">NEVA BUILD</span>
           </h2>
-          <p className="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground">
+          <p className="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-black/65">
             Покажите свои решения профессиональной аудитории строительной индустрии.
           </p>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row" id="participate">
             <Link
               href="/exhibit"
-              className="group inline-flex h-12 items-center gap-2 bg-lime px-8 text-sm font-semibold uppercase tracking-wide text-lime-foreground transition-colors hover:bg-foreground"
+              className="group inline-flex h-12 items-center gap-2 bg-black px-8 text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-white hover:text-black"
             >
               Стать участником
               <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
             </Link>
             <Link
               href="/tickets"
-              className="inline-flex h-12 items-center gap-2 border border-border px-8 text-sm font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-lime hover:text-lime"
+              className="inline-flex h-12 items-center gap-2 border border-black/20 px-8 text-sm font-semibold uppercase tracking-wide text-black transition-colors hover:border-black hover:bg-black/10"
             >
               Получить билет
             </Link>
