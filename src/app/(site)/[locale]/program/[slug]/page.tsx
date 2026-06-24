@@ -46,7 +46,6 @@ export default async function SessionPage({
   const { locale, slug } = await params;
   setRequestLocale(locale as Locale);
   const t = await getTranslations({ locale: locale as Locale, namespace: "ProgramPage" });
-  const tc = await getTranslations({ locale: locale as Locale, namespace: "Common" });
 
   const s = await getSessionBySlug(slug);
   if (!s) notFound();
