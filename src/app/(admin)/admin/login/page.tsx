@@ -7,7 +7,6 @@ import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Logo } from "@/components/layout/Logo";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -28,8 +27,7 @@ export default function AdminLoginPage() {
     if (res?.error) {
       setError("Неверный email или пароль");
     } else {
-      const cb =
-        new URLSearchParams(window.location.search).get("callbackUrl") ?? "/admin";
+      const cb = new URLSearchParams(window.location.search).get("callbackUrl") ?? "/admin";
       router.push(cb);
       router.refresh();
     }
@@ -38,11 +36,15 @@ export default function AdminLoginPage() {
   return (
     <div className="flex min-h-dvh items-center justify-center p-4">
       <div className="w-full max-w-sm rounded-3xl border bg-card p-8 shadow-sm">
-        <Logo />
+        {/* eslint-disable-next-line @next/next/no-img-element -- SVG, без IntlProvider в /admin */}
+        <img
+          src="/logo-ru.svg"
+          alt="НЕВА БИЛД"
+          className="h-10 w-auto select-none"
+          draggable={false}
+        />
         <h1 className="mt-6 text-2xl font-bold">Вход в админ-панель</h1>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Доступ только для сотрудников.
-        </p>
+        <p className="mt-1 text-sm text-muted-foreground">Доступ только для сотрудников.</p>
 
         <form onSubmit={onSubmit} className="mt-6 space-y-4">
           <div className="space-y-1.5">
@@ -51,7 +53,13 @@ export default function AdminLoginPage() {
           </div>
           <div className="space-y-1.5">
             <Label htmlFor="password">Пароль</Label>
-            <Input id="password" name="password" type="password" required autoComplete="current-password" />
+            <Input
+              id="password"
+              name="password"
+              type="password"
+              required
+              autoComplete="current-password"
+            />
           </div>
           {error && (
             <p className="rounded-lg bg-destructive/10 px-4 py-2 text-sm text-destructive">
