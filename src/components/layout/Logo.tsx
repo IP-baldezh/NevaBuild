@@ -12,6 +12,7 @@ export function Logo({ className }: LogoProps) {
   const isEn = locale === "en";
 
   return (
+    // eslint-disable-next-line @next/next/no-img-element -- SVG логотип не нуждается в оптимизации next/image
     <img
       src={isEn ? "/logo-en.svg" : "/logo-ru.svg"}
       alt={isEn ? "NEVA BUILD" : "НЕВА БИЛД"}

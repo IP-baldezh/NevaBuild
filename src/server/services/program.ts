@@ -2,6 +2,7 @@ import "server-only";
 import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/db";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- used via typeof for Prisma type inference
 const dayWithSessions = Prisma.validator<Prisma.ProgramDayDefaultArgs>()({
   include: {
     sessions: {
@@ -10,9 +11,7 @@ const dayWithSessions = Prisma.validator<Prisma.ProgramDayDefaultArgs>()({
     },
   },
 });
-export type ProgramDayWithSessions = Prisma.ProgramDayGetPayload<
-  typeof dayWithSessions
->;
+export type ProgramDayWithSessions = Prisma.ProgramDayGetPayload<typeof dayWithSessions>;
 
 export async function getProgramDays() {
   try {

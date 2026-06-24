@@ -2,12 +2,11 @@ import "server-only";
 import { Prisma, type ExhibitorStatus } from "@prisma/client";
 import { prisma } from "@/lib/db";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- used via typeof for Prisma type inference
 const withCategories = Prisma.validator<Prisma.ExhibitorDefaultArgs>()({
   include: { categories: { include: { category: true } } },
 });
-export type ExhibitorWithCategories = Prisma.ExhibitorGetPayload<
-  typeof withCategories
->;
+export type ExhibitorWithCategories = Prisma.ExhibitorGetPayload<typeof withCategories>;
 
 export async function getFeaturedExhibitors(limit = 7) {
   try {
@@ -39,10 +38,7 @@ export async function getExhibitors(filters: ExhibitorFilters = {}) {
     where.status = filters.status;
   }
   if (filters.country) {
-    where.OR = [
-      { countryRu: filters.country },
-      { countryEn: filters.country },
-    ];
+    where.OR = [{ countryRu: filters.country }, { countryEn: filters.country }];
   }
   if (filters.category) {
     where.categories = {
