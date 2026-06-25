@@ -67,14 +67,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* Посетителям / Экспонентам */}
       <ForWhom />
 
+      {/* Секторы выставки — перед WhyVisit, как в 2.0 */}
+      {categories.length > 0 && <SectionsGrid categories={categories} />}
+
       {/* Почему NevaBuild — зелёный градиент */}
       <WhyVisit />
 
       {/* Голоса индустрии — тёмный блок с карточками */}
       <AmbassadorsAlt />
-
-      {/* Секторы выставки */}
-      {categories.length > 0 && <SectionsGrid categories={categories} />}
 
       {/* Деловая программа */}
       {days.length > 0 && (

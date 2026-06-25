@@ -55,7 +55,14 @@
       "Bash(gh release *)",
       "PowerShell(gh release list --repo AutomatedRetailAssociates/arms-backend --limit 20 2>&1)",
       "PowerShell($env:PATH = [System.Environment]::GetEnvironmentVariable\\(\"PATH\", \"Machine\"\\) + \";\" + [System.Environment]::GetEnvironmentVariable\\(\"PATH\", \"User\"\\); Set-Location \"U:\\\\arms-backend\"; gh release create investigations_v0.5.6-rc4 --title \"investigations_v0.5.6-rc4\" --notes \"\"; gh release create matching_v0.0.1-rc14 --title \"matching_v0.0.1-rc14\" --notes \"\"; gh release create companies_v0.4.9-rc2 --title \"companies_v0.4.9-rc2\" --notes \"\")",
-      "Bash(npm test *)"
+      "Bash(npm test *)",
+      "Bash(Remove-Item -Recurse -Force \"U:\\\\NevaBuild\\\\.next\" -ErrorAction SilentlyContinue)",
+      "Bash(Write-Host \"done\")",
+      "Bash(gh auth *)",
+      "Bash(git config *)",
+      "Bash(git checkout *)",
+      "Bash(grep -v \"NevaBuild$\")",
+      "PowerShell(Get-ChildItem \"U:\\\\nevabuild2.0\\\\\" -Recurse -Depth 3 | Where-Object { $_.Name -match \"\\\\.tsx$\" -and $_.DirectoryName -match \"home\" } | Select-Object FullName)"
     ]
   }
 }

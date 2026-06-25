@@ -84,7 +84,7 @@ export function ForWhom() {
             </h2>
             <p
               className="text-[15px] mb-8 max-w-[420px] leading-relaxed relative z-10"
-              style={{ color: "#1a4a0a" }}
+              style={{ color: "#1a4a0a", fontFamily: "var(--font-mulish)" }}
             >
               {ru
                 ? "Четыре дня погружения в мир строительства, архитектуры и дизайна интерьеров. Профессионалы, продукты и идеи — в одном месте."
@@ -97,7 +97,10 @@ export function ForWhom() {
                     className="flex-shrink-0 mt-0.5 size-[18px]"
                     style={{ color: "#0d2d06" }}
                   />
-                  <span className="text-[14px]" style={{ color: "#1a4a0a" }}>
+                  <span
+                    className="text-[14px]"
+                    style={{ color: "#1a4a0a", fontFamily: "var(--font-mulish)" }}
+                  >
                     {f}
                   </span>
                 </li>
@@ -146,7 +149,10 @@ export function ForWhom() {
                 </>
               )}
             </h2>
-            <p className="text-[15px] text-black/65 mb-8 max-w-[420px] leading-relaxed">
+            <p
+              className="text-[15px] text-black/65 mb-8 max-w-[420px] leading-relaxed"
+              style={{ fontFamily: "var(--font-mulish)" }}
+            >
               {ru
                 ? "Представьте свой бренд перед профессиональной аудиторией. Получите заявки, заключите договоры и укрепите позиции на рынке."
                 : "Present your brand to a professional audience. Get leads, close deals and strengthen your market position."}
@@ -155,7 +161,12 @@ export function ForWhom() {
               {exhibitorsFeatures.map((f) => (
                 <li key={f} className="flex items-start gap-3">
                   <CheckCircle className="flex-shrink-0 mt-0.5 size-[18px] text-brand-red" />
-                  <span className="text-[14px] text-black/75">{f}</span>
+                  <span
+                    className="text-[14px] text-black/75"
+                    style={{ fontFamily: "var(--font-mulish)" }}
+                  >
+                    {f}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -170,7 +181,7 @@ export function ForWhom() {
               </Link>
               <a
                 href="#"
-                className="inline-flex items-center gap-2 font-bold text-[14.5px] border border-nb-border hover:border-nb-green text-nb-dark hover:text-nb-green-dark px-6 py-3.5 rounded-xl transition-all duration-200"
+                className="inline-flex items-center gap-2 font-bold text-[14.5px] border border-nb-border hover:border-nb-lime-acid text-nb-dark hover:text-nb-lime-acid px-6 py-3.5 rounded-xl transition-all duration-200"
               >
                 {ru ? "Скачать прайс-лист" : "Download Price List"}
               </a>
