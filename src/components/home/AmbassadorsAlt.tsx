@@ -119,12 +119,7 @@ function SpeakerCard({ name, role, initials, quote, bg }: Speaker) {
         >
           &#8220;
         </span>
-        <p
-          className="text-[#0d2d06] text-[14px] leading-relaxed mb-5"
-          style={{ fontFamily: "var(--font-mulish)" }}
-        >
-          {quote}
-        </p>
+        <p className="font-mulish text-[#0d2d06] text-[14px] leading-relaxed mb-5">{quote}</p>
         <div className="border-t border-[#0d2d06]/20 pt-4 flex items-center gap-3">
           <div
             className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
@@ -163,10 +158,7 @@ export function AmbassadorsAlt() {
             </h2>
           </div>
           <div className="lg:max-w-[420px]">
-            <p
-              className="text-white/40 text-[15px] leading-relaxed"
-              style={{ fontFamily: "var(--font-mulish)" }}
-            >
+            <p className="font-mulish text-white/40 text-[15px] leading-relaxed">
               {ru
                 ? "Ведущие архитекторы, дизайнеры и девелоперы, которые определяют будущее строительной отрасли — уже с нами."
                 : "Leading architects, designers and developers shaping the future of the construction industry — already with us."}

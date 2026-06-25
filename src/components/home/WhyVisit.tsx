@@ -100,10 +100,7 @@ export function WhyVisit() {
                 </>
               )}
             </h2>
-            <p
-              className="text-[15px] leading-relaxed mb-10 text-white/80"
-              style={{ fontFamily: "var(--font-mulish)" }}
-            >
+            <p className="font-mulish text-[15px] leading-relaxed mb-10 text-white/80">
               {ru
                 ? "Каждый год NevaBuild задаёт тренды строительного рынка страны. Не упустите возможность быть в центре событий."
                 : "Every year NevaBuild sets the trends of the country's construction market. Don't miss your chance to be at the centre of it all."}
@@ -134,10 +131,7 @@ export function WhyVisit() {
                 }}
               >
                 <h3 className="font-black text-[17px] text-white leading-snug mb-3">{title}</h3>
-                <p
-                  className="text-[14px] leading-relaxed"
-                  style={{ color: "#0d2d06", fontFamily: "var(--font-mulish)" }}
-                >
+                <p className="font-mulish text-[14px] leading-relaxed" style={{ color: "#0d2d06" }}>
                   {desc}
                 </p>
               </div>

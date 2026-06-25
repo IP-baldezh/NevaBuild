@@ -117,15 +117,17 @@ export function Header() {
           type="button"
           onClick={() => setOpen((v) => !v)}
           className={cn(
-            "inline-flex size-10 items-center justify-center border lg:hidden transition-colors",
-            transparent
-              ? "border-white/40 text-white hover:bg-white/15"
-              : "border-border text-foreground",
+            "inline-flex size-10 items-center justify-center lg:hidden transition-colors",
+            transparent ? "text-white hover:bg-white/15" : "text-foreground hover:bg-nb-bg-light",
           )}
           aria-label={open ? t("close") : t("menu")}
           aria-expanded={open}
         >
-          {open ? <X className="size-5" /> : <Menu className="size-5" />}
+          {open ? (
+            <X className="size-5" strokeWidth={2.5} strokeLinecap="round" />
+          ) : (
+            <Menu className="size-5" strokeWidth={2.5} strokeLinecap="round" />
+          )}
         </button>
       </div>
 
