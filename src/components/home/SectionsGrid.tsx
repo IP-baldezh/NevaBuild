@@ -102,10 +102,7 @@ export function SectionsGrid({ categories }: { categories: ExhibitorCategory[] }
                   <h3 className="font-bold text-[16px] text-nb-dark mb-2 leading-snug">
                     {pick(locale, c.titleRu, c.titleEn)}
                   </h3>
-                  <p
-                    className="text-[13px] text-nb-muted leading-relaxed"
-                    style={{ fontFamily: "var(--font-mulish)" }}
-                  >
+                  <p className="font-mulish text-[13px] text-nb-muted leading-relaxed">
                     {locale === "ru"
                       ? (SECTOR_DESCRIPTIONS_RU[c.slug] ?? "")
                       : (SECTOR_DESCRIPTIONS_EN[c.slug] ?? "")}

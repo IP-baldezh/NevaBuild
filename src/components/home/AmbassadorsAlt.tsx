@@ -181,10 +181,7 @@ export function AmbassadorsAlt() {
             </h2>
           </div>
           <div className="lg:max-w-[420px]">
-            <p
-              className="text-white/40 text-[15px] leading-relaxed"
-              style={{ fontFamily: "var(--font-mulish)" }}
-            >
+            <p className="font-mulish text-white/40 text-[15px] leading-relaxed">
               {ru
                 ? "Ведущие архитекторы, дизайнеры и девелоперы, которые определяют будущее строительной отрасли — уже с нами."
                 : "Leading architects, designers and developers shaping the future of the construction industry — already with us."}
