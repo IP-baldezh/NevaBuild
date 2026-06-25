@@ -14,7 +14,6 @@ import { SectionsGrid } from "@/components/home/SectionsGrid";
 import { ProgramPreview } from "@/components/home/ProgramPreview";
 import { PartnersSection } from "@/components/home/PartnersSection";
 import { NewsPreview } from "@/components/home/NewsPreview";
-import { ContactsSection } from "@/components/home/ContactsSection";
 import { CtaBanner } from "@/components/home/CtaBanner";
 import { StatsGrid, type StatItem } from "@/components/home/StatsGrid";
 import { MarqueeTicker } from "@/components/home/MarqueeTicker";
@@ -37,11 +36,41 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   const sqm = locale === "ru" ? " м²" : " m²";
   const stats: StatItem[] = [
-    { value: ev.visitorCount, suffix: "+", label: t("visitors"), locale },
-    { value: ev.exhibitorCount, suffix: "+", label: t("companies"), locale },
-    { value: ev.areaSize, suffix: sqm, label: t("area"), locale },
-    { value: ev.programEventsCount, suffix: "+", label: t("events"), locale },
-    { value: ev.programDays, suffix: "", label: t("days"), locale },
+    {
+      value: ev.visitorCount,
+      suffix: "+",
+      label: t("visitors"),
+      sub: locale === "ru" ? "за 4 дня" : "over 4 days",
+      locale,
+    },
+    {
+      value: ev.exhibitorCount,
+      suffix: "+",
+      label: t("companies"),
+      sub: locale === "ru" ? "из 35 стран" : "from 35 countries",
+      locale,
+    },
+    {
+      value: ev.areaSize,
+      suffix: sqm,
+      label: t("area"),
+      sub: locale === "ru" ? "в 3 павильонах" : "in 3 pavilions",
+      locale,
+    },
+    {
+      value: ev.programEventsCount,
+      suffix: "+",
+      label: t("events"),
+      sub: locale === "ru" ? "форумы и мастер-классы" : "forums & masterclasses",
+      locale,
+    },
+    {
+      value: ev.programDays,
+      suffix: "",
+      label: t("days"),
+      sub: locale === "ru" ? "деловой программы" : "business programme",
+      locale,
+    },
   ];
 
   return (
@@ -77,32 +106,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <AmbassadorsAlt />
 
       {/* Деловая программа */}
-      {days.length > 0 && (
-        <section className="py-20 bg-nb-bg-light" id="program">
-          <div className="container-neva">
-            <ProgramPreview days={days} />
-          </div>
-        </section>
-      )}
+      {days.length > 0 && <ProgramPreview days={days} />}
 
       {/* Партнёры */}
       <PartnersSection partners={partners} />
 
       {/* Новости */}
       <NewsPreview news={news} />
-
-      {/* Контакты */}
-      <section className="py-20 bg-nb-bg-light" id="location">
-        <div className="container-neva">
-          <ContactsSection
-            venue={ev.venue}
-            city={ev.city}
-            address={ev.address}
-            phone={ev.phone}
-            email={ev.email}
-          />
-        </div>
-      </section>
 
       {/* Тикер */}
       <MarqueeTicker />

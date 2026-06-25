@@ -9,10 +9,10 @@ import { cn } from "@/lib/utils";
 
 type Props = {
   className?: string;
-  tone?: "light" | "dark";
+  transparent?: boolean;
 };
 
-export function LanguageSwitcher({ className }: Props) {
+export function LanguageSwitcher({ className, transparent }: Props) {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
@@ -30,7 +30,8 @@ export function LanguageSwitcher({ className }: Props) {
   return (
     <div
       className={cn(
-        "inline-flex items-center border border-border text-xs font-semibold",
+        "flex items-center rounded-full p-[3px] transition-colors duration-300",
+        transparent ? "bg-white/15" : "bg-nb-bg-light",
         isPending && "opacity-60",
         className,
       )}
@@ -44,10 +45,12 @@ export function LanguageSwitcher({ className }: Props) {
           onClick={() => switchTo(loc)}
           aria-current={loc === locale}
           className={cn(
-            "h-8 px-3 uppercase transition-colors",
+            "font-bold text-[12.5px] px-3 py-1.5 rounded-full uppercase transition-all duration-200 cursor-pointer",
             loc === locale
-              ? "bg-foreground text-background"
-              : "text-muted-foreground hover:text-foreground",
+              ? "bg-white text-nb-dark shadow-sm"
+              : transparent
+                ? "text-white/70 hover:text-white"
+                : "text-nb-muted-dark hover:text-nb-dark",
           )}
         >
           {loc}

@@ -188,7 +188,7 @@ export function Hero({ dateStart, dateEnd, venue, city }: HeroProps) {
   return (
     <section
       className="relative flex flex-col overflow-hidden bg-nb-dark -mt-[72px]"
-      style={{ minHeight: "100dvh" }}
+      style={{ height: "calc(100dvh + 72px)" }}
       aria-label={`${slide.line1} ${slide.line2}`}
     >
       {/* Background photos */}

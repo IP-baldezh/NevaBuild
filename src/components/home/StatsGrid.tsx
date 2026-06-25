@@ -1,44 +1,38 @@
 "use client";
 
 import { AnimatedCounter } from "@/components/ui/animated-counter";
-import { StaggerReveal, StaggerItem } from "@/components/ui/scroll-reveal";
 
 export type StatItem = {
   value: number;
   suffix?: string;
   label: string;
+  sub?: string;
   locale?: string;
 };
 
 export function StatsGrid({ items }: { items: StatItem[] }) {
   return (
-    <section className="bg-foreground">
-      <div className="container-neva py-16 md:py-24">
-        <StaggerReveal
-          stagger={0.08}
-          className="grid grid-cols-2 gap-x-6 gap-y-14 sm:gap-x-10 lg:grid-cols-5 lg:gap-x-0 lg:divide-x lg:divide-white/10"
-        >
+    <section className="bg-nb-dark">
+      <div className="max-w-[1440px] mx-auto px-5 md:px-10 lg:px-16">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 divide-x divide-y lg:divide-y-0 divide-white/8">
           {items.map((s) => (
-            <StaggerItem key={s.label}>
-              <div className="flex flex-col lg:px-10 first:lg:pl-0 last:lg:pr-0 group cursor-default">
-                <div
-                  className="font-black leading-[0.88] tracking-tight text-white transition-colors duration-300 group-hover:text-nb-lime-acid"
-                  style={{ fontSize: "clamp(2.75rem, 6vw, 5rem)" }}
-                >
-                  <AnimatedCounter
-                    value={s.value}
-                    suffix={s.suffix ?? ""}
-                    locale={s.locale ?? "ru"}
-                    duration={1800}
-                  />
-                </div>
-                <div className="mt-3 text-[10px] font-bold uppercase tracking-[0.3em] text-lime/70">
-                  {s.label}
-                </div>
-              </div>
-            </StaggerItem>
+            <div key={s.label} className="py-10 px-4 lg:px-8 flex flex-col group cursor-default">
+              <span
+                className="font-black text-white leading-none mb-1.5 group-hover:text-nb-lime-acid transition-colors duration-300 tabular-nums"
+                style={{ fontSize: "clamp(28px, 3.5vw, 44px)" }}
+              >
+                <AnimatedCounter
+                  value={s.value}
+                  suffix={s.suffix ?? ""}
+                  locale={s.locale ?? "ru"}
+                  duration={1800}
+                />
+              </span>
+              <span className="text-[14px] font-semibold text-white/60 mb-0.5">{s.label}</span>
+              {s.sub && <span className="text-[12px] text-white/28">{s.sub}</span>}
+            </div>
           ))}
-        </StaggerReveal>
+        </div>
       </div>
     </section>
   );

@@ -21,12 +21,6 @@ export function CtaBanner() {
       <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-nb-lime-acid/20 to-transparent" />
 
       <div className="container-neva relative text-center">
-        <span className="font-bold text-[13px] text-nb-teal uppercase tracking-[3px] mb-5 block">
-          {ru
-            ? "17–20 марта 2027 · Экспофорум · Санкт-Петербург"
-            : "17–20 March 2027 · Expoforum · Saint Petersburg"}
-        </span>
-
         <h2
           className="font-black text-white leading-tight tracking-tight mb-6 max-w-[900px] mx-auto"
           style={{ fontSize: "clamp(36px, 6vw, 80px)" }}

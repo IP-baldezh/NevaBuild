@@ -28,12 +28,20 @@ export function PartnersSection({ partners }: { partners: Partner[] }) {
     <section className="py-16 bg-nb-bg-light border-y border-nb-border overflow-hidden">
       <div className="container-neva mb-10">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <span className="font-bold text-[13px] text-nb-teal uppercase tracking-[3px]">
-            {t("label")}
-          </span>
+          <div>
+            <span className="font-bold text-[13px] text-nb-teal uppercase tracking-[3px] block">
+              {t("label")}
+            </span>
+            <h2
+              className="font-black text-nb-dark mt-1"
+              style={{ fontSize: "clamp(20px, 2.5vw, 28px)" }}
+            >
+              {locale === "ru" ? "Генеральные партнёры и спонсоры" : "General Partners & Sponsors"}
+            </h2>
+          </div>
           <a
             href="#"
-            className="font-bold text-[13px] text-nb-green-dark hover:text-nb-green border-b border-nb-green/30 pb-0.5 transition-colors duration-200 self-start sm:self-auto"
+            className="font-bold text-[13px] text-nb-green-dark hover:text-nb-lime-acid border-b border-nb-green/30 pb-0.5 transition-colors duration-200 self-start sm:self-auto"
           >
             {locale === "ru" ? "Стать партнёром" : "Become a Partner"}
           </a>
@@ -50,15 +58,16 @@ export function PartnersSection({ partners }: { partners: Partner[] }) {
           {doubled.map(({ name, src }, i) => (
             <div
               key={`${name}-${i}`}
-              className="flex-shrink-0 mx-4 flex items-center justify-center h-16 bg-white border border-nb-border rounded-xl hover:border-nb-lime-acid hover:shadow-md transition-all duration-200 cursor-pointer overflow-hidden"
-              style={{ width: "160px" }}
+              className="flex-shrink-0 mx-3 flex items-center justify-center h-16 bg-white border border-nb-border rounded-xl hover:border-nb-lime-acid hover:shadow-md transition-all duration-200 cursor-pointer overflow-hidden"
+              style={{ width: "160px", padding: "0" }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={src}
                 alt={name}
-                className="w-full h-full object-contain p-3"
+                className="w-full h-full object-contain p-2"
                 draggable={false}
+                style={{ width: "160px", padding: "0" }}
                 onError={(e) => {
                   const target = e.currentTarget;
                   target.style.display = "none";
@@ -73,20 +82,26 @@ export function PartnersSection({ partners }: { partners: Partner[] }) {
         </div>
       </div>
 
-      {/* DB partners grid (if any with real data) */}
-      {partners.length > 0 && (
+      {/* DB partners grid — only company logos, no person names */}
+      {partners.filter((p) => p.logoUrl).length > 0 && (
         <div className="container-neva mt-10">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-            {partners.map((p) => (
-              <div
-                key={p.id}
-                className="flex items-center justify-center h-14 bg-white border border-nb-border rounded-xl px-4"
-              >
-                <span className="text-xs font-bold uppercase tracking-wider text-nb-muted-dark text-center">
-                  {p.name}
-                </span>
-              </div>
-            ))}
+          <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3">
+            {partners
+              .filter((p) => p.logoUrl)
+              .map((p) => (
+                <div
+                  key={p.id}
+                  className="flex items-center justify-center h-14 bg-white border border-nb-border rounded-xl overflow-hidden"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={p.logoUrl!}
+                    alt={p.name}
+                    className="w-full h-full object-contain p-2"
+                    draggable={false}
+                  />
+                </div>
+              ))}
           </div>
         </div>
       )}

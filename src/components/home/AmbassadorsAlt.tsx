@@ -76,7 +76,7 @@ type Speaker = (typeof SPEAKERS)[0];
 function SpeakerCard({ name, role, initials, quote, bg }: Speaker) {
   return (
     <div
-      className="relative rounded-2xl overflow-hidden cursor-pointer group"
+      className="relative rounded-3xl overflow-hidden cursor-pointer group"
       style={{ height: "360px", background: bg }}
     >
       {/* Lime top accent bar */}

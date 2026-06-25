@@ -77,7 +77,7 @@ export function Header() {
                       : "text-white/85 hover:text-white hover:bg-white/15"
                     : isActive
                       ? "text-nb-green bg-nb-bg-light"
-                      : "text-foreground hover:text-nb-green hover:bg-nb-bg-light",
+                      : "text-nb-dark hover:text-nb-lime-acid hover:bg-nb-bg-light",
                 )}
               >
                 {t(item.key)}
@@ -87,14 +87,14 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex flex-none">
-          <LanguageSwitcher />
+          <LanguageSwitcher transparent={transparent} />
           <Link
             href="/exhibit"
             className={cn(
-              "inline-flex h-10 items-center justify-center gap-2 border px-4 text-sm font-semibold uppercase tracking-wide transition-all duration-200",
+              "inline-flex items-center justify-center gap-2 border px-6 py-3 rounded-xl text-[14px] font-bold transition-all duration-200",
               transparent
                 ? "border-white/40 text-white hover:border-white hover:bg-white/10"
-                : "border-border text-foreground hover:border-nb-green hover:text-nb-green-dark hover:bg-nb-bg-light",
+                : "border-nb-border text-nb-dark hover:border-nb-lime-acid hover:text-nb-green-dark hover:bg-nb-bg-light",
             )}
           >
             {t("exhibit")}
@@ -102,11 +102,12 @@ export function Header() {
           <Link
             href="/tickets"
             className={cn(
-              "inline-flex h-10 items-center justify-center gap-2 px-4 text-sm font-semibold uppercase tracking-wide transition-all duration-200",
+              "inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-[14px] font-bold transition-all duration-200 hover:-translate-y-0.5",
               transparent
-                ? "bg-brand-red text-white hover:opacity-90 shadow-[0_6px_20px_rgba(225,27,34,0.40)]"
-                : "bg-brand-red text-white hover:opacity-90 shadow-[0_4px_12px_rgba(225,27,34,0.25)]",
+                ? "text-white shadow-[0_6px_20px_rgba(225,27,34,0.40)]"
+                : "text-white shadow-[0_4px_12px_rgba(225,27,34,0.25)]",
             )}
+            style={{ background: "#E11B22" }}
           >
             {t("getTicket")}
           </Link>

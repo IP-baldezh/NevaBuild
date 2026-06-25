@@ -6,32 +6,26 @@ import type { Locale } from "@/i18n/routing";
 
 const REASONS_RU = [
   {
-    num: "01",
     title: "Крупнейшая площадка Северо-Запада",
     desc: "60 000 м² экспозиционной площади в трёх павильонах Экспофорума — самый масштабный отраслевой смотр в регионе.",
   },
   {
-    num: "02",
     title: "Живой рынок за 4 дня",
     desc: "Встречи с поставщиками, дистрибьюторами и производителями в режиме реального времени. Без посредников и онлайн-фильтров.",
   },
   {
-    num: "03",
     title: "Деловая программа мирового уровня",
     desc: "200+ форумов, круглых столов и мастер-классов. Спикеры — практикующие архитекторы, девелоперы, ведущие инженеры страны.",
   },
   {
-    num: "04",
     title: "Технологии будущего сегодня",
     desc: "Зона инноваций с демонстрацией BIM-проектирования, роботизированных строительных систем и материалов нового поколения.",
   },
   {
-    num: "05",
     title: "Нетворкинг с топ-аудиторией",
     desc: "Платформа matchmaking соединяет участников ещё до открытия выставки. 80% экспонентов фиксируют партнёрства уже на этапе выставки.",
   },
   {
-    num: "06",
     title: "Международный формат",
     desc: "Делегации из 70+ стран. Официальные национальные экспозиции Германии, Италии, Финляндии, Китая и других лидеров строительного рынка.",
   },
@@ -39,32 +33,26 @@ const REASONS_RU = [
 
 const REASONS_EN = [
   {
-    num: "01",
     title: "Largest Venue in the Northwest",
     desc: "60 000 m² of exhibition space across three pavilions at Expoforum — the region's most large-scale industry showcase.",
   },
   {
-    num: "02",
     title: "Live Market in 4 Days",
     desc: "Meet suppliers, distributors and manufacturers in real time. No intermediaries, no online filters.",
   },
   {
-    num: "03",
     title: "World-Class Business Programme",
     desc: "200+ forums, roundtables and masterclasses. Speakers are practising architects, developers and leading engineers.",
   },
   {
-    num: "04",
     title: "Tomorrow's Technologies Today",
     desc: "An innovation zone showcasing BIM design, robotic construction systems and next-generation materials.",
   },
   {
-    num: "05",
     title: "Networking with Top Audience",
     desc: "The matchmaking platform connects participants before the exhibition opens. 80% of exhibitors confirm partnerships during the event.",
   },
   {
-    num: "06",
     title: "International Format",
     desc: "Delegations from 70+ countries. Official national expositions from Germany, Italy, Finland, China and other construction market leaders.",
   },
@@ -122,8 +110,8 @@ export function WhyVisit() {
             </p>
             <Link
               href="/tickets"
-              className="inline-flex items-center gap-2 font-bold text-[14.5px] px-6 py-3.5 rounded-xl transition-all duration-200 hover:-translate-y-0.5 bg-brand-red text-white hover:opacity-90"
-              style={{ boxShadow: "0 8px 24px rgba(225,27,34,0.35)" }}
+              className="inline-flex items-center gap-2 font-bold text-[14.5px] px-6 py-3.5 rounded-xl transition-all duration-200 hover:-translate-y-0.5 text-white"
+              style={{ background: "#E11B22", boxShadow: "0 8px 24px rgba(225,27,34,0.35)" }}
             >
               {ru ? "Зарегистрироваться бесплатно" : "Register for Free"}
             </Link>
@@ -134,9 +122,9 @@ export function WhyVisit() {
             className="flex-1 grid sm:grid-cols-2 gap-px rounded-2xl overflow-hidden"
             style={{ background: "rgba(13,45,6,0.12)" }}
           >
-            {reasons.map(({ num, title, desc }) => (
+            {reasons.map(({ title, desc }) => (
               <div
-                key={num}
+                key={title}
                 className="p-8 group transition-colors duration-300"
                 style={{
                   background: "rgba(255,255,255,0.18)",
@@ -145,7 +133,6 @@ export function WhyVisit() {
                   border: "1px solid rgba(255,255,255,0.30)",
                 }}
               >
-                <span className="font-black text-[22px] mb-3 block text-brand-red">{num}</span>
                 <h3 className="font-black text-[17px] text-white leading-snug mb-3">{title}</h3>
                 <p
                   className="text-[14px] leading-relaxed"

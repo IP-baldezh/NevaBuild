@@ -95,7 +95,7 @@ export function ForWhom() {
                 <li key={f} className="flex items-start gap-3">
                   <CheckCircle
                     className="flex-shrink-0 mt-0.5 size-[18px]"
-                    style={{ color: "#0d2d06" }}
+                    style={{ color: "e11b22" }}
                   />
                   <span
                     className="text-[14px]"

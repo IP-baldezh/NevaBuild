@@ -60,7 +60,7 @@ export function NewsPreview({ news }: { news: News[] }) {
             return (
               <article
                 key={n.id}
-                className="group bg-white border border-nb-border hover:border-nb-lime-acid/50 rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-nb-green/8"
+                className="group bg-white border border-nb-border hover:border-nb-lime-acid/50 rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-nb-green/8 cursor-pointer"
               >
                 {/* Image placeholder */}
                 <div
@@ -70,7 +70,7 @@ export function NewsPreview({ news }: { news: News[] }) {
                   }}
                 >
                   <span
-                    className="font-black text-nb-border"
+                    className="font-black text-black/12"
                     style={{ fontSize: "clamp(3rem, 8vw, 5rem)" }}
                   >
                     {String(i + 1).padStart(2, "0")}
@@ -97,7 +97,7 @@ export function NewsPreview({ news }: { news: News[] }) {
                     </time>
                   </div>
 
-                  <h3 className="font-black text-[17px] text-nb-dark leading-snug">
+                  <h3 className="font-black text-[17px] text-nb-dark group-hover:text-nb-lime-acid leading-snug transition-colors duration-200">
                     {pick(locale, n.titleRu, n.titleEn)}
                   </h3>
 
