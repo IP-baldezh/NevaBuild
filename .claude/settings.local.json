@@ -37,7 +37,25 @@
       "PowerShell(head -20)",
       "PowerShell(Get-ChildItem \"C:\\\\Users\\\\Fanare\\\\.claude\\\\skills\\\\ui-ux-pro-max\\\\\" -Recurse | Select-Object -First 20 | ForEach-Object { $_.FullName })",
       "PowerShell($item = Get-Item \"C:\\\\Users\\\\Fanare\\\\.claude\\\\skills\\\\ui-ux-pro-max\\\\scripts\"; $item.Mode; $item.Target; python \"C:\\\\Users\\\\Fanare\\\\.claude\\\\skills\\\\ui-ux-pro-max\\\\scripts\" --help 2>&1 | Select-Object -First 5)",
-      "Bash(node -e \"const pkg = require\\('./node_modules/framer-motion/package.json'\\); console.log\\('framer-motion version:', pkg.version\\)\")"
+      "Bash(node -e \"const pkg = require\\('./node_modules/framer-motion/package.json'\\); console.log\\('framer-motion version:', pkg.version\\)\")",
+      "PowerShell(cd U:\\\\NevaBuild; $env:DATABASE_URL = \"postgresql://neondb_owner:npg_wRZB3fehG2CH@ep-rapid-art-adokg16y.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require\"; npx prisma migrate deploy 2>&1)",
+      "WebFetch(domain:neva-build.vercel.app)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Read(//c/Users/Fanare/AppData/Roaming/Claude/local-agent-mode-sessions/skills-plugin/f383900c-5f22-4db2-b1d8-1491db308ec1/26cb20d2-8f43-4f1b-bf9d-a3edae91ec0a/skills/xlsx/**)",
+      "Bash(python -)",
+      "Bash(pip install *)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(gh api *)",
+      "WebFetch(domain:api.github.com)",
+      "Bash(git push *)",
+      "Bash(grep -o '\"#[0-9A-Fa-f]\\\\{3,8\\\\}\"' \"C:/Users/Fanare/Downloads/NevaBuild.html\")",
+      "Bash(node -e \"const j=require\\('./messages/ru.json'\\); console.log\\(JSON.stringify\\({Hero:j.Hero, Stats:j.Stats}, null, 2\\)\\)\")",
+      "Bash(gh pr *)",
+      "Bash(gh release *)",
+      "PowerShell(gh release list --repo AutomatedRetailAssociates/arms-backend --limit 20 2>&1)",
+      "PowerShell($env:PATH = [System.Environment]::GetEnvironmentVariable\\(\"PATH\", \"Machine\"\\) + \";\" + [System.Environment]::GetEnvironmentVariable\\(\"PATH\", \"User\"\\); Set-Location \"U:\\\\arms-backend\"; gh release create investigations_v0.5.6-rc4 --title \"investigations_v0.5.6-rc4\" --notes \"\"; gh release create matching_v0.0.1-rc14 --title \"matching_v0.0.1-rc14\" --notes \"\"; gh release create companies_v0.4.9-rc2 --title \"companies_v0.4.9-rc2\" --notes \"\")",
+      "Bash(npm test *)"
     ]
   }
 }

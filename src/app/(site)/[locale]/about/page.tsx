@@ -38,11 +38,7 @@ const AUDIENCE = [
   { key: "owners", icon: Users },
 ] as const;
 
-export default async function AboutPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale as Locale);
   const t = await getTranslations({ locale: locale as Locale, namespace: "AboutPage" });
@@ -70,7 +66,11 @@ export default async function AboutPage({
       <GradientSection variant="plain">
         <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-center">
           <div>
-            <SectionTitle label={tAbout("label")} title={t("descriptionTitle")} description={tAbout("text")} />
+            <SectionTitle
+              label={tAbout("label")}
+              title={t("descriptionTitle")}
+              description={tAbout("text")}
+            />
           </div>
           <StatsGridCompact />
         </div>
@@ -83,7 +83,10 @@ export default async function AboutPage({
         <SectionTitle align="center" title={t("audienceTitle")} className="mb-10" />
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
           {AUDIENCE.map(({ key, icon: Icon }) => (
-            <div key={key} className="flex flex-col items-center gap-3 rounded-2xl border bg-card p-6 text-center">
+            <div
+              key={key}
+              className="flex flex-col items-center gap-3 rounded-2xl border bg-card p-6 text-center"
+            >
               <span className="flex size-12 items-center justify-center rounded-xl bg-secondary text-brand-red">
                 <Icon className="size-6" />
               </span>
@@ -109,8 +112,12 @@ export default async function AboutPage({
             {tAbout("title")}
           </h2>
           <div className="flex flex-col gap-3 sm:flex-row">
-            <Button asChild size="lg"><Link href="/tickets">{tc("getTicket")}</Link></Button>
-            <Button asChild size="lg" variant="accent"><Link href="/exhibit">{tc("bookStand")}</Link></Button>
+            <Button asChild size="lg">
+              <Link href="/tickets">{tc("getTicket")}</Link>
+            </Button>
+            <Button asChild size="lg" variant="accent">
+              <Link href="/exhibit">{tc("bookStand")}</Link>
+            </Button>
           </div>
         </div>
       </GradientSection>

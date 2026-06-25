@@ -42,12 +42,8 @@ export function TicketCard({
           </span>
         )}
       </div>
-      {description && (
-        <p className="mt-2 text-sm text-muted-foreground">{description}</p>
-      )}
-      <div className="mt-4 text-3xl font-extrabold text-neva-gradient">
-        {priceLabel}
-      </div>
+      {description && <p className="mt-2 text-sm text-muted-foreground">{description}</p>}
+      <div className="mt-4 text-3xl font-extrabold text-neva-gradient">{priceLabel}</div>
 
       <div className="mt-5 border-t pt-5">
         <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
@@ -66,9 +62,7 @@ export function TicketCard({
       <div
         className={cn(
           "mt-6 rounded-full py-2.5 text-center text-sm font-semibold transition-colors",
-          selected
-            ? "bg-brand-red text-white"
-            : "bg-secondary text-secondary-foreground",
+          selected ? "bg-brand-red text-white" : "bg-secondary text-secondary-foreground",
         )}
       >
         {selected ? "✓" : ""} {title}

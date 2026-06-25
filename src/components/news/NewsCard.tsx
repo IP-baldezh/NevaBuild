@@ -29,9 +29,7 @@ export function NewsCard({ item }: { item: News }) {
           />
         ) : (
           <div className="flex h-full items-center justify-center">
-            <span className="text-4xl font-extrabold text-brand-black/15">
-              NEVA BUILD
-            </span>
+            <span className="text-4xl font-extrabold text-brand-black/15">NEVA BUILD</span>
           </div>
         )}
       </div>
@@ -43,11 +41,7 @@ export function NewsCard({ item }: { item: News }) {
         <h3 className="mt-3 text-lg font-bold leading-tight transition-colors group-hover:text-brand-red">
           {title}
         </h3>
-        {excerpt && (
-          <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
-            {excerpt}
-          </p>
-        )}
+        {excerpt && <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{excerpt}</p>}
       </div>
     </Link>
   );

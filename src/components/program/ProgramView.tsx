@@ -20,7 +20,10 @@ function googleCalendarUrl(opts: {
   location?: string;
 }) {
   const fmt = (d: Date) =>
-    new Date(d).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+    new Date(d)
+      .toISOString()
+      .replace(/[-:]/g, "")
+      .replace(/\.\d{3}/, "");
   const p = new URLSearchParams({
     action: "TEMPLATE",
     text: opts.title,
@@ -38,26 +41,16 @@ export function ProgramView({ days }: { days: ProgramDayWithSessions[] }) {
   const [type, setType] = useState("");
   const [hall, setHall] = useState("");
 
-  const allSessions = useMemo(
-    () => days.flatMap((d) => d.sessions),
-    [days],
-  );
-  const types = useMemo(
-    () => Array.from(new Set(allSessions.map((s) => s.type))),
-    [allSessions],
-  );
+  const allSessions = useMemo(() => days.flatMap((d) => d.sessions), [days]);
+  const types = useMemo(() => Array.from(new Set(allSessions.map((s) => s.type))), [allSessions]);
   const halls = useMemo(
-    () =>
-      Array.from(
-        new Set(allSessions.map((s) => s.hallRu).filter((h): h is string => !!h)),
-      ),
+    () => Array.from(new Set(allSessions.map((s) => s.hallRu).filter((h): h is string => !!h))),
     [allSessions],
   );
 
   const day = days[activeDay];
   const sessions = (day?.sessions ?? []).filter(
-    (s) =>
-      (!type || s.type === type) && (!hall || s.hallRu === hall),
+    (s) => (!type || s.type === type) && (!hall || s.hallRu === hall),
   );
 
   if (days.length === 0) {
@@ -75,9 +68,7 @@ export function ProgramView({ days }: { days: ProgramDayWithSessions[] }) {
             onClick={() => setActiveDay(i)}
             className={cn(
               "rounded-full px-5 py-2.5 text-sm font-semibold transition-colors",
-              i === activeDay
-                ? "bg-brand-red text-white"
-                : "border bg-card hover:bg-secondary",
+              i === activeDay ? "bg-brand-red text-white" : "border bg-card hover:bg-secondary",
             )}
           >
             <span className="block">{pick(locale, d.titleRu, d.titleEn)}</span>
@@ -95,7 +86,11 @@ export function ProgramView({ days }: { days: ProgramDayWithSessions[] }) {
 
       {/* Фильтры */}
       <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:max-w-md">
-        <SelectNative value={type} onChange={(e) => setType(e.target.value)} aria-label={t("allTypes")}>
+        <SelectNative
+          value={type}
+          onChange={(e) => setType(e.target.value)}
+          aria-label={t("allTypes")}
+        >
           <option value="">{t("allTypes")}</option>
           {types.map((ty) => (
             <option key={ty} value={ty}>
@@ -103,7 +98,11 @@ export function ProgramView({ days }: { days: ProgramDayWithSessions[] }) {
             </option>
           ))}
         </SelectNative>
-        <SelectNative value={hall} onChange={(e) => setHall(e.target.value)} aria-label={t("allHalls")}>
+        <SelectNative
+          value={hall}
+          onChange={(e) => setHall(e.target.value)}
+          aria-label={t("allHalls")}
+        >
           <option value="">{t("allHalls")}</option>
           {halls.map((h) => (
             <option key={h} value={h}>
@@ -152,9 +151,7 @@ export function ProgramView({ days }: { days: ProgramDayWithSessions[] }) {
                   {s.speakers.length > 0 && (
                     <p className="mt-1 text-sm text-muted-foreground">
                       {t("speakers")}:{" "}
-                      {s.speakers
-                        .map((sp) => pick(locale, sp.nameRu, sp.nameEn))
-                        .join(", ")}
+                      {s.speakers.map((sp) => pick(locale, sp.nameRu, sp.nameEn)).join(", ")}
                     </p>
                   )}
                 </div>

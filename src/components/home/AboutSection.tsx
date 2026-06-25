@@ -7,7 +7,7 @@ import { StaggerReveal, StaggerItem } from "@/components/ui/scroll-reveal";
 
 const DIRECTIONS = [
   { index: "01", tKey: "ExhibitBlock", href: "/exhibit", accent: true },
-  { index: "02", tKey: "VisitBlock",   href: "/tickets", accent: false },
+  { index: "02", tKey: "VisitBlock", href: "/tickets", accent: false },
 ] as const;
 
 const ease = [0.21, 0.47, 0.32, 0.98] as [number, number, number, number];

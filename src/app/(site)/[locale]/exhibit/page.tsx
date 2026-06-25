@@ -52,11 +52,7 @@ const BENEFITS = [
 
 const STEPS = ["request", "consult", "format", "contract", "prepare"] as const;
 
-export default async function ExhibitPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function ExhibitPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale as Locale);
   const t = await getTranslations({ locale: locale as Locale, namespace: "ExhibitPage" });
@@ -85,7 +81,10 @@ export default async function ExhibitPage({
         <SectionTitle align="center" title={t("benefitsTitle")} className="mb-10" />
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
           {BENEFITS.map(({ key, icon: Icon }) => (
-            <div key={key} className="flex flex-col items-center gap-3 rounded-2xl border bg-card p-6 text-center">
+            <div
+              key={key}
+              className="flex flex-col items-center gap-3 rounded-2xl border bg-card p-6 text-center"
+            >
               <span className="flex size-12 items-center justify-center rounded-xl bg-accent text-accent-foreground">
                 <Icon className="size-6" />
               </span>

@@ -6,10 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useLocale, useTranslations } from "next-intl";
 import { Loader2 } from "lucide-react";
 
-import {
-  participationSchema,
-  type ParticipationInput,
-} from "@/lib/validations/forms";
+import { participationSchema, type ParticipationInput } from "@/lib/validations/forms";
 import { submitParticipation } from "@/server/actions/leads";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -22,11 +19,7 @@ import { pick } from "@/lib/content";
 import type { Locale } from "@/i18n/routing";
 import type { ExhibitorCategory } from "@prisma/client";
 
-export function LeadForm({
-  categories,
-}: {
-  categories: ExhibitorCategory[];
-}) {
+export function LeadForm({ categories }: { categories: ExhibitorCategory[] }) {
   const t = useTranslations("Forms");
   const tc = useTranslations("Common");
   const locale = useLocale() as Locale;
@@ -123,9 +116,7 @@ export function LeadForm({
           </label>
         )}
       />
-      {err("consent") && (
-        <p className="text-xs font-medium text-destructive">{err("consent")}</p>
-      )}
+      {err("consent") && <p className="text-xs font-medium text-destructive">{err("consent")}</p>}
 
       {serverError && (
         <p className="rounded-lg bg-destructive/10 px-4 py-2 text-sm text-destructive">

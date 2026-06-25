@@ -1,74 +1,85 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
+import { ArrowUpRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { SectionTitle } from "@/components/ui/section-title";
-import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/ui/scroll-reveal";
-import { getCategoryIcon } from "@/lib/category-icons";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { pick } from "@/lib/content";
 import type { Locale } from "@/i18n/routing";
 import type { ExhibitorCategory } from "@prisma/client";
+
+const SECTOR_COLORS = [
+  { badge: "bg-nb-green/10 text-nb-green-dark border-nb-green/20", accent: "text-nb-green" },
+  { badge: "bg-brand-red/10 text-brand-red border-brand-red/15", accent: "text-brand-red" },
+  { badge: "bg-blue-500/8 text-blue-600 border-blue-200", accent: "text-blue-500" },
+  { badge: "bg-emerald-500/8 text-emerald-700 border-emerald-200", accent: "text-emerald-500" },
+  { badge: "bg-violet-500/8 text-violet-700 border-violet-200", accent: "text-violet-500" },
+  { badge: "bg-amber-500/8 text-amber-700 border-amber-200", accent: "text-amber-500" },
+  { badge: "bg-sky-500/8 text-sky-700 border-sky-200", accent: "text-sky-500" },
+  { badge: "bg-nb-dark/5 text-nb-dark border-nb-border", accent: "text-nb-dark" },
+];
 
 export function SectionsGrid({ categories }: { categories: ExhibitorCategory[] }) {
   const t = useTranslations("Sections");
   const locale = useLocale() as Locale;
 
   return (
-    <>
-      <ScrollReveal>
-        <SectionTitle
-          index="02"
-          label={t("label")}
-          title={t("title")}
-          description={t("description") || undefined}
-          className="mb-14"
-        />
-      </ScrollReveal>
+    <section id="sectors" className="py-20 bg-white">
+      <div className="container-neva">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-14">
+          <div>
+            <span className="font-bold text-[11px] text-nb-green uppercase tracking-[3px] mb-3 block">
+              {t("label")}
+            </span>
+            <h2
+              className="font-black text-nb-dark leading-tight"
+              style={{ fontSize: "clamp(30px, 4vw, 50px)" }}
+            >
+              {t("title")}
+            </h2>
+          </div>
+          <ScrollReveal>
+            <Link
+              href="/exhibitors"
+              className="inline-flex items-center gap-2 font-bold text-[14px] text-nb-green-dark hover:text-nb-lime-acid border-b border-nb-green/40 hover:border-nb-lime-acid pb-0.5 transition-all duration-200 self-start sm:self-auto"
+            >
+              {t("cta")}
+              <ArrowUpRight className="size-4" />
+            </Link>
+          </ScrollReveal>
+        </div>
 
-      {/* Один StaggerReveal = один IntersectionObserver на весь grid */}
-      <StaggerReveal
-        stagger={0.05}
-        className="grid gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-      >
-        {categories.map((c, i) => {
-          const Icon = getCategoryIcon(c.icon);
-          return (
-            <StaggerItem key={c.id} className="flex flex-col">
+        {/* Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {categories.map((c, i) => {
+            const colors = SECTOR_COLORS[i % SECTOR_COLORS.length];
+            return (
               <Link
+                key={c.id}
                 href={`/exhibitors?category=${c.slug}`}
-                className="group relative flex h-full flex-col gap-4 overflow-hidden bg-background p-7 transition-colors hover:bg-card"
+                className="group relative bg-white border border-nb-border hover:border-nb-lime-acid/50 rounded-2xl p-6 flex flex-col gap-4 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-nb-green/8"
               >
-                <span
-                  aria-hidden
-                  className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-lime transition-transform duration-300 group-hover:scale-x-100"
-                />
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">
+                <div className="flex items-start justify-between">
+                  <span
+                    className={`inline-flex items-center font-black text-[11px] px-2.5 py-1 rounded-lg border ${colors.badge}`}
+                  >
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <Icon className="size-6 text-lime transition-transform duration-300 group-hover:scale-110" />
+                  <ArrowUpRight
+                    className={`size-4 ${colors.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-200`}
+                  />
                 </div>
-                <h3 className="text-base font-bold uppercase leading-tight tracking-tight text-foreground">
-                  {pick(locale, c.titleRu, c.titleEn)}
-                </h3>
-                <span className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-foreground transition-colors group-hover:text-lime">
-                  {t("more")}{" "}
-                  <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-1">→</span>
-                </span>
+                <div>
+                  <h3 className="font-bold text-[16px] text-nb-dark mb-2 leading-snug">
+                    {pick(locale, c.titleRu, c.titleEn)}
+                  </h3>
+                </div>
               </Link>
-            </StaggerItem>
-          );
-        })}
-      </StaggerReveal>
-
-      <ScrollReveal className="mt-10 flex justify-center">
-        <Link
-          href="/exhibitors"
-          className="inline-flex h-12 items-center gap-2 border border-border px-8 text-sm font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-lime hover:text-lime"
-        >
-          {t("cta")}
-        </Link>
-      </ScrollReveal>
-    </>
+            );
+          })}
+        </div>
+      </div>
+    </section>
   );
 }

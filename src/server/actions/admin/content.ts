@@ -2,12 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import {
-  ContentStatus,
-  ExhibitorStatus,
-  PartnerType,
-  SessionType,
-} from "@prisma/client";
+import { ContentStatus, ExhibitorStatus, PartnerType, SessionType } from "@prisma/client";
 import { prisma } from "@/lib/db";
 import { requireRole } from "@/lib/authz";
 import { EDITOR_ROLES } from "@/lib/authz";
@@ -122,8 +117,7 @@ export async function saveNews(fd: FormData) {
     categoryRu: s(fd, "categoryRu") || null,
     categoryEn: s(fd, "categoryEn") || null,
     status,
-    publishedAt:
-      status === ContentStatus.PUBLISHED ? new Date() : null,
+    publishedAt: status === ContentStatus.PUBLISHED ? new Date() : null,
   };
   if (id) await prisma.news.update({ where: { id }, data });
   else await prisma.news.create({ data });
@@ -229,7 +223,8 @@ export async function saveSession(fd: FormData) {
   await guard();
   const id = s(fd, "id");
   const dayId = s(fd, "dayId");
-  const dateBase = (await prisma.programDay.findUnique({ where: { id: dayId } }))?.date ?? new Date();
+  const dateBase =
+    (await prisma.programDay.findUnique({ where: { id: dayId } }))?.date ?? new Date();
   const mkTime = (hhmm: string) => {
     const [h, m] = hhmm.split(":").map(Number);
     const d = new Date(dateBase);
@@ -237,7 +232,9 @@ export async function saveSession(fd: FormData) {
     return d;
   };
   const data = {
-    slug: s(fd, "slug") || slugify(s(fd, "titleEn") || s(fd, "titleRu")) + "-" + Date.now().toString(36),
+    slug:
+      s(fd, "slug") ||
+      slugify(s(fd, "titleEn") || s(fd, "titleRu")) + "-" + Date.now().toString(36),
     dayId,
     titleRu: s(fd, "titleRu"),
     titleEn: s(fd, "titleEn"),
@@ -248,7 +245,10 @@ export async function saveSession(fd: FormData) {
     hallRu: s(fd, "hallRu") || null,
     hallEn: s(fd, "hallEn") || null,
     type: s(fd, "type") as SessionType,
-    tags: s(fd, "tags").split(",").map((t) => t.trim()).filter(Boolean),
+    tags: s(fd, "tags")
+      .split(",")
+      .map((t) => t.trim())
+      .filter(Boolean),
   };
   const speakerIds = fd.getAll("speakers").map(String).filter(Boolean);
 

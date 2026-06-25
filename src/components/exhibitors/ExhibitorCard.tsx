@@ -14,11 +14,7 @@ const STATUS_VARIANT = {
   AMBASSADOR: "outline",
 } as const;
 
-export function ExhibitorCard({
-  exhibitor,
-}: {
-  exhibitor: ExhibitorWithCategories;
-}) {
+export function ExhibitorCard({ exhibitor }: { exhibitor: ExhibitorWithCategories }) {
   const locale = useLocale() as Locale;
   const t = useTranslations("ExhibitorsPage");
   const country = pick(locale, exhibitor.countryRu, exhibitor.countryEn);
@@ -46,9 +42,7 @@ export function ExhibitorCard({
             </span>
           )}
         </div>
-        <Badge variant={STATUS_VARIANT[exhibitor.status]}>
-          {t(`status.${exhibitor.status}`)}
-        </Badge>
+        <Badge variant={STATUS_VARIANT[exhibitor.status]}>{t(`status.${exhibitor.status}`)}</Badge>
       </div>
 
       <h3 className="mt-4 text-lg font-bold leading-tight">{exhibitor.name}</h3>

@@ -71,7 +71,9 @@ export default async function AdminUsersPage() {
             <FormField label="Роль" htmlFor="u-role">
               <SelectNative id="u-role" name="role" defaultValue={Role.CONTENT_MANAGER}>
                 {Object.values(Role).map((r) => (
-                  <option key={r} value={r}>{r}</option>
+                  <option key={r} value={r}>
+                    {r}
+                  </option>
                 ))}
               </SelectNative>
             </FormField>

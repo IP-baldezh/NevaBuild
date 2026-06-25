@@ -32,8 +32,16 @@ export function ExhibitorForm({
             <Input id="slug" name="slug" defaultValue={e?.slug} placeholder="авто из названия" />
           </FormField>
           <FormField label="Статус" htmlFor="status">
-            <SelectNative id="status" name="status" defaultValue={e?.status ?? ExhibitorStatus.EXHIBITOR}>
-              {Object.values(ExhibitorStatus).map((s) => <option key={s} value={s}>{s}</option>)}
+            <SelectNative
+              id="status"
+              name="status"
+              defaultValue={e?.status ?? ExhibitorStatus.EXHIBITOR}
+            >
+              {Object.values(ExhibitorStatus).map((s) => (
+                <option key={s} value={s}>
+                  {s}
+                </option>
+              ))}
             </SelectNative>
           </FormField>
           <FormField label="Стенд №" htmlFor="boothNumber">
@@ -95,11 +103,21 @@ export function ExhibitorForm({
 
         <div className="flex gap-6">
           <label className="flex items-center gap-2 text-sm">
-            <input type="checkbox" name="isPublished" defaultChecked={e?.isPublished ?? true} className="size-4" />
+            <input
+              type="checkbox"
+              name="isPublished"
+              defaultChecked={e?.isPublished ?? true}
+              className="size-4"
+            />
             Опубликован
           </label>
           <label className="flex items-center gap-2 text-sm">
-            <input type="checkbox" name="isFeatured" defaultChecked={e?.isFeatured ?? false} className="size-4" />
+            <input
+              type="checkbox"
+              name="isFeatured"
+              defaultChecked={e?.isFeatured ?? false}
+              className="size-4"
+            />
             На главной
           </label>
         </div>
@@ -107,7 +125,10 @@ export function ExhibitorForm({
 
       <div className="flex gap-3">
         <SubmitButton>Сохранить</SubmitButton>
-        <Link href="/admin/exhibitors" className="h-11 rounded-full border px-6 text-sm leading-[2.75rem] hover:bg-secondary">
+        <Link
+          href="/admin/exhibitors"
+          className="h-11 rounded-full border px-6 text-sm leading-[2.75rem] hover:bg-secondary"
+        >
           Отмена
         </Link>
       </div>

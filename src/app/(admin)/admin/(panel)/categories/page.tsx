@@ -41,12 +41,17 @@ export default async function AdminCategoriesPage({
                   <td className="p-3 text-muted-foreground">{c.icon}</td>
                   <td className="p-3 text-right">
                     <div className="flex justify-end gap-2">
-                      <Link href={`/admin/categories?edit=${c.id}`} className="h-8 rounded-full border px-3 text-xs leading-8 hover:bg-secondary">
+                      <Link
+                        href={`/admin/categories?edit=${c.id}`}
+                        className="h-8 rounded-full border px-3 text-xs leading-8 hover:bg-secondary"
+                      >
                         Изменить
                       </Link>
                       <form action={deleteCategory}>
                         <input type="hidden" name="id" value={c.id} />
-                        <button className="h-8 rounded-full border px-3 text-xs text-destructive hover:bg-destructive/10">Удалить</button>
+                        <button className="h-8 rounded-full border px-3 text-xs text-destructive hover:bg-destructive/10">
+                          Удалить
+                        </button>
                       </form>
                     </div>
                   </td>
@@ -70,15 +75,28 @@ export default async function AdminCategoriesPage({
               <Input id="slug" name="slug" defaultValue={editing?.slug} placeholder="авто из EN" />
             </FormField>
             <FormField label="Иконка (lucide)" htmlFor="icon">
-              <Input id="icon" name="icon" defaultValue={editing?.icon ?? ""} placeholder="BrickWall" />
+              <Input
+                id="icon"
+                name="icon"
+                defaultValue={editing?.icon ?? ""}
+                placeholder="BrickWall"
+              />
             </FormField>
             <FormField label="Порядок" htmlFor="sortOrder">
-              <Input id="sortOrder" name="sortOrder" type="number" defaultValue={editing?.sortOrder ?? 0} />
+              <Input
+                id="sortOrder"
+                name="sortOrder"
+                type="number"
+                defaultValue={editing?.sortOrder ?? 0}
+              />
             </FormField>
             <div className="flex gap-2">
               <SubmitButton>Сохранить</SubmitButton>
               {editing && (
-                <Link href="/admin/categories" className="h-11 rounded-full border px-5 text-sm leading-[2.75rem] hover:bg-secondary">
+                <Link
+                  href="/admin/categories"
+                  className="h-11 rounded-full border px-5 text-sm leading-[2.75rem] hover:bg-secondary"
+                >
                   Отмена
                 </Link>
               )}

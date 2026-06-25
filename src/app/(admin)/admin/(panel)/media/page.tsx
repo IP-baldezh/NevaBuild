@@ -26,7 +26,8 @@ export default async function AdminMediaPage() {
           <SubmitButton>Загрузить</SubmitButton>
         </form>
         <p className="mt-2 text-xs text-muted-foreground">
-          Файл сохраняется в /public/uploads. Скопируйте URL и вставьте в нужное поле (логотип, обложка).
+          Файл сохраняется в /public/uploads. Скопируйте URL и вставьте в нужное поле (логотип,
+          обложка).
         </p>
       </Panel>
 

@@ -16,12 +16,7 @@ export function CatalogPreview({ exhibitors }: { exhibitors: ExhibitorWithCatego
   return (
     <>
       <ScrollReveal>
-        <SectionTitle
-          index="03"
-          label={t("label")}
-          title={t("title")}
-          className="mb-14"
-        />
+        <SectionTitle index="03" label={t("label")} title={t("title")} className="mb-14" />
       </ScrollReveal>
 
       <StaggerReveal
@@ -41,9 +36,7 @@ export function CatalogPreview({ exhibitors }: { exhibitors: ExhibitorWithCatego
               <span className="text-xs text-muted-foreground">
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <h3 className="font-bold uppercase tracking-tight text-foreground">
-                {e.name}
-              </h3>
+              <h3 className="font-bold uppercase tracking-tight text-foreground">{e.name}</h3>
               {e.categories.length > 0 && (
                 <span className="text-sm text-muted-foreground">
                   {pick(locale, e.categories[0].category.titleRu, e.categories[0].category.titleEn)}
@@ -51,7 +44,12 @@ export function CatalogPreview({ exhibitors }: { exhibitors: ExhibitorWithCatego
               )}
               <span className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-foreground transition-colors group-hover:text-lime">
                 {t("more") || "Подробнее"}{" "}
-                <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-1">→</span>
+                <span
+                  aria-hidden
+                  className="transition-transform duration-200 group-hover:translate-x-1"
+                >
+                  →
+                </span>
               </span>
             </Link>
           </StaggerItem>

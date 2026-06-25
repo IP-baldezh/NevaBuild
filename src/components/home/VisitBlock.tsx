@@ -16,9 +16,7 @@ export function VisitBlock() {
         <span className="inline-flex items-center gap-2 rounded-full bg-white/60 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-brand-black backdrop-blur">
           {t("label")}
         </span>
-        <h3 className="mt-4 text-2xl font-extrabold leading-tight sm:text-3xl">
-          {t("title")}
-        </h3>
+        <h3 className="mt-4 text-2xl font-extrabold leading-tight sm:text-3xl">{t("title")}</h3>
         <p className="mt-3 max-w-md text-brand-black/75">{t("text")}</p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Button asChild size="lg">

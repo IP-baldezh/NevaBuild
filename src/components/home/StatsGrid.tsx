@@ -20,9 +20,9 @@ export function StatsGrid({ items }: { items: StatItem[] }) {
         >
           {items.map((s) => (
             <StaggerItem key={s.label}>
-              <div className="flex flex-col lg:px-10 first:lg:pl-0 last:lg:pr-0">
+              <div className="flex flex-col lg:px-10 first:lg:pl-0 last:lg:pr-0 group cursor-default">
                 <div
-                  className="font-black leading-[0.88] tracking-tight text-white"
+                  className="font-black leading-[0.88] tracking-tight text-white transition-colors duration-300 group-hover:text-nb-lime-acid"
                   style={{ fontSize: "clamp(2.75rem, 6vw, 5rem)" }}
                 >
                   <AnimatedCounter

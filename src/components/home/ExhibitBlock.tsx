@@ -18,9 +18,7 @@ export function ExhibitBlock() {
         <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-accent">
           {t("label")}
         </span>
-        <h3 className="mt-4 text-2xl font-extrabold leading-tight sm:text-3xl">
-          {t("title")}
-        </h3>
+        <h3 className="mt-4 text-2xl font-extrabold leading-tight sm:text-3xl">{t("title")}</h3>
         <p className="mt-3 max-w-md text-white/70">{t("text")}</p>
         <ul className="mt-6 space-y-3">
           {POINTS.map((p) => (

@@ -34,8 +34,12 @@ export default async function AdminDashboard() {
                       <div className="text-xs text-muted-foreground">{l.email}</div>
                     </td>
                     <td className="p-3 text-muted-foreground">{l.type}</td>
-                    <td className="p-3"><StatusBadge status={l.status} /></td>
-                    <td className="p-3 text-right text-xs text-muted-foreground">{dt(l.createdAt)}</td>
+                    <td className="p-3">
+                      <StatusBadge status={l.status} />
+                    </td>
+                    <td className="p-3 text-right text-xs text-muted-foreground">
+                      {dt(l.createdAt)}
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -57,7 +61,9 @@ export default async function AdminDashboard() {
                       <div className="text-xs text-muted-foreground">{o.fullName}</div>
                     </td>
                     <td className="p-3 text-muted-foreground">{o.ticketProduct.titleRu}</td>
-                    <td className="p-3"><StatusBadge status={o.status} /></td>
+                    <td className="p-3">
+                      <StatusBadge status={o.status} />
+                    </td>
                     <td className="p-3 text-right font-medium">{formatPrice(o.amount)}</td>
                   </tr>
                 ))}

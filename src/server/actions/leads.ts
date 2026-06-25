@@ -13,9 +13,7 @@ import {
 export type ActionResult = { ok: true } | { ok: false; error: string };
 
 /** Заявка на участие. Серверная валидация + сохранение + письмо организатору. */
-export async function submitParticipation(
-  input: ParticipationInput,
-): Promise<ActionResult> {
+export async function submitParticipation(input: ParticipationInput): Promise<ActionResult> {
   // Honeypot: бот заполнил скрытое поле — молча принимаем (без сохранения).
   if (input.hp) return { ok: true };
 
@@ -58,9 +56,7 @@ export async function submitParticipation(
 }
 
 /** Обратная связь. */
-export async function submitContact(
-  input: ContactInput,
-): Promise<ActionResult> {
+export async function submitContact(input: ContactInput): Promise<ActionResult> {
   if (input.hp) return { ok: true };
 
   const parsed = contactSchema.safeParse(input);

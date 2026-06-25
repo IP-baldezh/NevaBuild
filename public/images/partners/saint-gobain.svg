@@ -1,0 +1,7 @@
+<svg width="160" height="56" viewBox="0 0 160 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="160" height="56" fill="white"/>
+  <rect x="0" y="0" width="6" height="56" fill="#E2001A"/>
+  <rect x="154" y="0" width="6" height="56" fill="#E2001A"/>
+  <text x="80" y="24" font-family="Arial, sans-serif" font-weight="700" font-size="10" fill="#1a1a1a" text-anchor="middle" letter-spacing="1.5">SAINT-GOBAIN</text>
+  <text x="80" y="40" font-family="Arial, sans-serif" font-weight="400" font-size="9" fill="#666" text-anchor="middle" letter-spacing="1">Making the World a Better Home</text>
+</svg>

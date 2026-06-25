@@ -26,11 +26,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function ContactsPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function ContactsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale as Locale);
   const t = await getTranslations({ locale: locale as Locale, namespace: "ContactsPage" });
@@ -82,9 +78,7 @@ export default async function ContactsPage({
               </dl>
 
               <div>
-                <p className="mb-2 text-sm font-semibold text-muted-foreground">
-                  {t("domains")}
-                </p>
+                <p className="mb-2 text-sm font-semibold text-muted-foreground">{t("domains")}</p>
                 <ul className="space-y-1.5">
                   {ev.domains.map((d) => (
                     <li key={d}>

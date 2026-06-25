@@ -25,7 +25,11 @@ export function NewsForm({ news }: { news?: News | null }) {
             <Input id="slug" name="slug" defaultValue={news?.slug} placeholder="авто из EN" />
           </FormField>
           <FormField label="Обложка URL" htmlFor="coverImageUrl">
-            <Input id="coverImageUrl" name="coverImageUrl" defaultValue={news?.coverImageUrl ?? ""} />
+            <Input
+              id="coverImageUrl"
+              name="coverImageUrl"
+              defaultValue={news?.coverImageUrl ?? ""}
+            />
           </FormField>
           <FormField label="Категория (RU)" htmlFor="categoryRu">
             <Input id="categoryRu" name="categoryRu" defaultValue={news?.categoryRu ?? ""} />
@@ -34,7 +38,11 @@ export function NewsForm({ news }: { news?: News | null }) {
             <Input id="categoryEn" name="categoryEn" defaultValue={news?.categoryEn ?? ""} />
           </FormField>
           <FormField label="Статус" htmlFor="status">
-            <SelectNative id="status" name="status" defaultValue={news?.status ?? ContentStatus.DRAFT}>
+            <SelectNative
+              id="status"
+              name="status"
+              defaultValue={news?.status ?? ContentStatus.DRAFT}
+            >
               <option value={ContentStatus.DRAFT}>Черновик</option>
               <option value={ContentStatus.PUBLISHED}>Опубликовано</option>
             </SelectNative>
@@ -55,7 +63,10 @@ export function NewsForm({ news }: { news?: News | null }) {
       </Panel>
       <div className="flex gap-3">
         <SubmitButton>Сохранить</SubmitButton>
-        <Link href="/admin/news" className="h-11 rounded-full border px-6 text-sm leading-[2.75rem] hover:bg-secondary">
+        <Link
+          href="/admin/news"
+          className="h-11 rounded-full border px-6 text-sm leading-[2.75rem] hover:bg-secondary"
+        >
           Отмена
         </Link>
       </div>

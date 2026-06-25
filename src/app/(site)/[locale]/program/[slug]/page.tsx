@@ -10,10 +10,7 @@ import { Button } from "@/components/ui/button";
 import { GradientSection } from "@/components/ui/gradient-section";
 import { pick } from "@/lib/content";
 import { formatTime, formatDate } from "@/lib/format";
-import {
-  getSessionBySlug,
-  getAllSessionSlugs,
-} from "@/server/services/program";
+import { getSessionBySlug, getAllSessionSlugs } from "@/server/services/program";
 
 export const revalidate = 300;
 export const dynamicParams = true;
@@ -91,9 +88,7 @@ export default async function SessionPage({
       <GradientSection variant="plain">
         <div className="mx-auto max-w-3xl">
           {description && (
-            <p className="text-pretty text-lg leading-relaxed text-foreground/90">
-              {description}
-            </p>
+            <p className="text-pretty text-lg leading-relaxed text-foreground/90">{description}</p>
           )}
 
           {s.speakers.length > 0 && (
@@ -101,7 +96,10 @@ export default async function SessionPage({
               <h2 className="text-xl font-bold">{t("speakers")}</h2>
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
                 {s.speakers.map((sp) => (
-                  <div key={sp.id} className="flex items-center gap-4 rounded-2xl border bg-card p-4">
+                  <div
+                    key={sp.id}
+                    className="flex items-center gap-4 rounded-2xl border bg-card p-4"
+                  >
                     <div className="flex size-14 shrink-0 items-center justify-center rounded-full bg-neva-gradient text-lg font-extrabold text-brand-black">
                       {pick(lc, sp.nameRu, sp.nameEn).charAt(0)}
                     </div>

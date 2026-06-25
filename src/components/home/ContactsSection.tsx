@@ -36,12 +36,7 @@ export function ContactsSection({ venue, city, address, phone, email }: Props) {
   return (
     <>
       <ScrollReveal>
-        <SectionTitle
-          index="08"
-          label={t("label")}
-          title={t("title")}
-          className="mb-12"
-        />
+        <SectionTitle index="08" label={t("label")} title={t("title")} className="mb-12" />
       </ScrollReveal>
 
       <div className="grid gap-px border border-border bg-border lg:grid-cols-2">
@@ -66,11 +61,17 @@ export function ContactsSection({ venue, city, address, phone, email }: Props) {
                 <div>
                   <div className="font-semibold text-foreground">{t(key)}</div>
                   {valueKey && key === "phone" ? (
-                    <a href={`tel:${phone.replace(/\s/g, "")}`} className="text-muted-foreground transition-colors hover:text-lime">
+                    <a
+                      href={`tel:${phone.replace(/\s/g, "")}`}
+                      className="text-muted-foreground transition-colors hover:text-lime"
+                    >
                       {phone}
                     </a>
                   ) : valueKey && key === "email" ? (
-                    <a href={`mailto:${email}`} className="text-muted-foreground transition-colors hover:text-lime">
+                    <a
+                      href={`mailto:${email}`}
+                      className="text-muted-foreground transition-colors hover:text-lime"
+                    >
                       {email}
                     </a>
                   ) : valueKey ? (
@@ -91,7 +92,9 @@ export function ContactsSection({ venue, city, address, phone, email }: Props) {
               className="group inline-flex h-12 items-center gap-2 bg-lime px-6 text-sm font-semibold uppercase tracking-wide text-lime-foreground transition-colors hover:bg-foreground"
             >
               {t("address")}
-              <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
+              <span aria-hidden className="transition-transform group-hover:translate-x-1">
+                →
+              </span>
             </a>
           </div>
         </m.div>
@@ -106,10 +109,16 @@ export function ContactsSection({ venue, city, address, phone, email }: Props) {
         >
           <div aria-hidden className="absolute inset-0 bg-blueprint opacity-60" />
           {/* Scan line */}
-          <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-full overflow-hidden">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 top-0 h-full overflow-hidden"
+          >
             <div className="animate-scan-line absolute inset-x-0 h-px bg-lime/30" />
           </div>
-          <div aria-hidden className="absolute left-1/2 top-1/2 size-px -translate-x-1/2 -translate-y-1/2">
+          <div
+            aria-hidden
+            className="absolute left-1/2 top-1/2 size-px -translate-x-1/2 -translate-y-1/2"
+          >
             <span className="absolute left-1/2 top-1/2 size-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-red" />
             <span className="absolute left-1/2 top-1/2 size-16 -translate-x-1/2 -translate-y-1/2 animate-ping rounded-full border border-brand-red/50" />
             <span className="absolute left-1/2 top-1/2 size-32 -translate-x-1/2 -translate-y-1/2 animate-ping rounded-full border border-brand-red/20 [animation-delay:0.5s]" />

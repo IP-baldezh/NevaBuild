@@ -8,16 +8,10 @@ export const metadata: Metadata = {
 };
 
 // Корневой layout админки (нелокализованная зона). Отдельный root от публичного сайта.
-export default function AdminRootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function AdminRootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru" className={manrope.variable} suppressHydrationWarning>
-      <body className="min-h-dvh bg-muted font-sans text-foreground antialiased">
-        {children}
-      </body>
+      <body className="min-h-dvh bg-muted font-sans text-foreground antialiased">{children}</body>
     </html>
   );
 }

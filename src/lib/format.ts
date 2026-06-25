@@ -1,17 +1,12 @@
 /** Форматирование дат и диапазонов с учётом локали. Хранение — ISO в UTC. */
 
-export function formatDateRange(
-  start: string | Date,
-  end: string | Date,
-  locale: string,
-): string {
+export function formatDateRange(start: string | Date, end: string | Date, locale: string): string {
   const s = new Date(start);
   const e = new Date(end);
   const day = (d: Date) => d.getUTCDate();
 
   const sameMonth =
-    s.getUTCMonth() === e.getUTCMonth() &&
-    s.getUTCFullYear() === e.getUTCFullYear();
+    s.getUTCMonth() === e.getUTCMonth() && s.getUTCFullYear() === e.getUTCFullYear();
 
   if (sameMonth) {
     const monthYear = new Intl.DateTimeFormat(locale, {

@@ -43,8 +43,7 @@ export default async function ExhibitorsPage({
   setRequestLocale(locale as Locale);
   const t = await getTranslations({ locale: locale as Locale, namespace: "ExhibitorsPage" });
 
-  const str = (v: string | string[] | undefined) =>
-    typeof v === "string" ? v : undefined;
+  const str = (v: string | string[] | undefined) => (typeof v === "string" ? v : undefined);
 
   const [exhibitors, categories, countries] = await Promise.all([
     getExhibitors({

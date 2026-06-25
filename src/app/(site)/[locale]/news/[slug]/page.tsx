@@ -73,9 +73,7 @@ export default async function NewsArticlePage({
           <div className="flex items-center gap-3 text-sm">
             {category && <Badge variant="default">{category}</Badge>}
             {item.publishedAt && (
-              <time className="text-brand-black/60">
-                {formatDate(item.publishedAt, lc)}
-              </time>
+              <time className="text-brand-black/60">{formatDate(item.publishedAt, lc)}</time>
             )}
           </div>
           <h1 className="mt-4 text-balance text-3xl font-extrabold text-brand-black sm:text-4xl">

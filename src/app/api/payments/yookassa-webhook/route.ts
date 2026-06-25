@@ -1,8 +1,5 @@
 import { NextResponse } from "next/server";
-import {
-  issueTicketForOrder,
-  markOrderFailed,
-} from "@/server/services/orders";
+import { issueTicketForOrder, markOrderFailed } from "@/server/services/orders";
 import * as yookassa from "@/lib/payments/yookassa";
 
 /**

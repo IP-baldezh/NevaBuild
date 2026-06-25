@@ -25,7 +25,15 @@ export async function generateMetadata({
   };
 }
 
-const WHO = ["architects", "designers", "developers", "builders", "buyers", "owners", "private"] as const;
+const WHO = [
+  "architects",
+  "designers",
+  "developers",
+  "builders",
+  "buyers",
+  "owners",
+  "private",
+] as const;
 const FIND = [
   { key: "materials", icon: Boxes },
   { key: "tech", icon: Cpu },
@@ -35,11 +43,7 @@ const FIND = [
 ] as const;
 const FAQ = ["1", "2", "3", "4"] as const;
 
-export default async function VisitPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function VisitPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale as Locale);
   const t = await getTranslations({ locale: locale as Locale, namespace: "VisitPage" });
@@ -49,8 +53,12 @@ export default async function VisitPage({
     <>
       <PageHero title={t("title")} lead={t("lead")}>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <Button asChild size="lg"><Link href="/tickets">{tc("buyTicket")}</Link></Button>
-          <Button asChild size="lg" variant="dark"><Link href="/program">{tc("viewProgram")}</Link></Button>
+          <Button asChild size="lg">
+            <Link href="/tickets">{tc("buyTicket")}</Link>
+          </Button>
+          <Button asChild size="lg" variant="dark">
+            <Link href="/program">{tc("viewProgram")}</Link>
+          </Button>
         </div>
       </PageHero>
 
@@ -75,7 +83,10 @@ export default async function VisitPage({
         <SectionTitle align="center" title={t("findTitle")} className="mb-10" />
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
           {FIND.map(({ key, icon: Icon }) => (
-            <div key={key} className="flex flex-col items-center gap-3 rounded-2xl border bg-card p-6 text-center">
+            <div
+              key={key}
+              className="flex flex-col items-center gap-3 rounded-2xl border bg-card p-6 text-center"
+            >
               <span className="flex size-12 items-center justify-center rounded-xl bg-secondary text-brand-red">
                 <Icon className="size-6" />
               </span>
@@ -90,7 +101,10 @@ export default async function VisitPage({
           <SectionTitle align="center" title={t("faqTitle")} className="mb-8" />
           <div className="space-y-3">
             {FAQ.map((n) => (
-              <details key={n} className="group rounded-2xl border bg-card p-5 [&_summary]:cursor-pointer">
+              <details
+                key={n}
+                className="group rounded-2xl border bg-card p-5 [&_summary]:cursor-pointer"
+              >
                 <summary className="flex items-center justify-between gap-4 font-semibold marker:content-none">
                   {t(`faq.q${n}`)}
                   <Plus className="size-5 shrink-0 text-brand-red transition-transform group-open:rotate-45" />

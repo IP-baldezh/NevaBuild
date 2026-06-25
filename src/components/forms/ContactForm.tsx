@@ -75,7 +75,12 @@ export function ContactForm() {
         <Input id="c-phone" type="tel" {...register("phone")} />
       </FormField>
       <FormField label={t("message")} htmlFor="c-message" required error={err("message")}>
-        <Textarea id="c-message" rows={5} {...register("message")} aria-invalid={!!errors.message} />
+        <Textarea
+          id="c-message"
+          rows={5}
+          {...register("message")}
+          aria-invalid={!!errors.message}
+        />
       </FormField>
 
       <Controller
@@ -93,9 +98,7 @@ export function ContactForm() {
           </label>
         )}
       />
-      {err("consent") && (
-        <p className="text-xs font-medium text-destructive">{err("consent")}</p>
-      )}
+      {err("consent") && <p className="text-xs font-medium text-destructive">{err("consent")}</p>}
 
       {serverError && (
         <p className="rounded-lg bg-destructive/10 px-4 py-2 text-sm text-destructive">

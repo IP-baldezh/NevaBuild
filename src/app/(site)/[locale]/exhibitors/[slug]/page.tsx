@@ -10,10 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { GradientSection } from "@/components/ui/gradient-section";
 import { pick } from "@/lib/content";
-import {
-  getExhibitorBySlug,
-  getAllExhibitorSlugs,
-} from "@/server/services/exhibitors";
+import { getExhibitorBySlug, getAllExhibitorSlugs } from "@/server/services/exhibitors";
 
 export const revalidate = 300;
 export const dynamicParams = true;
@@ -69,7 +66,13 @@ export default async function ExhibitorPage({
           <div className="mt-6 flex flex-col gap-6 sm:flex-row sm:items-center">
             <div className="flex size-24 items-center justify-center overflow-hidden rounded-2xl bg-white shadow-sm">
               {e.logoUrl ? (
-                <Image src={e.logoUrl} alt={e.name} width={96} height={96} className="object-contain" />
+                <Image
+                  src={e.logoUrl}
+                  alt={e.name}
+                  width={96}
+                  height={96}
+                  className="object-contain"
+                />
               ) : (
                 <span className="text-4xl font-extrabold text-muted-foreground">
                   {e.name.charAt(0)}
@@ -119,7 +122,10 @@ export default async function ExhibitorPage({
             {e.gallery.length > 0 && (
               <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3">
                 {e.gallery.map((url, i) => (
-                  <div key={i} className="relative aspect-square overflow-hidden rounded-xl bg-muted">
+                  <div
+                    key={i}
+                    className="relative aspect-square overflow-hidden rounded-xl bg-muted"
+                  >
                     <Image src={url} alt={`${e.name} ${i + 1}`} fill className="object-cover" />
                   </div>
                 ))}

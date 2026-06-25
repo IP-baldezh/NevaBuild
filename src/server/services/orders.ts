@@ -6,10 +6,7 @@ import { generateQrDataUrl } from "@/lib/qr";
 import { sendTicketEmail } from "@/lib/email";
 
 const orderCode = customAlphabet("0123456789", 8);
-const ticketCodeGen = customAlphabet(
-  "ABCDEFGHJKLMNPQRSTUVWXYZ23456789",
-  10,
-);
+const ticketCodeGen = customAlphabet("ABCDEFGHJKLMNPQRSTUVWXYZ23456789", 10);
 
 export type CreateOrderInput = {
   ticketProductId: string;

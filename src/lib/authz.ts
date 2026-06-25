@@ -12,11 +12,7 @@ export const ADMIN_ROLES: Role[] = [
 ];
 
 // Роли, которым разрешено изменять контент (не VIEWER).
-export const EDITOR_ROLES: Role[] = [
-  Role.SUPER_ADMIN,
-  Role.CONTENT_MANAGER,
-  Role.SALES_MANAGER,
-];
+export const EDITOR_ROLES: Role[] = [Role.SUPER_ADMIN, Role.CONTENT_MANAGER, Role.SALES_MANAGER];
 
 /** Гарантирует, что текущий пользователь — администратор. Иначе редирект на логин. */
 export async function requireAdmin() {

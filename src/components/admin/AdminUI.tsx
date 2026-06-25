@@ -15,9 +15,7 @@ export function PageHeader({
     <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
       <div>
         <h1 className="text-2xl font-bold tracking-tight">{title}</h1>
-        {description && (
-          <p className="mt-1 text-sm text-muted-foreground">{description}</p>
-        )}
+        {description && <p className="mt-1 text-sm text-muted-foreground">{description}</p>}
       </div>
       {action && (
         <Button asChild>
@@ -46,16 +44,8 @@ export function StatCard({
   );
 }
 
-export function Panel({
-  className,
-  children,
-}: {
-  className?: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className={cn("rounded-2xl border bg-card", className)}>{children}</div>
-  );
+export function Panel({ className, children }: { className?: string; children: React.ReactNode }) {
+  return <div className={cn("rounded-2xl border bg-card", className)}>{children}</div>;
 }
 
 /** Бейдж статуса. */

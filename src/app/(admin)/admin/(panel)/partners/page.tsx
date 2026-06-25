@@ -27,7 +27,12 @@ export default async function AdminPartnersPage({
         <Panel className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="border-b text-left text-muted-foreground">
-              <tr><th className="p-3">Имя</th><th className="p-3">Тип</th><th className="p-3">Активен</th><th className="p-3 text-right">Действия</th></tr>
+              <tr>
+                <th className="p-3">Имя</th>
+                <th className="p-3">Тип</th>
+                <th className="p-3">Активен</th>
+                <th className="p-3 text-right">Действия</th>
+              </tr>
             </thead>
             <tbody>
               {partners.map((p) => (
@@ -37,8 +42,18 @@ export default async function AdminPartnersPage({
                   <td className="p-3">{p.isActive ? "да" : "нет"}</td>
                   <td className="p-3 text-right">
                     <div className="flex justify-end gap-2">
-                      <Link href={`/admin/partners?edit=${p.id}`} className="h-8 rounded-full border px-3 text-xs leading-8 hover:bg-secondary">Изменить</Link>
-                      <form action={deletePartner}><input type="hidden" name="id" value={p.id} /><button className="h-8 rounded-full border px-3 text-xs text-destructive hover:bg-destructive/10">Удалить</button></form>
+                      <Link
+                        href={`/admin/partners?edit=${p.id}`}
+                        className="h-8 rounded-full border px-3 text-xs leading-8 hover:bg-secondary"
+                      >
+                        Изменить
+                      </Link>
+                      <form action={deletePartner}>
+                        <input type="hidden" name="id" value={p.id} />
+                        <button className="h-8 rounded-full border px-3 text-xs text-destructive hover:bg-destructive/10">
+                          Удалить
+                        </button>
+                      </form>
                     </div>
                   </td>
                 </tr>
@@ -56,7 +71,11 @@ export default async function AdminPartnersPage({
             </FormField>
             <FormField label="Тип" htmlFor="type">
               <SelectNative id="type" name="type" defaultValue={e?.type ?? PartnerType.PARTNER}>
-                {Object.values(PartnerType).map((t) => <option key={t} value={t}>{t}</option>)}
+                {Object.values(PartnerType).map((t) => (
+                  <option key={t} value={t}>
+                    {t}
+                  </option>
+                ))}
               </SelectNative>
             </FormField>
             <FormField label="Роль (RU)" htmlFor="roleRu">
@@ -66,7 +85,11 @@ export default async function AdminPartnersPage({
               <Input id="roleEn" name="roleEn" defaultValue={e?.roleEn ?? ""} />
             </FormField>
             <FormField label="Описание (RU)" htmlFor="descriptionRu">
-              <Textarea id="descriptionRu" name="descriptionRu" defaultValue={e?.descriptionRu ?? ""} />
+              <Textarea
+                id="descriptionRu"
+                name="descriptionRu"
+                defaultValue={e?.descriptionRu ?? ""}
+              />
             </FormField>
             <FormField label="Логотип URL" htmlFor="logoUrl">
               <Input id="logoUrl" name="logoUrl" defaultValue={e?.logoUrl ?? ""} />
@@ -75,15 +98,32 @@ export default async function AdminPartnersPage({
               <Input id="website" name="website" defaultValue={e?.website ?? ""} />
             </FormField>
             <FormField label="Порядок" htmlFor="sortOrder">
-              <Input id="sortOrder" name="sortOrder" type="number" defaultValue={e?.sortOrder ?? 0} />
+              <Input
+                id="sortOrder"
+                name="sortOrder"
+                type="number"
+                defaultValue={e?.sortOrder ?? 0}
+              />
             </FormField>
             <label className="flex items-center gap-2 text-sm">
-              <input type="checkbox" name="isActive" defaultChecked={e?.isActive ?? true} className="size-4" />
+              <input
+                type="checkbox"
+                name="isActive"
+                defaultChecked={e?.isActive ?? true}
+                className="size-4"
+              />
               Активен
             </label>
             <div className="flex gap-2">
               <SubmitButton>Сохранить</SubmitButton>
-              {e && <Link href="/admin/partners" className="h-11 rounded-full border px-5 text-sm leading-[2.75rem] hover:bg-secondary">Отмена</Link>}
+              {e && (
+                <Link
+                  href="/admin/partners"
+                  className="h-11 rounded-full border px-5 text-sm leading-[2.75rem] hover:bg-secondary"
+                >
+                  Отмена
+                </Link>
+              )}
             </div>
           </form>
         </Panel>

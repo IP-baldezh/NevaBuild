@@ -8,11 +8,7 @@ export const metadata: Metadata = {
 };
 
 // Заготовка под будущие личные кабинеты (отдельная нелокализованная зона).
-export default function AccountLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function AccountLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru" className={manrope.variable} suppressHydrationWarning>
       <body className="flex min-h-dvh items-center justify-center bg-neva-gradient-soft p-4 font-sans">

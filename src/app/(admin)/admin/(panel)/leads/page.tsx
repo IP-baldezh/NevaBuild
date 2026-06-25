@@ -29,7 +29,9 @@ export default async function AdminLeadsPage() {
                   </div>
                   <div className="mt-1 text-sm text-muted-foreground">
                     {l.company && <span>{l.company} · </span>}
-                    <a href={`mailto:${l.email}`} className="hover:underline">{l.email}</a>
+                    <a href={`mailto:${l.email}`} className="hover:underline">
+                      {l.email}
+                    </a>
                     {l.phone && <span> · {l.phone}</span>}
                   </div>
                   {l.message && <p className="mt-2 max-w-2xl text-sm">{l.message}</p>}
@@ -42,12 +44,17 @@ export default async function AdminLeadsPage() {
                 </span>
               </div>
 
-              <form action={updateLead} className="mt-3 flex flex-wrap items-end gap-3 border-t pt-3">
+              <form
+                action={updateLead}
+                className="mt-3 flex flex-wrap items-end gap-3 border-t pt-3"
+              >
                 <input type="hidden" name="id" value={l.id} />
                 <div className="w-40">
                   <SelectNative name="status" defaultValue={l.status}>
                     {STATUSES.map((s) => (
-                      <option key={s} value={s}>{s}</option>
+                      <option key={s} value={s}>
+                        {s}
+                      </option>
                     ))}
                   </SelectNative>
                 </div>

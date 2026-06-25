@@ -10,14 +10,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-export function FormField({
-  label,
-  htmlFor,
-  error,
-  required,
-  className,
-  children,
-}: Props) {
+export function FormField({ label, htmlFor, error, required, className, children }: Props) {
   return (
     <div className={cn("space-y-1.5", className)}>
       <Label htmlFor={htmlFor}>

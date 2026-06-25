@@ -6,11 +6,7 @@ import { cn } from "@/lib/utils";
  * Стилизованный нативный <select>: доступный, лёгкий, без лишнего клиентского JS.
  * Используется в формах и фильтрах каталога.
  */
-function SelectNative({
-  className,
-  children,
-  ...props
-}: React.ComponentProps<"select">) {
+function SelectNative({ className, children, ...props }: React.ComponentProps<"select">) {
   return (
     <div className="relative">
       <select

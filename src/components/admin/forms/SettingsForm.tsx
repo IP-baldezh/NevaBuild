@@ -12,10 +12,7 @@ import { Panel } from "@/components/admin/AdminUI";
 const dateVal = (d: Date) => new Date(d).toISOString().slice(0, 10);
 
 export function SettingsForm({ settings }: { settings: EventSettings }) {
-  const [state, action] = useActionState<FormState, FormData>(
-    updateEventSettings,
-    { ok: false },
-  );
+  const [state, action] = useActionState<FormState, FormData>(updateEventSettings, { ok: false });
   const social = (settings.social ?? {}) as Record<string, string>;
 
   return (
@@ -30,10 +27,20 @@ export function SettingsForm({ settings }: { settings: EventSettings }) {
             <Input id="titleEn" name="titleEn" defaultValue={settings.titleEn} />
           </FormField>
           <FormField label="Дата начала" htmlFor="dateStart">
-            <Input id="dateStart" name="dateStart" type="date" defaultValue={dateVal(settings.dateStart)} />
+            <Input
+              id="dateStart"
+              name="dateStart"
+              type="date"
+              defaultValue={dateVal(settings.dateStart)}
+            />
           </FormField>
           <FormField label="Дата окончания" htmlFor="dateEnd">
-            <Input id="dateEnd" name="dateEnd" type="date" defaultValue={dateVal(settings.dateEnd)} />
+            <Input
+              id="dateEnd"
+              name="dateEnd"
+              type="date"
+              defaultValue={dateVal(settings.dateEnd)}
+            />
           </FormField>
           <FormField label="Площадка (RU)" htmlFor="venueRu">
             <Input id="venueRu" name="venueRu" defaultValue={settings.venueRu} />
@@ -66,19 +73,39 @@ export function SettingsForm({ settings }: { settings: EventSettings }) {
         <h2 className="mb-4 font-semibold">Цифры</h2>
         <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-5">
           <FormField label="Посетители" htmlFor="visitorCount">
-            <Input id="visitorCount" name="visitorCount" type="number" defaultValue={settings.visitorCount} />
+            <Input
+              id="visitorCount"
+              name="visitorCount"
+              type="number"
+              defaultValue={settings.visitorCount}
+            />
           </FormField>
           <FormField label="Компании" htmlFor="exhibitorCount">
-            <Input id="exhibitorCount" name="exhibitorCount" type="number" defaultValue={settings.exhibitorCount} />
+            <Input
+              id="exhibitorCount"
+              name="exhibitorCount"
+              type="number"
+              defaultValue={settings.exhibitorCount}
+            />
           </FormField>
           <FormField label="Площадь, м²" htmlFor="areaSize">
             <Input id="areaSize" name="areaSize" type="number" defaultValue={settings.areaSize} />
           </FormField>
           <FormField label="Мероприятий" htmlFor="programEventsCount">
-            <Input id="programEventsCount" name="programEventsCount" type="number" defaultValue={settings.programEventsCount} />
+            <Input
+              id="programEventsCount"
+              name="programEventsCount"
+              type="number"
+              defaultValue={settings.programEventsCount}
+            />
           </FormField>
           <FormField label="Дней программы" htmlFor="programDays">
-            <Input id="programDays" name="programDays" type="number" defaultValue={settings.programDays} />
+            <Input
+              id="programDays"
+              name="programDays"
+              type="number"
+              defaultValue={settings.programDays}
+            />
           </FormField>
         </div>
       </Panel>
@@ -93,10 +120,18 @@ export function SettingsForm({ settings }: { settings: EventSettings }) {
             <Input id="seoTitleEn" name="seoTitleEn" defaultValue={settings.seoTitleEn ?? ""} />
           </FormField>
           <FormField label="SEO description (RU)" htmlFor="seoDescriptionRu">
-            <Textarea id="seoDescriptionRu" name="seoDescriptionRu" defaultValue={settings.seoDescriptionRu ?? ""} />
+            <Textarea
+              id="seoDescriptionRu"
+              name="seoDescriptionRu"
+              defaultValue={settings.seoDescriptionRu ?? ""}
+            />
           </FormField>
           <FormField label="SEO description (EN)" htmlFor="seoDescriptionEn">
-            <Textarea id="seoDescriptionEn" name="seoDescriptionEn" defaultValue={settings.seoDescriptionEn ?? ""} />
+            <Textarea
+              id="seoDescriptionEn"
+              name="seoDescriptionEn"
+              defaultValue={settings.seoDescriptionEn ?? ""}
+            />
           </FormField>
           <FormField label="Организатор (RU)" htmlFor="organizerRu">
             <Input id="organizerRu" name="organizerRu" defaultValue={settings.organizerRu ?? ""} />
@@ -111,7 +146,11 @@ export function SettingsForm({ settings }: { settings: EventSettings }) {
         <h2 className="mb-4 font-semibold">Соцсети и домены</h2>
         <div className="grid gap-4 sm:grid-cols-2">
           <FormField label="Telegram" htmlFor="social_telegram">
-            <Input id="social_telegram" name="social_telegram" defaultValue={social.telegram ?? ""} />
+            <Input
+              id="social_telegram"
+              name="social_telegram"
+              defaultValue={social.telegram ?? ""}
+            />
           </FormField>
           <FormField label="VK" htmlFor="social_vk">
             <Input id="social_vk" name="social_vk" defaultValue={social.vk ?? ""} />

@@ -30,7 +30,12 @@ export default async function AdminTicketsPage({
         <Panel className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="border-b text-left text-muted-foreground">
-              <tr><th className="p-3">Билет</th><th className="p-3">Цена</th><th className="p-3">Активен</th><th className="p-3 text-right">Действия</th></tr>
+              <tr>
+                <th className="p-3">Билет</th>
+                <th className="p-3">Цена</th>
+                <th className="p-3">Активен</th>
+                <th className="p-3 text-right">Действия</th>
+              </tr>
             </thead>
             <tbody>
               {products.map((p) => (
@@ -40,8 +45,18 @@ export default async function AdminTicketsPage({
                   <td className="p-3">{p.isActive ? "да" : "нет"}</td>
                   <td className="p-3 text-right">
                     <div className="flex justify-end gap-2">
-                      <Link href={`/admin/tickets?edit=${p.id}`} className="h-8 rounded-full border px-3 text-xs leading-8 hover:bg-secondary">Изменить</Link>
-                      <form action={deleteTicketProduct}><input type="hidden" name="id" value={p.id} /><button className="h-8 rounded-full border px-3 text-xs text-destructive hover:bg-destructive/10">Удалить</button></form>
+                      <Link
+                        href={`/admin/tickets?edit=${p.id}`}
+                        className="h-8 rounded-full border px-3 text-xs leading-8 hover:bg-secondary"
+                      >
+                        Изменить
+                      </Link>
+                      <form action={deleteTicketProduct}>
+                        <input type="hidden" name="id" value={p.id} />
+                        <button className="h-8 rounded-full border px-3 text-xs text-destructive hover:bg-destructive/10">
+                          Удалить
+                        </button>
+                      </form>
                     </div>
                   </td>
                 </tr>
@@ -64,27 +79,60 @@ export default async function AdminTicketsPage({
               <Input id="price" name="price" type="number" defaultValue={e?.price ?? 0} required />
             </FormField>
             <FormField label="Описание (RU)" htmlFor="descriptionRu">
-              <Textarea id="descriptionRu" name="descriptionRu" defaultValue={e?.descriptionRu ?? ""} />
+              <Textarea
+                id="descriptionRu"
+                name="descriptionRu"
+                defaultValue={e?.descriptionRu ?? ""}
+              />
             </FormField>
             <FormField label="Описание (EN)" htmlFor="descriptionEn">
-              <Textarea id="descriptionEn" name="descriptionEn" defaultValue={e?.descriptionEn ?? ""} />
+              <Textarea
+                id="descriptionEn"
+                name="descriptionEn"
+                defaultValue={e?.descriptionEn ?? ""}
+              />
             </FormField>
             <FormField label="Преимущества RU (по строке)" htmlFor="benefitsRu">
-              <Textarea id="benefitsRu" name="benefitsRu" defaultValue={(e?.benefitsRu ?? []).join("\n")} />
+              <Textarea
+                id="benefitsRu"
+                name="benefitsRu"
+                defaultValue={(e?.benefitsRu ?? []).join("\n")}
+              />
             </FormField>
             <FormField label="Преимущества EN (по строке)" htmlFor="benefitsEn">
-              <Textarea id="benefitsEn" name="benefitsEn" defaultValue={(e?.benefitsEn ?? []).join("\n")} />
+              <Textarea
+                id="benefitsEn"
+                name="benefitsEn"
+                defaultValue={(e?.benefitsEn ?? []).join("\n")}
+              />
             </FormField>
             <FormField label="Порядок" htmlFor="sortOrder">
-              <Input id="sortOrder" name="sortOrder" type="number" defaultValue={e?.sortOrder ?? 0} />
+              <Input
+                id="sortOrder"
+                name="sortOrder"
+                type="number"
+                defaultValue={e?.sortOrder ?? 0}
+              />
             </FormField>
             <label className="flex items-center gap-2 text-sm">
-              <input type="checkbox" name="isActive" defaultChecked={e?.isActive ?? true} className="size-4" />
+              <input
+                type="checkbox"
+                name="isActive"
+                defaultChecked={e?.isActive ?? true}
+                className="size-4"
+              />
               Активен
             </label>
             <div className="flex gap-2">
               <SubmitButton>Сохранить</SubmitButton>
-              {e && <Link href="/admin/tickets" className="h-11 rounded-full border px-5 text-sm leading-[2.75rem] hover:bg-secondary">Отмена</Link>}
+              {e && (
+                <Link
+                  href="/admin/tickets"
+                  className="h-11 rounded-full border px-5 text-sm leading-[2.75rem] hover:bg-secondary"
+                >
+                  Отмена
+                </Link>
+              )}
             </div>
           </form>
         </Panel>

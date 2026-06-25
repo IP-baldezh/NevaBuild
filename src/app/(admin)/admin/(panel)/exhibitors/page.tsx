@@ -12,15 +12,28 @@ export default async function AdminExhibitorsPage() {
 
   return (
     <>
-      <PageHeader title="Участники" action={{ href: "/admin/exhibitors/new", label: "Добавить участника" }} />
+      <PageHeader
+        title="Участники"
+        action={{ href: "/admin/exhibitors/new", label: "Добавить участника" }}
+      />
       <Panel className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead className="border-b text-left text-muted-foreground">
-            <tr><th className="p-3">Название</th><th className="p-3">Статус</th><th className="p-3">Стенд</th><th className="p-3">Публ.</th><th className="p-3 text-right">Действия</th></tr>
+            <tr>
+              <th className="p-3">Название</th>
+              <th className="p-3">Статус</th>
+              <th className="p-3">Стенд</th>
+              <th className="p-3">Публ.</th>
+              <th className="p-3 text-right">Действия</th>
+            </tr>
           </thead>
           <tbody>
             {exhibitors.length === 0 ? (
-              <tr><td colSpan={5} className="p-6 text-center text-muted-foreground">Участников пока нет</td></tr>
+              <tr>
+                <td colSpan={5} className="p-6 text-center text-muted-foreground">
+                  Участников пока нет
+                </td>
+              </tr>
             ) : (
               exhibitors.map((e) => (
                 <tr key={e.id} className="border-b last:border-0">
@@ -30,8 +43,18 @@ export default async function AdminExhibitorsPage() {
                   <td className="p-3">{e.isPublished ? "да" : "нет"}</td>
                   <td className="p-3 text-right">
                     <div className="flex justify-end gap-2">
-                      <Link href={`/admin/exhibitors/${e.id}`} className="h-8 rounded-full border px-3 text-xs leading-8 hover:bg-secondary">Изменить</Link>
-                      <form action={deleteExhibitor}><input type="hidden" name="id" value={e.id} /><button className="h-8 rounded-full border px-3 text-xs text-destructive hover:bg-destructive/10">Удалить</button></form>
+                      <Link
+                        href={`/admin/exhibitors/${e.id}`}
+                        className="h-8 rounded-full border px-3 text-xs leading-8 hover:bg-secondary"
+                      >
+                        Изменить
+                      </Link>
+                      <form action={deleteExhibitor}>
+                        <input type="hidden" name="id" value={e.id} />
+                        <button className="h-8 rounded-full border px-3 text-xs text-destructive hover:bg-destructive/10">
+                          Удалить
+                        </button>
+                      </form>
                     </div>
                   </td>
                 </tr>

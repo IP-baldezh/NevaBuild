@@ -13,10 +13,7 @@ function str(fd: FormData, key: string): string {
   return String(fd.get(key) ?? "").trim();
 }
 
-export async function updateEventSettings(
-  _prev: FormState,
-  fd: FormData,
-): Promise<FormState> {
+export async function updateEventSettings(_prev: FormState, fd: FormData): Promise<FormState> {
   await requireAdmin();
 
   const data = {

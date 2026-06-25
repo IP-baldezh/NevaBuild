@@ -7,11 +7,7 @@ import { GradientSection } from "@/components/ui/gradient-section";
 
 export const dynamic = "force-dynamic";
 
-export default async function TicketFailPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function TicketFailPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale as Locale);
   const t = await getTranslations({ locale: locale as Locale, namespace: "TicketsPage" });

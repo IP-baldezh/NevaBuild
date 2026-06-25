@@ -102,21 +102,48 @@ export function TicketCheckout({ products }: { products: TicketProduct[] }) {
               <Input id="tk-name" {...register("fullName")} aria-invalid={!!errors.fullName} />
             </FormField>
             <FormField label={tf("email")} htmlFor="tk-email" required error={err("email")}>
-              <Input id="tk-email" type="email" {...register("email")} aria-invalid={!!errors.email} />
+              <Input
+                id="tk-email"
+                type="email"
+                {...register("email")}
+                aria-invalid={!!errors.email}
+              />
             </FormField>
             <FormField label={tf("phone")} htmlFor="tk-phone" required error={err("phone")}>
-              <Input id="tk-phone" type="tel" {...register("phone")} aria-invalid={!!errors.phone} />
+              <Input
+                id="tk-phone"
+                type="tel"
+                {...register("phone")}
+                aria-invalid={!!errors.phone}
+              />
             </FormField>
             <FormField label={tf("company")} htmlFor="tk-company" error={err("company")}>
               <Input id="tk-company" {...register("company")} />
             </FormField>
-            <FormField label={tf("position")} htmlFor="tk-position" error={err("position")} className="sm:col-span-2">
+            <FormField
+              label={tf("position")}
+              htmlFor="tk-position"
+              error={err("position")}
+              className="sm:col-span-2"
+            >
               <Input id="tk-position" {...register("position")} />
             </FormField>
           </div>
 
-          <Consent control={control} name="consent" label={tf("consent")} error={err("consent")} invalid={!!errors.consent} />
-          <Consent control={control} name="offerConsent" label={tf("offerConsent")} error={err("offerConsent")} invalid={!!errors.offerConsent} />
+          <Consent
+            control={control}
+            name="consent"
+            label={tf("consent")}
+            error={err("consent")}
+            invalid={!!errors.consent}
+          />
+          <Consent
+            control={control}
+            name="offerConsent"
+            label={tf("offerConsent")}
+            error={err("offerConsent")}
+            invalid={!!errors.offerConsent}
+          />
 
           {serverError && (
             <p className="rounded-lg bg-destructive/10 px-4 py-2 text-sm text-destructive">

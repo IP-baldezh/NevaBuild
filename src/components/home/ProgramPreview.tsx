@@ -21,18 +21,10 @@ export function ProgramPreview({ days }: { days: ProgramDayWithSessions[] }) {
   return (
     <>
       <ScrollReveal>
-        <SectionTitle
-          index="04"
-          label={t("label")}
-          title={t("title")}
-          className="mb-14"
-        />
+        <SectionTitle index="04" label={t("label")} title={t("title")} className="mb-14" />
       </ScrollReveal>
 
-      <StaggerReveal
-        stagger={0.08}
-        className="grid gap-px border border-border bg-border"
-      >
+      <StaggerReveal stagger={0.08} className="grid gap-px border border-border bg-border">
         {sessions.map((s) => (
           <StaggerItem key={s.id}>
             <div className="flex flex-col gap-3 bg-background p-6 transition-colors hover:bg-card sm:flex-row sm:items-center sm:gap-8 md:p-8">
@@ -40,9 +32,7 @@ export function ProgramPreview({ days }: { days: ProgramDayWithSessions[] }) {
                 {formatTime(s.startTime, locale)} – {formatTime(s.endTime, locale)}
               </time>
               <div className="flex-1">
-                <h4 className="font-bold text-foreground">
-                  {pick(locale, s.titleRu, s.titleEn)}
-                </h4>
+                <h4 className="font-bold text-foreground">{pick(locale, s.titleRu, s.titleEn)}</h4>
                 {(s.hallRu || s.hallEn) && (
                   <p className="mt-0.5 text-sm text-muted-foreground">
                     {pick(locale, s.hallRu, s.hallEn)}
@@ -63,7 +53,9 @@ export function ProgramPreview({ days }: { days: ProgramDayWithSessions[] }) {
           className="group inline-flex h-12 items-center gap-2 bg-lime px-8 text-sm font-semibold uppercase tracking-wide text-lime-foreground transition-colors hover:bg-foreground"
         >
           {t("cta")}
-          <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
+          <span aria-hidden className="transition-transform group-hover:translate-x-1">
+            →
+          </span>
         </Link>
       </ScrollReveal>
     </>

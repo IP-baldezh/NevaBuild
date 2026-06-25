@@ -1,40 +1,34 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { getEventSettings, localizeEvent } from "@/server/services/event";
-import { getExhibitorCategories, getFeaturedExhibitors } from "@/server/services/exhibitors";
+import { getExhibitorCategories } from "@/server/services/exhibitors";
 import { getProgramDays } from "@/server/services/program";
 import { getPartners } from "@/server/services/partners";
 import { getLatestNews } from "@/server/services/news";
 
 import { Hero } from "@/components/home/Hero";
-import { AboutSection } from "@/components/home/AboutSection";
+import { ForWhom } from "@/components/home/ForWhom";
+import { WhyVisit } from "@/components/home/WhyVisit";
 import { SectionsGrid } from "@/components/home/SectionsGrid";
-import { CatalogPreview } from "@/components/home/CatalogPreview";
 import { ProgramPreview } from "@/components/home/ProgramPreview";
 import { PartnersSection } from "@/components/home/PartnersSection";
 import { NewsPreview } from "@/components/home/NewsPreview";
 import { ContactsSection } from "@/components/home/ContactsSection";
-import { GradientSection } from "@/components/ui/gradient-section";
+import { CtaBanner } from "@/components/home/CtaBanner";
 import { StatsGrid, type StatItem } from "@/components/home/StatsGrid";
-import { Link } from "@/i18n/navigation";
 import { MarqueeTicker } from "@/components/home/MarqueeTicker";
 
 export const revalidate = 300;
 
-export default async function HomePage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale as Locale);
   const t = await getTranslations({ locale: locale as Locale, namespace: "Stats" });
 
   const settings = await getEventSettings();
   const ev = localizeEvent(settings, locale as Locale);
-  const [categories, featured, days, partners, news] = await Promise.all([
+  const [categories, days, partners, news] = await Promise.all([
     getExhibitorCategories(),
-    getFeaturedExhibitors(),
     getProgramDays(),
     getPartners(),
     getLatestNews(),
@@ -51,6 +45,7 @@ export default async function HomePage({
 
   return (
     <>
+      {/* Hero — fullscreen slider с countdown */}
       <Hero
         dateStart={ev.dateStart}
         dateEnd={ev.dateEnd}
@@ -65,94 +60,51 @@ export default async function HomePage({
       {/* Тикер */}
       <MarqueeTicker />
 
-      {/* О выставке + направления */}
-      <GradientSection variant="plain" id="about">
-        <AboutSection />
-      </GradientSection>
-
-      {/* Ключевые цифры */}
+      {/* Ключевые цифры — тёмная секция */}
       <StatsGrid items={stats} />
 
-      {/* Секторы */}
-      <GradientSection variant="plain" id="sectors">
-        <SectionsGrid categories={categories} />
-      </GradientSection>
+      {/* Посетителям / Экспонентам */}
+      <ForWhom />
 
-      {/* Каталог участников */}
-      {featured.length > 0 && (
-        <GradientSection variant="muted">
-          <CatalogPreview exhibitors={featured} />
-        </GradientSection>
-      )}
+      {/* Почему NevaBuild — зелёный градиент */}
+      <WhyVisit />
 
-      {/* Программа */}
+      {/* Секторы выставки */}
+      {categories.length > 0 && <SectionsGrid categories={categories} />}
+
+      {/* Деловая программа */}
       {days.length > 0 && (
-        <GradientSection variant="plain" id="program">
-          <ProgramPreview days={days} />
-        </GradientSection>
+        <section className="py-20 bg-nb-bg-light" id="program">
+          <div className="container-neva">
+            <ProgramPreview days={days} />
+          </div>
+        </section>
       )}
 
       {/* Партнёры */}
-      {partners.length > 0 && (
-        <GradientSection variant="muted" id="partners">
-          <PartnersSection partners={partners} />
-        </GradientSection>
-      )}
+      <PartnersSection partners={partners} />
 
       {/* Новости */}
-      {news.length > 0 && (
-        <GradientSection variant="plain" id="news">
-          <NewsPreview news={news} />
-        </GradientSection>
-      )}
+      <NewsPreview news={news} />
 
       {/* Контакты */}
-      <GradientSection variant="muted" id="location">
-        <ContactsSection
-          venue={ev.venue}
-          city={ev.city}
-          address={ev.address}
-          phone={ev.phone}
-          email={ev.email}
-        />
-      </GradientSection>
-
-      {/* Тикер перед финальным CTA */}
-      <MarqueeTicker />
-
-      {/* Финальный CTA */}
-      <section className="relative overflow-hidden bg-lime">
-        <div className="container-neva relative py-24 md:py-32">
-          <div className="flex items-center gap-3">
-            <span className="size-2 bg-black/40" />
-            <span className="text-xs uppercase tracking-[0.3em] text-black/55">
-              {ev.city} · {ev.venue}
-            </span>
-          </div>
-          <h2 className="mt-8 max-w-4xl text-balance text-4xl font-black uppercase leading-[1.02] tracking-tight text-black sm:text-5xl md:text-6xl lg:text-7xl">
-            Станьте частью{" "}
-            <span className="text-white/80">NEVA BUILD</span>
-          </h2>
-          <p className="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-black/65">
-            Покажите свои решения профессиональной аудитории строительной индустрии.
-          </p>
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row" id="participate">
-            <Link
-              href="/exhibit"
-              className="group inline-flex h-12 items-center gap-2 bg-black px-8 text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-white hover:text-black"
-            >
-              Стать участником
-              <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
-            </Link>
-            <Link
-              href="/tickets"
-              className="inline-flex h-12 items-center gap-2 border border-black/20 px-8 text-sm font-semibold uppercase tracking-wide text-black transition-colors hover:border-black hover:bg-black/10"
-            >
-              Получить билет
-            </Link>
-          </div>
+      <section className="py-20 bg-nb-bg-light" id="location">
+        <div className="container-neva">
+          <ContactsSection
+            venue={ev.venue}
+            city={ev.city}
+            address={ev.address}
+            phone={ev.phone}
+            email={ev.email}
+          />
         </div>
       </section>
+
+      {/* Тикер */}
+      <MarqueeTicker />
+
+      {/* Финальный CTA — тёмная секция */}
+      <CtaBanner />
     </>
   );
 }

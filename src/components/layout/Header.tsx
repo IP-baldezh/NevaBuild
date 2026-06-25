@@ -24,55 +24,89 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
+  const isHome = pathname === "/";
+  const transparent = isHome && !scrolled;
+
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16);
+    const onScroll = () => setScrolled(window.scrollY > 60);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => { setOpen(false); }, [pathname]);
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [open]);
 
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border transition-shadow duration-300",
-        scrolled && "shadow-sm",
+        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+        transparent
+          ? "bg-transparent border-b border-white/10"
+          : "bg-background/95 backdrop-blur-md border-b border-border shadow-sm",
       )}
     >
-      <div className="container-neva flex h-16 items-center justify-between gap-6 md:h-20">
+      <div className="container-neva flex h-[72px] items-center justify-between gap-6">
         <Link href="/" aria-label="NEVA BUILD — на главную">
-          <Logo />
+          <Logo white={transparent} />
         </Link>
 
-        <nav className="hidden items-center gap-7 xl:flex" aria-label="Главное меню">
-          {NAV_ITEMS.map((item) => (
-            <Link
-              key={item.key}
-              href={item.href}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {t(item.key)}
-            </Link>
-          ))}
+        <nav
+          className="hidden items-center gap-1 xl:flex flex-1 justify-center"
+          aria-label="Главное меню"
+        >
+          {NAV_ITEMS.map((item) => {
+            const isActive = (pathname as string) === item.href;
+            return (
+              <Link
+                key={item.key}
+                href={item.href}
+                className={cn(
+                  "font-semibold text-[14px] whitespace-nowrap px-3 py-2 rounded-lg transition-all duration-200",
+                  transparent
+                    ? isActive
+                      ? "text-white bg-white/15"
+                      : "text-white/85 hover:text-white hover:bg-white/15"
+                    : isActive
+                      ? "text-nb-green bg-nb-bg-light"
+                      : "text-foreground hover:text-nb-green hover:bg-nb-bg-light",
+                )}
+              >
+                {t(item.key)}
+              </Link>
+            );
+          })}
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-3 lg:flex flex-none">
           <LanguageSwitcher />
           <Link
             href="/exhibit"
-            className="inline-flex h-10 items-center justify-center gap-2 border border-border px-4 text-sm font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-lime hover:text-lime"
+            className={cn(
+              "inline-flex h-10 items-center justify-center gap-2 border px-4 text-sm font-semibold uppercase tracking-wide transition-all duration-200",
+              transparent
+                ? "border-white/40 text-white hover:border-white hover:bg-white/10"
+                : "border-border text-foreground hover:border-nb-green hover:text-nb-green-dark hover:bg-nb-bg-light",
+            )}
           >
             {t("exhibit")}
           </Link>
           <Link
             href="/tickets"
-            className="inline-flex h-10 items-center justify-center gap-2 bg-lime px-4 text-sm font-semibold uppercase tracking-wide text-lime-foreground transition-colors hover:bg-foreground"
+            className={cn(
+              "inline-flex h-10 items-center justify-center gap-2 px-4 text-sm font-semibold uppercase tracking-wide transition-all duration-200",
+              transparent
+                ? "bg-brand-red text-white hover:opacity-90 shadow-[0_6px_20px_rgba(225,27,34,0.40)]"
+                : "bg-brand-red text-white hover:opacity-90 shadow-[0_4px_12px_rgba(225,27,34,0.25)]",
+            )}
           >
             {t("getTicket")}
           </Link>
@@ -81,7 +115,12 @@ export function Header() {
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="inline-flex size-10 items-center justify-center border border-border text-foreground lg:hidden"
+          className={cn(
+            "inline-flex size-10 items-center justify-center border lg:hidden transition-colors",
+            transparent
+              ? "border-white/40 text-white hover:bg-white/15"
+              : "border-border text-foreground",
+          )}
           aria-label={open ? t("close") : t("menu")}
           aria-expanded={open}
         >
@@ -96,7 +135,7 @@ export function Header() {
           open ? "translate-x-0" : "translate-x-full",
         )}
       >
-        <div className="flex h-16 items-center justify-between border-b border-border px-5 md:px-10">
+        <div className="flex h-[72px] items-center justify-between border-b border-border px-5 md:px-10">
           <Logo />
           <button
             type="button"
@@ -114,9 +153,12 @@ export function Header() {
               key={item.key}
               href={item.href}
               onClick={() => setOpen(false)}
-              className="flex items-center gap-4 border-b border-border py-5 text-2xl font-black uppercase tracking-tight text-foreground"
+              className={cn(
+                "flex items-center gap-4 border-b border-border py-5 text-2xl font-black uppercase tracking-tight",
+                pathname === item.href ? "text-nb-green" : "text-foreground",
+              )}
             >
-              <span className="text-sm text-lime">{String(i + 1).padStart(2, "0")}</span>
+              <span className="text-sm text-nb-green">{String(i + 1).padStart(2, "0")}</span>
               {t(item.key)}
             </Link>
           ))}
@@ -127,14 +169,14 @@ export function Header() {
           <Link
             href="/exhibit"
             onClick={() => setOpen(false)}
-            className="inline-flex h-12 items-center justify-center border border-border text-sm font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-lime hover:text-lime"
+            className="inline-flex h-12 items-center justify-center border border-border text-sm font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-nb-green hover:text-nb-green-dark"
           >
             {t("exhibit")}
           </Link>
           <Link
             href="/tickets"
             onClick={() => setOpen(false)}
-            className="inline-flex h-12 items-center justify-center bg-lime text-sm font-semibold uppercase tracking-wide text-lime-foreground transition-colors hover:bg-foreground"
+            className="inline-flex h-12 items-center justify-center bg-brand-red text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:opacity-90"
           >
             {t("getTicket")}
           </Link>

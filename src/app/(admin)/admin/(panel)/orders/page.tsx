@@ -30,7 +30,11 @@ export default async function AdminOrdersPage() {
           </thead>
           <tbody>
             {orders.length === 0 ? (
-              <tr><td colSpan={7} className="p-6 text-center text-muted-foreground">Заказов пока нет</td></tr>
+              <tr>
+                <td colSpan={7} className="p-6 text-center text-muted-foreground">
+                  Заказов пока нет
+                </td>
+              </tr>
             ) : (
               orders.map((o) => (
                 <tr key={o.id} className="border-b last:border-0">
@@ -41,7 +45,9 @@ export default async function AdminOrdersPage() {
                   </td>
                   <td className="p-3 text-muted-foreground">{o.ticketProduct.titleRu}</td>
                   <td className="p-3 font-medium">{formatPrice(o.amount)}</td>
-                  <td className="p-3"><StatusBadge status={o.status} /></td>
+                  <td className="p-3">
+                    <StatusBadge status={o.status} />
+                  </td>
                   <td className="p-3 font-mono text-xs">{o.ticket?.ticketCode ?? "—"}</td>
                   <td className="p-3">
                     {o.status !== "PAID" && (
@@ -52,7 +58,9 @@ export default async function AdminOrdersPage() {
                         </form>
                         <form action={cancelOrder}>
                           <input type="hidden" name="id" value={o.id} />
-                          <button className="h-8 rounded-full border px-3 text-xs hover:bg-secondary">Отменить</button>
+                          <button className="h-8 rounded-full border px-3 text-xs hover:bg-secondary">
+                            Отменить
+                          </button>
                         </form>
                       </div>
                     )}
