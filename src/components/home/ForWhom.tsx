@@ -83,8 +83,8 @@ export function ForWhom() {
               )}
             </h2>
             <p
-              className="text-[15px] mb-8 max-w-[420px] leading-relaxed relative z-10"
-              style={{ color: "#1a4a0a", fontFamily: "var(--font-mulish)" }}
+              className="font-mulish text-[15px] mb-8 max-w-[420px] leading-relaxed relative z-10"
+              style={{ color: "#1a4a0a" }}
             >
               {ru
                 ? "Четыре дня погружения в мир строительства, архитектуры и дизайна интерьеров. Профессионалы, продукты и идеи — в одном месте."
@@ -97,10 +97,7 @@ export function ForWhom() {
                     className="flex-shrink-0 mt-0.5 size-[18px]"
                     style={{ color: "e11b22" }}
                   />
-                  <span
-                    className="text-[14px]"
-                    style={{ color: "#1a4a0a", fontFamily: "var(--font-mulish)" }}
-                  >
+                  <span className="font-mulish text-[14px]" style={{ color: "#1a4a0a" }}>
                     {f}
                   </span>
                 </li>
@@ -149,10 +146,7 @@ export function ForWhom() {
                 </>
               )}
             </h2>
-            <p
-              className="text-[15px] text-black/65 mb-8 max-w-[420px] leading-relaxed"
-              style={{ fontFamily: "var(--font-mulish)" }}
-            >
+            <p className="font-mulish text-[15px] text-black/65 mb-8 max-w-[420px] leading-relaxed">
               {ru
                 ? "Представьте свой бренд перед профессиональной аудиторией. Получите заявки, заключите договоры и укрепите позиции на рынке."
                 : "Present your brand to a professional audience. Get leads, close deals and strengthen your market position."}
@@ -161,12 +155,7 @@ export function ForWhom() {
               {exhibitorsFeatures.map((f) => (
                 <li key={f} className="flex items-start gap-3">
                   <CheckCircle className="flex-shrink-0 mt-0.5 size-[18px] text-brand-red" />
-                  <span
-                    className="text-[14px] text-black/75"
-                    style={{ fontFamily: "var(--font-mulish)" }}
-                  >
-                    {f}
-                  </span>
+                  <span className="font-mulish text-[14px] text-black/75">{f}</span>
                 </li>
               ))}
             </ul>

@@ -98,10 +98,7 @@ export function ProgramPreview({ days }: { days: ProgramDayWithSessions[] }) {
         {/* Zone / Hall selector */}
         {halls.length > 0 && (
           <div className="mb-6">
-            <p
-              className="text-[11px] text-nb-muted uppercase tracking-[0.14em] mb-3 font-bold"
-              style={{ fontFamily: "var(--font-mulish)" }}
-            >
+            <p className="font-mulish text-[11px] text-nb-muted uppercase tracking-[0.14em] mb-3 font-bold">
               {ru ? "Выберите зону" : "Select zone"}
             </p>
             <div className="flex flex-wrap gap-2">
@@ -174,10 +171,7 @@ export function ProgramPreview({ days }: { days: ProgramDayWithSessions[] }) {
 
         {/* Session cards */}
         {visibleSessions.length === 0 ? (
-          <div
-            className="text-center py-16 text-nb-muted"
-            style={{ fontFamily: "var(--font-mulish)" }}
-          >
+          <div className="font-mulish text-center py-16 text-nb-muted">
             {activeHall
               ? ru
                 ? `В этот день в зоне «${activeHall}» событий нет`
@@ -233,21 +227,13 @@ export function ProgramPreview({ days }: { days: ProgramDayWithSessions[] }) {
                       {hall && (
                         <div className="flex items-center gap-1.5 text-nb-muted">
                           <MapPin className="size-[13px]" />
-                          <span
-                            className="text-[13px]"
-                            style={{ fontFamily: "var(--font-mulish)" }}
-                          >
-                            {hall}
-                          </span>
+                          <span className="font-mulish text-[13px]">{hall}</span>
                         </div>
                       )}
                       {s.speakers && s.speakers.length > 0 && (
                         <div className="flex items-center gap-1.5 text-nb-muted">
                           <Users className="size-[13px]" />
-                          <span
-                            className="text-[13px]"
-                            style={{ fontFamily: "var(--font-mulish)" }}
-                          >
+                          <span className="font-mulish text-[13px]">
                             {s.speakers.map((sp) => pick(locale, sp.nameRu, sp.nameEn)).join(", ")}
                           </span>
                         </div>

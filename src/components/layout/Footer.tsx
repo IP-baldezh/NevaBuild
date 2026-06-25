@@ -1,128 +1,131 @@
+import { Phone, Mail, MapPin } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Mail, Phone, MapPin } from "lucide-react";
-import { NewsletterForm } from "./NewsletterForm";
 import { Link } from "@/i18n/navigation";
 import { Logo } from "./Logo";
+import { FooterNewsletterForm } from "@/components/layout/FooterNewsletterForm";
 import { EVENT_DEFAULTS } from "@/lib/event-defaults";
+
+const NAV_ITEMS = [
+  { key: "about", href: "/about" },
+  { key: "exhibit", href: "/exhibit" },
+  { key: "visit", href: "/visit" },
+  { key: "program", href: "/program" },
+  { key: "exhibitors", href: "/exhibitors" },
+  { key: "news", href: "/news" },
+  { key: "contacts", href: "/contacts" },
+] as const;
+
+const social = [
+  { label: "ВК", href: EVENT_DEFAULTS.social.vk },
+  { label: "TG", href: EVENT_DEFAULTS.social.telegram },
+  { label: "YT", href: EVENT_DEFAULTS.social.youtube || "#" },
+  { label: "OK", href: "#" },
+];
 
 export function Footer() {
   const t = useTranslations("Footer");
   const tn = useTranslations("Nav");
   const year = new Date().getFullYear();
 
-  const navLinks = [
-    { key: "about", href: "/about" },
-    { key: "exhibit", href: "/exhibit" },
-    { key: "visit", href: "/visit" },
-    { key: "program", href: "/program" },
-    { key: "exhibitors", href: "/exhibitors" },
-    { key: "news", href: "/news" },
-  ] as const;
-
-  const legalLinks = [
-    { key: "privacy", href: "/legal/privacy" },
-    { key: "terms", href: "/legal/terms" },
-    { key: "consent", href: "/legal/consent" },
-    { key: "offer", href: "/legal/offer" },
-  ] as const;
-
-  const social = ["TG", "VK", "YT"];
-
   return (
-    <footer className="bg-nb-dark-deep border-t border-white/8">
-      <div className="container-neva py-16 md:py-20">
-        <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr_1.4fr]">
-          {/* Brand */}
-          <div className="flex flex-col gap-6">
-            <Logo white />
-            <p className="max-w-xs text-pretty text-sm leading-relaxed text-white/45">
-              {t("about")}
-            </p>
+    <footer className="bg-nb-dark-deep">
+      {/* Main body */}
+      <div className="container-neva py-10 md:py-14 lg:py-20">
+        <div className="grid gap-8 md:gap-6 lg:gap-12 lg:grid-cols-[1.5fr_1fr_1.4fr]">
+          {/* Brand + contacts */}
+          <div className="flex flex-col items-start gap-4 lg:gap-6">
+            <Logo white className="self-start" />
+            <p className="max-w-[300px] text-[14px] leading-relaxed text-white/50">{t("about")}</p>
+            <div className="flex flex-col gap-2.5">
+              <a
+                href={`tel:${EVENT_DEFAULTS.phone.replace(/\s/g, "")}`}
+                className="flex items-center gap-2.5 text-[13px] text-white/60 transition-colors hover:text-white"
+              >
+                <Phone className="size-3.5 flex-shrink-0 text-nb-green" />
+                {EVENT_DEFAULTS.phone}
+              </a>
+              <a
+                href={`mailto:${EVENT_DEFAULTS.email}`}
+                className="flex items-center gap-2.5 text-[13px] text-white/60 transition-colors hover:text-white"
+              >
+                <Mail className="size-3.5 flex-shrink-0 text-nb-green" />
+                {EVENT_DEFAULTS.email}
+              </a>
+              <p className="flex items-start gap-2.5 text-[13px] text-white/60">
+                <MapPin className="mt-0.5 size-3.5 flex-shrink-0 text-nb-green" />
+                <span>
+                  {EVENT_DEFAULTS.addressRu}, {EVENT_DEFAULTS.venueRu}
+                </span>
+              </p>
+            </div>
+            {/* Social buttons */}
             <div className="flex gap-2">
               {social.map((s) => (
                 <a
-                  key={s}
-                  href="#"
-                  aria-label={s}
-                  className="inline-flex size-10 items-center justify-center border border-white/15 font-mono text-xs font-bold text-white/50 transition-colors hover:border-nb-green hover:text-nb-green"
+                  key={s.label}
+                  href={s.href}
+                  className="inline-flex h-7 items-center justify-center rounded-md border border-white/20 px-3 text-[11px] font-bold text-white/50 transition-colors hover:border-nb-green hover:text-nb-green"
                 >
-                  {s}
+                  {s.label}
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Nav */}
-          <div>
-            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40 mb-5">
-              {t("nav")}
-            </h3>
-            <ul className="flex flex-col gap-3">
-              {navLinks.map((l) => (
-                <li key={l.key}>
+          {/* Navigation — two columns, offset on desktop to align with description */}
+          <div className="lg:pt-16">
+            <ul className="grid grid-cols-2 gap-x-6 gap-y-3">
+              {NAV_ITEMS.map((item) => (
+                <li key={item.key}>
                   <Link
-                    href={l.href}
-                    className="text-sm text-white/60 transition-colors hover:text-white"
+                    href={item.href}
+                    className="font-mulish text-[13px] text-white/55 transition-colors hover:text-white"
                   >
-                    {tn(l.key)}
+                    {tn(item.key)}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Legal */}
-          <div>
-            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40 mb-5">
-              {t("legal")}
+          {/* Newsletter */}
+          <div className="lg:pt-16">
+            <h3 className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-white">
+              {t("followNews")}
             </h3>
-            <ul className="flex flex-col gap-3">
-              {legalLinks.map((l) => (
-                <li key={l.key}>
-                  <Link
-                    href={l.href}
-                    className="text-sm text-white/60 transition-colors hover:text-white"
-                  >
-                    {t(l.key)}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Newsletter + contacts */}
-          <div className="flex flex-col gap-5">
-            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40">
-              {t("newsletter") || "Подписка на новости"}
-            </h3>
-            <p className="text-sm leading-relaxed text-white/45">
-              {t("newsletterText") || "Получайте анонсы программы и новости выставки на почту."}
+            <p className="font-mulish mb-4 text-[13px] leading-relaxed text-white/50">
+              {t("newsletterText")}
             </p>
-            <NewsletterForm />
-            <div className="mt-2 space-y-1.5 text-sm text-white/45">
-              <p className="flex items-center gap-2">
-                <Mail className="size-3.5 text-nb-green" />
-                {EVENT_DEFAULTS.email}
-              </p>
-              <p className="flex items-center gap-2">
-                <Phone className="size-3.5 text-nb-green" />
-                {EVENT_DEFAULTS.phone}
-              </p>
-              <p className="flex items-center gap-2">
-                <MapPin className="size-3.5 text-nb-green" />
-                {EVENT_DEFAULTS.cityRu}
-              </p>
-            </div>
+            <FooterNewsletterForm
+              placeholder={t("emailPlaceholder")}
+              submitLabel={t("subscribe")}
+            />
           </div>
         </div>
+      </div>
 
-        <div className="mt-16 flex flex-col gap-4 border-t border-white/8 pt-8 text-sm text-white/30 sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            © {year} NEVA BUILD. {t("rights")}
-          </p>
-          <p className="uppercase tracking-wide">
-            {EVENT_DEFAULTS.cityRu} / {EVENT_DEFAULTS.venueRu}
-          </p>
+      {/* Bottom bar */}
+      <div className="border-t border-white/10">
+        <div className="container-neva flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-2.5">
+            <div className="flex size-7 flex-shrink-0 items-center justify-center rounded-full bg-white/10">
+              <span className="font-black text-[10px] text-white">N</span>
+            </div>
+            <p className="text-[12px] text-white/35">
+              © 2009–{year} NevaBuild. {t("rights")}
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-4 text-[12px] text-white/35">
+            <Link href="/legal/privacy" className="transition-colors hover:text-white">
+              {t("privacy")}
+            </Link>
+            <Link href="/legal/terms" className="transition-colors hover:text-white">
+              {t("termsUse")}
+            </Link>
+            <Link href="/sitemap.xml" className="transition-colors hover:text-white">
+              {t("sitemap")}
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
