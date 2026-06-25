@@ -18,7 +18,7 @@ function pad(n: number) {
   return String(n).padStart(2, "0");
 }
 
-function Countdown() {
+function Countdown({ ru }: { ru: boolean }) {
   const [t, setT] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
@@ -38,10 +38,10 @@ function Countdown() {
   }, []);
 
   const items = [
-    { val: t.days, label: "дней" },
-    { val: t.hours, label: "часов" },
-    { val: t.minutes, label: "минут" },
-    { val: t.seconds, label: "сек" },
+    { val: t.days, label: ru ? "дней" : "days" },
+    { val: t.hours, label: ru ? "часов" : "hours" },
+    { val: t.minutes, label: ru ? "минут" : "min" },
+    { val: t.seconds, label: ru ? "сек" : "sec" },
   ];
 
   return (
@@ -365,7 +365,7 @@ export function Hero({ dateStart, dateEnd, venue, city }: HeroProps) {
           <span className="font-semibold text-white text-[11px] uppercase tracking-[0.18em] flex-none">
             {ru ? "До открытия выставки:" : "Until exhibition opens:"}
           </span>
-          <Countdown />
+          <Countdown ru={ru} />
 
           {/* Dots + arrows */}
           <div className="flex items-center gap-2 ml-auto">

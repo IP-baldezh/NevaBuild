@@ -1,6 +1,10 @@
-import { Link } from "@/i18n/navigation";
+"use client";
 
-const reasons = [
+import { useLocale } from "next-intl";
+import { Link } from "@/i18n/navigation";
+import type { Locale } from "@/i18n/routing";
+
+const REASONS_RU = [
   {
     num: "01",
     title: "Крупнейшая площадка Северо-Запада",
@@ -33,7 +37,44 @@ const reasons = [
   },
 ];
 
+const REASONS_EN = [
+  {
+    num: "01",
+    title: "Largest Venue in the Northwest",
+    desc: "60 000 m² of exhibition space across three pavilions at Expoforum — the region's most large-scale industry showcase.",
+  },
+  {
+    num: "02",
+    title: "Live Market in 4 Days",
+    desc: "Meet suppliers, distributors and manufacturers in real time. No intermediaries, no online filters.",
+  },
+  {
+    num: "03",
+    title: "World-Class Business Programme",
+    desc: "200+ forums, roundtables and masterclasses. Speakers are practising architects, developers and leading engineers.",
+  },
+  {
+    num: "04",
+    title: "Tomorrow's Technologies Today",
+    desc: "An innovation zone showcasing BIM design, robotic construction systems and next-generation materials.",
+  },
+  {
+    num: "05",
+    title: "Networking with Top Audience",
+    desc: "The matchmaking platform connects participants before the exhibition opens. 80% of exhibitors confirm partnerships during the event.",
+  },
+  {
+    num: "06",
+    title: "International Format",
+    desc: "Delegations from 70+ countries. Official national expositions from Germany, Italy, Finland, China and other construction market leaders.",
+  },
+];
+
 export function WhyVisit() {
+  const locale = useLocale() as Locale;
+  const ru = locale === "ru";
+  const reasons = ru ? REASONS_RU : REASONS_EN;
+
   return (
     <section
       id="why-visit"
@@ -47,28 +88,41 @@ export function WhyVisit() {
           {/* Left — sticky title */}
           <div className="lg:w-[340px] flex-shrink-0">
             <span className="font-bold text-[13px] text-nb-teal uppercase tracking-[3px] mb-4 block">
-              Почему NevaBuild
+              {ru ? "Почему NevaBuild" : "Why NevaBuild"}
             </span>
             <h2
               className="font-black leading-tight mb-6 text-white"
               style={{ fontSize: "clamp(32px, 4vw, 52px)" }}
             >
-              6 причин
-              <br />
-              прийти
-              <br />
-              на выставку
+              {ru ? (
+                <>
+                  6 причин
+                  <br />
+                  прийти
+                  <br />
+                  на выставку
+                </>
+              ) : (
+                <>
+                  6 reasons
+                  <br />
+                  to visit
+                  <br />
+                  the exhibition
+                </>
+              )}
             </h2>
             <p className="text-[15px] leading-relaxed mb-10 text-white/80">
-              Каждый год NevaBuild задаёт тренды строительного рынка страны. Не упустите возможность
-              быть в центре событий.
+              {ru
+                ? "Каждый год NevaBuild задаёт тренды строительного рынка страны. Не упустите возможность быть в центре событий."
+                : "Every year NevaBuild sets the trends of the country's construction market. Don't miss your chance to be at the centre of it all."}
             </p>
             <Link
               href="/tickets"
               className="inline-flex items-center gap-2 font-bold text-[14.5px] px-6 py-3.5 rounded-xl transition-all duration-200 hover:-translate-y-0.5 bg-brand-red text-white hover:opacity-90"
               style={{ boxShadow: "0 8px 24px rgba(225,27,34,0.35)" }}
             >
-              Зарегистрироваться бесплатно
+              {ru ? "Зарегистрироваться бесплатно" : "Register for Free"}
             </Link>
           </div>
 

@@ -16,11 +16,13 @@ const TAG_COLORS = [
   "bg-amber-500/10 text-amber-700",
 ];
 
-const TAG_LABELS = ["Анонс", "Новость", "Деловая программа", "Участники"];
+const TAG_LABELS_RU = ["Анонс", "Новость", "Деловая программа", "Участники"];
+const TAG_LABELS_EN = ["Announcement", "News", "Business Programme", "Participants"];
 
 export function NewsPreview({ news }: { news: News[] }) {
   const t = useTranslations("NewsPreview");
   const locale = useLocale() as Locale;
+  const TAG_LABELS = locale === "ru" ? TAG_LABELS_RU : TAG_LABELS_EN;
   if (!news.length) return null;
 
   return (
@@ -109,7 +111,7 @@ export function NewsPreview({ news }: { news: News[] }) {
                     href={`/news/${n.slug}`}
                     className="inline-flex items-center gap-2 font-bold text-[13px] text-nb-green-dark group-hover:text-nb-green mt-2 transition-colors"
                   >
-                    Читать далее
+                    {locale === "ru" ? "Читать далее" : "Read more"}
                     <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
                   </Link>
                 </div>

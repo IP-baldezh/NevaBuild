@@ -1,6 +1,8 @@
 "use client";
 
+import { useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import type { Locale } from "@/i18n/routing";
 
 const SPEAKERS = [
   {
@@ -136,6 +138,9 @@ function SpeakerCard({ name, role, initials, quote, bg }: Speaker) {
 }
 
 export function AmbassadorsAlt() {
+  const locale = useLocale() as Locale;
+  const ru = locale === "ru";
+
   return (
     <section className="py-24" style={{ background: "#0F1813" }}>
       <div className="container-neva">
@@ -143,25 +148,26 @@ export function AmbassadorsAlt() {
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
           <div>
             <span className="font-bold text-[13px] text-nb-teal uppercase tracking-[3px] mb-4 block">
-              Эксперты NevaBuild 2027
+              {ru ? "Эксперты NevaBuild 2027" : "NevaBuild 2027 Experts"}
             </span>
             <h2
               className="font-black text-white leading-tight"
               style={{ fontSize: "clamp(36px, 5vw, 64px)" }}
             >
-              Голоса индустрии
+              {ru ? "Голоса индустрии" : "Voices of the Industry"}
             </h2>
           </div>
           <div className="lg:max-w-[420px]">
             <p className="text-white/40 text-[15px] leading-relaxed">
-              Ведущие архитекторы, дизайнеры и девелоперы, которые определяют будущее строительной
-              отрасли — уже с нами.
+              {ru
+                ? "Ведущие архитекторы, дизайнеры и девелоперы, которые определяют будущее строительной отрасли — уже с нами."
+                : "Leading architects, designers and developers shaping the future of the construction industry — already with us."}
             </p>
             <Link
               href="/about"
               className="inline-flex items-center gap-2 font-bold text-[13px] text-nb-lime-acid hover:text-white mt-5 transition-colors duration-200 group/cta"
             >
-              Стать амбассадором
+              {ru ? "Стать амбассадором" : "Become an Ambassador"}
               <span className="transition-transform duration-200 group-hover/cta:translate-x-1 inline-block">
                 →
               </span>
@@ -179,8 +185,17 @@ export function AmbassadorsAlt() {
         {/* Footer row */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mt-12 pt-12 border-t border-white/[0.06]">
           <p className="text-white/30 text-[13px]">
-            Уже <span className="text-nb-lime-acid font-bold">14 амбассадоров</span> подтвердили
-            участие в NevaBuild 2027
+            {ru ? (
+              <>
+                Уже <span className="text-nb-lime-acid font-bold">14 амбассадоров</span> подтвердили
+                участие в NevaBuild 2027
+              </>
+            ) : (
+              <>
+                Already <span className="text-nb-lime-acid font-bold">14 ambassadors</span>{" "}
+                confirmed for NevaBuild 2027
+              </>
+            )}
           </p>
           <Link
             href="/about"
@@ -191,7 +206,7 @@ export function AmbassadorsAlt() {
               boxShadow: "0 8px 32px rgba(169,236,70,0.18)",
             }}
           >
-            Все амбассадоры
+            {ru ? "Все амбассадоры" : "All Ambassadors"}
           </Link>
         </div>
       </div>

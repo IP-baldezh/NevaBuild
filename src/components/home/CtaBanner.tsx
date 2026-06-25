@@ -1,7 +1,14 @@
+"use client";
+
 import { ArrowRight } from "lucide-react";
+import { useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import type { Locale } from "@/i18n/routing";
 
 export function CtaBanner() {
+  const locale = useLocale() as Locale;
+  const ru = locale === "ru";
+
   return (
     <section className="relative overflow-hidden bg-nb-dark">
       {/* Lime glow accent */}
@@ -16,19 +23,23 @@ export function CtaBanner() {
 
       <div className="container-neva relative py-24 md:py-32 text-center">
         <span className="font-bold text-[13px] text-nb-teal uppercase tracking-[3px] mb-5 block">
-          17–20 марта 2027 · Экспофорум · Санкт-Петербург
+          {ru
+            ? "17–20 марта 2027 · Экспофорум · Санкт-Петербург"
+            : "17–20 March 2027 · Expoforum · Saint Petersburg"}
         </span>
 
         <h2
           className="font-black leading-tight tracking-tight text-white mb-6 max-w-[900px] mx-auto"
           style={{ fontSize: "clamp(2.5rem, 7vw, 6rem)" }}
         >
-          Станьте частью <span style={{ color: "#a9ec46" }}>NEVA BUILD</span>
+          {ru ? "Станьте частью" : "Be part of"}{" "}
+          <span style={{ color: "#a9ec46" }}>NEVA BUILD</span>
         </h2>
 
         <p className="max-w-2xl mx-auto text-[16px] leading-relaxed text-white/60 mb-12">
-          Покажите свои решения профессиональной аудитории строительной индустрии. Присоединяйтесь к
-          500+ компаниям из 35 стран.
+          {ru
+            ? "Покажите свои решения профессиональной аудитории строительной индустрии. Присоединяйтесь к 500+ компаниям из 35 стран."
+            : "Showcase your solutions to a professional construction industry audience. Join 500+ companies from 35 countries."}
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-4">
@@ -41,14 +52,14 @@ export function CtaBanner() {
               boxShadow: "0 12px 40px rgba(169,236,70,0.28)",
             }}
           >
-            Стать участником
+            {ru ? "Стать участником" : "Become an Exhibitor"}
             <ArrowRight className="size-4" />
           </Link>
           <Link
             href="/tickets"
             className="inline-flex items-center gap-2 font-bold text-[15px] border-2 border-white/20 hover:border-nb-lime-acid text-white hover:text-nb-lime-acid px-8 py-4 rounded-2xl transition-all duration-200"
           >
-            Получить билет
+            {ru ? "Получить билет" : "Get a Ticket"}
           </Link>
         </div>
       </div>

@@ -1,23 +1,47 @@
-import { ArrowRight, CheckCircle } from "lucide-react";
-import { Link } from "@/i18n/navigation";
+"use client";
 
-const visitorsFeatures = [
+import { ArrowRight, CheckCircle } from "lucide-react";
+import { useLocale } from "next-intl";
+import { Link } from "@/i18n/navigation";
+import type { Locale } from "@/i18n/routing";
+
+const VISITORS_RU = [
   "Бесплатный вход для профессионалов отрасли",
   "Эксклюзивные новинки рынка строительства",
   "Деловая программа: форумы и мастер-классы",
   "Нетворкинг с 40 000+ специалистами",
   "Онлайн-регистрация без очереди на входе",
 ];
+const VISITORS_EN = [
+  "Free entry for industry professionals",
+  "Exclusive new products from the construction market",
+  "Business programme: forums and masterclasses",
+  "Networking with 40 000+ specialists",
+  "Online registration — no queues at the entrance",
+];
 
-const exhibitorsFeatures = [
+const EXHIBITORS_RU = [
   "Прямой выход на b2b-аудиторию покупателей",
   "Стенды от 9 м² — любой формат участия",
   "Маркетинговая поддержка и PR-пакеты",
   "Деловые встречи через платформу matchmaking",
   "Специальные условия для якорных участников",
 ];
+const EXHIBITORS_EN = [
+  "Direct access to a B2B buyer audience",
+  "Booths from 9 m² — any participation format",
+  "Marketing support and PR packages",
+  "Business meetings via matchmaking platform",
+  "Special terms for anchor participants",
+];
 
 export function ForWhom() {
+  const locale = useLocale() as Locale;
+  const ru = locale === "ru";
+
+  const visitorsFeatures = ru ? VISITORS_RU : VISITORS_EN;
+  const exhibitorsFeatures = ru ? EXHIBITORS_RU : EXHIBITORS_EN;
+
   return (
     <section className="py-20 bg-nb-bg-light" id="for-whom">
       <div className="container-neva">
@@ -29,7 +53,6 @@ export function ForWhom() {
               background: "linear-gradient(135deg, #12B669 0%, #a9ec46 55%, #d4f772 100%)",
             }}
           >
-            {/* Glow overlay */}
             <div
               className="absolute inset-0 pointer-events-none"
               style={{
@@ -39,25 +62,33 @@ export function ForWhom() {
               aria-hidden
             />
             <span className="font-bold text-[13px] text-nb-teal uppercase tracking-[3px] mb-6 relative z-10">
-              Посетителям
+              {ru ? "Посетителям" : "For Visitors"}
             </span>
             <h2
               className="font-black leading-tight mb-4 relative z-10"
-              style={{
-                fontSize: "clamp(28px, 3.5vw, 42px)",
-                color: "#0d2d06",
-              }}
+              style={{ fontSize: "clamp(28px, 3.5vw, 42px)", color: "#0d2d06" }}
             >
-              Откройте новые
-              <br />
-              горизонты рынка
+              {ru ? (
+                <>
+                  Откройте новые
+                  <br />
+                  горизонты рынка
+                </>
+              ) : (
+                <>
+                  Discover new
+                  <br />
+                  market horizons
+                </>
+              )}
             </h2>
             <p
               className="text-[15px] mb-8 max-w-[420px] leading-relaxed relative z-10"
               style={{ color: "#1a4a0a" }}
             >
-              Четыре дня погружения в мир строительства, архитектуры и дизайна интерьеров.
-              Профессионалы, продукты и идеи — в одном месте.
+              {ru
+                ? "Четыре дня погружения в мир строительства, архитектуры и дизайна интерьеров. Профессионалы, продукты и идеи — в одном месте."
+                : "Four days immersed in the world of construction, architecture and interior design. Professionals, products and ideas — all in one place."}
             </p>
             <ul className="flex flex-col gap-3 mb-10 relative z-10">
               {visitorsFeatures.map((f) => (
@@ -82,7 +113,7 @@ export function ForWhom() {
                   boxShadow: "0 8px 24px rgba(14,45,8,0.25)",
                 }}
               >
-                Зарегистрироваться
+                {ru ? "Зарегистрироваться" : "Register Now"}
                 <ArrowRight className="size-4" />
               </Link>
             </div>
@@ -96,18 +127,29 @@ export function ForWhom() {
               aria-hidden
             />
             <span className="font-bold text-[13px] text-nb-teal uppercase tracking-[3px] mb-6">
-              Экспонентам
+              {ru ? "Экспонентам" : "For Exhibitors"}
             </span>
             <h2
               className="font-black text-black leading-tight mb-4"
               style={{ fontSize: "clamp(28px, 3.5vw, 42px)" }}
             >
-              Найдите клиентов
-              <br />и партнёров
+              {ru ? (
+                <>
+                  Найдите клиентов
+                  <br />и партнёров
+                </>
+              ) : (
+                <>
+                  Find clients
+                  <br />
+                  and partners
+                </>
+              )}
             </h2>
             <p className="text-[15px] text-black/65 mb-8 max-w-[420px] leading-relaxed">
-              Представьте свой бренд перед профессиональной аудиторией. Получите заявки, заключите
-              договоры и укрепите позиции на рынке.
+              {ru
+                ? "Представьте свой бренд перед профессиональной аудиторией. Получите заявки, заключите договоры и укрепите позиции на рынке."
+                : "Present your brand to a professional audience. Get leads, close deals and strengthen your market position."}
             </p>
             <ul className="flex flex-col gap-3 mb-10">
               {exhibitorsFeatures.map((f) => (
@@ -123,14 +165,14 @@ export function ForWhom() {
                 className="inline-flex items-center gap-2 font-bold text-[14.5px] bg-brand-red text-white px-6 py-3.5 rounded-xl transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5"
                 style={{ boxShadow: "0 8px 20px rgba(225,27,34,0.25)" }}
               >
-                Забронировать стенд
+                {ru ? "Забронировать стенд" : "Book a Stand"}
                 <ArrowRight className="size-4" />
               </Link>
               <a
                 href="#"
                 className="inline-flex items-center gap-2 font-bold text-[14.5px] border border-nb-border hover:border-nb-green text-nb-dark hover:text-nb-green-dark px-6 py-3.5 rounded-xl transition-all duration-200"
               >
-                Скачать прайс-лист
+                {ru ? "Скачать прайс-лист" : "Download Price List"}
               </a>
             </div>
           </div>

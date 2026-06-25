@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import type { Partner } from "@prisma/client";
 
 const STATIC_LOGOS = [
@@ -21,6 +21,7 @@ const STATIC_LOGOS = [
 
 export function PartnersSection({ partners }: { partners: Partner[] }) {
   const t = useTranslations("Partners");
+  const locale = useLocale();
   const doubled = [...STATIC_LOGOS, ...STATIC_LOGOS];
 
   return (
@@ -34,7 +35,7 @@ export function PartnersSection({ partners }: { partners: Partner[] }) {
             href="#"
             className="font-bold text-[13px] text-nb-green-dark hover:text-nb-green border-b border-nb-green/30 pb-0.5 transition-colors duration-200 self-start sm:self-auto"
           >
-            Стать партнёром
+            {locale === "ru" ? "Стать партнёром" : "Become a Partner"}
           </a>
         </div>
       </div>
