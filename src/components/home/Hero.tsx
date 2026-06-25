@@ -158,6 +158,7 @@ export function Hero({ dateStart, dateEnd, venue, city }: HeroProps) {
   const [dir, setDir] = useState(1);
   const [fading, setFading] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const touchStartX = useRef<number | null>(null);
 
   const go = useCallback(
     (next: number, d: number) => {
@@ -175,6 +176,23 @@ export function Hero({ dateStart, dateEnd, venue, city }: HeroProps) {
   const next = useCallback(() => go(idx + 1, 1), [idx, go]);
   const prev = useCallback(() => go(idx - 1, -1), [idx, go]);
 
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  }, []);
+
+  const handleTouchEnd = useCallback(
+    (e: React.TouchEvent) => {
+      if (touchStartX.current === null) return;
+      const delta = touchStartX.current - e.changedTouches[0].clientX;
+      if (Math.abs(delta) > 50) {
+        if (delta > 0) next();
+        else prev();
+      }
+      touchStartX.current = null;
+    },
+    [next, prev],
+  );
+
   useEffect(() => {
     timer.current = setTimeout(next, SLIDE_MS);
     return () => {
@@ -190,6 +208,8 @@ export function Hero({ dateStart, dateEnd, venue, city }: HeroProps) {
       className="relative flex flex-col overflow-hidden bg-nb-dark -mt-[72px]"
       style={{ height: "calc(100dvh + 72px)" }}
       aria-label={`${slide.line1} ${slide.line2}`}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
       {/* Background photos */}
       {slides.map((s, i) => (
@@ -225,9 +245,9 @@ export function Hero({ dateStart, dateEnd, venue, city }: HeroProps) {
         aria-hidden
       />
 
-      {/* Left green accent line */}
+      {/* Left green accent line — desktop only */}
       <div
-        className="absolute left-0 top-0 bottom-0 w-[3px]"
+        className="max-sm:hidden absolute left-0 top-0 bottom-0 w-[3px]"
         style={{
           background:
             "linear-gradient(to bottom, transparent 0%, #12B669 35%, #12B669 65%, transparent 100%)",
@@ -237,8 +257,8 @@ export function Hero({ dateStart, dateEnd, venue, city }: HeroProps) {
 
       {/* Main content */}
       <div className="relative z-10 flex-1 flex items-center">
-        <div className="container-neva w-full pt-[88px] pb-6">
-          <div className="max-w-[680px]">
+        <div className="container-neva w-full pt-[88px] pb-4 sm:pb-6">
+          <div className="max-w-[680px] mx-auto sm:mx-0 text-center sm:text-left">
             <AnimatePresence mode="wait" custom={dir}>
               <m.div
                 key={`content-${slide.id}`}
@@ -272,7 +292,7 @@ export function Hero({ dateStart, dateEnd, venue, city }: HeroProps) {
                 <h1
                   className="font-black leading-[0.88] tracking-tight text-white mb-5"
                   style={{
-                    fontSize: "clamp(38px, 6vw, 82px)",
+                    fontSize: "clamp(36px, 7vw, 82px)",
                     opacity,
                     transform: fading ? "translateY(16px)" : "translateY(0)",
                     transition: "transform 0.4s ease, opacity 0.4s ease",
@@ -291,14 +311,17 @@ export function Hero({ dateStart, dateEnd, venue, city }: HeroProps) {
 
                 {/* Subtitle */}
                 <p
-                  className="text-white/80 mb-5 leading-relaxed"
-                  style={{ fontSize: "clamp(13px, 1.4vw, 16px)", maxWidth: "520px", opacity }}
+                  className="text-white/80 leading-relaxed mx-auto sm:mx-0 mb-5"
+                  style={{ fontSize: "clamp(14px, 1.4vw, 16px)", maxWidth: "520px", opacity }}
                 >
                   {slide.body}
                 </p>
 
                 {/* Date + location pills */}
-                <div className="flex flex-wrap gap-2 mb-6" style={{ opacity }}>
+                <div
+                  className="flex flex-wrap justify-center sm:justify-start gap-2 mb-6"
+                  style={{ opacity }}
+                >
                   {[
                     {
                       icon: <Calendar className="size-3 text-nb-green" />,
@@ -323,7 +346,10 @@ export function Hero({ dateStart, dateEnd, venue, city }: HeroProps) {
                 </div>
 
                 {/* CTAs */}
-                <div className="flex flex-wrap gap-3" style={{ opacity }}>
+                <div
+                  className="flex flex-wrap justify-center sm:justify-start gap-3"
+                  style={{ opacity }}
+                >
                   <Link
                     href={slide.cta.href}
                     className="inline-flex items-center gap-2 font-bold text-[14px] bg-white text-brand-red px-5 py-3 rounded-xl hover:-translate-y-0.5 transition-all duration-200"
@@ -367,25 +393,29 @@ export function Hero({ dateStart, dateEnd, venue, city }: HeroProps) {
           </span>
           <Countdown ru={ru} />
 
-          {/* Dots + arrows */}
-          <div className="flex items-center gap-2 ml-auto">
+          {/* Dots + arrows — hidden on mobile, swipe instead */}
+          <div className="hidden sm:flex items-center gap-1 ml-auto">
             {slides.map((_, i) => (
               <button
                 key={i}
                 onClick={() => go(i, i > idx ? 1 : -1)}
                 aria-label={`${ru ? "Слайд" : "Slide"} ${i + 1}`}
-                className="transition-all duration-300 rounded-full"
-                style={{
-                  width: i === idx ? "24px" : "8px",
-                  height: "8px",
-                  background: i === idx ? "#E11B22" : "rgba(255,255,255,0.35)",
-                }}
-              />
+                className="flex items-center justify-center  min-h-[44px] transition-all duration-300 touch-manipulation"
+              >
+                <span
+                  className="rounded-full transition-all duration-300 block"
+                  style={{
+                    width: i === idx ? "24px" : "8px",
+                    height: "8px",
+                    background: i === idx ? "#E11B22" : "rgba(255,255,255,0.35)",
+                  }}
+                />
+              </button>
             ))}
             <button
               onClick={prev}
               aria-label={ru ? "Предыдущий" : "Previous"}
-              className="ml-3 w-8 h-8 rounded-full flex items-center justify-center text-white transition-all hover:bg-white/20"
+              className="ml-1 size-11 rounded-full flex items-center justify-center text-white transition-all hover:bg-white/20 touch-manipulation"
               style={{
                 background: "rgba(255,255,255,0.10)",
                 border: "1px solid rgba(255,255,255,0.2)",
@@ -396,7 +426,7 @@ export function Hero({ dateStart, dateEnd, venue, city }: HeroProps) {
             <button
               onClick={next}
               aria-label={ru ? "Следующий" : "Next"}
-              className="w-8 h-8 rounded-full flex items-center justify-center text-white transition-all hover:bg-white/20"
+              className="size-11 rounded-full flex items-center justify-center text-white transition-all hover:bg-white/20 touch-manipulation"
               style={{
                 background: "rgba(255,255,255,0.10)",
                 border: "1px solid rgba(255,255,255,0.2)",

@@ -43,12 +43,12 @@ export function ForWhom() {
   const exhibitorsFeatures = ru ? EXHIBITORS_RU : EXHIBITORS_EN;
 
   return (
-    <section className="py-20 bg-nb-bg-light" id="for-whom">
+    <section className="py-12 sm:py-20 bg-nb-bg-light" id="for-whom">
       <div className="container-neva">
         <div className="grid lg:grid-cols-2 gap-6">
           {/* Visitors — green gradient */}
           <div
-            className="relative rounded-3xl p-10 lg:p-12 overflow-hidden flex flex-col"
+            className="relative rounded-3xl p-7 sm:p-10 lg:p-12 overflow-hidden flex flex-col"
             style={{
               background: "linear-gradient(135deg, #12B669 0%, #a9ec46 55%, #d4f772 100%)",
             }}
@@ -103,10 +103,10 @@ export function ForWhom() {
                 </li>
               ))}
             </ul>
-            <div className="mt-auto relative z-10">
+            <div className="mt-auto relative z-10 flex justify-center sm:justify-start">
               <Link
                 href="/tickets"
-                className="inline-flex items-center gap-2 font-bold text-[14.5px] px-6 py-3.5 rounded-xl transition-all duration-200 hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center gap-2 font-bold text-[14.5px] px-6 py-3.5 rounded-xl transition-all duration-200 hover:-translate-y-0.5 w-full sm:w-auto touch-manipulation"
                 style={{
                   background: "#0e2d08",
                   color: "#a9ec46",
@@ -120,7 +120,7 @@ export function ForWhom() {
           </div>
 
           {/* Exhibitors — white */}
-          <div className="relative bg-white rounded-3xl p-10 lg:p-12 overflow-hidden border border-nb-border flex flex-col">
+          <div className="relative bg-white rounded-3xl p-7 sm:p-10 lg:p-12 overflow-hidden border border-nb-border flex flex-col">
             <div
               className="absolute top-0 right-0 w-[280px] h-[280px] opacity-5 pointer-events-none"
               style={{ background: "radial-gradient(circle, #E11B22 0%, transparent 70%)" }}
@@ -159,10 +159,10 @@ export function ForWhom() {
                 </li>
               ))}
             </ul>
-            <div className="mt-auto flex flex-wrap gap-3">
+            <div className="mt-auto flex flex-col sm:flex-row gap-3">
               <Link
                 href="/exhibit"
-                className="inline-flex items-center gap-2 font-bold text-[14.5px] bg-brand-red text-white px-6 py-3.5 rounded-xl transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center gap-2 font-bold text-[14.5px] bg-brand-red text-white px-6 py-3.5 rounded-xl transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5 touch-manipulation"
                 style={{ boxShadow: "0 8px 20px rgba(225,27,34,0.25)" }}
               >
                 {ru ? "Забронировать стенд" : "Book a Stand"}
@@ -170,7 +170,7 @@ export function ForWhom() {
               </Link>
               <a
                 href="#"
-                className="inline-flex items-center gap-2 font-bold text-[14.5px] border border-nb-border hover:border-nb-lime-acid text-nb-dark hover:text-nb-lime-acid px-6 py-3.5 rounded-xl transition-all duration-200"
+                className="inline-flex items-center justify-center gap-2 font-bold text-[14.5px] border border-nb-border hover:border-nb-lime-acid text-nb-dark hover:text-nb-lime-acid px-6 py-3.5 rounded-xl transition-all duration-200 touch-manipulation"
               >
                 {ru ? "Скачать прайс-лист" : "Download Price List"}
               </a>

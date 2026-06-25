@@ -66,18 +66,15 @@ export function WhyVisit() {
   return (
     <section
       id="why-visit"
-      className="py-20 overflow-hidden"
+      className="py-12 sm:py-20 overflow-hidden"
       style={{
         background: "linear-gradient(135deg, #12B669 0%, #a9ec46 55%, #d4f772 100%)",
       }}
     >
       <div className="container-neva">
-        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-20">
           {/* Left — sticky title */}
           <div className="lg:w-[340px] flex-shrink-0">
-            <span className="font-bold text-[13px] text-nb-teal uppercase tracking-[3px] mb-4 block">
-              {ru ? "Почему NevaBuild" : "Why NevaBuild"}
-            </span>
             <h2
               className="font-black leading-tight mb-6 text-white"
               style={{ fontSize: "clamp(32px, 4vw, 52px)" }}
@@ -107,7 +104,7 @@ export function WhyVisit() {
             </p>
             <Link
               href="/tickets"
-              className="inline-flex items-center gap-2 font-bold text-[14.5px] px-6 py-3.5 rounded-xl transition-all duration-200 hover:-translate-y-0.5 text-white"
+              className="inline-flex items-center justify-center gap-2 font-bold text-[14.5px] px-6 py-3.5 rounded-xl transition-all duration-200 hover:-translate-y-0.5 text-white w-full sm:w-auto touch-manipulation"
               style={{ background: "#E11B22", boxShadow: "0 8px 24px rgba(225,27,34,0.35)" }}
             >
               {ru ? "Зарегистрироваться бесплатно" : "Register for Free"}
@@ -116,13 +113,13 @@ export function WhyVisit() {
 
           {/* Right — 2×3 grid */}
           <div
-            className="flex-1 grid sm:grid-cols-2 gap-px rounded-2xl overflow-hidden"
+            className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-px rounded-2xl overflow-hidden"
             style={{ background: "rgba(13,45,6,0.12)" }}
           >
             {reasons.map(({ title, desc }) => (
               <div
                 key={title}
-                className="p-8 group transition-colors duration-300"
+                className="p-6 sm:p-8 group transition-colors duration-300"
                 style={{
                   background: "rgba(255,255,255,0.18)",
                   backdropFilter: "blur(16px)",

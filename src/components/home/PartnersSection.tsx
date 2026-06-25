@@ -1,6 +1,6 @@
 "use client";
 
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 import type { Partner } from "@prisma/client";
 
 const STATIC_LOGOS = [
@@ -20,7 +20,6 @@ const STATIC_LOGOS = [
 ];
 
 export function PartnersSection({ partners }: { partners: Partner[] }) {
-  const t = useTranslations("Partners");
   const locale = useLocale();
   const doubled = [...STATIC_LOGOS, ...STATIC_LOGOS];
 
@@ -29,9 +28,6 @@ export function PartnersSection({ partners }: { partners: Partner[] }) {
       <div className="container-neva mb-10">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <span className="font-bold text-[13px] text-nb-teal uppercase tracking-[3px] block">
-              {t("label")}
-            </span>
             <h2
               className="font-black text-nb-dark mt-1"
               style={{ fontSize: "clamp(20px, 2.5vw, 28px)" }}

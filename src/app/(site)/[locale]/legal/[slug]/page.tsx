@@ -22,9 +22,20 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale, slug } = await params;
   if (!SLUGS.includes(slug as LegalSlug)) return {};
-  const t = await getTranslations({ locale: locale as Locale, namespace: "Footer" });
+  // next-intl v4: type inference loses namespace scope when locale option is explicit
+  // and the namespace contains mixed flat+nested keys — cast to recover correct types
+  const t = (await getTranslations({
+    locale: locale as Locale,
+    namespace: "Footer",
+  })) as unknown as (key: LegalSlug) => string;
+  const TITLES: Record<LegalSlug, string> = {
+    privacy: t("privacy"),
+    terms: t("terms"),
+    consent: t("consent"),
+    offer: t("offer"),
+  };
   return {
-    title: t(slug as LegalSlug),
+    title: TITLES[slug as LegalSlug],
     alternates: buildAlternates(locale, `/legal/${slug}`),
     robots: { index: false },
   };
@@ -38,7 +49,10 @@ export default async function LegalPage({
   const { locale, slug } = await params;
   if (!SLUGS.includes(slug as LegalSlug)) notFound();
   setRequestLocale(locale as Locale);
-  const tf = await getTranslations({ locale: locale as Locale, namespace: "Footer" });
+  const tf = (await getTranslations({
+    locale: locale as Locale,
+    namespace: "Footer",
+  })) as unknown as (key: LegalSlug) => string;
   const tl = await getTranslations({ locale: locale as Locale, namespace: "Legal" });
 
   return (

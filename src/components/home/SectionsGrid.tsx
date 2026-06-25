@@ -1,7 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { pick } from "@/lib/content";
@@ -49,19 +50,20 @@ const SECTOR_COLORS = [
   { badge: "bg-nb-dark/5 text-nb-dark border-nb-border", accent: "text-nb-dark" },
 ];
 
+const MOBILE_VISIBLE = 4;
+
 export function SectionsGrid({ categories }: { categories: ExhibitorCategory[] }) {
   const t = useTranslations("Sections");
   const locale = useLocale() as Locale;
+  const ru = locale === "ru";
+  const [showAll, setShowAll] = useState(false);
 
   return (
-    <section id="sectors" className="py-20 bg-white">
+    <section id="sectors" className="py-14 sm:py-20 bg-white">
       <div className="container-neva">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-14">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 sm:mb-14">
           <div>
-            <span className="font-bold text-[13px] text-nb-teal uppercase tracking-[3px] mb-3 block">
-              {t("label")}
-            </span>
             <h2
               className="font-black text-nb-dark leading-tight"
               style={{ fontSize: "clamp(30px, 4vw, 50px)" }}
@@ -72,7 +74,7 @@ export function SectionsGrid({ categories }: { categories: ExhibitorCategory[] }
           <ScrollReveal>
             <Link
               href="/exhibitors"
-              className="inline-flex items-center gap-2 font-bold text-[14px] text-nb-green-dark hover:text-nb-lime-acid border-b border-nb-green/40 hover:border-nb-lime-acid pb-0.5 transition-all duration-200 self-start sm:self-auto"
+              className="hidden sm:inline-flex items-center gap-2 font-bold text-[14px] text-nb-green-dark hover:text-nb-lime-acid border-b border-nb-green/40 hover:border-nb-lime-acid pb-0.5 transition-all duration-200 self-start sm:self-auto"
             >
               {t("cta")}
               <ArrowUpRight className="size-4" />
@@ -81,21 +83,17 @@ export function SectionsGrid({ categories }: { categories: ExhibitorCategory[] }
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           {categories.map((c, i) => {
             const colors = SECTOR_COLORS[i % SECTOR_COLORS.length];
+            const hiddenOnMobile = !showAll && i >= MOBILE_VISIBLE;
             return (
               <Link
                 key={c.id}
                 href={`/exhibitors?category=${c.slug}`}
-                className="group relative bg-white border border-nb-border hover:border-nb-lime-acid/50 rounded-2xl p-6 flex flex-col gap-4 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-nb-green/8"
+                className={`group relative bg-white border border-nb-border hover:border-nb-lime-acid/50 rounded-2xl p-5 sm:p-6 flex flex-col gap-3 sm:gap-4 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-nb-green/8 touch-manipulation${hiddenOnMobile ? " hidden sm:flex" : ""}`}
               >
                 <div className="flex items-start justify-between">
-                  <span
-                    className={`inline-flex items-center font-black text-[11px] px-2.5 py-1 rounded-lg border ${colors.badge}`}
-                  >
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
                   <ArrowUpRight
                     className={`size-4 ${colors.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-200`}
                   />
@@ -114,6 +112,32 @@ export function SectionsGrid({ categories }: { categories: ExhibitorCategory[] }
             );
           })}
         </div>
+
+        {/* Кнопка на мобильном: перейти на страницу или свернуть */}
+        {categories.length > MOBILE_VISIBLE && (
+          <div className="mt-4 sm:hidden flex justify-center">
+            {showAll ? (
+              <button
+                type="button"
+                onClick={() => setShowAll(false)}
+                className="inline-flex items-center gap-2 font-bold text-[14px] text-nb-dark border border-nb-border rounded-xl px-6 py-3 touch-manipulation"
+              >
+                {ru ? "Свернуть" : "Show less"}
+                <ChevronDown className="size-4 rotate-180" />
+              </button>
+            ) : (
+              <Link
+                href="/exhibitors"
+                className="inline-flex items-center gap-2 font-bold text-[14px] text-nb-dark border border-nb-border rounded-xl px-6 py-3 touch-manipulation"
+              >
+                {ru
+                  ? `Все секторы выставки (${categories.length})`
+                  : `All sectors (${categories.length})`}
+                <ArrowUpRight className="size-4" />
+              </Link>
+            )}
+          </div>
+        )}
       </div>
     </section>
   );

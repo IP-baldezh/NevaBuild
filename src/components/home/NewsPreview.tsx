@@ -26,14 +26,11 @@ export function NewsPreview({ news }: { news: News[] }) {
   if (!news.length) return null;
 
   return (
-    <section id="news" className="py-20 bg-white">
+    <section id="news" className="py-12 sm:py-20 bg-white">
       <div className="container-neva">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-14">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-14">
           <div>
-            <span className="font-bold text-[13px] text-nb-teal uppercase tracking-[3px] mb-3 block">
-              {t("label")}
-            </span>
             <h2
               className="font-black text-nb-dark leading-tight"
               style={{ fontSize: "clamp(30px, 4vw, 50px)" }}
@@ -85,7 +82,7 @@ export function NewsPreview({ news }: { news: News[] }) {
                   />
                 </div>
 
-                <div className="p-7 flex flex-col flex-1 gap-3">
+                <div className="p-5 sm:p-7 flex flex-col flex-1 gap-3">
                   <div className="flex items-center gap-3">
                     <span
                       className={`text-[11px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full ${tagColor}`}
