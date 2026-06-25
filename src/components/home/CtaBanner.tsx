@@ -30,10 +30,7 @@ export function CtaBanner() {
           <span className="text-nb-lime-acid">{ru ? "NevaBuild 2027" : "NevaBuild 2027"}</span>
         </h2>
 
-        <p
-          className="text-[17px] text-white/50 max-w-[560px] mx-auto mb-12 leading-relaxed"
-          style={{ fontFamily: "var(--font-mulish)" }}
-        >
+        <p className="font-mulish text-[17px] text-white/50 max-w-[560px] mx-auto mb-12 leading-relaxed">
           {ru
             ? "Покажите свои решения профессиональной аудитории строительной индустрии. Присоединяйтесь к 500+ компаниям из 35 стран."
             : "Showcase your solutions to a professional construction industry audience. Join 500+ companies from 35 countries."}

@@ -56,6 +56,8 @@
 
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-manrope: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-mulish: var(--font-mulish-var), ui-sans-serif, system-ui, sans-serif;
 
   /* NevaBuild 2.0 design palette */
   --color-nb-dark: #16221c;

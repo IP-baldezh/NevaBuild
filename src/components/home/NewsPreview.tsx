@@ -102,10 +102,7 @@ export function NewsPreview({ news }: { news: News[] }) {
                   </h3>
 
                   {(n.excerptRu || n.excerptEn) && (
-                    <p
-                      className="text-[14px] text-nb-muted-dark leading-relaxed flex-1"
-                      style={{ fontFamily: "var(--font-mulish)" }}
-                    >
+                    <p className="font-mulish text-[14px] text-nb-muted-dark leading-relaxed flex-1">
                       {pick(locale, n.excerptRu ?? "", n.excerptEn ?? "")}
                     </p>
                   )}

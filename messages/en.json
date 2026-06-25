@@ -153,17 +153,40 @@
     "writeUs": "Write to us"
   },
   "Footer": {
-    "about": "International building & interior exhibition and forum in Saint Petersburg.",
+    "about": "The largest building & interior exhibition of the Northwestern Federal District. Since 2009.",
     "nav": "Menu",
-    "forVisitors": "For visitors",
-    "legal": "Legal",
-    "privacy": "Privacy policy",
-    "terms": "Terms of use",
-    "consent": "Personal data consent",
-    "offer": "Ticket purchase offer",
+    "forVisitors": "For Visitors",
+    "forExhibitors": "For Exhibitors",
+    "aboutSection": "About",
+    "followNews": "Stay Updated",
+    "newsletterText": "Event announcements, early registration offers and market news — straight to your inbox.",
+    "emailPlaceholder": "your@email.com",
+    "subscribe": "Subscribe",
     "rights": "All rights reserved.",
-    "newsletter": "Newsletter",
-    "newsletterText": "Get program announcements and exhibition news by email."
+    "privacy": "Privacy Policy",
+    "termsUse": "Terms of Use",
+    "sitemap": "Sitemap",
+    "visitors": {
+      "register": "Register",
+      "howToGet": "Getting There",
+      "program": "Business Programme",
+      "sections": "Exhibition Sections",
+      "faq": "FAQ"
+    },
+    "exhibitors": {
+      "conditions": "Participation Terms",
+      "priceList": "Stand Price List",
+      "marketing": "Marketing Packages",
+      "catalog": "Online Catalogue",
+      "logistics": "Logistics"
+    },
+    "aboutLinks": {
+      "history": "NevaBuild History",
+      "team": "Our Team",
+      "media": "Media Partners",
+      "press": "Press Materials",
+      "contacts": "Contacts"
+    }
   },
   "AboutPage": {
     "title": "About NEVA BUILD",
