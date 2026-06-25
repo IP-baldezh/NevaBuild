@@ -23,8 +23,14 @@ export async function generateMetadata({
   const { locale, slug } = await params;
   if (!SLUGS.includes(slug as LegalSlug)) return {};
   const t = await getTranslations({ locale: locale as Locale, namespace: "Footer" });
+  const TITLES = {
+    privacy: t("privacy"),
+    terms: t("terms"),
+    consent: t("consent"),
+    offer: t("offer"),
+  } satisfies Record<LegalSlug, string>;
   return {
-    title: t(slug as LegalSlug),
+    title: TITLES[slug as LegalSlug],
     alternates: buildAlternates(locale, `/legal/${slug}`),
     robots: { index: false },
   };
