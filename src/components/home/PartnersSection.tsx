@@ -27,7 +27,7 @@ export function PartnersSection({ partners }: { partners: Partner[] }) {
     <section className="py-16 bg-nb-bg-light border-y border-nb-border overflow-hidden">
       <div className="container-neva mb-10">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <span className="font-bold text-[11px] text-nb-muted uppercase tracking-[3px]">
+          <span className="font-bold text-[13px] text-nb-teal uppercase tracking-[3px]">
             {t("label")}
           </span>
           <a

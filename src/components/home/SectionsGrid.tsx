@@ -29,7 +29,7 @@ export function SectionsGrid({ categories }: { categories: ExhibitorCategory[] }
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-14">
           <div>
-            <span className="font-bold text-[11px] text-nb-green uppercase tracking-[3px] mb-3 block">
+            <span className="font-bold text-[13px] text-nb-teal uppercase tracking-[3px] mb-3 block">
               {t("label")}
             </span>
             <h2

@@ -38,10 +38,7 @@ export function ForWhom() {
               }}
               aria-hidden
             />
-            <span
-              className="font-bold text-[11px] uppercase tracking-[3px] mb-6 relative z-10"
-              style={{ color: "#1a4a0a" }}
-            >
+            <span className="font-bold text-[13px] text-nb-teal uppercase tracking-[3px] mb-6 relative z-10">
               Посетителям
             </span>
             <h2
@@ -98,7 +95,7 @@ export function ForWhom() {
               style={{ background: "radial-gradient(circle, #E11B22 0%, transparent 70%)" }}
               aria-hidden
             />
-            <span className="font-bold text-[11px] text-black/50 uppercase tracking-[3px] mb-6">
+            <span className="font-bold text-[13px] text-nb-teal uppercase tracking-[3px] mb-6">
               Экспонентам
             </span>
             <h2

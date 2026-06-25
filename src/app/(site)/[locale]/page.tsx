@@ -9,6 +9,7 @@ import { getLatestNews } from "@/server/services/news";
 import { Hero } from "@/components/home/Hero";
 import { ForWhom } from "@/components/home/ForWhom";
 import { WhyVisit } from "@/components/home/WhyVisit";
+import { AmbassadorsAlt } from "@/components/home/AmbassadorsAlt";
 import { SectionsGrid } from "@/components/home/SectionsGrid";
 import { ProgramPreview } from "@/components/home/ProgramPreview";
 import { PartnersSection } from "@/components/home/PartnersSection";
@@ -68,6 +69,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
       {/* Почему NevaBuild — зелёный градиент */}
       <WhyVisit />
+
+      {/* Голоса индустрии — тёмный блок с карточками */}
+      <AmbassadorsAlt />
 
       {/* Секторы выставки */}
       {categories.length > 0 && <SectionsGrid categories={categories} />}

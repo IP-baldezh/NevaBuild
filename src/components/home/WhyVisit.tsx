@@ -46,7 +46,7 @@ export function WhyVisit() {
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
           {/* Left — sticky title */}
           <div className="lg:w-[340px] flex-shrink-0">
-            <span className="font-bold text-[11px] uppercase tracking-[3px] mb-4 block text-white/70">
+            <span className="font-bold text-[13px] text-nb-teal uppercase tracking-[3px] mb-4 block">
               Почему NevaBuild
             </span>
             <h2
