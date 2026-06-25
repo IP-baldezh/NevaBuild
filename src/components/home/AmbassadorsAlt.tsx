@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
@@ -74,26 +75,44 @@ const SPEAKERS = [
 type Speaker = (typeof SPEAKERS)[0];
 
 function SpeakerCard({ name, role, initials, quote, bg }: Speaker) {
+  const [tapped, setTapped] = useState(false);
+
   return (
     <div
-      className="relative rounded-3xl overflow-hidden cursor-pointer group"
-      style={{ height: "360px", background: bg }}
+      className="relative rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer group touch-manipulation aspect-square lg:aspect-auto lg:h-[360px]"
+      style={{ background: bg }}
+      onClick={() => setTapped((v) => !v)}
     >
       {/* Lime top accent bar */}
-      <div className="absolute top-0 left-0 right-0 h-[3px] bg-nb-lime-acid transition-all duration-500 group-hover:opacity-0" />
+      <div
+        className={`absolute top-0 left-0 right-0 h-[3px] bg-nb-lime-acid transition-all duration-500 ${
+          tapped ? "opacity-0" : "group-hover:opacity-0"
+        }`}
+      />
 
       {/* Decorative large initials */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-        <span className="font-black text-white/[0.035]" style={{ fontSize: "130px" }}>
+        <span
+          className="font-black text-white/[0.035]"
+          style={{ fontSize: "clamp(64px, 10vw, 130px)" }}
+        >
           {initials}
         </span>
       </div>
 
       {/* Bottom ambient shadow */}
-      <div className="absolute bottom-0 left-0 right-0 h-36 bg-gradient-to-t from-black/70 to-transparent pointer-events-none transition-opacity duration-500 group-hover:opacity-0" />
+      <div
+        className={`absolute bottom-0 left-0 right-0 h-36 bg-gradient-to-t from-black/70 to-transparent pointer-events-none transition-opacity duration-500 ${
+          tapped ? "opacity-0" : "group-hover:opacity-0"
+        }`}
+      />
 
-      {/* Name strip — slides down on hover */}
-      <div className="absolute bottom-0 left-0 right-0 p-6 transition-transform duration-500 group-hover:translate-y-full">
+      {/* Name strip — slides down on hover / tap */}
+      <div
+        className={`absolute bottom-0 left-0 right-0 p-3 sm:p-6 transition-transform duration-500 ${
+          tapped ? "translate-y-full" : "group-hover:translate-y-full"
+        }`}
+      >
         <div className="flex items-center gap-3">
           <div
             className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 border border-nb-lime-acid/30"
@@ -102,39 +121,41 @@ function SpeakerCard({ name, role, initials, quote, bg }: Speaker) {
             <span className="font-black text-nb-lime-acid text-[11px]">{initials}</span>
           </div>
           <div>
-            <p className="font-black text-white text-[14px] leading-tight">{name}</p>
-            <p className="text-white/45 text-[11px] mt-0.5">{role}</p>
+            <p className="font-black text-white text-[11px] sm:text-[14px] leading-tight">{name}</p>
+            <p className="text-white/45 text-[9px] sm:text-[11px] mt-0.5 hidden sm:block">{role}</p>
           </div>
         </div>
       </div>
 
-      {/* Quote overlay — slides up on hover */}
+      {/* Quote overlay — slides up on hover / tap */}
       <div
-        className="absolute inset-0 flex flex-col justify-end p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"
+        className={`absolute inset-0 flex flex-col justify-end p-3 sm:p-6 transition-transform duration-500 ease-out ${
+          tapped ? "translate-y-0" : "translate-y-full group-hover:translate-y-0"
+        }`}
         style={{ background: "#a9ec46" }}
       >
         <span
           className="font-black text-[#0d2d06]/10 select-none leading-none block"
-          style={{ fontSize: "96px", marginBottom: "-28px" }}
+          style={{ fontSize: "clamp(44px, 8vw, 96px)", marginBottom: "clamp(-14px, -2vw, -28px)" }}
         >
           &#8220;
         </span>
         <p
-          className="text-[#0d2d06] text-[14px] leading-relaxed mb-5"
+          className="text-[#0d2d06] text-[11px] sm:text-[14px] leading-relaxed mb-3 sm:mb-5"
           style={{ fontFamily: "var(--font-mulish)" }}
         >
           {quote}
         </p>
-        <div className="border-t border-[#0d2d06]/20 pt-4 flex items-center gap-3">
+        <div className="border-t border-[#0d2d06]/20 pt-2 sm:pt-4 flex items-center gap-2 sm:gap-3">
           <div
-            className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
+            className="w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center flex-shrink-0"
             style={{ background: "rgba(13,45,6,0.10)" }}
           >
-            <span className="font-black text-[#0d2d06] text-[10px]">{initials}</span>
+            <span className="font-black text-[#0d2d06] text-[9px] sm:text-[10px]">{initials}</span>
           </div>
           <div>
-            <p className="font-black text-[#0d2d06] text-[13px]">{name}</p>
-            <p className="text-[#0d2d06]/60 text-[11px] mt-0.5">{role}</p>
+            <p className="font-black text-[#0d2d06] text-[11px] sm:text-[13px]">{name}</p>
+            <p className="text-[#0d2d06]/60 text-[9px] sm:text-[11px] mt-0.5">{role}</p>
           </div>
         </div>
       </div>
@@ -147,14 +168,11 @@ export function AmbassadorsAlt() {
   const ru = locale === "ru";
 
   return (
-    <section className="py-24" style={{ background: "#0F1813" }}>
+    <section className="py-12 sm:py-24" style={{ background: "#0F1813" }}>
       <div className="container-neva">
         {/* Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10 lg:mb-16">
           <div>
-            <span className="font-bold text-[13px] text-nb-teal uppercase tracking-[3px] mb-4 block">
-              {ru ? "Эксперты NevaBuild 2027" : "NevaBuild 2027 Experts"}
-            </span>
             <h2
               className="font-black text-white leading-tight"
               style={{ fontSize: "clamp(36px, 5vw, 64px)" }}
@@ -171,21 +189,12 @@ export function AmbassadorsAlt() {
                 ? "Ведущие архитекторы, дизайнеры и девелоперы, которые определяют будущее строительной отрасли — уже с нами."
                 : "Leading architects, designers and developers shaping the future of the construction industry — already with us."}
             </p>
-            <Link
-              href="/about"
-              className="inline-flex items-center gap-2 font-bold text-[13px] text-nb-lime-acid hover:text-white mt-5 transition-colors duration-200 group/cta"
-            >
-              {ru ? "Стать амбассадором" : "Become an Ambassador"}
-              <span className="transition-transform duration-200 group-hover/cta:translate-x-1 inline-block">
-                →
-              </span>
-            </Link>
           </div>
         </div>
 
-        {/* Card grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {SPEAKERS.map((s) => (
+        {/* Card grid — первые 6, остальные на странице /about */}
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+          {SPEAKERS.slice(0, 6).map((s) => (
             <SpeakerCard key={s.name} {...s} />
           ))}
         </div>

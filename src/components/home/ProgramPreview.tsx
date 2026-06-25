@@ -61,14 +61,11 @@ export function ProgramPreview({ days }: { days: ProgramDayWithSessions[] }) {
   if (!days.length) return null;
 
   return (
-    <section id="program" className="py-20 bg-nb-bg-light">
+    <section id="program" className="py-12 sm:py-20 bg-nb-bg-light">
       <div className="container-neva">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10">
           <div>
-            <span className="font-bold text-[13px] text-nb-teal uppercase tracking-[3px] mb-3 block">
-              {ru ? "Деловая программа" : "Business Programme"}
-            </span>
             <h2
               className="font-black text-nb-dark leading-tight"
               style={{ fontSize: "clamp(30px,4vw,50px)" }}
@@ -90,7 +87,7 @@ export function ProgramPreview({ days }: { days: ProgramDayWithSessions[] }) {
           </div>
           <Link
             href="/program"
-            className="inline-flex items-center gap-2 font-bold text-[14px] hover:text-nb-lime-acid border-b hover:border-nb-lime-acid pb-0.5 transition-all duration-200 self-start sm:self-auto"
+            className="hidden sm:inline-flex items-center gap-2 font-bold text-[14px] hover:text-nb-lime-acid border-b hover:border-nb-lime-acid pb-0.5 transition-all duration-200 self-start sm:self-auto"
             style={{ color: "#E11B22", borderColor: "rgba(18,182,105,0.4)" }}
           >
             {ru ? "Полная программа" : "Full programme"}
@@ -267,7 +264,7 @@ export function ProgramPreview({ days }: { days: ProgramDayWithSessions[] }) {
         <div className="mt-10 flex justify-center">
           <Link
             href="/program"
-            className="inline-flex items-center gap-2.5 font-bold text-[14.5px] px-8 py-4 rounded-xl text-white transition-all duration-200 hover:-translate-y-0.5"
+            className="inline-flex items-center justify-center gap-2.5 font-bold text-[14.5px] px-8 py-4 rounded-xl text-white transition-all duration-200 hover:-translate-y-0.5 w-full sm:w-auto touch-manipulation"
             style={{ background: "#E11B22", boxShadow: "0 8px 24px rgba(225,27,34,0.25)" }}
           >
             {ru ? "Полная программа" : "Full programme"}

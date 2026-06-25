@@ -10,7 +10,7 @@ export function CtaBanner() {
   const ru = locale === "ru";
 
   return (
-    <section id="ticket" className="py-20 bg-nb-dark relative overflow-hidden">
+    <section id="ticket" className="py-12 sm:py-20 bg-nb-dark relative overflow-hidden">
       {/* Background glow */}
       <div
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] opacity-10 pointer-events-none"
@@ -31,7 +31,7 @@ export function CtaBanner() {
         </h2>
 
         <p
-          className="text-[17px] text-white/50 max-w-[560px] mx-auto mb-12 leading-relaxed"
+          className="text-[15px] sm:text-[17px] text-white/50 max-w-[560px] mx-auto mb-8 sm:mb-12 leading-relaxed"
           style={{ fontFamily: "var(--font-mulish)" }}
         >
           {ru
@@ -39,10 +39,10 @@ export function CtaBanner() {
             : "Showcase your solutions to a professional construction industry audience. Join 500+ companies from 35 countries."}
         </p>
 
-        <div className="flex flex-wrap items-center justify-center gap-4">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4">
           <Link
             href="/tickets"
-            className="inline-flex items-center gap-3 font-bold text-[16px] px-8 py-4 rounded-2xl transition-all duration-200 hover:-translate-y-1"
+            className="inline-flex items-center justify-center gap-3 font-bold text-[15px] sm:text-[16px] px-8 py-4 rounded-2xl transition-all duration-200 hover:-translate-y-1 touch-manipulation"
             style={{
               background: "linear-gradient(135deg, #a9ec46 0%, #8dd62e 100%)",
               color: "#0d2d06",
@@ -55,7 +55,7 @@ export function CtaBanner() {
           </Link>
           <Link
             href="/exhibit"
-            className="inline-flex items-center gap-2.5 font-bold text-[16px] border-2 border-white/20 hover:border-nb-lime-acid text-white hover:text-nb-lime-acid px-8 py-4 rounded-2xl transition-all duration-200"
+            className="inline-flex items-center justify-center gap-2.5 font-bold text-[15px] sm:text-[16px] border-2 border-white/20 hover:border-nb-lime-acid text-white hover:text-nb-lime-acid px-8 py-4 rounded-2xl transition-all duration-200 touch-manipulation"
           >
             {ru ? "Участвовать как экспонент" : "Exhibit at NevaBuild"}
           </Link>
