@@ -94,7 +94,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <StatsGrid items={stats} />
 
       {/* Посетителям / Экспонентам */}
-      <ForWhom />
+      <ForWhom categories={categories} />
 
       {/* Секторы выставки — перед WhyVisit, как в 2.0 */}
       {categories.length > 0 && <SectionsGrid categories={categories} />}
@@ -118,7 +118,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <MarqueeTicker />
 
       {/* Финальный CTA — тёмная секция */}
-      <CtaBanner />
+      <CtaBanner categories={categories} />
     </>
   );
 }

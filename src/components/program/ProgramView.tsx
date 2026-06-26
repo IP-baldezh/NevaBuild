@@ -5,7 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { CalendarPlus, Clock, MapPin } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Badge } from "@/components/ui/badge";
-import { SelectNative } from "@/components/ui/select-native";
+import { CustomSelect } from "@/components/ui/custom-select";
 import { pick } from "@/lib/content";
 import { formatTime, formatDate } from "@/lib/format";
 import { cn } from "@/lib/utils";
@@ -86,30 +86,22 @@ export function ProgramView({ days }: { days: ProgramDayWithSessions[] }) {
 
       {/* Фильтры */}
       <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:max-w-md">
-        <SelectNative
+        <CustomSelect
           value={type}
-          onChange={(e) => setType(e.target.value)}
-          aria-label={t("allTypes")}
-        >
-          <option value="">{t("allTypes")}</option>
-          {types.map((ty) => (
-            <option key={ty} value={ty}>
-              {t(`type.${ty}`)}
-            </option>
-          ))}
-        </SelectNative>
-        <SelectNative
+          onChange={setType}
+          options={[
+            { value: "", label: t("allTypes") },
+            ...types.map((ty) => ({ value: ty, label: t(`type.${ty}`) })),
+          ]}
+        />
+        <CustomSelect
           value={hall}
-          onChange={(e) => setHall(e.target.value)}
-          aria-label={t("allHalls")}
-        >
-          <option value="">{t("allHalls")}</option>
-          {halls.map((h) => (
-            <option key={h} value={h}>
-              {h}
-            </option>
-          ))}
-        </SelectNative>
+          onChange={setHall}
+          options={[
+            { value: "", label: t("allHalls") },
+            ...halls.map((h) => ({ value: h, label: h })),
+          ]}
+        />
       </div>
 
       {/* Сессии */}

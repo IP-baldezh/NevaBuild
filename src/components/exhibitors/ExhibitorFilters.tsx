@@ -5,7 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { SelectNative } from "@/components/ui/select-native";
+import { CustomSelect } from "@/components/ui/custom-select";
 import { pick } from "@/lib/content";
 import type { Locale } from "@/i18n/routing";
 import type { ExhibitorCategory } from "@prisma/client";
@@ -51,44 +51,35 @@ export function ExhibitorFilters({
         />
       </div>
 
-      <SelectNative
-        defaultValue={params.get("category") ?? ""}
-        onChange={(e) => update("category", e.target.value)}
-        aria-label={t("allCategories")}
-      >
-        <option value="">{t("allCategories")}</option>
-        {categories.map((c) => (
-          <option key={c.id} value={c.slug}>
-            {pick(locale, c.titleRu, c.titleEn)}
-          </option>
-        ))}
-      </SelectNative>
+      <CustomSelect
+        value={params.get("category") ?? ""}
+        onChange={(v) => update("category", v)}
+        options={[
+          { value: "", label: t("allCategories") },
+          ...categories.map((c) => ({
+            value: c.slug,
+            label: pick(locale, c.titleRu, c.titleEn),
+          })),
+        ]}
+      />
 
-      <SelectNative
-        defaultValue={params.get("country") ?? ""}
-        onChange={(e) => update("country", e.target.value)}
-        aria-label={t("allCountries")}
-      >
-        <option value="">{t("allCountries")}</option>
-        {countries.map((c) => (
-          <option key={c} value={c}>
-            {c}
-          </option>
-        ))}
-      </SelectNative>
+      <CustomSelect
+        value={params.get("country") ?? ""}
+        onChange={(v) => update("country", v)}
+        options={[
+          { value: "", label: t("allCountries") },
+          ...countries.map((c) => ({ value: c, label: c })),
+        ]}
+      />
 
-      <SelectNative
-        defaultValue={params.get("status") ?? ""}
-        onChange={(e) => update("status", e.target.value)}
-        aria-label={t("allStatuses")}
-      >
-        <option value="">{t("allStatuses")}</option>
-        {STATUSES.map((s) => (
-          <option key={s} value={s}>
-            {t(`status.${s}`)}
-          </option>
-        ))}
-      </SelectNative>
+      <CustomSelect
+        value={params.get("status") ?? ""}
+        onChange={(v) => update("status", v)}
+        options={[
+          { value: "", label: t("allStatuses") },
+          ...STATUSES.map((s) => ({ value: s, label: t(`status.${s}`) })),
+        ]}
+      />
     </div>
   );
 }

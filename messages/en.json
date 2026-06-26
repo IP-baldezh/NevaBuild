@@ -345,6 +345,8 @@
     "consent": "I consent to the processing of my personal data",
     "offerConsent": "I accept the terms of the offer",
     "selectCategory": "Select a category",
+    "area": "Desired stand area",
+    "selectArea": "Select stand area",
     "successTitle": "Request sent",
     "successText": "Thank you! We will contact you shortly.",
     "errorTitle": "Submission error",
