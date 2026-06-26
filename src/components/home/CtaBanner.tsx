@@ -1,66 +1,86 @@
 "use client";
 
+import { useState } from "react";
 import { ArrowRight, Ticket } from "lucide-react";
 import { useLocale } from "next-intl";
-import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
+import type { ExhibitorCategory } from "@prisma/client";
+import { ExhibitorModal } from "@/components/modals/ExhibitorModal";
+import { VisitorModal } from "@/components/modals/VisitorModal";
 
-export function CtaBanner() {
+interface CtaBannerProps {
+  categories?: ExhibitorCategory[];
+}
+
+export function CtaBanner({ categories = [] }: CtaBannerProps) {
   const locale = useLocale() as Locale;
   const ru = locale === "ru";
+  const [visitorOpen, setVisitorOpen] = useState(false);
+  const [exhibitorOpen, setExhibitorOpen] = useState(false);
 
   return (
-    <section id="ticket" className="py-12 sm:py-20 bg-nb-dark relative overflow-hidden">
-      {/* Background glow */}
-      <div
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] opacity-10 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse, #a9ec46 0%, transparent 65%)" }}
-        aria-hidden
-      />
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-nb-lime-acid/40 to-transparent" />
-      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-nb-lime-acid/20 to-transparent" />
+    <>
+      <section id="ticket" className="py-12 sm:py-20 bg-nb-dark relative overflow-hidden">
+        {/* Background glow */}
+        <div
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] opacity-10 pointer-events-none"
+          style={{ background: "radial-gradient(ellipse, #a9ec46 0%, transparent 65%)" }}
+          aria-hidden
+        />
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-nb-lime-acid/40 to-transparent" />
+        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-nb-lime-acid/20 to-transparent" />
 
-      <div className="container-neva relative text-center">
-        <h2
-          className="font-black text-white leading-tight tracking-tight mb-6 max-w-[900px] mx-auto"
-          style={{ fontSize: "clamp(36px, 6vw, 80px)" }}
-        >
-          {ru ? "Станьте частью" : "Be part of"}
-          <br />
-          <span className="text-nb-lime-acid">{ru ? "NevaBuild 2027" : "NevaBuild 2027"}</span>
-        </h2>
-
-        <p
-          className="text-[15px] sm:text-[17px] text-white/50 max-w-[560px] mx-auto mb-8 sm:mb-12 leading-relaxed"
-          style={{ fontFamily: "var(--font-mulish)" }}
-        >
-          {ru
-            ? "Покажите свои решения профессиональной аудитории строительной индустрии. Присоединяйтесь к 500+ компаниям из 35 стран."
-            : "Showcase your solutions to a professional construction industry audience. Join 500+ companies from 35 countries."}
-        </p>
-
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4">
-          <Link
-            href="/tickets"
-            className="inline-flex items-center justify-center gap-3 font-bold text-[15px] sm:text-[16px] px-8 py-4 rounded-2xl transition-all duration-200 hover:-translate-y-1 touch-manipulation"
-            style={{
-              background: "linear-gradient(135deg, #a9ec46 0%, #8dd62e 100%)",
-              color: "#0d2d06",
-              boxShadow: "0 12px 40px rgba(169,236,70,0.28)",
-            }}
+        <div className="container-neva relative text-center">
+          <h2
+            className="font-black text-white leading-tight tracking-tight mb-6 max-w-[900px] mx-auto"
+            style={{ fontSize: "clamp(36px, 6vw, 80px)" }}
           >
-            <Ticket className="size-5" />
-            {ru ? "Получить бесплатный билет" : "Get a Free Ticket"}
-            <ArrowRight className="size-[18px]" />
-          </Link>
-          <Link
-            href="/exhibit"
-            className="inline-flex items-center justify-center gap-2.5 font-bold text-[15px] sm:text-[16px] border-2 border-white/20 hover:border-nb-lime-acid text-white hover:text-nb-lime-acid px-8 py-4 rounded-2xl transition-all duration-200 touch-manipulation"
+            {ru ? "Станьте частью" : "Be part of"}
+            <br />
+            <span className="text-nb-lime-acid">NevaBuild 2027</span>
+          </h2>
+
+          <p
+            className="text-[15px] sm:text-[17px] text-white/50 max-w-[560px] mx-auto mb-8 sm:mb-12 leading-relaxed"
+            style={{ fontFamily: "var(--font-mulish)" }}
           >
-            {ru ? "Участвовать как экспонент" : "Exhibit at NevaBuild"}
-          </Link>
+            {ru
+              ? "Покажите свои решения профессиональной аудитории строительной индустрии. Присоединяйтесь к 500+ компаниям из 35 стран."
+              : "Showcase your solutions to a professional construction industry audience. Join 500+ companies from 35 countries."}
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4">
+            <button
+              type="button"
+              onClick={() => setVisitorOpen(true)}
+              className="inline-flex items-center justify-center gap-3 font-bold text-[15px] sm:text-[16px] px-8 py-4 rounded-2xl transition-all duration-200 hover:-translate-y-1 touch-manipulation"
+              style={{
+                background: "linear-gradient(135deg, #a9ec46 0%, #8dd62e 100%)",
+                color: "#0d2d06",
+                boxShadow: "0 12px 40px rgba(169,236,70,0.28)",
+              }}
+            >
+              <Ticket className="size-5" />
+              {ru ? "Получить бесплатный билет" : "Get a Free Ticket"}
+              <ArrowRight className="size-[18px]" />
+            </button>
+            <button
+              type="button"
+              onClick={() => setExhibitorOpen(true)}
+              className="inline-flex items-center justify-center gap-2.5 font-bold text-[15px] sm:text-[16px] border-2 border-white/20 hover:border-nb-lime-acid text-white hover:text-nb-lime-acid px-8 py-4 rounded-2xl transition-all duration-200 touch-manipulation"
+            >
+              {ru ? "Участвовать как экспонент" : "Exhibit at NevaBuild"}
+            </button>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <VisitorModal open={visitorOpen} onClose={() => setVisitorOpen(false)} />
+      <ExhibitorModal
+        open={exhibitorOpen}
+        onClose={() => setExhibitorOpen(false)}
+        categories={categories}
+      />
+    </>
   );
 }

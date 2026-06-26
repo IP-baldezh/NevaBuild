@@ -16,12 +16,23 @@ export const participationSchema = z.object({
   email: z.email(emailMsg),
   website: optionalString,
   category: optionalString,
+  area: optionalString,
   message: optionalString,
   consent: z.boolean().refine((v) => v === true, consentMsg),
   // honeypot — должен оставаться пустым
   hp: z.string().optional(),
 });
 export type ParticipationInput = z.infer<typeof participationSchema>;
+
+/** Регистрация посетителя. */
+export const visitorSchema = z.object({
+  fullName: z.string().trim().min(2, required),
+  email: z.email(emailMsg),
+  phone: optionalString,
+  consent: z.boolean().refine((v) => v === true, consentMsg),
+  hp: z.string().optional(),
+});
+export type VisitorInput = z.infer<typeof visitorSchema>;
 
 /** Обратная связь. */
 export const contactSchema = z.object({

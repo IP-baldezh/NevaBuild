@@ -12,7 +12,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
-import { SelectNative } from "@/components/ui/select-native";
+import { CustomSelect } from "@/components/ui/custom-select";
+import { PhoneInput } from "@/components/ui/phone-input";
 import { FormField } from "./FormField";
 import { FormSuccess } from "./FormSuccess";
 import { pick } from "@/lib/content";
@@ -23,6 +24,7 @@ export function LeadForm({ categories }: { categories: ExhibitorCategory[] }) {
   const t = useTranslations("Forms");
   const tc = useTranslations("Common");
   const locale = useLocale() as Locale;
+  const ru = locale === "ru";
   const [done, setDone] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
 
@@ -77,7 +79,19 @@ export function LeadForm({ categories }: { categories: ExhibitorCategory[] }) {
           <Input id="fullName" {...register("fullName")} aria-invalid={!!errors.fullName} />
         </FormField>
         <FormField label={t("phone")} htmlFor="phone" required error={err("phone")}>
-          <Input id="phone" type="tel" {...register("phone")} aria-invalid={!!errors.phone} />
+          <Controller
+            control={control}
+            name="phone"
+            render={({ field }) => (
+              <PhoneInput
+                id="phone"
+                value={field.value ?? ""}
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                invalid={!!errors.phone}
+              />
+            )}
+          />
         </FormField>
         <FormField label={t("email")} htmlFor="email" required error={err("email")}>
           <Input id="email" type="email" {...register("email")} aria-invalid={!!errors.email} />
@@ -86,14 +100,22 @@ export function LeadForm({ categories }: { categories: ExhibitorCategory[] }) {
           <Input id="website" {...register("website")} placeholder="https://" />
         </FormField>
         <FormField label={t("category")} htmlFor="category" error={err("category")}>
-          <SelectNative id="category" {...register("category")} defaultValue="">
-            <option value="">{t("selectCategory")}</option>
-            {categories.map((c) => (
-              <option key={c.id} value={c.slug}>
-                {pick(locale, c.titleRu, c.titleEn)}
-              </option>
-            ))}
-          </SelectNative>
+          <Controller
+            control={control}
+            name="category"
+            render={({ field }) => (
+              <CustomSelect
+                value={field.value ?? ""}
+                onChange={field.onChange}
+                placeholder={t("selectCategory")}
+                options={categories.map((c) => ({
+                  value: c.slug,
+                  label: pick(locale, c.titleRu, c.titleEn),
+                }))}
+                invalid={!!errors.category}
+              />
+            )}
+          />
         </FormField>
       </div>
 
@@ -112,7 +134,18 @@ export function LeadForm({ categories }: { categories: ExhibitorCategory[] }) {
               aria-invalid={!!errors.consent}
               className="mt-0.5"
             />
-            <span>{t("consent")}</span>
+            <span>
+              {ru ? "Я согласен на " : "I agree to the "}
+              <a
+                href="/docs/personal-data-consent.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="underline underline-offset-2 hover:text-foreground transition-colors"
+              >
+                {ru ? "обработку персональных данных" : "processing of personal data"}
+              </a>
+            </span>
           </label>
         )}
       />
