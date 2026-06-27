@@ -25,7 +25,9 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   const isHome = pathname === "/";
-  const transparent = isHome && !scrolled;
+  const isDarkPage = (pathname as string).startsWith("/about");
+  const transparent = (isHome || isDarkPage) && !scrolled;
+  const darkScrolled = isDarkPage && scrolled;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -52,7 +54,9 @@ export function Header() {
           "fixed inset-x-0 top-0 z-50 transition-all duration-300",
           transparent
             ? "bg-transparent border-b border-white/10"
-            : "bg-background/95 backdrop-blur-md border-b border-border shadow-sm",
+            : darkScrolled
+              ? "bg-[#07100a]/85 backdrop-blur-md border-b border-white/10"
+              : "bg-background/95 backdrop-blur-md border-b border-border shadow-sm",
         )}
       >
         <div className="container-neva flex h-[72px] items-center justify-between gap-6">
