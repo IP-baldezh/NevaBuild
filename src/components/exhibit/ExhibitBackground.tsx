@@ -9,29 +9,29 @@ const ORB_STATES: Record<
     o2: { top: string; left: string; bg: string; opacity: number; scale: number };
   }
 > = {
-  "s-hero": {
+  "e-hero": {
     o1: { top: "10%", left: "10%", bg: "#12B669", opacity: 0.55, scale: 1.0 },
     o2: { top: "20%", left: "65%", bg: "#a9ec46", opacity: 0.28, scale: 0.8 },
   },
-  "s-stats": {
+  "e-benefits": {
     o1: { top: "30%", left: "4%", bg: "#a9ec46", opacity: 0.42, scale: 1.1 },
     o2: { top: "8%", left: "72%", bg: "#12B669", opacity: 0.38, scale: 0.9 },
   },
-  "s-cards": {
-    o1: { top: "42%", left: "28%", bg: "#12B669", opacity: 0.38, scale: 1.0 },
-    o2: { top: "12%", left: "58%", bg: "#a9ec46", opacity: 0.25, scale: 0.7 },
+  "e-formats": {
+    o1: { top: "42%", left: "28%", bg: "#12B669", opacity: 0.35, scale: 1.0 },
+    o2: { top: "12%", left: "58%", bg: "#a9ec46", opacity: 0.22, scale: 0.7 },
   },
-  "s-sections": {
-    o1: { top: "22%", left: "14%", bg: "#a9ec46", opacity: 0.42, scale: 1.0 },
-    o2: { top: "38%", left: "68%", bg: "#12B669", opacity: 0.4, scale: 1.1 },
+  "e-steps": {
+    o1: { top: "22%", left: "14%", bg: "#a9ec46", opacity: 0.4, scale: 1.0 },
+    o2: { top: "38%", left: "68%", bg: "#12B669", opacity: 0.38, scale: 1.1 },
   },
-  "s-cta": {
+  "e-form": {
     o1: { top: "18%", left: "22%", bg: "#a9ec46", opacity: 0.58, scale: 1.3 },
     o2: { top: "28%", left: "52%", bg: "#12B669", opacity: 0.5, scale: 1.2 },
   },
 };
 
-export function AboutBackground({ ids }: { ids: string[] }) {
+export function ExhibitBackground({ ids }: { ids: string[] }) {
   const o1 = useRef<HTMLDivElement>(null);
   const o2 = useRef<HTMLDivElement>(null);
 
@@ -62,7 +62,6 @@ export function AboutBackground({ ids }: { ids: string[] }) {
       });
     };
 
-    // Main scroll observer — updates orb positions/colors per section
     const scrollObs = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -76,21 +75,18 @@ export function AboutBackground({ ids }: { ids: string[] }) {
 
     sections.forEach((s) => scrollObs.observe(s));
 
-    // Exit observer — sentinel at end of page: fades orbs exactly when footer enters view
-    const sentinel = document.getElementById("about-end");
+    const sentinel = document.getElementById("exhibit-end");
     const exitObs = new IntersectionObserver(
       ([entry]) => {
         if (!entry) return;
         if (entry.isIntersecting) {
           fadeOut();
         } else if (entry.boundingClientRect.top > 0) {
-          // sentinel is below viewport — user scrolled back up into CTA
-          applyOrbs(ORB_STATES["s-cta"]);
+          applyOrbs(ORB_STATES["e-form"]);
         }
       },
       { threshold: 0 },
     );
-
     if (sentinel) exitObs.observe(sentinel);
 
     return () => {

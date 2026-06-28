@@ -25,9 +25,19 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   const isHome = pathname === "/";
-  const isDarkPage = (pathname as string).startsWith("/about");
+  const p = pathname as string;
+  const isDarkPage =
+    p.startsWith("/about") ||
+    p.startsWith("/exhibit") ||
+    p.startsWith("/visit") ||
+    p.startsWith("/contacts") ||
+    p.startsWith("/news") ||
+    p.startsWith("/exhibitors") ||
+    p.startsWith("/program") ||
+    p.startsWith("/tickets");
   const transparent = (isHome || isDarkPage) && !scrolled;
   const darkScrolled = isDarkPage && scrolled;
+  const useWhite = transparent || darkScrolled;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -61,7 +71,7 @@ export function Header() {
       >
         <div className="container-neva flex h-[72px] items-center justify-between gap-6">
           <Link href="/" aria-label="NEVA BUILD — на главную">
-            <Logo white={transparent} />
+            <Logo white={useWhite} />
           </Link>
 
           <nav
@@ -76,7 +86,7 @@ export function Header() {
                   href={item.href}
                   className={cn(
                     "font-semibold text-[14px] whitespace-nowrap px-3 py-2 rounded-lg transition-all duration-200",
-                    transparent
+                    useWhite
                       ? isActive
                         ? "text-white bg-white/15"
                         : "text-white/85 hover:text-white hover:bg-white/15"
@@ -92,12 +102,12 @@ export function Header() {
           </nav>
 
           <div className="hidden items-center gap-3 lg:flex flex-none">
-            <LanguageSwitcher transparent={transparent} />
+            <LanguageSwitcher transparent={useWhite} />
             <Link
               href="/exhibit"
               className={cn(
                 "inline-flex items-center justify-center gap-2 border px-6 py-3 rounded-xl text-[14px] font-bold transition-all duration-200",
-                transparent
+                useWhite
                   ? "border-white/40 text-white hover:border-white hover:bg-white/10"
                   : "border-nb-border text-nb-dark hover:border-nb-lime-acid hover:text-nb-green-dark hover:bg-nb-bg-light",
               )}
@@ -108,7 +118,7 @@ export function Header() {
               href="/tickets"
               className={cn(
                 "inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-[14px] font-bold transition-all duration-200 hover:-translate-y-0.5",
-                transparent
+                useWhite
                   ? "text-white shadow-[0_6px_20px_rgba(225,27,34,0.40)]"
                   : "text-white shadow-[0_4px_12px_rgba(225,27,34,0.25)]",
               )}
@@ -123,7 +133,7 @@ export function Header() {
             onClick={() => setOpen((v) => !v)}
             className={cn(
               "inline-flex size-10 items-center justify-center border lg:hidden transition-colors",
-              transparent
+              useWhite
                 ? "border-white/40 text-white hover:bg-white/15"
                 : "border-border text-foreground",
             )}

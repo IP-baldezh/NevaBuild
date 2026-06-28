@@ -212,7 +212,7 @@ function SectionCard({ Icon, num, label, sub, bg }: Omit<Section, "category">) {
 
       {/* Hover lime overlay */}
       <div
-        className="absolute inset-0 flex flex-col justify-end p-6 sm:p-8 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-20"
+        className="absolute inset-0 flex flex-col justify-end p-6 sm:p-8 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-20 rounded-3xl"
         style={{ background: "#a9ec46" }}
       >
         <div

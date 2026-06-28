@@ -95,6 +95,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       <AboutSectionsDark />
 
       <AboutCtaDark dateRange={dateRange} venue={ev.venue} city={ev.city} />
+      <div id="about-end" aria-hidden />
     </div>
   );
 }
