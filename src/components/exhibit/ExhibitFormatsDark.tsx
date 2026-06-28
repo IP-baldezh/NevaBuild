@@ -6,8 +6,10 @@ import { LayoutGrid, Sparkles, Handshake, Mic, Rocket, ArrowUpRight } from "luci
 import type { LucideIcon } from "lucide-react";
 import type { Locale } from "@/i18n/routing";
 
+type FormatKey = "standard" | "custom" | "partner" | "speaker" | "special";
+
 type Format = {
-  key: string;
+  key: FormatKey;
   Icon: LucideIcon;
   num: string;
   bg: string;
