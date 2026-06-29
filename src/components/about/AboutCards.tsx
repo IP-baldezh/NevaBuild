@@ -47,12 +47,9 @@ export function AboutCards() {
     <section className="py-12 sm:py-20" style={{ background: "#f4faf6" }}>
       <div className="container-neva">
         <div className="grid lg:grid-cols-2 gap-6">
-          {/* Left — green gradient (NEVA BUILD в цифрах) */}
           <div
             className="relative rounded-3xl p-7 sm:p-10 lg:p-12 overflow-hidden flex flex-col"
-            style={{
-              background: "linear-gradient(135deg, #12B669 0%, #a9ec46 55%, #d4f772 100%)",
-            }}
+            style={{ background: "linear-gradient(135deg, #12B669 0%, #a9ec46 55%, #d4f772 100%)" }}
           >
             <div
               className="absolute inset-0 pointer-events-none"
@@ -62,7 +59,6 @@ export function AboutCards() {
               }}
               aria-hidden
             />
-            {/* Decorative big number */}
             <div
               className="absolute right-6 bottom-6 font-black leading-none pointer-events-none select-none"
               style={{ fontSize: "clamp(80px, 12vw, 160px)", color: "rgba(13,45,6,0.06)" }}
@@ -70,7 +66,6 @@ export function AboutCards() {
             >
               №1
             </div>
-
             <span
               className="font-bold text-[13px] uppercase tracking-[3px] mb-6 relative z-10"
               style={{ color: "#E11B22" }}
@@ -135,7 +130,6 @@ export function AboutCards() {
             </div>
           </div>
 
-          {/* Right — white (Миссия) */}
           <div className="relative bg-white rounded-3xl p-7 sm:p-10 lg:p-12 overflow-hidden border border-[#e4efe8] flex flex-col">
             <div
               className="absolute top-0 right-0 w-[280px] h-[280px] opacity-[0.04] pointer-events-none"
@@ -187,14 +181,11 @@ export function AboutCards() {
                 </li>
               ))}
             </ul>
-            <div className="mt-auto flex flex-col sm:flex-row gap-3">
+            <div className="mt-auto">
               <Link
                 href="/exhibit"
                 className="inline-flex items-center justify-center gap-2 font-bold text-[14.5px] text-white px-6 py-3.5 rounded-xl transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5 touch-manipulation"
-                style={{
-                  background: "#E11B22",
-                  boxShadow: "0 8px 20px rgba(225,27,34,0.25)",
-                }}
+                style={{ background: "#E11B22", boxShadow: "0 8px 20px rgba(225,27,34,0.25)" }}
               >
                 {ru ? "Забронировать стенд" : "Book a Stand"}
                 <ArrowRight className="size-4" />

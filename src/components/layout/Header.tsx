@@ -36,7 +36,7 @@ export function Header() {
     p.startsWith("/program") ||
     p.startsWith("/tickets");
   const transparent = (isHome || isDarkPage) && !scrolled;
-  const darkScrolled = isDarkPage && scrolled;
+  const darkScrolled = (isDarkPage || isHome) && scrolled;
   const useWhite = transparent || darkScrolled;
 
   useEffect(() => {

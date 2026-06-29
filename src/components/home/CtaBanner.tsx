@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ArrowRight, Ticket } from "lucide-react";
 import { useLocale } from "next-intl";
+import { m } from "framer-motion";
 import type { Locale } from "@/i18n/routing";
 import type { ExhibitorCategory } from "@prisma/client";
 import { ExhibitorModal } from "@/components/modals/ExhibitorModal";
@@ -10,46 +11,77 @@ import { VisitorModal } from "@/components/modals/VisitorModal";
 
 interface CtaBannerProps {
   categories?: ExhibitorCategory[];
+  dateRange?: string;
+  venue?: string;
+  city?: string;
 }
 
-export function CtaBanner({ categories = [] }: CtaBannerProps) {
+export function CtaBanner({ categories = [], dateRange, venue, city }: CtaBannerProps) {
   const locale = useLocale() as Locale;
   const ru = locale === "ru";
   const [visitorOpen, setVisitorOpen] = useState(false);
   const [exhibitorOpen, setExhibitorOpen] = useState(false);
 
+  const meta = [dateRange, city, venue].filter(Boolean).join(" · ");
+
   return (
     <>
-      <section id="ticket" className="py-12 sm:py-20 bg-nb-dark relative overflow-hidden">
-        {/* Background glow */}
-        <div
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] opacity-10 pointer-events-none"
-          style={{ background: "radial-gradient(ellipse, #a9ec46 0%, transparent 65%)" }}
-          aria-hidden
-        />
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-nb-lime-acid/40 to-transparent" />
-        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-nb-lime-acid/20 to-transparent" />
-
-        <div className="container-neva relative text-center">
-          <h2
-            className="font-black text-white leading-tight tracking-tight mb-6 max-w-[900px] mx-auto"
-            style={{ fontSize: "clamp(36px, 6vw, 80px)" }}
+      <section
+        id="ticket"
+        className="relative z-10 min-h-screen flex flex-col justify-center items-center text-center"
+        style={{
+          paddingLeft: "10vw",
+          paddingRight: "10vw",
+          paddingTop: "6rem",
+          paddingBottom: "6rem",
+        }}
+      >
+        <div className="relative z-10 flex flex-col items-center">
+          <m.span
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-[11px] uppercase tracking-[0.32em] font-bold mb-6 block"
+            style={{ color: "#a9ec46", fontFamily: "var(--font-mulish)" }}
           >
-            {ru ? "Станьте частью" : "Be part of"}
-            <br />
-            <span className="text-nb-lime-acid">NevaBuild 2027</span>
-          </h2>
+            NEVA BUILD 2027
+          </m.span>
 
-          <p
-            className="text-[15px] sm:text-[17px] text-white/50 max-w-[560px] mx-auto mb-8 sm:mb-12 leading-relaxed"
-            style={{ fontFamily: "var(--font-mulish)" }}
+          <m.h2
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.08 }}
+            className="font-black text-white mb-10 max-w-4xl"
+            style={{
+              fontSize: "clamp(2.8rem, 7vw, 7.5rem)",
+              lineHeight: 0.93,
+              letterSpacing: "-0.04em",
+            }}
           >
-            {ru
-              ? "Покажите свои решения профессиональной аудитории строительной индустрии. Присоединяйтесь к 500+ компаниям из 35 стран."
-              : "Showcase your solutions to a professional construction industry audience. Join 500+ companies from 35 countries."}
-          </p>
+            {ru ? (
+              <>
+                Станьте частью
+                <br />
+                <span style={{ color: "#a9ec46" }}>главного</span> события.
+              </>
+            ) : (
+              <>
+                Be part of the
+                <br />
+                <span style={{ color: "#a9ec46" }}>main</span> event.
+              </>
+            )}
+          </m.h2>
 
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4">
+          <m.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.16 }}
+            className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 mb-10"
+          >
             <button
               type="button"
               onClick={() => setVisitorOpen(true)}
@@ -67,11 +99,25 @@ export function CtaBanner({ categories = [] }: CtaBannerProps) {
             <button
               type="button"
               onClick={() => setExhibitorOpen(true)}
-              className="inline-flex items-center justify-center gap-2.5 font-bold text-[15px] sm:text-[16px] border-2 border-white/20 hover:border-nb-lime-acid text-white hover:text-nb-lime-acid px-8 py-4 rounded-2xl transition-all duration-200 touch-manipulation"
+              className="inline-flex items-center justify-center gap-2.5 font-bold text-[15px] sm:text-[16px] border-2 px-8 py-4 rounded-2xl transition-all duration-200 touch-manipulation hover:border-white/40 hover:text-white"
+              style={{ borderColor: "rgba(255,255,255,0.18)", color: "rgba(255,255,255,0.65)" }}
             >
               {ru ? "Участвовать как экспонент" : "Exhibit at NevaBuild"}
             </button>
-          </div>
+          </m.div>
+
+          {meta && (
+            <m.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.28 }}
+              className="text-[13px] font-medium tracking-wide"
+              style={{ color: "rgba(255,255,255,0.22)", fontFamily: "var(--font-mulish)" }}
+            >
+              {meta}
+            </m.p>
+          )}
         </div>
       </section>
 

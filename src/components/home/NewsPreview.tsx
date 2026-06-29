@@ -3,18 +3,10 @@
 import { useLocale, useTranslations } from "next-intl";
 import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { pick } from "@/lib/content";
 import { formatDate } from "@/lib/format";
 import type { Locale } from "@/i18n/routing";
 import type { News } from "@prisma/client";
-
-const TAG_COLORS = [
-  "bg-nb-green/10 text-nb-green-dark",
-  "bg-brand-red/10 text-brand-red",
-  "bg-violet-500/10 text-violet-700",
-  "bg-amber-500/10 text-amber-700",
-];
 
 const TAG_LABELS_RU = ["Анонс", "Новость", "Деловая программа", "Участники"];
 const TAG_LABELS_EN = ["Announcement", "News", "Business Programme", "Participants"];
@@ -26,49 +18,56 @@ export function NewsPreview({ news }: { news: News[] }) {
   if (!news.length) return null;
 
   return (
-    <section id="news" className="py-12 sm:py-20 bg-white">
+    <section
+      id="news"
+      className="relative z-10 py-16 sm:py-24"
+      style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
+    >
       <div className="container-neva">
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-14">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 sm:mb-14">
           <div>
+            <span
+              className="text-[11px] uppercase tracking-[0.28em] mb-3 block font-bold"
+              style={{ color: "#a9ec46", fontFamily: "var(--font-mulish)" }}
+            >
+              {locale === "ru" ? "Актуальное" : "Latest"}
+            </span>
             <h2
-              className="font-black text-nb-dark leading-tight"
-              style={{ fontSize: "clamp(30px, 4vw, 50px)" }}
+              className="font-black text-white leading-tight"
+              style={{ fontSize: "clamp(28px, 4vw, 50px)" }}
             >
               {t("title")}
             </h2>
           </div>
-          <ScrollReveal>
-            <Link
-              href="/news"
-              className="inline-flex items-center gap-2 font-bold text-[14px] text-nb-green-dark hover:text-nb-lime-acid border-b border-nb-green/40 hover:border-nb-lime-acid pb-0.5 transition-all duration-200 self-start sm:self-auto"
-            >
-              {t("cta")}
-              <ArrowRight className="size-4" />
-            </Link>
-          </ScrollReveal>
+          <Link
+            href="/news"
+            className="inline-flex items-center gap-2 font-bold text-[14px] pb-0.5 transition-all duration-200 self-start sm:self-auto"
+            style={{ color: "#a9ec46", borderBottom: "1px solid rgba(169,236,70,0.4)" }}
+          >
+            {t("cta")}
+            <ArrowRight className="size-4" />
+          </Link>
         </div>
 
-        {/* Cards grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {news.slice(0, 3).map((n, i) => {
-            const tagColor = TAG_COLORS[i % TAG_COLORS.length];
             const tagLabel = TAG_LABELS[i % TAG_LABELS.length];
             return (
               <article
                 key={n.id}
-                className="group bg-white border border-nb-border hover:border-nb-lime-acid/50 rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-nb-green/8 cursor-pointer"
+                className="group rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+                style={{
+                  background: "rgba(255,255,255,0.04)",
+                  border: "1px solid rgba(255,255,255,0.07)",
+                }}
               >
-                {/* Image placeholder */}
                 <div
-                  className="h-48 flex items-center justify-center bg-nb-bg-light relative overflow-hidden"
-                  style={{
-                    background: "linear-gradient(135deg, #F4FAF6 0%, #EAF8F0 100%)",
-                  }}
+                  className="h-44 flex items-center justify-center relative overflow-hidden"
+                  style={{ background: "rgba(18,182,105,0.06)" }}
                 >
                   <span
-                    className="font-black text-black/12"
-                    style={{ fontSize: "clamp(3rem, 8vw, 5rem)" }}
+                    className="font-black"
+                    style={{ fontSize: "clamp(3rem, 8vw, 5rem)", color: "rgba(169,236,70,0.12)" }}
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
@@ -76,37 +75,45 @@ export function NewsPreview({ news }: { news: News[] }) {
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     style={{
                       background:
-                        "radial-gradient(ellipse at 70% 30%, rgba(18,182,105,0.12) 0%, transparent 70%)",
+                        "radial-gradient(ellipse at 70% 30%, rgba(169,236,70,0.08) 0%, transparent 70%)",
                     }}
                     aria-hidden
                   />
                 </div>
 
-                <div className="p-5 sm:p-7 flex flex-col flex-1 gap-3">
+                <div className="p-5 sm:p-6 flex flex-col flex-1 gap-3">
                   <div className="flex items-center gap-3">
                     <span
-                      className={`text-[11px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full ${tagColor}`}
+                      className="text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full"
+                      style={{ background: "rgba(169,236,70,0.12)", color: "#a9ec46" }}
                     >
                       {tagLabel}
                     </span>
-                    <time className="text-[12px] text-nb-muted">
+                    <time
+                      className="text-[12px]"
+                      style={{ color: "rgba(255,255,255,0.3)", fontFamily: "var(--font-mulish)" }}
+                    >
                       {formatDate(n.publishedAt ?? n.createdAt, locale)}
                     </time>
                   </div>
 
-                  <h3 className="font-black text-[17px] text-nb-dark group-hover:text-nb-lime-acid leading-snug transition-colors duration-200">
+                  <h3 className="font-black text-[16px] text-white group-hover:text-nb-lime-acid leading-snug transition-colors duration-200">
                     {pick(locale, n.titleRu, n.titleEn)}
                   </h3>
 
                   {(n.excerptRu || n.excerptEn) && (
-                    <p className="font-mulish text-[14px] text-nb-muted-dark leading-relaxed flex-1">
+                    <p
+                      className="text-[13px] leading-relaxed flex-1"
+                      style={{ color: "rgba(255,255,255,0.4)", fontFamily: "var(--font-mulish)" }}
+                    >
                       {pick(locale, n.excerptRu ?? "", n.excerptEn ?? "")}
                     </p>
                   )}
 
                   <Link
                     href={`/news/${n.slug}`}
-                    className="inline-flex items-center gap-2 font-bold text-[13px] text-nb-green-dark group-hover:text-nb-green mt-2 transition-colors"
+                    className="inline-flex items-center gap-2 font-bold text-[13px] mt-2 transition-colors"
+                    style={{ color: "rgba(169,236,70,0.7)" }}
                   >
                     {locale === "ru" ? "Читать далее" : "Read more"}
                     <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />

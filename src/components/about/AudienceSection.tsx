@@ -79,7 +79,6 @@ export function AudienceSection() {
   return (
     <section className="py-20 md:py-28 bg-white border-t border-[#e4efe8]">
       <div className="container-neva">
-        {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12 sm:mb-16">
           <div>
             <span
@@ -104,8 +103,6 @@ export function AudienceSection() {
               : "Construction and interior industry professionals from across the Northwest"}
           </p>
         </div>
-
-        {/* Editorial list — no fake sequence numbers */}
         <div className="flex flex-col">
           {audience.map(({ icon: Icon, title, desc }, i) => (
             <m.div
@@ -116,18 +113,12 @@ export function AudienceSection() {
               transition={{ duration: 0.35, delay: i * 0.06, ease: [0.21, 0.47, 0.32, 0.98] }}
               className="group flex items-center gap-5 sm:gap-8 py-5 sm:py-6 border-t border-[#e4efe8] first:border-t-0 hover:bg-[#f4faf6] -mx-4 px-4 sm:-mx-6 sm:px-6 rounded-xl transition-colors duration-200 cursor-default"
             >
-              {/* Icon — min 44×44px touch target */}
               <span
                 className="flex-none flex size-11 items-center justify-center rounded-xl transition-colors duration-200 group-hover:bg-[#12B669]/15"
                 style={{ background: "rgba(18,182,105,0.08)" }}
               >
-                <Icon
-                  className="size-5 transition-colors duration-200"
-                  style={{ color: "#12B669" }}
-                />
+                <Icon className="size-5" style={{ color: "#12B669" }} />
               </span>
-
-              {/* Content */}
               <div className="flex-1 min-w-0">
                 <h3 className="font-black text-[16px] sm:text-[18px] text-black mb-1 leading-snug">
                   {title}
@@ -139,8 +130,6 @@ export function AudienceSection() {
                   {desc}
                 </p>
               </div>
-
-              {/* Arrow — desktop only */}
               <span
                 className="flex-none font-bold text-[20px] text-black/10 group-hover:text-[#12B669] transition-colors duration-200 hidden sm:block"
                 aria-hidden
