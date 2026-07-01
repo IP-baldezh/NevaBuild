@@ -6,55 +6,67 @@ import type { Locale } from "@/i18n/routing";
 
 const REASONS_RU = [
   {
+    num: "01",
     title: "Крупнейшая площадка Северо-Запада",
-    desc: "60 000 м² экспозиционной площади в трёх павильонах Экспофорума — самый масштабный отраслевой смотр в регионе.",
+    desc: "60 000 м² экспозиции в трёх павильонах Экспофорума.",
   },
   {
+    num: "02",
     title: "Живой рынок за 4 дня",
-    desc: "Встречи с поставщиками, дистрибьюторами и производителями в режиме реального времени. Без посредников и онлайн-фильтров.",
+    desc: "Встречи с поставщиками и производителями без посредников.",
   },
   {
+    num: "03",
     title: "Деловая программа мирового уровня",
-    desc: "200+ форумов, круглых столов и мастер-классов. Спикеры — практикующие архитекторы, девелоперы, ведущие инженеры страны.",
+    desc: "200+ форумов, круглых столов и мастер-классов.",
   },
   {
+    num: "04",
     title: "Технологии будущего сегодня",
-    desc: "Зона инноваций с демонстрацией BIM-проектирования, роботизированных строительных систем и материалов нового поколения.",
+    desc: "BIM-проектирование, роботизированные системы, новые материалы.",
   },
   {
+    num: "05",
     title: "Нетворкинг с топ-аудиторией",
-    desc: "Платформа matchmaking соединяет участников ещё до открытия выставки. 80% экспонентов фиксируют партнёрства уже на этапе выставки.",
+    desc: "Matchmaking-платформа. 80% экспонентов заключают партнёрства.",
   },
   {
+    num: "06",
     title: "Международный формат",
-    desc: "Делегации из 70+ стран. Официальные национальные экспозиции Германии, Италии, Финляндии, Китая и других лидеров строительного рынка.",
+    desc: "Делегации из 70+ стран, национальные экспозиции мировых лидеров.",
   },
 ];
 
 const REASONS_EN = [
   {
+    num: "01",
     title: "Largest Venue in the Northwest",
-    desc: "60 000 m² of exhibition space across three pavilions at Expoforum — the region's most large-scale industry showcase.",
+    desc: "60 000 m² across three Expoforum pavilions.",
   },
   {
+    num: "02",
     title: "Live Market in 4 Days",
-    desc: "Meet suppliers, distributors and manufacturers in real time. No intermediaries, no online filters.",
+    desc: "Meet suppliers and manufacturers directly, no intermediaries.",
   },
   {
+    num: "03",
     title: "World-Class Business Programme",
-    desc: "200+ forums, roundtables and masterclasses. Speakers are practising architects, developers and leading engineers.",
+    desc: "200+ forums, roundtables and masterclasses.",
   },
   {
+    num: "04",
     title: "Tomorrow's Technologies Today",
-    desc: "An innovation zone showcasing BIM design, robotic construction systems and next-generation materials.",
+    desc: "BIM design, robotic systems and next-generation materials.",
   },
   {
+    num: "05",
     title: "Networking with Top Audience",
-    desc: "The matchmaking platform connects participants before the exhibition opens. 80% of exhibitors confirm partnerships during the event.",
+    desc: "Matchmaking platform. 80% of exhibitors close partnerships.",
   },
   {
+    num: "06",
     title: "International Format",
-    desc: "Delegations from 70+ countries. Official national expositions from Germany, Italy, Finland, China and other construction market leaders.",
+    desc: "Delegations from 70+ countries, national expositions worldwide.",
   },
 ];
 
@@ -64,20 +76,20 @@ export function WhyVisit() {
   const reasons = ru ? REASONS_RU : REASONS_EN;
 
   return (
-    <section
-      id="why-visit"
-      className="py-12 sm:py-20 overflow-hidden"
-      style={{
-        background: "linear-gradient(135deg, #12B669 0%, #a9ec46 55%, #d4f772 100%)",
-      }}
-    >
+    <section id="why-visit" className="relative z-10 py-16 sm:py-24">
       <div className="container-neva">
-        <div className="flex flex-col lg:flex-row gap-10 lg:gap-20">
-          {/* Left — sticky title */}
-          <div className="lg:w-[340px] flex-shrink-0">
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
+          {/* Left */}
+          <div className="lg:w-[320px] flex-shrink-0">
+            <span
+              className="text-[11px] uppercase tracking-[0.28em] mb-4 block font-bold"
+              style={{ color: "#a9ec46", fontFamily: "var(--font-mulish)" }}
+            >
+              {ru ? "Почему NevaBuild" : "Why NevaBuild"}
+            </span>
             <h2
-              className="font-black leading-tight mb-6 text-white"
-              style={{ fontSize: "clamp(32px, 4vw, 52px)" }}
+              className="font-black text-white leading-tight mb-6"
+              style={{ fontSize: "clamp(28px, 4vw, 52px)" }}
             >
               {ru ? (
                 <>
@@ -93,19 +105,26 @@ export function WhyVisit() {
                   <br />
                   to visit
                   <br />
-                  the exhibition
+                  the show
                 </>
               )}
             </h2>
-            <p className="font-mulish text-[15px] leading-relaxed mb-10 text-white/80">
+            <p
+              className="mb-10 leading-relaxed"
+              style={{
+                color: "rgba(255,255,255,0.45)",
+                fontFamily: "var(--font-mulish)",
+                fontSize: "15px",
+              }}
+            >
               {ru
-                ? "Каждый год NevaBuild задаёт тренды строительного рынка страны. Не упустите возможность быть в центре событий."
-                : "Every year NevaBuild sets the trends of the country's construction market. Don't miss your chance to be at the centre of it all."}
+                ? "Каждый год NevaBuild задаёт тренды строительного рынка. Не упустите возможность быть в центре событий."
+                : "Every year NevaBuild sets the trends of the construction market. Don't miss your chance to be at the centre."}
             </p>
             <Link
               href="/tickets"
-              className="inline-flex items-center justify-center gap-2 font-bold text-[14.5px] px-6 py-3.5 rounded-xl transition-all duration-200 hover:-translate-y-0.5 text-white w-full sm:w-auto touch-manipulation"
-              style={{ background: "#E11B22", boxShadow: "0 8px 24px rgba(225,27,34,0.35)" }}
+              className="inline-flex items-center justify-center gap-2 font-bold text-[14px] text-white px-6 py-3.5 rounded-xl transition-all duration-200 hover:-translate-y-0.5 w-full sm:w-auto"
+              style={{ background: "#E11B22", boxShadow: "0 8px 24px rgba(225,27,34,0.30)" }}
             >
               {ru ? "Зарегистрироваться бесплатно" : "Register for Free"}
             </Link>
@@ -113,22 +132,30 @@ export function WhyVisit() {
 
           {/* Right — 2×3 grid */}
           <div
-            className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-px rounded-2xl overflow-hidden"
-            style={{ background: "rgba(13,45,6,0.12)" }}
+            className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-px"
+            style={{ background: "rgba(255,255,255,0.06)" }}
           >
-            {reasons.map(({ title, desc }) => (
+            {reasons.map(({ num, title, desc }) => (
               <div
-                key={title}
-                className="p-6 sm:p-8 group transition-colors duration-300"
-                style={{
-                  background: "rgba(255,255,255,0.18)",
-                  backdropFilter: "blur(16px)",
-                  WebkitBackdropFilter: "blur(16px)",
-                  border: "1px solid rgba(255,255,255,0.30)",
-                }}
+                key={num}
+                className="p-6 sm:p-8 group transition-colors duration-300 hover:bg-white/[0.03]"
+                style={{ background: "#07100a" }}
               >
-                <h3 className="font-black text-[17px] text-white leading-snug mb-3">{title}</h3>
-                <p className="font-mulish text-[14px] leading-relaxed" style={{ color: "#0d2d06" }}>
+                <span
+                  className="block font-black mb-3 tabular-nums group-hover:text-nb-lime-acid transition-colors duration-300"
+                  style={{ fontSize: "clamp(28px, 3vw, 40px)", color: "rgba(169,236,70,0.25)" }}
+                >
+                  {num}
+                </span>
+                <h3 className="font-black text-white text-[16px] leading-snug mb-2">{title}</h3>
+                <p
+                  style={{
+                    color: "rgba(255,255,255,0.4)",
+                    fontFamily: "var(--font-mulish)",
+                    fontSize: "13px",
+                    lineHeight: "1.6",
+                  }}
+                >
                   {desc}
                 </p>
               </div>

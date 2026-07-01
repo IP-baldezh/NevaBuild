@@ -24,52 +24,65 @@ export function PartnersSection({ partners }: { partners: Partner[] }) {
   const doubled = [...STATIC_LOGOS, ...STATIC_LOGOS];
 
   return (
-    <section className="py-16 bg-nb-bg-light border-y border-nb-border overflow-hidden">
+    <section
+      className="relative z-10 py-16 overflow-hidden"
+      style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
+    >
       <div className="container-neva mb-10">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div>
-            <h2
-              className="font-black text-nb-dark mt-1"
-              style={{ fontSize: "clamp(20px, 2.5vw, 28px)" }}
-            >
-              {locale === "ru" ? "Генеральные партнёры и спонсоры" : "General Partners & Sponsors"}
-            </h2>
-          </div>
+          <span
+            className="text-[11px] uppercase tracking-[0.28em] font-bold block mb-1"
+            style={{ color: "#a9ec46", fontFamily: "var(--font-mulish)" }}
+          >
+            {locale === "ru" ? "Партнёры" : "Partners"}
+          </span>
+          <h2 className="font-black text-white" style={{ fontSize: "clamp(20px, 2.5vw, 28px)" }}>
+            {locale === "ru" ? "Генеральные партнёры и спонсоры" : "General Partners & Sponsors"}
+          </h2>
           <a
             href="#"
-            className="font-bold text-[13px] text-nb-green-dark hover:text-nb-lime-acid border-b border-nb-green/30 pb-0.5 transition-colors duration-200 self-start sm:self-auto"
+            className="font-bold text-[13px] pb-0.5 transition-colors duration-200 self-start sm:self-auto"
+            style={{ color: "#a9ec46", borderBottom: "1px solid rgba(169,236,70,0.4)" }}
           >
             {locale === "ru" ? "Стать партнёром" : "Become a Partner"}
           </a>
         </div>
       </div>
 
-      {/* Scrolling ticker */}
       <div className="relative">
-        {/* Fade edges */}
-        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-nb-bg-light to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-nb-bg-light to-transparent z-10 pointer-events-none" />
+        <div
+          className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
+          style={{ background: "linear-gradient(to right, #07100a, transparent)" }}
+        />
+        <div
+          className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
+          style={{ background: "linear-gradient(to left, #07100a, transparent)" }}
+        />
 
         <div className="flex animate-scroll-x" style={{ width: "max-content" }}>
           {doubled.map(({ name, src }, i) => (
             <div
               key={`${name}-${i}`}
-              className="flex-shrink-0 mx-3 flex items-center justify-center h-16 bg-white border border-nb-border rounded-xl hover:border-nb-lime-acid hover:shadow-md transition-all duration-200 cursor-pointer overflow-hidden"
-              style={{ width: "160px", padding: "0" }}
+              className="flex-shrink-0 mx-3 flex items-center justify-center h-14 rounded-xl transition-all duration-200 cursor-pointer overflow-hidden"
+              style={{
+                width: "160px",
+                background: "rgba(255,255,255,0.05)",
+                border: "1px solid rgba(255,255,255,0.08)",
+              }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={src}
                 alt={name}
-                className="w-full h-full object-contain p-2"
+                className="w-full h-full object-contain p-3"
                 draggable={false}
-                style={{ width: "160px", padding: "0" }}
+                style={{ filter: "brightness(0) invert(1)", opacity: 0.55 }}
                 onError={(e) => {
                   const target = e.currentTarget;
                   target.style.display = "none";
                   const parent = target.parentElement;
                   if (parent) {
-                    parent.innerHTML = `<span class="text-xs font-bold text-nb-muted-dark uppercase tracking-wider px-2 text-center">${name}</span>`;
+                    parent.innerHTML = `<span style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);text-align:center;padding:0 8px;letter-spacing:0.1em">${name}</span>`;
                   }
                 }}
               />
@@ -78,7 +91,6 @@ export function PartnersSection({ partners }: { partners: Partner[] }) {
         </div>
       </div>
 
-      {/* DB partners grid — only company logos, no person names */}
       {partners.filter((p) => p.logoUrl).length > 0 && (
         <div className="container-neva mt-10">
           <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3">
@@ -87,7 +99,11 @@ export function PartnersSection({ partners }: { partners: Partner[] }) {
               .map((p) => (
                 <div
                   key={p.id}
-                  className="flex items-center justify-center h-14 bg-white border border-nb-border rounded-xl overflow-hidden"
+                  className="flex items-center justify-center h-14 rounded-xl overflow-hidden"
+                  style={{
+                    background: "rgba(255,255,255,0.05)",
+                    border: "1px solid rgba(255,255,255,0.08)",
+                  }}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
@@ -95,6 +111,7 @@ export function PartnersSection({ partners }: { partners: Partner[] }) {
                     alt={p.name}
                     className="w-full h-full object-contain p-2"
                     draggable={false}
+                    style={{ filter: "brightness(0) invert(1)", opacity: 0.55 }}
                   />
                 </div>
               ))}

@@ -12,15 +12,15 @@ import type { ProgramDayWithSessions } from "@/server/services/program";
 const ZONE_COLORS = ["#E11B22", "#12B669", "#0066cc", "#7c3aed", "#f59e0b"];
 
 const TYPE_COLORS: Record<string, string> = {
-  lecture: "bg-teal-50 text-teal-700",
-  workshop: "bg-orange-50 text-orange-700",
-  conference: "bg-blue-50 text-blue-700",
-  panel: "bg-violet-50 text-violet-700",
-  ceremony: "bg-emerald-50 text-emerald-700",
-  presentation: "bg-sky-50 text-sky-700",
-  networking: "bg-pink-50 text-pink-700",
-  exhibition: "bg-gray-100 text-gray-700",
-  default: "bg-gray-100 text-gray-600",
+  lecture: "text-teal-300",
+  workshop: "text-orange-300",
+  conference: "text-blue-300",
+  panel: "text-violet-300",
+  ceremony: "text-emerald-300",
+  presentation: "text-sky-300",
+  networking: "text-pink-300",
+  exhibition: "text-gray-300",
+  default: "text-gray-400",
 };
 
 function typeColor(type: string): string {
@@ -61,13 +61,23 @@ export function ProgramPreview({ days }: { days: ProgramDayWithSessions[] }) {
   if (!days.length) return null;
 
   return (
-    <section id="program" className="py-12 sm:py-20 bg-nb-bg-light">
+    <section
+      id="program"
+      className="relative z-10 py-12 sm:py-20"
+      style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
+    >
       <div className="container-neva">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10">
           <div>
+            <span
+              className="text-[11px] uppercase tracking-[0.28em] mb-3 block font-bold"
+              style={{ color: "#a9ec46", fontFamily: "var(--font-mulish)" }}
+            >
+              {ru ? "Деловая программа" : "Business Programme"}
+            </span>
             <h2
-              className="font-black text-nb-dark leading-tight"
+              className="font-black text-white leading-tight"
               style={{ fontSize: "clamp(30px,4vw,50px)" }}
             >
               {ru ? (
@@ -87,8 +97,8 @@ export function ProgramPreview({ days }: { days: ProgramDayWithSessions[] }) {
           </div>
           <Link
             href="/program"
-            className="hidden sm:inline-flex items-center gap-2 font-bold text-[14px] hover:text-nb-lime-acid border-b hover:border-nb-lime-acid pb-0.5 transition-all duration-200 self-start sm:self-auto"
-            style={{ color: "#E11B22", borderColor: "rgba(18,182,105,0.4)" }}
+            className="hidden sm:inline-flex items-center gap-2 font-bold text-[14px] pb-0.5 transition-all duration-200 self-start sm:self-auto"
+            style={{ color: "#a9ec46", borderBottom: "1px solid rgba(169,236,70,0.4)" }}
           >
             {ru ? "Полная программа" : "Full programme"}
             <ArrowRight className="size-[14px]" />
@@ -98,11 +108,13 @@ export function ProgramPreview({ days }: { days: ProgramDayWithSessions[] }) {
         {/* Zone / Hall selector */}
         {halls.length > 0 && (
           <div className="mb-6">
-            <p className="font-mulish text-[11px] text-nb-muted uppercase tracking-[0.14em] mb-3 font-bold">
+            <p
+              className="text-[11px] uppercase tracking-[0.14em] mb-3 font-bold"
+              style={{ color: "rgba(255,255,255,0.3)", fontFamily: "var(--font-mulish)" }}
+            >
               {ru ? "Выберите зону" : "Select zone"}
             </p>
             <div className="flex flex-wrap gap-2">
-              {/* All zones */}
               {(() => {
                 const active = activeHall === null;
                 return (
@@ -112,17 +124,15 @@ export function ProgramPreview({ days }: { days: ProgramDayWithSessions[] }) {
                     onClick={() => setActiveHall(null)}
                     className="flex items-center gap-2 font-bold text-[13.5px] px-4 py-2 rounded-xl border transition-all duration-200"
                     style={{
-                      background: active ? "#16221C" : "white",
-                      color: active ? "white" : "#16221C",
-                      borderColor: active ? "#16221C" : "#e4efe8",
-                      boxShadow: active ? "0 4px 14px rgba(22,34,28,0.22)" : "none",
+                      background: active ? "rgba(169,236,70,0.15)" : "rgba(255,255,255,0.04)",
+                      color: active ? "#a9ec46" : "rgba(255,255,255,0.5)",
+                      borderColor: active ? "rgba(169,236,70,0.4)" : "rgba(255,255,255,0.08)",
                     }}
                   >
                     {ru ? "Все зоны" : "All zones"}
                   </button>
                 );
               })()}
-              {/* Each hall */}
               {halls.map((hall, i) => {
                 const color = ZONE_COLORS[i % ZONE_COLORS.length];
                 const active = activeHall === hall;
@@ -133,15 +143,14 @@ export function ProgramPreview({ days }: { days: ProgramDayWithSessions[] }) {
                     onClick={() => setActiveHall(active ? null : hall)}
                     className="flex items-center gap-2 font-bold text-[13.5px] px-4 py-2 rounded-xl border transition-all duration-200"
                     style={{
-                      background: active ? color : "white",
-                      color: active ? "white" : "#16221C",
-                      borderColor: active ? color : "#e4efe8",
-                      boxShadow: active ? `0 4px 14px ${color}33` : "none",
+                      background: active ? `${color}22` : "rgba(255,255,255,0.04)",
+                      color: active ? color : "rgba(255,255,255,0.5)",
+                      borderColor: active ? `${color}66` : "rgba(255,255,255,0.08)",
                     }}
                   >
                     <span
                       className="w-2 h-2 rounded-full flex-shrink-0"
-                      style={{ background: active ? "rgba(255,255,255,0.7)" : color }}
+                      style={{ background: color, opacity: active ? 1 : 0.5 }}
                     />
                     {hall}
                   </button>
@@ -158,11 +167,16 @@ export function ProgramPreview({ days }: { days: ProgramDayWithSessions[] }) {
               key={day.id}
               type="button"
               onClick={() => setActiveDayIdx(i)}
-              className={`flex-shrink-0 font-bold text-[14px] px-5 py-2.5 rounded-xl transition-all duration-200 ${
+              className="flex-shrink-0 font-bold text-[14px] px-5 py-2.5 rounded-xl border transition-all duration-200"
+              style={
                 activeDayIdx === i
-                  ? "bg-nb-dark text-white shadow-lg shadow-nb-dark/20"
-                  : "bg-white text-nb-dark border border-nb-border hover:border-nb-dark/40"
-              }`}
+                  ? { background: "#a9ec46", color: "#0d2d06", borderColor: "#a9ec46" }
+                  : {
+                      background: "rgba(255,255,255,0.04)",
+                      color: "rgba(255,255,255,0.55)",
+                      borderColor: "rgba(255,255,255,0.08)",
+                    }
+              }
             >
               {pick(locale, day.titleRu, day.titleEn)}
             </button>
@@ -171,7 +185,10 @@ export function ProgramPreview({ days }: { days: ProgramDayWithSessions[] }) {
 
         {/* Session cards */}
         {visibleSessions.length === 0 ? (
-          <div className="font-mulish text-center py-16 text-nb-muted">
+          <div
+            className="text-center py-16"
+            style={{ color: "rgba(255,255,255,0.3)", fontFamily: "var(--font-mulish)" }}
+          >
             {activeHall
               ? ru
                 ? `В этот день в зоне «${activeHall}» событий нет`
@@ -191,49 +208,59 @@ export function ProgramPreview({ days }: { days: ProgramDayWithSessions[] }) {
               return (
                 <div
                   key={s.id}
-                  className="bg-white border border-nb-border hover:border-nb-lime-acid/40 rounded-[1rem] p-5 sm:p-6 flex gap-5 transition-all duration-200 hover:shadow-md group"
+                  className="rounded-[1rem] p-5 sm:p-6 flex gap-5 transition-all duration-200 group"
+                  style={{
+                    background: "rgba(255,255,255,0.04)",
+                    border: "1px solid rgba(255,255,255,0.07)",
+                  }}
                 >
-                  {/* Time */}
                   <div className="flex-shrink-0 w-16 text-right">
-                    <span className="font-black text-[18px] text-nb-dark">
+                    <span className="font-black text-[18px] text-white">
                       {formatTime(s.startTime, locale)}
                     </span>
                   </div>
 
-                  <div className="w-px bg-nb-border flex-shrink-0" />
+                  <div
+                    className="w-px flex-shrink-0"
+                    style={{ background: "rgba(255,255,255,0.08)" }}
+                  />
 
-                  {/* Content */}
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-wrap items-center gap-2 mb-2">
-                      <span className={`font-bold text-[11px] px-2.5 py-1 rounded-md ${tColor}`}>
+                      <span className={`font-bold text-[11px] uppercase tracking-wide ${tColor}`}>
                         {s.type}
                       </span>
                       {!activeHall && hall && hallColor && (
                         <span
-                          className="font-bold text-[11px] px-2.5 py-1 rounded-md"
-                          style={{
-                            background: `${hallColor}14`,
-                            color: hallColor,
-                          }}
+                          className="font-bold text-[11px] px-2.5 py-0.5 rounded-md"
+                          style={{ background: `${hallColor}18`, color: hallColor }}
                         >
                           {hall}
                         </span>
                       )}
                     </div>
-                    <h3 className="font-bold text-[16px] text-nb-dark leading-snug mb-3 group-hover:text-nb-green transition-colors duration-200">
+                    <h3 className="font-bold text-[16px] text-white leading-snug mb-3 group-hover:text-nb-lime-acid transition-colors duration-200">
                       {pick(locale, s.titleRu, s.titleEn)}
                     </h3>
                     <div className="flex flex-wrap gap-4">
                       {hall && (
-                        <div className="flex items-center gap-1.5 text-nb-muted">
+                        <div
+                          className="flex items-center gap-1.5"
+                          style={{ color: "rgba(255,255,255,0.35)" }}
+                        >
                           <MapPin className="size-[13px]" />
-                          <span className="font-mulish text-[13px]">{hall}</span>
+                          <span style={{ fontFamily: "var(--font-mulish)", fontSize: "13px" }}>
+                            {hall}
+                          </span>
                         </div>
                       )}
                       {s.speakers && s.speakers.length > 0 && (
-                        <div className="flex items-center gap-1.5 text-nb-muted">
+                        <div
+                          className="flex items-center gap-1.5"
+                          style={{ color: "rgba(255,255,255,0.35)" }}
+                        >
                           <Users className="size-[13px]" />
-                          <span className="font-mulish text-[13px]">
+                          <span style={{ fontFamily: "var(--font-mulish)", fontSize: "13px" }}>
                             {s.speakers.map((sp) => pick(locale, sp.nameRu, sp.nameEn)).join(", ")}
                           </span>
                         </div>

@@ -1,19 +1,21 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Building2, Users, Hammer, Compass, ShoppingCart, Briefcase } from "lucide-react";
 import type { Locale } from "@/i18n/routing";
 import { buildAlternates } from "@/lib/seo";
-import { Link } from "@/i18n/navigation";
-import { Button } from "@/components/ui/button";
-import { GradientSection } from "@/components/ui/gradient-section";
-import { SectionTitle } from "@/components/ui/section-title";
-import { PageHero } from "@/components/layout/PageHero";
-import { StatsGrid, type StatItem } from "@/components/home/StatsGrid";
-import { SectionsGrid } from "@/components/home/SectionsGrid";
 import { getEventSettings, localizeEvent } from "@/server/services/event";
-import { getExhibitorCategories } from "@/server/services/exhibitors";
+import { formatDateRange } from "@/lib/format";
+
+import { AboutBackground } from "@/components/about/AboutBackground";
+import { AboutHero } from "@/components/about/AboutHero";
+import { AboutStatsDark } from "@/components/about/AboutStatsDark";
+import { AboutForWhomDark } from "@/components/about/AboutForWhomDark";
+import { AboutSectionsDark } from "@/components/about/AboutSectionsDark";
+import { AboutCtaDark } from "@/components/about/AboutCtaDark";
+import type { StatItem } from "@/components/home/StatsGrid";
 
 export const revalidate = 300;
+
+const SECTION_IDS = ["s-hero", "s-stats", "s-cards", "s-sections", "s-cta"];
 
 export async function generateMetadata({
   params,
@@ -29,113 +31,71 @@ export async function generateMetadata({
   };
 }
 
-const AUDIENCE = [
-  { key: "architects", icon: Compass },
-  { key: "designers", icon: Building2 },
-  { key: "developers", icon: Briefcase },
-  { key: "builders", icon: Hammer },
-  { key: "buyers", icon: ShoppingCart },
-  { key: "owners", icon: Users },
-] as const;
-
 export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale as Locale);
-  const t = await getTranslations({ locale: locale as Locale, namespace: "AboutPage" });
-  const tAbout = await getTranslations({ locale: locale as Locale, namespace: "About" });
+
+  const tAboutPage = await getTranslations({ locale: locale as Locale, namespace: "AboutPage" });
   const tStats = await getTranslations({ locale: locale as Locale, namespace: "Stats" });
-  const tc = await getTranslations({ locale: locale as Locale, namespace: "Common" });
 
   const settings = await getEventSettings();
   const ev = localizeEvent(settings, locale as Locale);
-  const categories = await getExhibitorCategories();
 
+  const dateRange = formatDateRange(ev.dateStart, ev.dateEnd, locale as Locale);
   const sqm = locale === "ru" ? " м²" : " m²";
+
   const stats: StatItem[] = [
-    { value: ev.visitorCount, suffix: "+", label: tStats("visitors"), locale },
-    { value: ev.exhibitorCount, suffix: "+", label: tStats("companies"), locale },
-    { value: ev.areaSize, suffix: sqm, label: tStats("area"), locale },
-    { value: ev.programEventsCount, suffix: "+", label: tStats("events"), locale },
-    { value: ev.programDays, suffix: "", label: tStats("days"), locale },
+    {
+      value: ev.visitorCount,
+      suffix: "+",
+      label: tStats("visitors"),
+      sub: locale === "ru" ? "за 4 дня" : "over 4 days",
+      locale,
+    },
+    {
+      value: ev.exhibitorCount,
+      suffix: "+",
+      label: tStats("companies"),
+      sub: locale === "ru" ? "из 35 стран" : "from 35 countries",
+      locale,
+    },
+    {
+      value: ev.areaSize,
+      suffix: sqm,
+      label: tStats("area"),
+      sub: locale === "ru" ? "в 3 павильонах" : "in 3 pavilions",
+      locale,
+    },
+    {
+      value: ev.programEventsCount,
+      suffix: "+",
+      label: tStats("events"),
+      sub: locale === "ru" ? "форумы и мастер-классы" : "forums & masterclasses",
+      locale,
+    },
+    {
+      value: ev.programDays,
+      suffix: "",
+      label: tStats("days"),
+      sub: locale === "ru" ? "деловой программы" : "business programme",
+      locale,
+    },
   ];
 
   return (
-    <>
-      <PageHero title={t("title")} lead={t("lead")} />
+    <div className="relative" style={{ background: "#07100a" }}>
+      <AboutBackground ids={SECTION_IDS} />
 
-      <GradientSection variant="plain">
-        <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-center">
-          <div>
-            <SectionTitle
-              label={tAbout("label")}
-              title={t("descriptionTitle")}
-              description={tAbout("text")}
-            />
-          </div>
-          <StatsGridCompact />
-        </div>
-        <div className="mt-12">
-          <StatsGrid items={stats} />
-        </div>
-      </GradientSection>
+      <AboutHero lead={tAboutPage("lead")} dateRange={dateRange} venue={ev.venue} city={ev.city} />
 
-      <GradientSection variant="muted">
-        <SectionTitle align="center" title={t("audienceTitle")} className="mb-10" />
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-          {AUDIENCE.map(({ key, icon: Icon }) => (
-            <div
-              key={key}
-              className="flex flex-col items-center gap-3 rounded-2xl border bg-card p-6 text-center"
-            >
-              <span className="flex size-12 items-center justify-center rounded-xl bg-secondary text-brand-red">
-                <Icon className="size-6" />
-              </span>
-              <span className="text-sm font-semibold">{t(`audience.${key}`)}</span>
-            </div>
-          ))}
-        </div>
-      </GradientSection>
+      <AboutStatsDark stats={stats} />
 
-      <GradientSection variant="plain">
-        <SectionsGrid categories={categories} />
-      </GradientSection>
+      <AboutForWhomDark />
 
-      <GradientSection variant="muted">
-        <div className="mx-auto max-w-3xl text-center">
-          <SectionTitle align="center" title={t("whyCity")} description={t("whyCityText")} />
-        </div>
-      </GradientSection>
+      <AboutSectionsDark />
 
-      <GradientSection variant="dark">
-        <div className="flex flex-col items-center gap-6 text-center">
-          <h2 className="text-balance text-3xl font-extrabold text-white sm:text-4xl">
-            {tAbout("title")}
-          </h2>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <Button asChild size="lg">
-              <Link href="/tickets">{tc("getTicket")}</Link>
-            </Button>
-            <Button asChild size="lg" variant="accent">
-              <Link href="/exhibit">{tc("bookStand")}</Link>
-            </Button>
-          </div>
-        </div>
-      </GradientSection>
-    </>
-  );
-}
-
-function StatsGridCompact() {
-  return (
-    <div className="ring-outline relative aspect-square overflow-hidden rounded-3xl bg-neva-gradient p-8">
-      <div className="flex h-full items-end">
-        <span className="text-3xl font-extrabold leading-tight text-brand-black">
-          NEVA BUILD
-          <span className="block text-base font-semibold text-brand-black/60">
-            Saint Petersburg · Expoforum
-          </span>
-        </span>
-      </div>
+      <AboutCtaDark dateRange={dateRange} venue={ev.venue} city={ev.city} />
+      <div id="about-end" aria-hidden />
     </div>
   );
 }
