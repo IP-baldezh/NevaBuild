@@ -38,7 +38,23 @@ export function AboutStatsDark({ stats }: Props) {
             className="font-black text-white leading-[0.93] tracking-[-0.04em] mb-6"
             style={{ fontSize: "clamp(2.4rem, 4.5vw, 5.5rem)" }}
           >
-            {ru ? "Цифры,\nкоторые\nговорят сами." : "Numbers\nthat speak\nfor themselves."}
+            {ru ? (
+              <>
+                Цифры,
+                <br />
+                которые
+                <br />
+                говорят сами.
+              </>
+            ) : (
+              <>
+                Numbers
+                <br />
+                that speak
+                <br />
+                for themselves.
+              </>
+            )}
           </m.h2>
 
           <m.p
@@ -98,11 +114,11 @@ export function AboutStatsDark({ stats }: Props) {
                 className="font-black"
                 style={{
                   fontSize: "clamp(1.8rem, 2.8vw, 3rem)",
-                  color: s.value > 0 ? "#a9ec46" : "rgba(255,255,255,0.15)",
+                  color: s.value != null ? "#a9ec46" : "rgba(255,255,255,0.15)",
                   lineHeight: 1,
                 }}
               >
-                {s.value > 0 ? `${s.value.toLocaleString(locale)}${s.suffix}` : "—"}
+                {s.value != null ? `${s.value.toLocaleString(locale)}${s.suffix}` : "—"}
               </span>
             </m.div>
           ))}

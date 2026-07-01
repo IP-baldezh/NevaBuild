@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Loader2 } from "lucide-react";
 
 import { contactSchema, type ContactInput } from "@/lib/validations/forms";
@@ -12,12 +12,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
+import { PhoneInput } from "@/components/ui/phone-input";
 import { FormField } from "./FormField";
 import { FormSuccess } from "./FormSuccess";
+import type { Locale } from "@/i18n/routing";
 
 export function ContactForm() {
   const t = useTranslations("Forms");
   const tc = useTranslations("Common");
+  const locale = useLocale() as Locale;
+  const ru = locale === "ru";
   const [done, setDone] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
 
@@ -72,7 +76,19 @@ export function ContactForm() {
         </FormField>
       </div>
       <FormField label={t("phone")} htmlFor="c-phone" error={err("phone")}>
-        <Input id="c-phone" type="tel" {...register("phone")} />
+        <Controller
+          control={control}
+          name="phone"
+          render={({ field }) => (
+            <PhoneInput
+              id="c-phone"
+              value={field.value ?? ""}
+              onChange={field.onChange}
+              onBlur={field.onBlur}
+              invalid={!!errors.phone}
+            />
+          )}
+        />
       </FormField>
       <FormField label={t("message")} htmlFor="c-message" required error={err("message")}>
         <Textarea
@@ -94,7 +110,18 @@ export function ContactForm() {
               aria-invalid={!!errors.consent}
               className="mt-0.5"
             />
-            <span>{t("consent")}</span>
+            <span>
+              {ru ? "Я согласен на " : "I agree to the "}
+              <a
+                href="/docs/personal-data-consent.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="underline underline-offset-2 hover:text-foreground transition-colors"
+              >
+                {ru ? "обработку персональных данных" : "processing of personal data"}
+              </a>
+            </span>
           </label>
         )}
       />

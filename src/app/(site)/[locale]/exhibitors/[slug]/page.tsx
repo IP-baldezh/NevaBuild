@@ -213,8 +213,8 @@ export default async function ExhibitorPage({
                     <a
                       key={href}
                       href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      target={href.startsWith("http") ? "_blank" : undefined}
+                      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
                       className="flex items-center gap-3 text-sm font-semibold transition-colors hover:text-[#a9ec46]"
                       style={{ color: "rgba(255,255,255,0.6)" }}
                     >

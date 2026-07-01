@@ -36,18 +36,20 @@ export async function generateMetadata({
 }
 
 const TYPE_COLOR: Record<string, string> = {
+  PLENARY: "rgba(169,236,70,0.12)",
+  MASTERCLASS: "rgba(255,200,0,0.1)",
   LECTURE: "rgba(18,182,105,0.12)",
   DISCUSSION: "rgba(169,236,70,0.1)",
   WORKSHOP: "rgba(225,27,34,0.12)",
   PRESENTATION: "rgba(255,255,255,0.08)",
-  NETWORKING: "rgba(255,200,0,0.1)",
 };
 const TYPE_TEXT: Record<string, string> = {
+  PLENARY: "#a9ec46",
+  MASTERCLASS: "#f5c842",
   LECTURE: "#12B669",
   DISCUSSION: "#a9ec46",
   WORKSHOP: "#E11B22",
   PRESENTATION: "rgba(255,255,255,0.5)",
-  NETWORKING: "#f5c842",
 };
 
 export default async function SessionPage({

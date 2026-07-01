@@ -36,7 +36,19 @@ export function AboutCtaDark({ dateRange, venue, city }: Props) {
         className="font-black text-white leading-[0.93] tracking-[-0.04em] mb-10 max-w-4xl"
         style={{ fontSize: "clamp(2.8rem, 7vw, 7.5rem)" }}
       >
-        {ru ? "Станьте частью\nглавного события." : "Be part of\nthe main event."}
+        {ru ? (
+          <>
+            Станьте частью
+            <br />
+            главного события.
+          </>
+        ) : (
+          <>
+            Be part of
+            <br />
+            the main event.
+          </>
+        )}
       </m.h2>
 
       <m.div

@@ -70,7 +70,19 @@ export function AboutForWhomDark() {
         className="font-black text-white leading-[0.93] tracking-[-0.04em] mb-12"
         style={{ fontSize: "clamp(2.4rem, 4.5vw, 5.5rem)" }}
       >
-        {ru ? "Для кого\nвыставка." : "Who is it\nfor."}
+        {ru ? (
+          <>
+            Для кого
+            <br />
+            выставка.
+          </>
+        ) : (
+          <>
+            Who is it
+            <br />
+            for.
+          </>
+        )}
       </m.h2>
 
       <div className="grid md:grid-cols-2 gap-6">
