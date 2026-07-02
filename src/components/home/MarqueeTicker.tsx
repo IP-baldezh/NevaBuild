@@ -24,7 +24,7 @@ export function MarqueeTicker({ className }: { className?: string }) {
         className="py-[13px] overflow-hidden"
         style={{
           background:
-            "linear-gradient(135deg, rgb(18, 182, 105) 0%, rgb(169, 236, 70) 55%, rgb(212, 247, 114) 100%)",
+            "linear-gradient(135deg, #a9ec46 0%, rgb(169, 236, 70) 55%, rgb(212, 247, 114) 100%)",
         }}
       >
         <Marquee speed="normal" pauseOnHover={false}>

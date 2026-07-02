@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { buildAlternates } from "@/lib/seo";
 import { ProgramView } from "@/components/program/ProgramView";
+import { ProgramSponsors } from "@/components/program/ProgramSponsors";
 import { getProgramDays } from "@/server/services/program";
 import { DarkBackground } from "@/components/layout/DarkBackground";
 import { DarkPageHero } from "@/components/layout/DarkPageHero";
@@ -44,7 +45,8 @@ export default async function ProgramPage({ params }: { params: Promise<{ locale
         className="relative z-10 py-16 border-t"
         style={{ borderColor: "rgba(255,255,255,0.06)" }}
       >
-        <div className="container-neva">
+        <div className="container-neva space-y-10">
+          <ProgramSponsors ru={locale === "ru"} />
           <Reveal>
             <ProgramView days={days} />
           </Reveal>

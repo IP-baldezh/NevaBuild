@@ -38,7 +38,7 @@ export async function generateMetadata({
 const TYPE_COLOR: Record<string, string> = {
   PLENARY: "rgba(169,236,70,0.12)",
   MASTERCLASS: "rgba(255,200,0,0.1)",
-  LECTURE: "rgba(18,182,105,0.12)",
+  LECTURE: "rgba(169,236,70,0.12)",
   DISCUSSION: "rgba(169,236,70,0.1)",
   WORKSHOP: "rgba(225,27,34,0.12)",
   PRESENTATION: "rgba(255,255,255,0.08)",
@@ -46,7 +46,7 @@ const TYPE_COLOR: Record<string, string> = {
 const TYPE_TEXT: Record<string, string> = {
   PLENARY: "#a9ec46",
   MASTERCLASS: "#f5c842",
-  LECTURE: "#12B669",
+  LECTURE: "#a9ec46",
   DISCUSSION: "#a9ec46",
   WORKSHOP: "#E11B22",
   PRESENTATION: "rgba(255,255,255,0.5)",
@@ -119,7 +119,7 @@ export default async function SessionPage({
                   className="inline-flex items-center gap-1.5 text-sm font-semibold"
                   style={{ color: "rgba(255,255,255,0.5)" }}
                 >
-                  <Icon className="size-4" style={{ color: "#12B669" }} />
+                  <Icon className="size-4" style={{ color: "#a9ec46" }} />
                   {value}
                 </span>
               ))}
@@ -171,7 +171,7 @@ export default async function SessionPage({
                     >
                       <div
                         className="flex size-14 shrink-0 items-center justify-center rounded-full text-lg font-black"
-                        style={{ background: "rgba(18,182,105,0.15)", color: "#12B669" }}
+                        style={{ background: "rgba(169,236,70,0.15)", color: "#a9ec46" }}
                       >
                         {pick(lc, sp.nameRu, sp.nameEn).charAt(0)}
                       </div>

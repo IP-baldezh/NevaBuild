@@ -195,7 +195,7 @@ export function SectorsCarousel({ categories }: { categories: ExhibitorCategory[
 
         <FeatureCarousel
           features={finalFeatures}
-          accentColor="#12B669"
+          accentColor="#a9ec46"
           panelBackground="linear-gradient(135deg, #00f0ff 0%, #00ff88 45%, #aaff00 100%)"
           chipTextColor="#E11B22"
           badgeText="NevaBuild 2027"

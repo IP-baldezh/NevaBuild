@@ -114,10 +114,10 @@ export function AudienceSection() {
               className="group flex items-center gap-5 sm:gap-8 py-5 sm:py-6 border-t border-[#e4efe8] first:border-t-0 hover:bg-[#f4faf6] -mx-4 px-4 sm:-mx-6 sm:px-6 rounded-xl transition-colors duration-200 cursor-default"
             >
               <span
-                className="flex-none flex size-11 items-center justify-center rounded-xl transition-colors duration-200 group-hover:bg-[#12B669]/15"
-                style={{ background: "rgba(18,182,105,0.08)" }}
+                className="flex-none flex size-11 items-center justify-center rounded-xl transition-colors duration-200 group-hover:bg-[#a9ec46]/15"
+                style={{ background: "rgba(169,236,70,0.08)" }}
               >
-                <Icon className="size-5" style={{ color: "#12B669" }} />
+                <Icon className="size-5" style={{ color: "#a9ec46" }} />
               </span>
               <div className="flex-1 min-w-0">
                 <h3 className="font-black text-[16px] sm:text-[18px] text-black mb-1 leading-snug">
@@ -131,7 +131,7 @@ export function AudienceSection() {
                 </p>
               </div>
               <span
-                className="flex-none font-bold text-[20px] text-black/10 group-hover:text-[#12B669] transition-colors duration-200 hidden sm:block"
+                className="flex-none font-bold text-[20px] text-black/10 group-hover:text-[#a9ec46] transition-colors duration-200 hidden sm:block"
                 aria-hidden
               >
                 →

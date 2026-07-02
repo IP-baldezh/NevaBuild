@@ -9,11 +9,11 @@
 export const EVENT_DEFAULTS = {
   titleRu: "Международная строительно-интерьерная выставка и форум",
   titleEn: "International Building & Interior Exhibition and Forum",
-  // Дата редактируется в админке. В мокапах — 13–15 апреля 2027.
-  dateStart: "2027-04-13T00:00:00.000Z",
-  dateEnd: "2027-04-15T00:00:00.000Z",
-  venueRu: "КВЦ «Экспофорум»",
-  venueEn: "Expoforum",
+  // Дата редактируется в админке. В мокапах — 22–24 апреля 2027.
+  dateStart: "2027-04-22T00:00:00.000Z",
+  dateEnd: "2027-04-24T00:00:00.000Z",
+  venueRu: "КВЦ «Экспофорум», Павильон H",
+  venueEn: "Expoforum, Pavilion H",
   cityRu: "Санкт-Петербург",
   cityEn: "Saint Petersburg",
   phone: "+7 495 423 39 33",

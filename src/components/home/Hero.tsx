@@ -12,7 +12,7 @@ import type { Locale } from "@/i18n/routing";
 const SLIDE_MS = 6500;
 const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
-const EVENT_DATE = new Date("2027-03-18T10:00:00");
+const EVENT_DATE = new Date("2027-04-22T09:00:00");
 
 function pad(n: number) {
   return String(n).padStart(2, "0");
@@ -102,7 +102,7 @@ export function Hero({ dateStart, dateEnd, venue, city }: HeroProps) {
       overlay:
         "linear-gradient(90deg, rgba(10,18,12,0.62) 0%, rgba(10,18,12,0.38) 60%, rgba(10,18,12,0.08) 100%)",
       accentGlow:
-        "radial-gradient(ellipse 50% 70% at 5% 50%, rgba(18,182,105,0.22) 0%, transparent 60%)",
+        "radial-gradient(ellipse 50% 70% at 5% 50%, rgba(169,236,70,0.22) 0%, transparent 60%)",
       label: ru ? "САНКТ-ПЕТЕРБУРГ · ЭКСПОФОРУМ" : "SAINT-PETERSBURG · EXPOFORUM",
       line1: "NEVA",
       line2: "BUILD",
@@ -120,7 +120,7 @@ export function Hero({ dateStart, dateEnd, venue, city }: HeroProps) {
       overlay:
         "linear-gradient(90deg, rgba(8,12,20,0.65) 0%, rgba(8,12,20,0.40) 55%, rgba(8,12,20,0.08) 100%)",
       accentGlow:
-        "radial-gradient(ellipse 40% 60% at 5% 60%, rgba(18,182,105,0.15) 0%, transparent 55%)",
+        "radial-gradient(ellipse 40% 60% at 5% 60%, rgba(169,236,70,0.15) 0%, transparent 55%)",
       label: ru
         ? "500+ КОМПАНИЙ · 25 000 м² · 35 СТРАН"
         : "500+ COMPANIES · 25 000 m² · 35 COUNTRIES",
@@ -250,7 +250,7 @@ export function Hero({ dateStart, dateEnd, venue, city }: HeroProps) {
         className="max-sm:hidden absolute left-0 top-0 bottom-0 w-[3px]"
         style={{
           background:
-            "linear-gradient(to bottom, transparent 0%, #12B669 35%, #12B669 65%, transparent 100%)",
+            "linear-gradient(to bottom, transparent 0%, #a9ec46 35%, #a9ec46 65%, transparent 100%)",
         }}
         aria-hidden
       />
@@ -277,8 +277,8 @@ export function Hero({ dateStart, dateEnd, venue, city }: HeroProps) {
                 <div
                   className="inline-flex items-center gap-2 mb-5 px-3 py-1.5 rounded-full"
                   style={{
-                    background: "rgba(18,182,105,0.12)",
-                    border: "1px solid rgba(18,182,105,0.28)",
+                    background: "rgba(169,236,70,0.12)",
+                    border: "1px solid rgba(169,236,70,0.28)",
                     opacity,
                   }}
                 >
@@ -302,7 +302,7 @@ export function Hero({ dateStart, dateEnd, venue, city }: HeroProps) {
                     <span
                       key={i}
                       className="block"
-                      style={{ color: i === slide.accentLine ? "#12B669" : "#fff" }}
+                      style={{ color: i === slide.accentLine ? "#a9ec46" : "#fff" }}
                     >
                       {word}
                     </span>

@@ -93,12 +93,12 @@ export function AboutForWhomDark() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.15 }}
           className="rounded-3xl p-8 md:p-10 flex flex-col gap-6"
-          style={{ background: "rgba(18,182,105,0.07)", border: "1px solid rgba(18,182,105,0.20)" }}
+          style={{ background: "rgba(169,236,70,0.07)", border: "1px solid rgba(169,236,70,0.20)" }}
         >
           <div>
             <span
               className="text-xs uppercase tracking-[0.16em] font-bold"
-              style={{ color: "#12B669" }}
+              style={{ color: "#a9ec46" }}
             >
               {ru ? "Посетителям" : "For visitors"}
             </span>
@@ -123,7 +123,7 @@ export function AboutForWhomDark() {
               >
                 <span
                   className="mt-[6px] size-[6px] rounded-full flex-shrink-0"
-                  style={{ background: "#12B669" }}
+                  style={{ background: "#a9ec46" }}
                 />
                 {item}
               </m.li>

@@ -104,7 +104,7 @@ export function ForWhom({ categories = [] }: ForWhomProps) {
             >
               <div
                 className="absolute top-0 left-0 right-0 h-[3px] rounded-t-3xl"
-                style={{ background: "linear-gradient(90deg, #12B669, #a9ec46)" }}
+                style={{ background: "linear-gradient(90deg, #a9ec46, #a9ec46)" }}
               />
               <span
                 className="text-[11px] font-bold uppercase tracking-[0.22em] mb-6"

@@ -130,7 +130,7 @@ export function ExhibitorModal({ open, onClose, categories = [] }: ExhibitorModa
           <div className="flex flex-col items-center text-center py-10">
             <div
               className="w-16 h-16 rounded-full flex items-center justify-center mb-5 flex-shrink-0"
-              style={{ background: "linear-gradient(135deg, #12B669 0%, #a9ec46 100%)" }}
+              style={{ background: "linear-gradient(135deg, #a9ec46 0%, #a9ec46 100%)" }}
             >
               <svg
                 className="w-8 h-8 text-white"

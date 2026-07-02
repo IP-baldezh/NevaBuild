@@ -10,13 +10,13 @@ import type { ExhibitorWithCategories } from "@/server/services/exhibitors";
 
 const STATUS_COLOR: Record<string, string> = {
   EXHIBITOR: "rgba(255,255,255,0.1)",
-  PARTNER: "rgba(18,182,105,0.15)",
+  PARTNER: "rgba(169,236,70,0.15)",
   SPONSOR: "rgba(225,27,34,0.15)",
   AMBASSADOR: "rgba(169,236,70,0.12)",
 };
 const STATUS_TEXT: Record<string, string> = {
   EXHIBITOR: "rgba(255,255,255,0.5)",
-  PARTNER: "#12B669",
+  PARTNER: "#a9ec46",
   SPONSOR: "#E11B22",
   AMBASSADOR: "#a9ec46",
 };
@@ -87,7 +87,7 @@ export function ExhibitorCardDark({ exhibitor }: { exhibitor: ExhibitorWithCateg
       >
         {(city || country) && (
           <span className="inline-flex items-center gap-1.5">
-            <MapPin className="size-3.5" style={{ color: "#12B669" }} />
+            <MapPin className="size-3.5" style={{ color: "#a9ec46" }} />
             {[city, country].filter(Boolean).join(", ")}
           </span>
         )}

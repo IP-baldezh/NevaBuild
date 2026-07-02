@@ -23,7 +23,7 @@ export function NewsCardDark({ item }: { item: News }) {
     >
       <div
         className="relative aspect-[16/10] overflow-hidden"
-        style={{ background: "rgba(18,182,105,0.06)" }}
+        style={{ background: "rgba(169,236,70,0.06)" }}
       >
         {item.coverImageUrl ? (
           <Image

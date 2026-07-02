@@ -32,7 +32,7 @@ const wrap = (min: number, max: number, v: number) => {
 
 export function FeatureCarousel({
   features,
-  accentColor = "#12B669",
+  accentColor = "#a9ec46",
   panelBackground,
   chipTextColor,
   badgeText = "NevaBuild 2027",

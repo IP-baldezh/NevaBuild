@@ -292,7 +292,7 @@ export function PhoneInput({ onChange, onBlur, invalid, className, id }: PhoneIn
         >
           <div
             className="h-[3px] w-full"
-            style={{ background: "linear-gradient(90deg, #12B669, #a9ec46)" }}
+            style={{ background: "linear-gradient(90deg, #a9ec46, #a9ec46)" }}
             aria-hidden
           />
           <div className="max-h-60 overflow-y-auto py-1.5">

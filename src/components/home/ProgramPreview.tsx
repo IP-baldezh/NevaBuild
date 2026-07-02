@@ -9,7 +9,7 @@ import { formatTime } from "@/lib/format";
 import type { Locale } from "@/i18n/routing";
 import type { ProgramDayWithSessions } from "@/server/services/program";
 
-const ZONE_COLORS = ["#E11B22", "#12B669", "#0066cc", "#7c3aed", "#f59e0b"];
+const ZONE_COLORS = ["#E11B22", "#a9ec46", "#0066cc", "#7c3aed", "#f59e0b"];
 
 const TYPE_COLORS: Record<string, string> = {
   lecture: "text-teal-300",

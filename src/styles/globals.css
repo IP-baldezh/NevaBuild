@@ -58,11 +58,12 @@
   --font-mono: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   --font-manrope: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   --font-mulish: var(--font-mulish-var), ui-sans-serif, system-ui, sans-serif;
+  --font-seenonim: "Seenonim", var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
 
   /* NevaBuild 2.0 design palette */
   --color-nb-dark: #16221c;
   --color-nb-dark-deep: #0f1813;
-  --color-nb-green: #12b669;
+  --color-nb-green: #a9ec46;
   --color-nb-green-muted: #5fe0a2;
   --color-nb-green-dark: #e11b22;
   --color-nb-lime-acid: #a9ec46;
@@ -136,6 +137,17 @@
   --sidebar-ring: oklch(0.66 0.16 154);
 }
 
+/* ---------- Seenonim display font ---------- */
+@font-face {
+  font-family: "Seenonim";
+  src:
+    url("/fonts/seenonim-v1.otf") format("opentype"),
+    url("/fonts/seenonim-v1.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -147,6 +159,10 @@
   body {
     @apply bg-background text-foreground antialiased;
     text-rendering: optimizeLegibility;
+  }
+  h1,
+  h2 {
+    font-family: var(--font-seenonim);
   }
   ::selection {
     background: #a9ec46;
