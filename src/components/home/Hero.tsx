@@ -12,7 +12,7 @@ import type { Locale } from "@/i18n/routing";
 const SLIDE_MS = 6500;
 const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
-const EVENT_DATE = new Date("2027-03-18T10:00:00");
+const EVENT_DATE = new Date("2027-04-22T09:00:00");
 
 function pad(n: number) {
   return String(n).padStart(2, "0");
