@@ -10,7 +10,7 @@ const CARDS_RU = [
     icon: Zap,
     title: "Инновации в действии",
     desc: "Живые демонстрации BIM-проектирования, роботизированных систем и материалов нового поколения. Технологии, которые уже меняют отрасль.",
-    color: "#12B669",
+    color: "#a9ec46",
   },
   {
     icon: Users2,
@@ -31,7 +31,7 @@ const CARDS_EN = [
     icon: Zap,
     title: "Innovation in Action",
     desc: "Live demonstrations of BIM design, robotic systems and next-generation materials. Technologies that are already reshaping the industry.",
-    color: "#12B669",
+    color: "#a9ec46",
   },
   {
     icon: Users2,

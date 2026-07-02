@@ -63,7 +63,7 @@ export function NewsPreview({ news }: { news: News[] }) {
               >
                 <div
                   className="h-44 flex items-center justify-center relative overflow-hidden"
-                  style={{ background: "rgba(18,182,105,0.06)" }}
+                  style={{ background: "rgba(169,236,70,0.06)" }}
                 >
                   <span
                     className="font-black"

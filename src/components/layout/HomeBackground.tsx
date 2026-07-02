@@ -13,36 +13,36 @@ const STATES: Record<
   }
 > = {
   hero: {
-    o1: { top: "8%", left: "4%", bg: "#12B669", opacity: 0.5, scale: 1.0 },
+    o1: { top: "8%", left: "4%", bg: "#a9ec46", opacity: 0.5, scale: 1.0 },
     o2: { top: "20%", left: "60%", bg: "#a9ec46", opacity: 0.25, scale: 0.85 },
   },
   stats: {
     o1: { top: "35%", left: "2%", bg: "#a9ec46", opacity: 0.4, scale: 1.1 },
-    o2: { top: "10%", left: "70%", bg: "#12B669", opacity: 0.32, scale: 0.9 },
+    o2: { top: "10%", left: "70%", bg: "#a9ec46", opacity: 0.32, scale: 0.9 },
   },
   "for-whom": {
-    o1: { top: "45%", left: "55%", bg: "#12B669", opacity: 0.38, scale: 1.0 },
+    o1: { top: "45%", left: "55%", bg: "#a9ec46", opacity: 0.38, scale: 1.0 },
     o2: { top: "15%", left: "8%", bg: "#a9ec46", opacity: 0.28, scale: 0.8 },
   },
   sectors: {
     o1: { top: "22%", left: "12%", bg: "#a9ec46", opacity: 0.42, scale: 1.05 },
-    o2: { top: "40%", left: "65%", bg: "#12B669", opacity: 0.38, scale: 1.0 },
+    o2: { top: "40%", left: "65%", bg: "#a9ec46", opacity: 0.38, scale: 1.0 },
   },
   "why-visit": {
-    o1: { top: "30%", left: "48%", bg: "#12B669", opacity: 0.44, scale: 1.1 },
+    o1: { top: "30%", left: "48%", bg: "#a9ec46", opacity: 0.44, scale: 1.1 },
     o2: { top: "12%", left: "18%", bg: "#a9ec46", opacity: 0.3, scale: 0.9 },
   },
   program: {
     o1: { top: "18%", left: "62%", bg: "#a9ec46", opacity: 0.36, scale: 1.0 },
-    o2: { top: "42%", left: "5%", bg: "#12B669", opacity: 0.4, scale: 1.05 },
+    o2: { top: "42%", left: "5%", bg: "#a9ec46", opacity: 0.4, scale: 1.05 },
   },
   news: {
-    o1: { top: "25%", left: "30%", bg: "#12B669", opacity: 0.42, scale: 1.1 },
+    o1: { top: "25%", left: "30%", bg: "#a9ec46", opacity: 0.42, scale: 1.1 },
     o2: { top: "50%", left: "58%", bg: "#a9ec46", opacity: 0.32, scale: 0.95 },
   },
   ticket: {
     o1: { top: "20%", left: "20%", bg: "#a9ec46", opacity: 0.55, scale: 1.25 },
-    o2: { top: "30%", left: "52%", bg: "#12B669", opacity: 0.48, scale: 1.15 },
+    o2: { top: "30%", left: "52%", bg: "#a9ec46", opacity: 0.48, scale: 1.15 },
   },
 };
 
@@ -126,7 +126,7 @@ export function HomeBackground({ sentinelId }: { sentinelId: string }) {
           height: "60vh",
           top: "8%",
           left: "4%",
-          background: "#12B669",
+          background: "#a9ec46",
           opacity: 0.5,
           filter: "blur(90px)",
           mixBlendMode: "screen",

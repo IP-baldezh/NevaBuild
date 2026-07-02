@@ -84,7 +84,7 @@ export function CustomSelect({
         >
           <div
             className="h-[3px]"
-            style={{ background: "linear-gradient(90deg, #12B669, #a9ec46)" }}
+            style={{ background: "linear-gradient(90deg, #a9ec46, #a9ec46)" }}
           />
           <ul role="listbox" className="py-2 px-1.5 max-h-60 overflow-y-auto">
             {options.map((option) => {

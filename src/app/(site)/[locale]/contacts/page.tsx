@@ -65,7 +65,7 @@ export default async function ContactsPage({ params }: { params: Promise<{ local
                 >
                   {ev.city}
                   <br />
-                  <span style={{ color: "#12B669" }}>{ev.venue}</span>
+                  <span style={{ color: "#a9ec46" }}>{ev.venue}</span>
                 </h2>
                 <div className="space-y-5">
                   {[
@@ -83,11 +83,11 @@ export default async function ContactsPage({ params }: { params: Promise<{ local
                       <div
                         className="size-9 rounded-xl flex items-center justify-center flex-shrink-0"
                         style={{
-                          background: "rgba(18,182,105,0.1)",
-                          border: "1px solid rgba(18,182,105,0.2)",
+                          background: "rgba(169,236,70,0.1)",
+                          border: "1px solid rgba(169,236,70,0.2)",
                         }}
                       >
-                        <Icon className="size-4" style={{ color: "#12B669" }} />
+                        <Icon className="size-4" style={{ color: "#a9ec46" }} />
                       </div>
                       <div>
                         <p
@@ -137,7 +137,7 @@ export default async function ContactsPage({ params }: { params: Promise<{ local
                           target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-1.5 text-sm font-semibold transition-colors hover:text-[#a9ec46]"
-                          style={{ color: "#12B669" }}
+                          style={{ color: "#a9ec46" }}
                         >
                           <Globe className="size-3.5" />
                           {d}

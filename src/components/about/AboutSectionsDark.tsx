@@ -8,8 +8,7 @@ import {
   Layers,
   Palette,
   Wrench,
-  Leaf,
-  Wifi,
+  Sofa,
   SquareDashedBottom,
   ArrowUpRight,
   ArrowRight,
@@ -19,13 +18,14 @@ import {
 import type { LucideIcon } from "lucide-react";
 import type { Locale } from "@/i18n/routing";
 
-type Category = "all" | "materials" | "design";
+type Category = "all" | "materials" | "solutions";
 
 type Section = {
   Icon: LucideIcon;
   num: string;
   label: string;
   sub: string;
+  description: string;
   bg: string;
   category: Exclude<Category, "all">;
 };
@@ -35,49 +35,51 @@ const SECTIONS_RU: Section[] = [
     Icon: Layers,
     num: "01",
     label: "Строительные материалы",
-    sub: "Конструкции · Отделка · Покрытия",
+    sub: "Конструкции · Кровля · Утеплители · Гидроизоляция",
+    description:
+      "Фундамент любого объекта: стеновые и кровельные материалы, пиломатериалы, металлопрокат, сухие смеси и гидроизоляция. Для прорабов, закупщиков и застройщиков.",
     bg: "linear-gradient(150deg, #1e3a2b 0%, #0a1510 100%)",
     category: "materials",
   },
   {
     Icon: Palette,
     num: "02",
-    label: "Интерьер и дизайн",
-    sub: "Мебель · Освещение · Текстиль",
+    label: "Отделочные материалы",
+    sub: "Штукатурки · Краски · Плитка · Фасадные панели",
+    description:
+      "Финишная отделка, формирующая облик интерьеров и фасадов: декоративные штукатурки, краски, обои, керамика, лепнина. Для дизайнеров, архитекторов и отделочных бригад.",
     bg: "linear-gradient(150deg, #1a2e38 0%, #0a1510 100%)",
-    category: "design",
-  },
-  {
-    Icon: Wrench,
-    num: "03",
-    label: "Инженерные системы",
-    sub: "HVAC · Электрика · Водоснабжение",
-    bg: "linear-gradient(150deg, #2a3818 0%, #0a1510 100%)",
     category: "materials",
-  },
-  {
-    Icon: Leaf,
-    num: "04",
-    label: "Ландшафт и благоустройство",
-    sub: "Озеленение · Мощение · Малые формы",
-    bg: "linear-gradient(150deg, #1e3820 0%, #0a1510 100%)",
-    category: "design",
-  },
-  {
-    Icon: Wifi,
-    num: "05",
-    label: "Умный дом и технологии",
-    sub: "IoT · Автоматизация · Безопасность",
-    bg: "linear-gradient(150deg, #20183a 0%, #0a1510 100%)",
-    category: "design",
   },
   {
     Icon: SquareDashedBottom,
-    num: "06",
-    label: "Окна, двери и фасады",
-    sub: "Профили · Остекление · Сэндвич-панели",
+    num: "03",
+    label: "Окна, двери, пол",
+    sub: "Остекление · Двери · Напольные покрытия",
+    description:
+      "Светопрозрачные конструкции, входные и межкомнатные двери с полным набором фурнитуры, а также все типы напольных покрытий — от паркетной доски до ПВХ-плит.",
     bg: "linear-gradient(150deg, #18283a 0%, #0a1510 100%)",
     category: "materials",
+  },
+  {
+    Icon: Wrench,
+    num: "04",
+    label: "Инженерные решения",
+    sub: "HVAC · Электрика · Водоснабжение · Умный дом",
+    description:
+      "Технологическое ядро выставки: отопление, вентиляция, водоснабжение, электрика, насосное оборудование и решения для «Умного дома». Для проектировщиков и инженеров.",
+    bg: "linear-gradient(150deg, #2a3818 0%, #0a1510 100%)",
+    category: "solutions",
+  },
+  {
+    Icon: Sofa,
+    num: "05",
+    label: "Интерьерные решения",
+    sub: "Мебель · Освещение · Текстиль · Декор",
+    description:
+      "Мебель (корпусная и мягкая), системы хранения, дизайнерский свет, текстиль, ковры, декор и арт-объекты для жилых и общественных интерьеров.",
+    bg: "linear-gradient(150deg, #20183a 0%, #0a1510 100%)",
+    category: "solutions",
   },
 ];
 
@@ -86,65 +88,67 @@ const SECTIONS_EN: Section[] = [
     Icon: Layers,
     num: "01",
     label: "Building Materials",
-    sub: "Structures · Finishing · Coatings",
+    sub: "Structures · Roofing · Insulation · Waterproofing",
+    description:
+      "The foundation of any structure: wall and roofing materials, lumber, rolled metal, dry mixes, and waterproofing. For construction managers, procurement specialists, and developers.",
     bg: "linear-gradient(150deg, #1e3a2b 0%, #0a1510 100%)",
     category: "materials",
   },
   {
     Icon: Palette,
     num: "02",
-    label: "Interior & Design",
-    sub: "Furniture · Lighting · Textiles",
+    label: "Finishing Materials",
+    sub: "Plasters · Paints · Tiles · Facade Panels",
+    description:
+      "Finishing that shapes interiors and facades: decorative plasters, paints, wallpapers, ceramic tiles, and moldings. For designers, architects, and finishing crews.",
     bg: "linear-gradient(150deg, #1a2e38 0%, #0a1510 100%)",
-    category: "design",
-  },
-  {
-    Icon: Wrench,
-    num: "03",
-    label: "Engineering Systems",
-    sub: "HVAC · Electrical · Plumbing",
-    bg: "linear-gradient(150deg, #2a3818 0%, #0a1510 100%)",
     category: "materials",
-  },
-  {
-    Icon: Leaf,
-    num: "04",
-    label: "Landscape & Outdoor",
-    sub: "Greenery · Paving · Street furniture",
-    bg: "linear-gradient(150deg, #1e3820 0%, #0a1510 100%)",
-    category: "design",
-  },
-  {
-    Icon: Wifi,
-    num: "05",
-    label: "Smart Home & Technology",
-    sub: "IoT · Automation · Security",
-    bg: "linear-gradient(150deg, #20183a 0%, #0a1510 100%)",
-    category: "design",
   },
   {
     Icon: SquareDashedBottom,
-    num: "06",
-    label: "Windows, Doors & Facades",
-    sub: "Profiles · Glazing · Cladding",
+    num: "03",
+    label: "Windows, Doors & Flooring",
+    sub: "Glazing · Doors · Flooring",
+    description:
+      "Glazing systems, entrance and interior doors with full hardware sets, and all types of flooring — from hardwood boards to modern PVC slabs.",
     bg: "linear-gradient(150deg, #18283a 0%, #0a1510 100%)",
     category: "materials",
+  },
+  {
+    Icon: Wrench,
+    num: "04",
+    label: "Engineering Solutions",
+    sub: "HVAC · Electrical · Plumbing · Smart Home",
+    description:
+      "The technical core: heating, ventilation, water supply, electrical systems, pump equipment, and Smart Home solutions. For designers, engineers, and installation contractors.",
+    bg: "linear-gradient(150deg, #2a3818 0%, #0a1510 100%)",
+    category: "solutions",
+  },
+  {
+    Icon: Sofa,
+    num: "05",
+    label: "Interior Solutions",
+    sub: "Furniture · Lighting · Textiles · Décor",
+    description:
+      "Furniture (case and upholstered), storage systems, designer lighting, textiles, carpets, décor, and art objects for residential and commercial interiors.",
+    bg: "linear-gradient(150deg, #20183a 0%, #0a1510 100%)",
+    category: "solutions",
   },
 ];
 
 const TABS_RU = [
   { id: "all" as Category, label: "Все разделы" },
   { id: "materials" as Category, label: "Материалы" },
-  { id: "design" as Category, label: "Дизайн" },
+  { id: "solutions" as Category, label: "Решения" },
 ];
 
 const TABS_EN = [
   { id: "all" as Category, label: "All Sections" },
   { id: "materials" as Category, label: "Materials" },
-  { id: "design" as Category, label: "Design" },
+  { id: "solutions" as Category, label: "Solutions" },
 ];
 
-function SectionCard({ Icon, num, label, sub, bg }: Omit<Section, "category">) {
+function SectionCard({ Icon, num, label, sub, description, bg }: Omit<Section, "category">) {
   return (
     <div
       className="group relative rounded-3xl overflow-hidden cursor-pointer flex-shrink-0 w-full"
@@ -215,33 +219,24 @@ function SectionCard({ Icon, num, label, sub, bg }: Omit<Section, "category">) {
         className="absolute inset-0 flex flex-col justify-end p-6 sm:p-8 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-20 rounded-3xl"
         style={{ background: "#a9ec46" }}
       >
-        <div
-          className="font-black leading-none block select-none mb-1"
-          style={{ fontSize: "clamp(48px, 8vw, 96px)", color: "rgba(13,45,6,0.06)" }}
-          aria-hidden
+        <span
+          className="text-[11px] font-bold uppercase tracking-[0.16em] mb-3"
+          style={{ color: "rgba(13,45,6,0.45)" }}
         >
-          &#8220;
-        </div>
+          {num}
+        </span>
         <p
-          className="font-black leading-tight mb-2"
+          className="font-black leading-tight mb-3"
           style={{ fontSize: "clamp(18px, 1.8vw, 24px)", color: "#0d2d06" }}
         >
           {label}
         </p>
         <p
           className="text-[13px] leading-relaxed"
-          style={{ color: "rgba(13,45,6,0.55)", fontFamily: "var(--font-mulish)" }}
+          style={{ color: "rgba(13,45,6,0.6)", fontFamily: "var(--font-mulish)" }}
         >
-          {sub}
+          {description}
         </p>
-        <div className="mt-4 pt-4 border-t" style={{ borderColor: "rgba(13,45,6,0.15)" }}>
-          <span
-            className="text-[11px] font-black tracking-[0.14em] uppercase"
-            style={{ color: "#0d2d06" }}
-          >
-            {num}
-          </span>
-        </div>
       </div>
     </div>
   );
@@ -324,7 +319,7 @@ export function AboutSectionsDark() {
             </h2>
           </div>
 
-          {/* Right column: arrows+dots above, tabs below — pt pushes arrows to h2 level */}
+          {/* Right column: arrows+dots above, tabs below */}
           <div className="flex flex-col gap-4 items-start md:items-end md:pt-9">
             {/* Arrows + dots */}
             <div className="flex items-center gap-3">
@@ -439,11 +434,10 @@ export function AboutSectionsDark() {
 
         {/* CTA */}
         <div className="mt-10 flex justify-end">
-          {/* CTA */}
           <Link
             href="/exhibitors"
             className="group inline-flex items-center gap-3 px-8 py-4 rounded-full font-black text-[13px] tracking-[0.12em] uppercase transition-all duration-200 hover:gap-4"
-            style={{ background: "#12B669", color: "#0d2d06" }}
+            style={{ background: "#a9ec46", color: "#0d2d06" }}
           >
             {ru ? "Каталог участников" : "Exhibitor Directory"}
             <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
