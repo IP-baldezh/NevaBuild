@@ -52,7 +52,7 @@ export function ContactsMapSection({ venue, city, address, phone, email, social 
           <div
             className="absolute top-0 left-0 right-0 h-[3px] z-10 pointer-events-none"
             style={{
-              background: "linear-gradient(90deg, #12B669 0%, #a9ec46 50%, #12B669 100%)",
+              background: "linear-gradient(90deg, #a9ec46 0%, #a9ec46 50%, #a9ec46 100%)",
             }}
             aria-hidden
           />

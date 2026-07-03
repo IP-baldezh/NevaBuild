@@ -543,24 +543,28 @@ async function main() {
       en: "Registration for NEVA BUILD 2027 is open",
       catRu: "Анонсы",
       catEn: "Announcements",
+      img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=800",
     },
     {
       ru: "Объявлены первые участники выставки",
       en: "First exhibitors announced",
       catRu: "Участники",
       catEn: "Exhibitors",
+      img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800",
     },
     {
       ru: "Деловая программа: что вас ждёт",
       en: "Business program: what to expect",
       catRu: "Программа",
       catEn: "Program",
+      img: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=800",
     },
     {
       ru: "Как добраться до КВЦ «Экспофорум»",
       en: "How to get to Expoforum",
       catRu: "Гид",
       catEn: "Guide",
+      img: "https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=800",
     },
   ];
   for (const [i, n] of news.entries()) {
@@ -569,13 +573,14 @@ async function main() {
     publishedAt.setDate(publishedAt.getDate() - i * 3);
     await prisma.news.upsert({
       where: { slug: s },
-      update: {},
+      update: { coverImageUrl: n.img },
       create: {
         slug: s,
         titleRu: n.ru,
         titleEn: n.en,
         categoryRu: n.catRu,
         categoryEn: n.catEn,
+        coverImageUrl: n.img,
         excerptRu: "Краткое описание новости NEVA BUILD для превью на карточке.",
         excerptEn: "A short NEVA BUILD news summary for the card preview.",
         contentRu:

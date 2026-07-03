@@ -37,13 +37,13 @@ export async function generateMetadata({
 
 const STATUS_COLOR: Record<string, string> = {
   EXHIBITOR: "rgba(255,255,255,0.1)",
-  PARTNER: "rgba(18,182,105,0.15)",
+  PARTNER: "rgba(169,236,70,0.15)",
   SPONSOR: "rgba(225,27,34,0.15)",
   AMBASSADOR: "rgba(169,236,70,0.12)",
 };
 const STATUS_TEXT: Record<string, string> = {
   EXHIBITOR: "rgba(255,255,255,0.5)",
-  PARTNER: "#12B669",
+  PARTNER: "#a9ec46",
   SPONSOR: "#E11B22",
   AMBASSADOR: "#a9ec46",
 };
@@ -134,7 +134,7 @@ export default async function ExhibitorPage({
                 >
                   {(city || country) && (
                     <span className="inline-flex items-center gap-1.5">
-                      <MapPin className="size-3.5" style={{ color: "#12B669" }} />
+                      <MapPin className="size-3.5" style={{ color: "#a9ec46" }} />
                       {[city, country].filter(Boolean).join(", ")}
                     </span>
                   )}
@@ -177,7 +177,7 @@ export default async function ExhibitorPage({
                       <span
                         key={category.id}
                         className="text-[11px] font-bold uppercase tracking-[0.14em] px-3 py-1.5 rounded-full"
-                        style={{ background: "rgba(18,182,105,0.1)", color: "#12B669" }}
+                        style={{ background: "rgba(169,236,70,0.1)", color: "#a9ec46" }}
                       >
                         {pick(lc, category.titleRu, category.titleEn)}
                       </span>
@@ -218,7 +218,7 @@ export default async function ExhibitorPage({
                       className="flex items-center gap-3 text-sm font-semibold transition-colors hover:text-[#a9ec46]"
                       style={{ color: "rgba(255,255,255,0.6)" }}
                     >
-                      <Icon className="size-4 flex-shrink-0" style={{ color: "#12B669" }} />
+                      <Icon className="size-4 flex-shrink-0" style={{ color: "#a9ec46" }} />
                       <span className="truncate">{label}</span>
                     </a>
                   ))}

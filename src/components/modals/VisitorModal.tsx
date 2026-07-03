@@ -68,7 +68,7 @@ export function VisitorModal({ open, onClose }: VisitorModalProps) {
       {/* Header — green gradient */}
       <div
         className="relative flex-none px-7 pt-8 pb-7 overflow-hidden"
-        style={{ background: "linear-gradient(135deg, #12B669 0%, #a9ec46 60%, #d4f772 100%)" }}
+        style={{ background: "linear-gradient(135deg, #a9ec46 0%, #a9ec46 60%, #d4f772 100%)" }}
       >
         <ModalCloseButton onClose={handleClose} variant="light" />
         <div
@@ -110,7 +110,7 @@ export function VisitorModal({ open, onClose }: VisitorModalProps) {
           <div className="flex flex-col items-center text-center py-8">
             <div
               className="w-16 h-16 rounded-full flex items-center justify-center mb-5 flex-shrink-0"
-              style={{ background: "linear-gradient(135deg, #12B669 0%, #a9ec46 100%)" }}
+              style={{ background: "linear-gradient(135deg, #a9ec46 0%, #a9ec46 100%)" }}
             >
               <svg
                 className="w-8 h-8 text-white"

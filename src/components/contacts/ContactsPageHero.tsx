@@ -31,7 +31,7 @@ export function ContactsPageHero({ address, phone, email }: ContactsPageHeroProp
         className="absolute left-0 top-0 bottom-0 w-[3px]"
         style={{
           background:
-            "linear-gradient(to bottom, transparent 0%, #12B669 30%, #12B669 70%, transparent 100%)",
+            "linear-gradient(to bottom, transparent 0%, #a9ec46 30%, #a9ec46 70%, transparent 100%)",
         }}
         aria-hidden
       />
@@ -41,7 +41,7 @@ export function ContactsPageHero({ address, phone, email }: ContactsPageHeroProp
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 65% 100% at 0% 55%, rgba(18,182,105,0.13) 0%, transparent 60%)",
+            "radial-gradient(ellipse 65% 100% at 0% 55%, rgba(169,236,70,0.13) 0%, transparent 60%)",
         }}
         aria-hidden
       />
@@ -107,7 +107,7 @@ export function ContactsPageHero({ address, phone, email }: ContactsPageHeroProp
           {pills.map(({ icon: Icon, text, href }) => {
             const inner = (
               <>
-                <Icon className="size-[15px] flex-shrink-0" style={{ color: "#12B669" }} />
+                <Icon className="size-[15px] flex-shrink-0" style={{ color: "#a9ec46" }} />
                 <span className="text-sm font-medium text-white/80 leading-snug">{text}</span>
               </>
             );

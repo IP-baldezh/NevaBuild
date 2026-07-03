@@ -3,12 +3,12 @@
 import { useEffect, useRef } from "react";
 
 const HERO = {
-  o1: { x: "6vw", y: "12vh", bg: "#12B669", opacity: 0.48, scale: 1.0 },
+  o1: { x: "6vw", y: "12vh", bg: "#a9ec46", opacity: 0.48, scale: 1.0 },
   o2: { x: "65vw", y: "22vh", bg: "#a9ec46", opacity: 0.22, scale: 0.85 },
 };
 const CONTENT = {
   o1: { x: "4vw", y: "38vh", bg: "#a9ec46", opacity: 0.38, scale: 1.1 },
-  o2: { x: "72vw", y: "10vh", bg: "#12B669", opacity: 0.32, scale: 0.95 },
+  o2: { x: "72vw", y: "10vh", bg: "#a9ec46", opacity: 0.32, scale: 0.95 },
 };
 
 const TRANSITION = "transform 2s cubic-bezier(0.16,1,0.3,1), background 2s ease, opacity 2s ease";
@@ -92,7 +92,7 @@ export function DarkBackground({ sentinelId }: { sentinelId: string }) {
           height: "55vh",
           top: 0,
           left: 0,
-          background: "#12B669",
+          background: "#a9ec46",
           opacity: 0.48,
           filter: "blur(90px)",
           mixBlendMode: "screen",

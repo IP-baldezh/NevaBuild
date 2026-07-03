@@ -49,7 +49,7 @@ export function AboutCards() {
         <div className="grid lg:grid-cols-2 gap-6">
           <div
             className="relative rounded-3xl p-7 sm:p-10 lg:p-12 overflow-hidden flex flex-col"
-            style={{ background: "linear-gradient(135deg, #12B669 0%, #a9ec46 55%, #d4f772 100%)" }}
+            style={{ background: "linear-gradient(135deg, #a9ec46 0%, #a9ec46 55%, #d4f772 100%)" }}
           >
             <div
               className="absolute inset-0 pointer-events-none"
@@ -133,7 +133,7 @@ export function AboutCards() {
           <div className="relative bg-white rounded-3xl p-7 sm:p-10 lg:p-12 overflow-hidden border border-[#e4efe8] flex flex-col">
             <div
               className="absolute top-0 right-0 w-[280px] h-[280px] opacity-[0.04] pointer-events-none"
-              style={{ background: "radial-gradient(circle, #12B669 0%, transparent 70%)" }}
+              style={{ background: "radial-gradient(circle, #a9ec46 0%, transparent 70%)" }}
               aria-hidden
             />
             <span
@@ -171,7 +171,7 @@ export function AboutCards() {
             <ul className="flex flex-col gap-3 mb-10">
               {mission.map((f) => (
                 <li key={f} className="flex items-start gap-3">
-                  <CheckCircle className="flex-shrink-0 mt-0.5 size-[18px] text-[#12B669]" />
+                  <CheckCircle className="flex-shrink-0 mt-0.5 size-[18px] text-[#a9ec46]" />
                   <span
                     className="text-[14px] text-black/75"
                     style={{ fontFamily: "var(--font-mulish)" }}

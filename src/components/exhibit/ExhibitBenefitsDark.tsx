@@ -83,10 +83,10 @@ export function ExhibitBenefitsDark() {
                 transition={{ duration: 0.5, delay: i * 0.08 }}
                 className="rounded-2xl p-6 sm:p-8 flex flex-col gap-4"
                 style={{
-                  background: i % 2 === 0 ? "rgba(18,182,105,0.06)" : "rgba(255,255,255,0.04)",
+                  background: i % 2 === 0 ? "rgba(169,236,70,0.06)" : "rgba(255,255,255,0.04)",
                   border:
                     i % 2 === 0
-                      ? "1px solid rgba(18,182,105,0.16)"
+                      ? "1px solid rgba(169,236,70,0.16)"
                       : "1px solid rgba(255,255,255,0.08)",
                 }}
               >

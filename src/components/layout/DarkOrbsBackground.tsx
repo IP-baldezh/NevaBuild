@@ -9,7 +9,7 @@ export function DarkOrbsBackground() {
           height: "55vh",
           top: "12%",
           left: "6%",
-          background: "#12B669",
+          background: "#a9ec46",
           opacity: 0.42,
           filter: "blur(90px)",
           mixBlendMode: "screen",

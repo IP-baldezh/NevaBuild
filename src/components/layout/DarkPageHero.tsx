@@ -27,7 +27,7 @@ export function DarkPageHero({ eyebrow, title, titleDim, lead, children }: Props
         className="max-sm:hidden absolute left-0 top-0 bottom-0 w-[3px]"
         style={{
           background:
-            "linear-gradient(to bottom, transparent 0%, #12B669 25%, #12B669 75%, transparent 100%)",
+            "linear-gradient(to bottom, transparent 0%, #a9ec46 25%, #a9ec46 75%, transparent 100%)",
         }}
         aria-hidden
       />

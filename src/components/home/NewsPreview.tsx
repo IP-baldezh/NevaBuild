@@ -11,6 +11,12 @@ import type { News } from "@prisma/client";
 const TAG_LABELS_RU = ["Анонс", "Новость", "Деловая программа", "Участники"];
 const TAG_LABELS_EN = ["Announcement", "News", "Business Programme", "Participants"];
 
+const NEWS_FALLBACKS = [
+  "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=800&fit=crop",
+  "https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=800&fit=crop",
+  "https://images.unsplash.com/photo-1590644365607-7eff9b2ce5b1?q=80&w=800&fit=crop",
+];
+
 export function NewsPreview({ news }: { news: News[] }) {
   const t = useTranslations("NewsPreview");
   const locale = useLocale() as Locale;
@@ -52,6 +58,7 @@ export function NewsPreview({ news }: { news: News[] }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {news.slice(0, 3).map((n, i) => {
             const tagLabel = TAG_LABELS[i % TAG_LABELS.length];
+            const coverSrc = n.coverImageUrl || NEWS_FALLBACKS[i % NEWS_FALLBACKS.length];
             return (
               <article
                 key={n.id}
@@ -61,16 +68,15 @@ export function NewsPreview({ news }: { news: News[] }) {
                   border: "1px solid rgba(255,255,255,0.07)",
                 }}
               >
-                <div
-                  className="h-44 flex items-center justify-center relative overflow-hidden"
-                  style={{ background: "rgba(18,182,105,0.06)" }}
-                >
-                  <span
-                    className="font-black"
-                    style={{ fontSize: "clamp(3rem, 8vw, 5rem)", color: "rgba(169,236,70,0.12)" }}
-                  >
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
+                <div className="h-44 relative overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={coverSrc}
+                    alt=""
+                    aria-hidden
+                    draggable={false}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     style={{

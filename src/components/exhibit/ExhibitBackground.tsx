@@ -10,24 +10,24 @@ const ORB_STATES: Record<
   }
 > = {
   "e-hero": {
-    o1: { x: "10vw", y: "10vh", bg: "#12B669", opacity: 0.55, scale: 1.0 },
+    o1: { x: "10vw", y: "10vh", bg: "#a9ec46", opacity: 0.55, scale: 1.0 },
     o2: { x: "65vw", y: "20vh", bg: "#a9ec46", opacity: 0.28, scale: 0.8 },
   },
   "e-benefits": {
     o1: { x: "4vw", y: "30vh", bg: "#a9ec46", opacity: 0.42, scale: 1.1 },
-    o2: { x: "72vw", y: "8vh", bg: "#12B669", opacity: 0.38, scale: 0.9 },
+    o2: { x: "72vw", y: "8vh", bg: "#a9ec46", opacity: 0.38, scale: 0.9 },
   },
   "e-formats": {
-    o1: { x: "28vw", y: "42vh", bg: "#12B669", opacity: 0.35, scale: 1.0 },
+    o1: { x: "28vw", y: "42vh", bg: "#a9ec46", opacity: 0.35, scale: 1.0 },
     o2: { x: "58vw", y: "12vh", bg: "#a9ec46", opacity: 0.22, scale: 0.7 },
   },
   "e-steps": {
     o1: { x: "14vw", y: "22vh", bg: "#a9ec46", opacity: 0.4, scale: 1.0 },
-    o2: { x: "68vw", y: "38vh", bg: "#12B669", opacity: 0.38, scale: 1.1 },
+    o2: { x: "68vw", y: "38vh", bg: "#a9ec46", opacity: 0.38, scale: 1.1 },
   },
   "e-form": {
     o1: { x: "22vw", y: "18vh", bg: "#a9ec46", opacity: 0.58, scale: 1.3 },
-    o2: { x: "52vw", y: "28vh", bg: "#12B669", opacity: 0.5, scale: 1.2 },
+    o2: { x: "52vw", y: "28vh", bg: "#a9ec46", opacity: 0.5, scale: 1.2 },
   },
 };
 
@@ -107,7 +107,7 @@ export function ExhibitBackground({ ids }: { ids: string[] }) {
           height: "55vh",
           top: 0,
           left: 0,
-          background: "#12B669",
+          background: "#a9ec46",
           opacity: 0.55,
           filter: "blur(90px)",
           mixBlendMode: "screen",

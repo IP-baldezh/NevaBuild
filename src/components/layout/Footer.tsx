@@ -80,7 +80,7 @@ export function Footer() {
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              "radial-gradient(ellipse at 0% 0%, rgba(18,182,105,0.08) 0%, transparent 60%), radial-gradient(ellipse at 100% 100%, rgba(169,236,70,0.05) 0%, transparent 50%)",
+              "radial-gradient(ellipse at 0% 0%, rgba(169,236,70,0.08) 0%, transparent 60%), radial-gradient(ellipse at 100% 100%, rgba(169,236,70,0.05) 0%, transparent 50%)",
           }}
           aria-hidden
         />
@@ -99,18 +99,18 @@ export function Footer() {
                   href={`tel:${EVENT_DEFAULTS.phone.replace(/\s/g, "")}`}
                   className="flex items-center gap-2.5 text-[13px] text-white/55 hover:text-white transition-colors"
                 >
-                  <Phone className="size-3.5 flex-shrink-0" style={{ color: "#12B669" }} />
+                  <Phone className="size-3.5 flex-shrink-0" style={{ color: "#a9ec46" }} />
                   {EVENT_DEFAULTS.phone}
                 </a>
                 <a
                   href={`mailto:${EVENT_DEFAULTS.email}`}
                   className="flex items-center gap-2.5 text-[13px] text-white/55 hover:text-white transition-colors"
                 >
-                  <Mail className="size-3.5 flex-shrink-0" style={{ color: "#12B669" }} />
+                  <Mail className="size-3.5 flex-shrink-0" style={{ color: "#a9ec46" }} />
                   {EVENT_DEFAULTS.email}
                 </a>
                 <p className="flex items-start gap-2.5 text-[13px] text-white/55">
-                  <MapPin className="mt-0.5 size-3.5 flex-shrink-0" style={{ color: "#12B669" }} />
+                  <MapPin className="mt-0.5 size-3.5 flex-shrink-0" style={{ color: "#a9ec46" }} />
                   <span>
                     {EVENT_DEFAULTS.addressRu}, {EVENT_DEFAULTS.venueRu}
                   </span>
