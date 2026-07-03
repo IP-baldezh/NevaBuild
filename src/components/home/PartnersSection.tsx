@@ -76,7 +76,7 @@ export function PartnersSection({ partners }: { partners: Partner[] }) {
                 alt={name}
                 className="w-full h-full object-contain p-3"
                 draggable={false}
-                style={{ filter: "brightness(0) invert(1)", opacity: 0.55 }}
+                style={{ opacity: 0.75 }}
                 onError={(e) => {
                   const target = e.currentTarget;
                   target.style.display = "none";
@@ -111,7 +111,7 @@ export function PartnersSection({ partners }: { partners: Partner[] }) {
                     alt={p.name}
                     className="w-full h-full object-contain p-2"
                     draggable={false}
-                    style={{ filter: "brightness(0) invert(1)", opacity: 0.55 }}
+                    style={{ opacity: 0.75 }}
                   />
                 </div>
               ))}

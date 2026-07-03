@@ -13,6 +13,8 @@ const SPEAKERS = [
     quote:
       "NevaBuild — это место, где тренды превращаются в реальные проекты. Здесь я нахожу вдохновение и партнёров.",
     bg: "linear-gradient(150deg, #1e3a2b 0%, #0a1510 100%)",
+    photo:
+      "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=400&h=500&fit=crop&crop=face",
   },
   {
     name: "Борис Уборевич",
@@ -21,6 +23,8 @@ const SPEAKERS = [
     quote:
       "Профессиональный диалог между архитекторами и производителями — именно это делает выставку уникальной.",
     bg: "linear-gradient(150deg, #1a2e38 0%, #0a1510 100%)",
+    photo:
+      "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400&h=500&fit=crop&crop=face",
   },
   {
     name: "Артемий Лебедев",
@@ -29,6 +33,8 @@ const SPEAKERS = [
     quote:
       "Дизайн живёт там, где встречаются идея и материал. NevaBuild — главная точка их встречи в России.",
     bg: "linear-gradient(150deg, #201a38 0%, #0a1510 100%)",
+    photo:
+      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=400&h=500&fit=crop&crop=face",
   },
   {
     name: "Диана Балашова",
@@ -37,6 +43,8 @@ const SPEAKERS = [
     quote:
       "Когда видишь новейшие материалы вживую, понимаешь, как расширяются возможности в дизайне.",
     bg: "linear-gradient(150deg, #321a1a 0%, #0a1510 100%)",
+    photo:
+      "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=400&h=500&fit=crop&crop=face",
   },
   {
     name: "Михаил Шапошников",
@@ -45,6 +53,8 @@ const SPEAKERS = [
     quote:
       "Для урбанистики важен диалог между проектировщиками и поставщиками. NevaBuild создаёт это пространство.",
     bg: "linear-gradient(150deg, #1a2e1a 0%, #0a1510 100%)",
+    photo:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&h=500&fit=crop&crop=face",
   },
   {
     name: "Олег Клодт",
@@ -53,6 +63,8 @@ const SPEAKERS = [
     quote:
       "Российский рынок строительных материалов растёт быстро. NevaBuild — лучший способ быть в курсе новинок.",
     bg: "linear-gradient(150deg, #1a1a32 0%, #0a1510 100%)",
+    photo:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400&h=500&fit=crop&crop=face",
   },
   {
     name: "Елена Паунич",
@@ -61,6 +73,8 @@ const SPEAKERS = [
     quote:
       "Luxury-интерьеры начинаются с правильных материалов. На NevaBuild я нахожу именно то, что ищу.",
     bg: "linear-gradient(150deg, #2e1a2e 0%, #0a1510 100%)",
+    photo:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=400&h=500&fit=crop&crop=face",
   },
   {
     name: "Валерий Лизунов",
@@ -69,12 +83,14 @@ const SPEAKERS = [
     quote:
       "BIM и параметрика меняют индустрию. Выставка — лучшая площадка, чтобы увидеть, как это работает вживую.",
     bg: "linear-gradient(150deg, #1a2838 0%, #0a1510 100%)",
+    photo:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=400&h=500&fit=crop&crop=face",
   },
 ];
 
 type Speaker = (typeof SPEAKERS)[0];
 
-function SpeakerCard({ name, role, initials, quote, bg }: Speaker) {
+function SpeakerCard({ name, role, initials, quote, bg, photo }: Speaker) {
   const [tapped, setTapped] = useState(false);
 
   return (
@@ -83,6 +99,22 @@ function SpeakerCard({ name, role, initials, quote, bg }: Speaker) {
       style={{ background: bg }}
       onClick={() => setTapped((v) => !v)}
     >
+      {/* Photo background */}
+      {photo && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={photo}
+          alt=""
+          aria-hidden
+          draggable={false}
+          className="absolute inset-0 w-full h-full object-cover object-top"
+          style={{ opacity: 0.6 }}
+        />
+      )}
+
+      {/* Dark vignette over photo */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/65 pointer-events-none" />
+
       {/* Lime top accent bar */}
       <div
         className={`absolute top-0 left-0 right-0 h-[3px] bg-nb-lime-acid transition-all duration-500 ${
@@ -90,15 +122,17 @@ function SpeakerCard({ name, role, initials, quote, bg }: Speaker) {
         }`}
       />
 
-      {/* Decorative large initials */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-        <span
-          className="font-black text-white/[0.035]"
-          style={{ fontSize: "clamp(64px, 10vw, 130px)" }}
-        >
-          {initials}
-        </span>
-      </div>
+      {/* Decorative large initials (only without photo) */}
+      {!photo && (
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
+          <span
+            className="font-black text-white/[0.035]"
+            style={{ fontSize: "clamp(64px, 10vw, 130px)" }}
+          >
+            {initials}
+          </span>
+        </div>
+      )}
 
       {/* Bottom ambient shadow */}
       <div

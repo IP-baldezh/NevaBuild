@@ -196,37 +196,69 @@ export default async function ContactsPage({ params }: { params: Promise<{ local
         </div>
       </section>
 
-      {/* Contact Form */}
+      {/* Contact Form — split layout */}
       <section
         className="relative z-10 py-20 border-t"
         style={{ borderColor: "rgba(255,255,255,0.06)" }}
       >
-        <div className="container-neva max-w-2xl">
+        <div className="container-neva">
+          {/* Eyebrow */}
           <ScrollReveal>
-            <span
-              className="text-[11px] uppercase tracking-[0.28em] mb-4 block font-bold"
-              style={{ color: "#a9ec46", fontFamily: "var(--font-mulish)" }}
-            >
-              {tc("writeUs")}
-            </span>
-            <h2
-              className="font-black text-white mb-8"
-              style={{ fontSize: "clamp(22px, 3.5vw, 44px)" }}
-            >
-              {tc("title")}
-            </h2>
-          </ScrollReveal>
-          <Reveal delay={0.1}>
-            <div
-              className="rounded-3xl p-6 sm:p-8"
-              style={{
-                background: "rgba(255,255,255,0.04)",
-                border: "1px solid rgba(255,255,255,0.08)",
-              }}
-            >
-              <ContactForm />
+            <div className="flex items-center gap-4 mb-12">
+              <span
+                className="text-[11px] font-bold uppercase tracking-[0.28em] flex-shrink-0"
+                style={{ color: "#a9ec46", fontFamily: "var(--font-mulish)" }}
+              >
+                {tc("writeUs")}
+              </span>
+              <span className="h-px flex-1" style={{ background: "rgba(255,255,255,0.08)" }} />
             </div>
-          </Reveal>
+          </ScrollReveal>
+
+          <div className="grid gap-10 lg:gap-20 lg:grid-cols-2 lg:items-start">
+            {/* Left: heading + description */}
+            <Reveal>
+              <h2
+                className="font-black text-white leading-[0.92] tracking-tight mb-5"
+                style={{ fontSize: "clamp(34px, 5vw, 60px)" }}
+              >
+                {ru ? (
+                  <>
+                    ОСТАЛИСЬ
+                    <br />
+                    <span style={{ color: "#a9ec46" }}>ВОПРОСЫ?</span>
+                  </>
+                ) : (
+                  <>
+                    HAVE A
+                    <br />
+                    <span style={{ color: "#a9ec46" }}>QUESTION?</span>
+                  </>
+                )}
+              </h2>
+              <p
+                className="text-white/40 text-[15px] sm:text-[16px] leading-relaxed max-w-md"
+                style={{ fontFamily: "var(--font-mulish)" }}
+              >
+                {ru
+                  ? "Заполните форму — наш менеджер свяжется с вами в течение рабочего дня. Или напишите нам напрямую."
+                  : "Fill out the form and our manager will get back to you within a business day. Or reach us directly."}
+              </p>
+            </Reveal>
+
+            {/* Right: form card */}
+            <Reveal delay={0.1}>
+              <div
+                className="rounded-3xl p-6 sm:p-8"
+                style={{
+                  background: "rgba(255,255,255,0.04)",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                }}
+              >
+                <ContactForm />
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
 

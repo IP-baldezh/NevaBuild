@@ -81,8 +81,8 @@
   --radius: 0.25rem;
 
   /* Фирменные сырые цвета */
-  --brand-acid: #0fae63;
-  --lime: oklch(0.66 0.16 154); /* #0FAE63 изумрудный зелёный */
+  --brand-acid: #a9ec46;
+  --lime: rgb(169, 236, 70); /* #a9ec46 кислотно-зелёный */
   --lime-foreground: oklch(0.12 0 0); /* тёмный текст на зелёных кнопках */
   --brand-red: oklch(0.49 0.24 27); /* #E11B22 красный */
   --brand-black: #0a0a0a;
@@ -99,8 +99,8 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.13 0 0);
 
-  /* primary = emerald green */
-  --primary: oklch(0.66 0.16 154);
+  /* primary = lime acid */
+  --primary: rgb(169, 236, 70);
   --primary-foreground: oklch(0.12 0 0);
 
   --secondary: oklch(0.94 0 0);
@@ -109,8 +109,8 @@
   --muted: oklch(0.94 0 0);
   --muted-foreground: oklch(0.52 0 0); /* средний серый */
 
-  /* accent = green */
-  --accent: oklch(0.66 0.16 154);
+  /* accent = lime acid */
+  --accent: rgb(169, 236, 70);
   --accent-foreground: oklch(0.12 0 0);
 
   --destructive: oklch(0.49 0.24 27); /* красный */
@@ -118,9 +118,9 @@
 
   --border: oklch(0.88 0 0); /* светлая граница */
   --input: oklch(0.88 0 0);
-  --ring: oklch(0.66 0.16 154);
+  --ring: rgb(169, 236, 70);
 
-  --chart-1: oklch(0.66 0.16 154);
+  --chart-1: rgb(169, 236, 70);
   --chart-2: oklch(0.49 0.24 27);
   --chart-3: oklch(0.52 0 0);
   --chart-4: oklch(0.75 0 0);
@@ -129,12 +129,12 @@
   /* Sidebar (admin) — сохраняем тёмным */
   --sidebar: oklch(0.18 0 0);
   --sidebar-foreground: oklch(0.98 0 0);
-  --sidebar-primary: oklch(0.66 0.16 154);
+  --sidebar-primary: rgb(169, 236, 70);
   --sidebar-primary-foreground: oklch(0.12 0 0);
   --sidebar-accent: oklch(0.24 0 0);
   --sidebar-accent-foreground: oklch(0.98 0 0);
   --sidebar-border: oklch(0.28 0 0);
-  --sidebar-ring: oklch(0.66 0.16 154);
+  --sidebar-ring: rgb(169, 236, 70);
 }
 
 /* ---------- Seenonim display font ---------- */
@@ -181,7 +181,7 @@
 
   /* Совместимость с компонентами использующими старые утилиты */
   .bg-neva-gradient {
-    background-image: linear-gradient(120deg, oklch(0.66 0.16 154) 0%, oklch(0.58 0.14 162) 100%);
+    background-image: linear-gradient(120deg, #a9ec46 0%, #a9ec46 100%);
   }
   .bg-neva-gradient-soft {
     background-color: oklch(0.96 0 0);
@@ -191,7 +191,7 @@
     background-color: oklch(0.13 0 0);
   }
   .text-neva-gradient {
-    background-image: linear-gradient(100deg, oklch(0.66 0.16 154), oklch(0.58 0.14 162));
+    background-image: linear-gradient(100deg, #a9ec46, #a9ec46);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -216,9 +216,9 @@
     background-size: 28px 28px;
   }
 
-  /* Фирменный emerald градиент (для акцентов) */
+  /* Фирменный lime градиент (для акцентов) */
   .bg-neva-gradient {
-    background-image: linear-gradient(120deg, oklch(0.66 0.16 154) 0%, oklch(0.58 0.14 162) 100%);
+    background-image: linear-gradient(120deg, #a9ec46 0%, #a9ec46 100%);
   }
 
   /* Marquee анимация */
@@ -238,14 +238,14 @@
   /* Green glow — тень для акцентных элементов */
   .glow-lime {
     box-shadow:
-      0 0 24px oklch(0.66 0.16 154 / 0.5),
-      0 0 8px oklch(0.66 0.16 154 / 0.3);
+      0 0 24px rgba(169, 236, 70, 0.5),
+      0 0 8px rgba(169, 236, 70, 0.3);
   }
   .glow-lime-sm {
-    box-shadow: 0 0 12px oklch(0.66 0.16 154 / 0.4);
+    box-shadow: 0 0 12px rgba(169, 236, 70, 0.4);
   }
   .text-glow-lime {
-    text-shadow: 0 0 20px oklch(0.66 0.16 154 / 0.7);
+    text-shadow: 0 0 20px rgba(169, 236, 70, 0.7);
   }
 
   /* Мигание для красной точки-акцента */
