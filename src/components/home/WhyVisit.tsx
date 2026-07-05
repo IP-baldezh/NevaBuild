@@ -76,7 +76,7 @@ export function WhyVisit() {
   const reasons = ru ? REASONS_RU : REASONS_EN;
 
   return (
-    <section id="why-visit" className="relative z-10 py-16 sm:py-24">
+    <section id="why-visit" className="relative z-10 py-10 sm:py-20">
       <div className="container-neva">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
           {/* Left */}

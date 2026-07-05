@@ -42,7 +42,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ locale
       />
 
       <section
-        className="relative z-10 py-16 border-t"
+        className="relative z-10 py-10 sm:py-16 border-t"
         style={{ borderColor: "rgba(255,255,255,0.06)" }}
       >
         <div className="container-neva space-y-10">

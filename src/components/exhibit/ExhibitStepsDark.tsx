@@ -13,7 +13,7 @@ export function ExhibitStepsDark() {
   const t = useTranslations("ExhibitPage");
 
   return (
-    <section id="e-steps" className="relative z-10 py-20 sm:py-28">
+    <section id="e-steps" className="relative z-10 py-10 sm:py-20">
       <div className="container-neva">
         <m.div
           initial={{ opacity: 0, y: 20 }}

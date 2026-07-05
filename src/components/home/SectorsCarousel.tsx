@@ -174,7 +174,7 @@ export function SectorsCarousel({ categories }: { categories: ExhibitorCategory[
   return (
     <section
       id="sectors"
-      className="relative z-10 py-14 sm:py-20"
+      className="relative z-10 py-10 sm:py-16"
       style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
     >
       <div className="container-neva">

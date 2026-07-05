@@ -28,13 +28,7 @@ export function CtaBanner({ categories = [], dateRange, venue, city }: CtaBanner
     <>
       <section
         id="ticket"
-        className="relative z-10 min-h-screen flex flex-col justify-center items-center text-center"
-        style={{
-          paddingLeft: "10vw",
-          paddingRight: "10vw",
-          paddingTop: "6rem",
-          paddingBottom: "6rem",
-        }}
+        className="relative z-10 flex flex-col justify-center items-center text-center px-5 sm:px-[10vw] py-20 sm:py-28"
       >
         <div className="relative z-10 flex flex-col items-center">
           <m.span

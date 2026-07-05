@@ -25,10 +25,10 @@ export function PartnersSection({ partners }: { partners: Partner[] }) {
 
   return (
     <section
-      className="relative z-10 py-16 overflow-hidden"
+      className="relative z-10 py-10 sm:py-16 overflow-hidden"
       style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
     >
-      <div className="container-neva mb-10">
+      <div className="container-neva mb-8">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <span
             className="text-[11px] uppercase tracking-[0.28em] font-bold block mb-1"
@@ -49,58 +49,50 @@ export function PartnersSection({ partners }: { partners: Partner[] }) {
         </div>
       </div>
 
-      <div className="relative">
-        <div
-          className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
-          style={{ background: "linear-gradient(to right, #07100a, transparent)" }}
-        />
-        <div
-          className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
-          style={{ background: "linear-gradient(to left, #07100a, transparent)" }}
-        />
-
-        <div className="flex animate-scroll-x" style={{ width: "max-content" }}>
-          {doubled.map(({ name, src }, i) => (
-            <div
-              key={`${name}-${i}`}
-              className="flex-shrink-0 mx-3 flex items-center justify-center h-14 rounded-xl transition-all duration-200 cursor-pointer overflow-hidden"
-              style={{
-                width: "160px",
-                background: "rgba(255,255,255,0.05)",
-                border: "1px solid rgba(255,255,255,0.08)",
+      {/* Marquee без боковых затемнений — edge-to-edge */}
+      <div className="flex animate-scroll-x" style={{ width: "max-content" }}>
+        {doubled.map(({ name, src }, i) => (
+          <div
+            key={`${name}-${i}`}
+            className="flex-shrink-0 mx-2 flex items-center justify-center rounded-xl transition-all duration-200 cursor-pointer overflow-hidden"
+            style={{
+              width: "200px",
+              height: "72px",
+              background: "rgba(255,255,255,0.05)",
+              border: "1px solid rgba(255,255,255,0.08)",
+            }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={src}
+              alt={name}
+              className="w-full h-full object-contain p-2"
+              draggable={false}
+              style={{ opacity: 0.8 }}
+              onError={(e) => {
+                const target = e.currentTarget;
+                target.style.display = "none";
+                const parent = target.parentElement;
+                if (parent) {
+                  parent.innerHTML = `<span style="font-size:12px;font-weight:700;color:rgba(255,255,255,0.5);text-align:center;padding:0 10px;letter-spacing:0.08em">${name}</span>`;
+                }
               }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={src}
-                alt={name}
-                className="w-full h-full object-contain p-3"
-                draggable={false}
-                style={{ opacity: 0.75 }}
-                onError={(e) => {
-                  const target = e.currentTarget;
-                  target.style.display = "none";
-                  const parent = target.parentElement;
-                  if (parent) {
-                    parent.innerHTML = `<span style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);text-align:center;padding:0 8px;letter-spacing:0.1em">${name}</span>`;
-                  }
-                }}
-              />
-            </div>
-          ))}
-        </div>
+            />
+          </div>
+        ))}
       </div>
 
       {partners.filter((p) => p.logoUrl).length > 0 && (
-        <div className="container-neva mt-10">
+        <div className="container-neva mt-8">
           <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3">
             {partners
               .filter((p) => p.logoUrl)
               .map((p) => (
                 <div
                   key={p.id}
-                  className="flex items-center justify-center h-14 rounded-xl overflow-hidden"
+                  className="flex items-center justify-center rounded-xl overflow-hidden"
                   style={{
+                    height: "72px",
                     background: "rgba(255,255,255,0.05)",
                     border: "1px solid rgba(255,255,255,0.08)",
                   }}
@@ -111,7 +103,7 @@ export function PartnersSection({ partners }: { partners: Partner[] }) {
                     alt={p.name}
                     className="w-full h-full object-contain p-2"
                     draggable={false}
-                    style={{ opacity: 0.75 }}
+                    style={{ opacity: 0.8 }}
                   />
                 </div>
               ))}
