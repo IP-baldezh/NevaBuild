@@ -202,7 +202,7 @@ export function AmbassadorsAlt() {
   const ru = locale === "ru";
 
   return (
-    <section className="py-12 sm:py-24" style={{ background: "#0F1813" }}>
+    <section className="py-10 sm:py-20" style={{ background: "#0F1813" }}>
       <div className="container-neva">
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10 lg:mb-16">

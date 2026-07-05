@@ -54,7 +54,7 @@ export function ForWhom({ categories = [] }: ForWhomProps) {
 
   return (
     <>
-      <section id="for-whom" className="relative z-10 py-16 sm:py-24">
+      <section id="for-whom" className="relative z-10 py-10 sm:py-20">
         <div className="container-neva">
           <m.div
             initial={{ opacity: 0, y: 20 }}

@@ -245,7 +245,7 @@ export function VenueDark() {
   return (
     <section
       id="s-venue"
-      className="relative z-10 py-12 sm:py-24"
+      className="relative z-10 py-10 sm:py-20"
       style={{ background: "rgba(8,16,11,0.88)" }}
     >
       <div className="container-neva">

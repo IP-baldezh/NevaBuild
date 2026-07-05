@@ -63,7 +63,7 @@ export function ProgramPreview({ days }: { days: ProgramDayWithSessions[] }) {
   return (
     <section
       id="program"
-      className="relative z-10 py-12 sm:py-20"
+      className="relative z-10 py-10 sm:py-16"
       style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
     >
       <div className="container-neva">

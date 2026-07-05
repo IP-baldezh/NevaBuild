@@ -382,7 +382,7 @@ export function AboutSectionsDark() {
   const sliderKey = `${activeTab}-${safeIndex}`;
 
   return (
-    <section id="s-sections" className="relative z-10 py-16 sm:py-28">
+    <section id="s-sections" className="relative z-10 py-10 sm:py-20">
       <div className="container-neva">
         {/* Header */}
         <m.div

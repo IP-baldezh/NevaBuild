@@ -148,22 +148,26 @@ export function Header() {
       {/* Мобильное меню — вне <header>, чтобы backdrop-filter не ломал fixed-позиционирование */}
       <div
         className={cn(
-          "fixed inset-0 z-[60] flex flex-col bg-white transition-transform duration-300 lg:hidden",
+          "fixed inset-0 z-[60] flex flex-col transition-transform duration-300 lg:hidden",
           open ? "translate-x-0" : "translate-x-full",
         )}
+        style={{ background: "#07100a" }}
       >
         {/* Шапка меню: лого + переключатель языка + кнопка закрытия */}
-        <div className="flex h-[72px] items-center border-b border-border px-5 md:px-10 gap-4 flex-none">
-          <Logo />
+        <div
+          className="flex h-[72px] items-center px-5 md:px-10 gap-4 flex-none"
+          style={{ borderBottom: "1px solid rgba(255,255,255,0.1)" }}
+        >
+          <Logo white />
           <div className="flex-1 flex justify-center">
             <div style={{ transform: "scale(1.3)", transformOrigin: "center" }}>
-              <LanguageSwitcher />
+              <LanguageSwitcher transparent />
             </div>
           </div>
           <button
             type="button"
             onClick={() => setOpen(false)}
-            className="inline-flex size-10 items-center justify-center text-foreground flex-none"
+            className="inline-flex size-10 items-center justify-center text-white flex-none"
             aria-label={t("close")}
           >
             <X className="size-5" />
@@ -171,7 +175,7 @@ export function Header() {
         </div>
 
         <nav
-          className="flex flex-1 flex-col px-5 py-4 md:px-10 overflow-y-auto"
+          className="flex flex-1 flex-col px-5 py-2 md:px-10 overflow-y-auto"
           aria-label="Мобильное меню"
         >
           {NAV_ITEMS.map((item) => (
@@ -180,20 +184,25 @@ export function Header() {
               href={item.href}
               onClick={() => setOpen(false)}
               className={cn(
-                "flex items-center gap-4 border-b border-border py-5 text-2xl font-black uppercase tracking-tight",
-                pathname === item.href ? "text-nb-green" : "text-foreground",
+                "flex items-center gap-4 py-4 text-2xl font-black uppercase tracking-tight transition-colors",
+                pathname === item.href ? "text-nb-lime-acid" : "text-white/75 hover:text-white",
               )}
+              style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}
             >
               {t(item.key)}
             </Link>
           ))}
         </nav>
 
-        <div className="flex flex-col gap-3 border-t border-border p-5 md:px-10 flex-none">
+        <div
+          className="flex flex-col gap-3 p-5 md:px-10 flex-none"
+          style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}
+        >
           <Link
             href="/exhibit"
             onClick={() => setOpen(false)}
-            className="inline-flex h-14 items-center justify-center rounded-2xl border border-border text-sm font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-nb-green hover:text-nb-green-dark"
+            className="inline-flex h-14 items-center justify-center rounded-2xl text-sm font-semibold uppercase tracking-wide text-white/80 transition-colors hover:text-nb-lime-acid"
+            style={{ border: "1px solid rgba(255,255,255,0.2)" }}
           >
             {t("exhibit")}
           </Link>
