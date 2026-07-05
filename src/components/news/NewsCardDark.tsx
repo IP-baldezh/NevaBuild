@@ -73,7 +73,7 @@ export function NewsCardDark({ item }: { item: News }) {
             {item.publishedAt && (
               <time
                 className="text-[11px]"
-                style={{ color: "rgba(255,255,255,0.35)", fontFamily: "var(--font-mulish)" }}
+                style={{ color: "rgba(255,255,255,0.65)", fontFamily: "var(--font-mulish)" }}
               >
                 {formatDate(item.publishedAt, locale)}
               </time>
@@ -94,7 +94,7 @@ export function NewsCardDark({ item }: { item: News }) {
         {excerpt && (
           <p
             className="mt-2 line-clamp-2 text-sm leading-relaxed"
-            style={{ color: "rgba(255,255,255,0.4)", fontFamily: "var(--font-mulish)" }}
+            style={{ color: "rgba(255,255,255,0.75)", fontFamily: "var(--font-mulish)" }}
           >
             {excerpt}
           </p>

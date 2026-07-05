@@ -5,6 +5,7 @@ import { buildAlternates } from "@/lib/seo";
 import { getEventSettings, localizeEvent } from "@/server/services/event";
 import { formatDateRange } from "@/lib/format";
 import { getExhibitorCategories } from "@/server/services/exhibitors";
+import { getPartners } from "@/server/services/partners";
 
 import { ExhibitBackground } from "@/components/exhibit/ExhibitBackground";
 import { ExhibitHero } from "@/components/exhibit/ExhibitHero";
@@ -12,6 +13,7 @@ import { ExhibitBenefitsDark } from "@/components/exhibit/ExhibitBenefitsDark";
 import { ExhibitFormatsDark } from "@/components/exhibit/ExhibitFormatsDark";
 import { ExhibitStepsDark } from "@/components/exhibit/ExhibitStepsDark";
 import { ExhibitFormDark } from "@/components/exhibit/ExhibitFormDark";
+import { PartnersSection } from "@/components/home/PartnersSection";
 
 export const revalidate = 300;
 
@@ -35,7 +37,11 @@ export default async function ExhibitPage({ params }: { params: Promise<{ locale
   const { locale } = await params;
   setRequestLocale(locale as Locale);
 
-  const [settings, categories] = await Promise.all([getEventSettings(), getExhibitorCategories()]);
+  const [settings, categories, partners] = await Promise.all([
+    getEventSettings(),
+    getExhibitorCategories(),
+    getPartners(),
+  ]);
   const ev = localizeEvent(settings, locale as Locale);
   const dateRange = formatDateRange(ev.dateStart, ev.dateEnd, locale as Locale);
 
@@ -50,6 +56,8 @@ export default async function ExhibitPage({ params }: { params: Promise<{ locale
       <ExhibitFormatsDark />
 
       <ExhibitStepsDark />
+
+      <PartnersSection partners={partners} />
 
       <ExhibitFormDark categories={categories} />
 

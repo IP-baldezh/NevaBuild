@@ -156,7 +156,7 @@ function SpeakerCard({ name, role, initials, quote, bg, photo }: Speaker) {
           </div>
           <div>
             <p className="font-black text-white text-[11px] sm:text-[14px] leading-tight">{name}</p>
-            <p className="text-white/45 text-[9px] sm:text-[11px] mt-0.5 hidden sm:block">{role}</p>
+            <p className="text-white/75 text-[9px] sm:text-[11px] mt-0.5 hidden sm:block">{role}</p>
           </div>
         </div>
       </div>
@@ -215,7 +215,7 @@ export function AmbassadorsAlt() {
             </h2>
           </div>
           <div className="lg:max-w-[420px]">
-            <p className="font-mulish text-white/40 text-[15px] leading-relaxed">
+            <p className="font-mulish text-white/75 text-[15px] leading-relaxed">
               {ru
                 ? "Ведущие архитекторы, дизайнеры и девелоперы, которые определяют будущее строительной отрасли — уже с нами."
                 : "Leading architects, designers and developers shaping the future of the construction industry — already with us."}
@@ -232,7 +232,7 @@ export function AmbassadorsAlt() {
 
         {/* Footer row */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mt-12 pt-12 border-t border-white/[0.06]">
-          <p className="text-white/30 text-[13px]">
+          <p className="text-white/70 text-[13px]">
             {ru ? (
               <>
                 Уже <span className="text-nb-lime-acid font-bold">14 амбассадоров</span> подтвердили

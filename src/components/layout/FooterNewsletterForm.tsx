@@ -32,7 +32,7 @@ export function FooterNewsletterForm({ placeholder, submitLabel, noSpamLabel }: 
           <Send className="size-3.5" />
         </button>
       </form>
-      <p className="mt-2 text-xs text-white/40">{noSpamLabel}</p>
+      <p className="mt-2 text-xs text-white/65">{noSpamLabel}</p>
     </div>
   );
 }

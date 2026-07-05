@@ -92,7 +92,7 @@ export default async function ContactsPage({ params }: { params: Promise<{ local
                       <div>
                         <p
                           className="text-xs font-bold uppercase tracking-[0.12em] mb-0.5"
-                          style={{ color: "rgba(255,255,255,0.35)" }}
+                          style={{ color: "rgba(255,255,255,0.65)" }}
                         >
                           {label}
                         </p>
@@ -125,7 +125,7 @@ export default async function ContactsPage({ params }: { params: Promise<{ local
                   >
                     <p
                       className="text-xs font-bold uppercase tracking-[0.12em] mb-3"
-                      style={{ color: "rgba(255,255,255,0.35)" }}
+                      style={{ color: "rgba(255,255,255,0.70)" }}
                     >
                       {t("domains")}
                     </p>
@@ -177,7 +177,10 @@ export default async function ContactsPage({ params }: { params: Promise<{ local
                     >
                       <dt
                         className="text-sm"
-                        style={{ color: "rgba(255,255,255,0.4)", fontFamily: "var(--font-mulish)" }}
+                        style={{
+                          color: "rgba(255,255,255,0.70)",
+                          fontFamily: "var(--font-mulish)",
+                        }}
                       >
                         {label}
                       </dt>
@@ -237,7 +240,7 @@ export default async function ContactsPage({ params }: { params: Promise<{ local
                 )}
               </h2>
               <p
-                className="text-white/40 text-[15px] sm:text-[16px] leading-relaxed max-w-md"
+                className="text-white/80 text-[15px] sm:text-[16px] leading-relaxed max-w-md"
                 style={{ fontFamily: "var(--font-mulish)" }}
               >
                 {ru
@@ -249,7 +252,7 @@ export default async function ContactsPage({ params }: { params: Promise<{ local
             {/* Right: form card */}
             <Reveal delay={0.1}>
               <div
-                className="rounded-3xl p-6 sm:p-8"
+                className="rounded-3xl p-6 sm:p-8 text-white"
                 style={{
                   background: "rgba(255,255,255,0.04)",
                   border: "1px solid rgba(255,255,255,0.08)",

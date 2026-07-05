@@ -54,13 +54,13 @@ export function DarkPageHero({ eyebrow, title, titleDim, lead, children }: Props
             {titleDim && (
               <>
                 <br />
-                <span style={{ color: "rgba(255,255,255,0.28)" }}>{titleDim}</span>
+                <span style={{ color: "#ffffff" }}>{titleDim}</span>
               </>
             )}
           </h1>
           {lead && (
             <p
-              className="text-white/55 mt-5 leading-relaxed max-w-xl"
+              className="text-white/80 mt-5 leading-relaxed max-w-xl"
               style={{ fontSize: "clamp(13px, 1.2vw, 17px)", fontFamily: "var(--font-mulish)" }}
             >
               {lead}

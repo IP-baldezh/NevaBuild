@@ -12,7 +12,8 @@ type Format = {
   key: FormatKey;
   Icon: LucideIcon;
   num: string;
-  bg: string;
+  image: string;
+  overlay: string;
   sub: { ru: string; en: string };
 };
 
@@ -21,35 +22,45 @@ const FORMATS: Format[] = [
     key: "standard",
     Icon: LayoutGrid,
     num: "01",
-    bg: "linear-gradient(150deg, #1e3a2b 0%, #0a1510 100%)",
+    image:
+      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1200&auto=format&fit=crop",
+    overlay: "linear-gradient(150deg, rgba(10,21,16,0.75) 0%, rgba(5,10,8,0.88) 100%)",
     sub: { ru: "Готовая застройка · 6–18 м²", en: "Shell scheme · 6–18 m²" },
   },
   {
     key: "custom",
     Icon: Sparkles,
     num: "02",
-    bg: "linear-gradient(150deg, #1a2e38 0%, #0a1510 100%)",
+    image:
+      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1200&auto=format&fit=crop",
+    overlay: "linear-gradient(150deg, rgba(8,16,26,0.75) 0%, rgba(5,10,8,0.88) 100%)",
     sub: { ru: "Авторский дизайн · от 20 м²", en: "Custom design · from 20 m²" },
   },
   {
     key: "partner",
     Icon: Handshake,
     num: "03",
-    bg: "linear-gradient(150deg, #2a3818 0%, #0a1510 100%)",
+    image:
+      "https://images.unsplash.com/photo-1560439514-4e9645039924?q=80&w=1200&auto=format&fit=crop",
+    overlay: "linear-gradient(150deg, rgba(14,21,8,0.78) 0%, rgba(5,10,8,0.90) 100%)",
     sub: { ru: "Спонсорство · Брендинг площадки", en: "Sponsorship · Venue branding" },
   },
   {
     key: "speaker",
     Icon: Mic,
     num: "04",
-    bg: "linear-gradient(150deg, #1e3820 0%, #0a1510 100%)",
+    image:
+      "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=1200&auto=format&fit=crop",
+    overlay: "linear-gradient(150deg, rgba(10,21,10,0.78) 0%, rgba(5,10,8,0.90) 100%)",
     sub: { ru: "Деловая программа · Лекция или панель", en: "Business programme · Talk or panel" },
   },
   {
     key: "special",
     Icon: Rocket,
     num: "05",
-    bg: "linear-gradient(150deg, #20183a 0%, #0a1510 100%)",
+    image:
+      "https://images.unsplash.com/photo-1547637589-f54c34f5d7a4?q=80&w=1200&auto=format&fit=crop",
+    overlay: "linear-gradient(150deg, rgba(10,8,21,0.78) 0%, rgba(5,10,8,0.90) 100%)",
     sub: {
       ru: "Инсталляция · Активация · Интеграция",
       en: "Installation · Activation · Integration",
@@ -58,12 +69,32 @@ const FORMATS: Format[] = [
 ];
 
 function FormatCard({ fmt, label, ru }: { fmt: Format; label: string; ru: boolean }) {
-  const { Icon, num, bg, sub } = fmt;
+  const { Icon, num, image, overlay, sub } = fmt;
   return (
     <div
       className="group relative rounded-3xl overflow-hidden cursor-pointer"
-      style={{ background: bg, height: "clamp(260px, 28vw, 420px)" }}
+      style={{ height: "clamp(260px, 28vw, 420px)" }}
     >
+      {/* Photo background */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={image}
+        alt=""
+        aria-hidden
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        loading="lazy"
+      />
+
+      {/* Dark color overlay */}
+      <div className="absolute inset-0" style={{ background: overlay }} />
+
+      {/* Bottom fade */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-48 pointer-events-none"
+        style={{ background: "linear-gradient(to top, rgba(0,0,0,0.80), transparent)" }}
+        aria-hidden
+      />
+
       {/* Top accent line */}
       <div
         className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -79,31 +110,11 @@ function FormatCard({ fmt, label, ru }: { fmt: Format; label: string; ru: boolea
         <ArrowUpRight className="size-4" style={{ color: "#a9ec46" }} />
       </div>
 
-      {/* Decorative number */}
-      <div
-        className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
-        aria-hidden
-      >
-        <span
-          className="font-black text-white"
-          style={{ fontSize: "clamp(80px, 14vw, 160px)", opacity: 0.045, lineHeight: 1 }}
-        >
-          {num}
-        </span>
-      </div>
-
-      {/* Bottom gradient */}
-      <div
-        className="absolute bottom-0 left-0 right-0 h-36 pointer-events-none"
-        style={{ background: "linear-gradient(to top, rgba(0,0,0,0.65), transparent)" }}
-        aria-hidden
-      />
-
       {/* Content */}
       <div className="absolute inset-0 flex flex-col justify-between p-6 sm:p-8 z-10">
         <div
           className="size-11 rounded-xl flex items-center justify-center border"
-          style={{ background: "rgba(169,236,70,0.06)", borderColor: "rgba(169,236,70,0.18)" }}
+          style={{ background: "rgba(169,236,70,0.08)", borderColor: "rgba(169,236,70,0.20)" }}
         >
           <Icon className="size-5" style={{ color: "#a9ec46" }} />
         </div>
@@ -115,7 +126,7 @@ function FormatCard({ fmt, label, ru }: { fmt: Format; label: string; ru: boolea
             {label}
           </p>
           <p
-            className="text-white/40 text-[12px] tracking-wide"
+            className="text-white/75 text-[12px] tracking-wide"
             style={{ fontFamily: "var(--font-mulish)" }}
           >
             {ru ? sub.ru : sub.en}
@@ -143,7 +154,7 @@ function FormatCard({ fmt, label, ru }: { fmt: Format; label: string; ru: boolea
         </p>
         <p
           className="text-[13px] leading-relaxed"
-          style={{ color: "rgba(13,45,6,0.55)", fontFamily: "var(--font-mulish)" }}
+          style={{ color: "rgba(13,45,6,0.65)", fontFamily: "var(--font-mulish)" }}
         >
           {ru ? sub.ru : sub.en}
         </p>
@@ -189,13 +200,13 @@ export function ExhibitFormatsDark() {
               <>
                 {t("formatsTitle")}
                 <br />
-                <span style={{ color: "rgba(255,255,255,0.28)" }}>на ваш выбор.</span>
+                <span style={{ color: "#ffffff" }}>на ваш выбор.</span>
               </>
             ) : (
               <>
                 {t("formatsTitle")}
                 <br />
-                <span style={{ color: "rgba(255,255,255,0.28)" }}>your choice.</span>
+                <span style={{ color: "#ffffff" }}>your choice.</span>
               </>
             )}
           </h2>

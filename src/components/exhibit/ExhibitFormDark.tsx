@@ -38,7 +38,7 @@ export function ExhibitFormDark({ categories }: { categories: ExhibitorCategory[
             {t("formTitle")}
           </h2>
           <p
-            className="text-white/45 max-w-md mx-auto leading-relaxed"
+            className="text-white/80 max-w-md mx-auto leading-relaxed"
             style={{ fontSize: "clamp(13px, 1.1vw, 16px)", fontFamily: "var(--font-mulish)" }}
           >
             {ru
@@ -52,7 +52,7 @@ export function ExhibitFormDark({ categories }: { categories: ExhibitorCategory[
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="rounded-3xl p-8 sm:p-10"
+          className="rounded-3xl p-8 sm:p-10 text-white"
           style={{
             background: "rgba(255,255,255,0.04)",
             border: "1px solid rgba(255,255,255,0.09)",

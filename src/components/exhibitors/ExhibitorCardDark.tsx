@@ -75,7 +75,7 @@ export function ExhibitorCardDark({ exhibitor }: { exhibitor: ExhibitorWithCateg
       {category && (
         <p
           className="mt-1 text-sm"
-          style={{ color: "rgba(255,255,255,0.4)", fontFamily: "var(--font-mulish)" }}
+          style={{ color: "rgba(255,255,255,0.75)", fontFamily: "var(--font-mulish)" }}
         >
           {pick(locale, category.titleRu, category.titleEn)}
         </p>
@@ -83,7 +83,7 @@ export function ExhibitorCardDark({ exhibitor }: { exhibitor: ExhibitorWithCateg
 
       <div
         className="mt-auto flex items-center justify-between pt-4 text-sm"
-        style={{ color: "rgba(255,255,255,0.35)" }}
+        style={{ color: "rgba(255,255,255,0.70)" }}
       >
         {(city || country) && (
           <span className="inline-flex items-center gap-1.5">

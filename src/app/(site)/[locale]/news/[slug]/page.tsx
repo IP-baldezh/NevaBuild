@@ -93,7 +93,7 @@ export default async function NewsArticlePage({
               {item.publishedAt && (
                 <time
                   className="text-sm"
-                  style={{ color: "rgba(255,255,255,0.35)", fontFamily: "var(--font-mulish)" }}
+                  style={{ color: "rgba(255,255,255,0.65)", fontFamily: "var(--font-mulish)" }}
                 >
                   {formatDate(item.publishedAt, lc)}
                 </time>

@@ -68,7 +68,7 @@ export function AboutCtaDark({ dateRange, venue, city }: Props) {
         <Link
           href="/exhibit"
           className="inline-flex items-center justify-center rounded-xl font-bold text-[12px] tracking-[0.12em] uppercase px-12 py-5 border transition-all duration-200 hover:bg-white/10 touch-manipulation"
-          style={{ color: "rgba(255,255,255,0.65)", borderColor: "rgba(255,255,255,0.18)" }}
+          style={{ color: "rgba(255,255,255,0.90)", borderColor: "rgba(255,255,255,0.25)" }}
         >
           {ru ? "Стать экспонентом" : "Become an Exhibitor"}
         </Link>
@@ -80,7 +80,7 @@ export function AboutCtaDark({ dateRange, venue, city }: Props) {
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.3 }}
         className="text-sm"
-        style={{ color: "rgba(255,255,255,0.25)", fontFamily: "var(--font-mulish)" }}
+        style={{ color: "rgba(255,255,255,0.60)", fontFamily: "var(--font-mulish)" }}
       >
         {dateRange} · {city} · {venue}
       </m.p>
