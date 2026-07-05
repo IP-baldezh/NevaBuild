@@ -112,7 +112,7 @@ export function WhyVisit() {
             <p
               className="mb-10 leading-relaxed"
               style={{
-                color: "rgba(255,255,255,0.45)",
+                color: "rgba(255,255,255,0.85)",
                 fontFamily: "var(--font-mulish)",
                 fontSize: "15px",
               }}
@@ -133,7 +133,7 @@ export function WhyVisit() {
           {/* Right — 2×3 grid */}
           <div
             className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-px"
-            style={{ background: "rgba(255,255,255,0.06)" }}
+            style={{ background: "rgba(169,236,70,0.22)" }}
           >
             {reasons.map(({ num, title, desc }) => (
               <div
@@ -143,14 +143,14 @@ export function WhyVisit() {
               >
                 <span
                   className="block font-black mb-3 tabular-nums group-hover:text-nb-lime-acid transition-colors duration-300"
-                  style={{ fontSize: "clamp(28px, 3vw, 40px)", color: "rgba(169,236,70,0.25)" }}
+                  style={{ fontSize: "clamp(28px, 3vw, 40px)", color: "rgb(169,236,70)" }}
                 >
                   {num}
                 </span>
                 <h3 className="font-black text-white text-[16px] leading-snug mb-2">{title}</h3>
                 <p
                   style={{
-                    color: "rgba(255,255,255,0.4)",
+                    color: "rgba(255,255,255,0.85)",
                     fontFamily: "var(--font-mulish)",
                     fontSize: "13px",
                     lineHeight: "1.6",

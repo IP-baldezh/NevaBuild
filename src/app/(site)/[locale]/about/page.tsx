@@ -4,13 +4,17 @@ import type { Locale } from "@/i18n/routing";
 import { buildAlternates } from "@/lib/seo";
 import { getEventSettings, localizeEvent } from "@/server/services/event";
 import { formatDateRange } from "@/lib/format";
+import { getPartners } from "@/server/services/partners";
 
 import { AboutBackground } from "@/components/about/AboutBackground";
 import { AboutHero } from "@/components/about/AboutHero";
+import { AboutIntroBlock } from "@/components/about/AboutIntroBlock";
 import { AboutStatsDark } from "@/components/about/AboutStatsDark";
 import { AboutForWhomDark } from "@/components/about/AboutForWhomDark";
+import { AboutBusinessCard } from "@/components/about/AboutBusinessCard";
 import { AboutSectionsDark } from "@/components/about/AboutSectionsDark";
 import { AboutCtaDark } from "@/components/about/AboutCtaDark";
+import { PartnersSection } from "@/components/home/PartnersSection";
 import type { StatItem } from "@/components/home/StatsGrid";
 
 export const revalidate = 300;
@@ -38,7 +42,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
   const tAboutPage = await getTranslations({ locale: locale as Locale, namespace: "AboutPage" });
   const tStats = await getTranslations({ locale: locale as Locale, namespace: "Stats" });
 
-  const settings = await getEventSettings();
+  const [settings, partners] = await Promise.all([getEventSettings(), getPartners()]);
   const ev = localizeEvent(settings, locale as Locale);
 
   const dateRange = formatDateRange(ev.dateStart, ev.dateEnd, locale as Locale);
@@ -88,11 +92,17 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
 
       <AboutHero lead={tAboutPage("lead")} dateRange={dateRange} venue={ev.venue} city={ev.city} />
 
+      <AboutIntroBlock />
+
       <AboutStatsDark stats={stats} />
 
       <AboutForWhomDark />
 
+      <AboutBusinessCard />
+
       <AboutSectionsDark />
+
+      <PartnersSection partners={partners} />
 
       <AboutCtaDark dateRange={dateRange} venue={ev.venue} city={ev.city} />
       <div id="about-end" aria-hidden />

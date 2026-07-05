@@ -62,13 +62,13 @@ export function ExhibitHero({ dateRange, venue, city }: Props) {
               <>
                 Станьте
                 <br />
-                <span style={{ color: "rgba(255,255,255,0.28)" }}>участником.</span>
+                <span style={{ color: "#ffffff" }}>участником.</span>
               </>
             ) : (
               <>
                 Become an
                 <br />
-                <span style={{ color: "rgba(255,255,255,0.28)" }}>exhibitor.</span>
+                <span style={{ color: "#ffffff" }}>exhibitor.</span>
               </>
             )}
           </h1>
@@ -107,7 +107,7 @@ export function ExhibitHero({ dateRange, venue, city }: Props) {
           </m.div>
 
           <p
-            className="font-bold text-white/30 mt-8 tracking-[0.14em]"
+            className="font-bold text-white/65 mt-8 tracking-[0.14em]"
             style={{ fontSize: "clamp(11px, 0.9vw, 13px)", fontFamily: "var(--font-mulish)" }}
           >
             {dateRange} / {city.toUpperCase()} · {venue.toUpperCase()}

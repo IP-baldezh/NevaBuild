@@ -97,7 +97,7 @@ export function NewsPreview({ news }: { news: News[] }) {
                     </span>
                     <time
                       className="text-[12px]"
-                      style={{ color: "rgba(255,255,255,0.3)", fontFamily: "var(--font-mulish)" }}
+                      style={{ color: "rgba(255,255,255,0.65)", fontFamily: "var(--font-mulish)" }}
                     >
                       {formatDate(n.publishedAt ?? n.createdAt, locale)}
                     </time>
@@ -110,7 +110,7 @@ export function NewsPreview({ news }: { news: News[] }) {
                   {(n.excerptRu || n.excerptEn) && (
                     <p
                       className="text-[13px] leading-relaxed flex-1"
-                      style={{ color: "rgba(255,255,255,0.4)", fontFamily: "var(--font-mulish)" }}
+                      style={{ color: "rgba(255,255,255,0.75)", fontFamily: "var(--font-mulish)" }}
                     >
                       {pick(locale, n.excerptRu ?? "", n.excerptEn ?? "")}
                     </p>

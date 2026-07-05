@@ -16,7 +16,7 @@ export function ProgramSponsors({ ru }: { ru: boolean }) {
     <div className="pb-10 border-b" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
       <p
         className="text-[10px] font-bold uppercase tracking-[0.22em] mb-6"
-        style={{ color: "rgba(255,255,255,0.28)", fontFamily: "var(--font-mulish)" }}
+        style={{ color: "rgba(255,255,255,0.60)", fontFamily: "var(--font-mulish)" }}
       >
         {ru ? "Партнёры программы" : "Programme Partners"}
       </p>

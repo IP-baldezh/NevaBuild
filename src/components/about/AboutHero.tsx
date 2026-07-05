@@ -47,7 +47,7 @@ export function AboutHero({ lead, dateRange, venue, city }: Props) {
         >
           <h1
             className="font-black text-white leading-[1.08] mb-5"
-            style={{ fontSize: "clamp(18px, 2.4vw, 36px)", letterSpacing: "0.04em" }}
+            style={{ fontSize: "clamp(26px, 3.2vw, 52px)", letterSpacing: "0.03em" }}
           >
             {ru
               ? "МЕЖДУНАРОДНАЯ СТРОИТЕЛЬНО-ИНТЕРЬЕРНАЯ ВЫСТАВКА И ФОРУМ"
@@ -55,7 +55,7 @@ export function AboutHero({ lead, dateRange, venue, city }: Props) {
           </h1>
 
           <p
-            className="text-white/55 mb-5 leading-relaxed"
+            className="text-white/85 mb-5 leading-relaxed"
             style={{
               fontSize: "clamp(13px, 1.2vw, 16px)",
               fontFamily: "var(--font-mulish)",
@@ -66,7 +66,7 @@ export function AboutHero({ lead, dateRange, venue, city }: Props) {
           </p>
 
           <p
-            className="font-bold text-white/40 mb-8 tracking-[0.14em]"
+            className="font-bold text-white/70 mb-8 tracking-[0.14em]"
             style={{ fontSize: "clamp(11px, 0.9vw, 13px)", fontFamily: "var(--font-mulish)" }}
           >
             {dateRange} / {city.toUpperCase()} · {venue.toUpperCase()}
@@ -76,13 +76,21 @@ export function AboutHero({ lead, dateRange, venue, city }: Props) {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-wrap gap-3"
           >
             <Link
               href="/tickets"
               className="inline-flex items-center rounded-xl font-black text-[12px] tracking-[0.18em] uppercase px-8 py-4 transition-all duration-200 hover:brightness-110 touch-manipulation"
               style={{ background: "#a9ec46", color: "#0d2d06" }}
             >
-              {ru ? "Зарегистрироваться" : "Register Now"}
+              {ru ? "Получить билет" : "Get a Ticket"}
+            </Link>
+            <Link
+              href="/exhibit"
+              className="inline-flex items-center rounded-xl font-black text-[12px] tracking-[0.14em] uppercase px-8 py-4 border transition-all duration-200 hover:bg-white/10 touch-manipulation"
+              style={{ borderColor: "rgba(255,255,255,0.25)", color: "rgba(255,255,255,0.9)" }}
+            >
+              {ru ? "Стать экспонентом" : "Become Exhibitor"}
             </Link>
           </m.div>
         </m.div>

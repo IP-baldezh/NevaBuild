@@ -150,7 +150,7 @@ export function Footer() {
 
           {/* Bottom */}
           <div className="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-white/40">
+            <p className="text-xs text-white/60">
               © 2009–{year} NevaBuild. {t("rights")}
             </p>
 
@@ -158,14 +158,14 @@ export function Footer() {
               {/* Legal links */}
               <Link
                 href="/legal/privacy"
-                className="text-xs text-white/35 hover:text-white/70 transition-colors hidden sm:block"
+                className="text-xs text-white/55 hover:text-white/85 transition-colors hidden sm:block"
               >
                 {t("privacy")}
               </Link>
               <span className="text-white/15 hidden sm:block">·</span>
               <Link
                 href="/legal/terms"
-                className="text-xs text-white/35 hover:text-white/70 transition-colors hidden sm:block"
+                className="text-xs text-white/55 hover:text-white/85 transition-colors hidden sm:block"
               >
                 {t("termsUse")}
               </Link>

@@ -77,13 +77,13 @@ export function ForWhom({ categories = [] }: ForWhomProps) {
                 <>
                   Для кого
                   <br />
-                  <span style={{ color: "rgba(255,255,255,0.35)" }}>NevaBuild</span>
+                  <span style={{ color: "#ffffff" }}>NevaBuild</span>
                 </>
               ) : (
                 <>
                   Who is
                   <br />
-                  <span style={{ color: "rgba(255,255,255,0.35)" }}>NevaBuild for</span>
+                  <span style={{ color: "#ffffff" }}>NevaBuild for</span>
                 </>
               )}
             </h2>
@@ -121,7 +121,7 @@ export function ForWhom({ categories = [] }: ForWhomProps) {
               <p
                 className="mb-8 leading-relaxed"
                 style={{
-                  color: "rgba(255,255,255,0.5)",
+                  color: "rgba(255,255,255,0.82)",
                   fontFamily: "var(--font-mulish)",
                   fontSize: "15px",
                 }}
@@ -139,7 +139,7 @@ export function ForWhom({ categories = [] }: ForWhomProps) {
                     />
                     <span
                       className="text-sm"
-                      style={{ color: "rgba(255,255,255,0.6)", fontFamily: "var(--font-mulish)" }}
+                      style={{ color: "rgba(255,255,255,0.82)", fontFamily: "var(--font-mulish)" }}
                     >
                       {f}
                     </span>
@@ -188,7 +188,7 @@ export function ForWhom({ categories = [] }: ForWhomProps) {
               <p
                 className="mb-8 leading-relaxed"
                 style={{
-                  color: "rgba(255,255,255,0.5)",
+                  color: "rgba(255,255,255,0.82)",
                   fontFamily: "var(--font-mulish)",
                   fontSize: "15px",
                 }}
@@ -206,7 +206,7 @@ export function ForWhom({ categories = [] }: ForWhomProps) {
                     />
                     <span
                       className="text-sm"
-                      style={{ color: "rgba(255,255,255,0.6)", fontFamily: "var(--font-mulish)" }}
+                      style={{ color: "rgba(255,255,255,0.82)", fontFamily: "var(--font-mulish)" }}
                     >
                       {f}
                     </span>

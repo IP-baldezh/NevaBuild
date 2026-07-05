@@ -119,7 +119,7 @@ export function AboutForWhomDark() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: 0.2 + i * 0.06 }}
                 className="flex items-start gap-3 text-sm leading-snug"
-                style={{ color: "rgba(255,255,255,0.50)", fontFamily: "var(--font-mulish)" }}
+                style={{ color: "rgba(255,255,255,0.82)", fontFamily: "var(--font-mulish)" }}
               >
                 <span
                   className="mt-[6px] size-[6px] rounded-full flex-shrink-0"
@@ -154,7 +154,7 @@ export function AboutForWhomDark() {
           <div>
             <span
               className="text-xs uppercase tracking-[0.16em] font-bold"
-              style={{ color: "rgba(255,255,255,0.32)" }}
+              style={{ color: "rgba(255,255,255,0.70)" }}
             >
               {ru ? "Экспонентам" : "For exhibitors"}
             </span>
@@ -175,7 +175,7 @@ export function AboutForWhomDark() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: 0.3 + i * 0.06 }}
                 className="flex items-start gap-3 text-sm leading-snug"
-                style={{ color: "rgba(255,255,255,0.45)", fontFamily: "var(--font-mulish)" }}
+                style={{ color: "rgba(255,255,255,0.82)", fontFamily: "var(--font-mulish)" }}
               >
                 <span
                   className="mt-[6px] size-[6px] rounded-full flex-shrink-0"

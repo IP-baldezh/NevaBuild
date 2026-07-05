@@ -55,9 +55,9 @@ function Countdown({ ru }: { ru: boolean }) {
             >
               {pad(val)}
             </div>
-            <div className="text-white/50 text-[10px] mt-1 uppercase tracking-wider">{label}</div>
+            <div className="text-white/75 text-[10px] mt-1 uppercase tracking-wider">{label}</div>
           </div>
-          {i < items.length - 1 && <span className="font-black text-white/40 text-lg mb-3">:</span>}
+          {i < items.length - 1 && <span className="font-black text-white/60 text-lg mb-3">:</span>}
         </div>
       ))}
     </div>
@@ -111,7 +111,7 @@ export function Hero({ dateStart, dateEnd, venue, city }: HeroProps) {
       body: ru
         ? "Международная строительно-интерьерная выставка Северо-Западного региона"
         : "International construction & interior exhibition of the Northwestern region",
-      cta: { label: ru ? "Зарегистрироваться" : "Register", href: "/tickets" },
+      cta: { label: ru ? "Получить билет" : "Get a Ticket", href: "/tickets" },
       cta2: { label: ru ? "Стать экспонентом" : "Become Exhibitor", href: "/exhibit" },
     },
     {
@@ -131,8 +131,8 @@ export function Hero({ dateStart, dateEnd, venue, city }: HeroProps) {
       body: ru
         ? "Застройщики, дизайнеры, инженеры и поставщики материалов — все под одной крышей"
         : "Developers, designers, engineers and suppliers — all under one roof",
-      cta: { label: ru ? "Посетить выставку" : "Visit Exhibition", href: "/tickets" },
-      cta2: { label: ru ? "Деловая программа" : "Business Programme", href: "/program" },
+      cta: { label: ru ? "Получить билет" : "Get a Ticket", href: "/tickets" },
+      cta2: { label: ru ? "Стать экспонентом" : "Become Exhibitor", href: "/exhibit" },
     },
     {
       id: "program",
@@ -149,8 +149,8 @@ export function Hero({ dateStart, dateEnd, venue, city }: HeroProps) {
       body: ru
         ? "Практические конференции, воркшопы и живые демонстрации инновационных решений"
         : "Practical conferences, workshops and live demonstrations of innovative solutions",
-      cta: { label: ru ? "Программа мероприятий" : "Event Programme", href: "/program" },
-      cta2: { label: ru ? "Стать спикером" : "Become Speaker", href: "/about" },
+      cta: { label: ru ? "Получить билет" : "Get a Ticket", href: "/tickets" },
+      cta2: { label: ru ? "Стать экспонентом" : "Become Exhibitor", href: "/exhibit" },
     },
   ];
 
@@ -352,7 +352,7 @@ export function Hero({ dateStart, dateEnd, venue, city }: HeroProps) {
                 >
                   <Link
                     href={slide.cta.href}
-                    className="inline-flex items-center gap-2 font-bold text-[14px] bg-white text-brand-red px-5 py-3 rounded-xl hover:-translate-y-0.5 transition-all duration-200"
+                    className="inline-flex items-center gap-2 font-bold text-[15px] bg-white text-brand-red px-7 py-4 rounded-xl hover:-translate-y-0.5 transition-all duration-200"
                     style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.22)" }}
                   >
                     {slide.cta.label}
@@ -366,7 +366,7 @@ export function Hero({ dateStart, dateEnd, venue, city }: HeroProps) {
                   {slide.cta2 && (
                     <Link
                       href={slide.cta2.href}
-                      className="inline-flex items-center gap-2 font-bold text-[14px] text-white px-5 py-3 rounded-xl hover:bg-white/10 transition-all duration-200"
+                      className="inline-flex items-center gap-2 font-bold text-[15px] text-white px-7 py-4 rounded-xl hover:bg-white/10 transition-all duration-200"
                       style={{ border: "1px solid rgba(255,255,255,0.3)" }}
                     >
                       {slide.cta2.label}

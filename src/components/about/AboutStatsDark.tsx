@@ -63,7 +63,7 @@ export function AboutStatsDark({ stats }: Props) {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg leading-relaxed max-w-[38ch]"
-            style={{ color: "rgba(255,255,255,0.40)", fontFamily: "var(--font-mulish)" }}
+            style={{ color: "rgba(255,255,255,0.80)", fontFamily: "var(--font-mulish)" }}
           >
             {ru
               ? "Главная строительная выставка Северо-Запада. Четыре дня, сотни участников, десятки тысяч решений."
@@ -98,13 +98,13 @@ export function AboutStatsDark({ stats }: Props) {
             >
               <span
                 className="text-sm leading-tight max-w-[50%]"
-                style={{ color: "rgba(255,255,255,0.38)", fontFamily: "var(--font-mulish)" }}
+                style={{ color: "rgba(255,255,255,0.75)", fontFamily: "var(--font-mulish)" }}
               >
                 {s.label}
                 {s.sub && (
                   <span
                     className="block text-xs mt-0.5"
-                    style={{ color: "rgba(255,255,255,0.20)" }}
+                    style={{ color: "rgba(255,255,255,0.55)" }}
                   >
                     {s.sub}
                   </span>

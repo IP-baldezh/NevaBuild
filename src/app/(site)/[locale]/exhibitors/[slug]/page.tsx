@@ -86,7 +86,7 @@ export default async function ExhibitorPage({
             <Link
               href="/exhibitors"
               className="inline-flex items-center gap-2 text-sm font-semibold mb-8 transition-colors hover:text-[#a9ec46]"
-              style={{ color: "rgba(255,255,255,0.5)" }}
+              style={{ color: "rgba(255,255,255,0.80)" }}
             >
               <ArrowLeft className="size-4" />
               {tc("backToCatalog")}
@@ -130,7 +130,7 @@ export default async function ExhibitorPage({
                 </h1>
                 <div
                   className="mt-2 flex flex-wrap gap-4 text-sm"
-                  style={{ color: "rgba(255,255,255,0.45)" }}
+                  style={{ color: "rgba(255,255,255,0.75)" }}
                 >
                   {(city || country) && (
                     <span className="inline-flex items-center gap-1.5">

@@ -75,7 +75,7 @@ export default async function ExhibitorsPage({
           <ExhibitorFilters categories={categories} countries={countries} />
 
           {exhibitors.length === 0 ? (
-            <p className="py-20 text-center" style={{ color: "rgba(255,255,255,0.4)" }}>
+            <p className="py-20 text-center" style={{ color: "rgba(255,255,255,0.65)" }}>
               {t("notFound")}
             </p>
           ) : (

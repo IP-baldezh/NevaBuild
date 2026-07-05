@@ -1,6 +1,19 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Boxes, Cpu, Truck, Handshake, Lightbulb, ChevronDown } from "lucide-react";
+import {
+  Boxes,
+  Cpu,
+  Truck,
+  Handshake,
+  Lightbulb,
+  Compass,
+  Palette,
+  Building2,
+  Wrench,
+  ShoppingBag,
+  Home,
+  User,
+} from "lucide-react";
 import type { Locale } from "@/i18n/routing";
 import { buildAlternates } from "@/lib/seo";
 import { Link } from "@/i18n/navigation";
@@ -9,7 +22,7 @@ import { formatDateRange } from "@/lib/format";
 import { DarkBackground } from "@/components/layout/DarkBackground";
 import { DarkPageHero } from "@/components/layout/DarkPageHero";
 import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/ui/scroll-reveal";
-import { Reveal } from "@/components/ui/reveal";
+import { VisitFaqAccordion } from "@/components/visit/VisitFaqAccordion";
 
 export const revalidate = 300;
 
@@ -28,14 +41,36 @@ export async function generateMetadata({
 }
 
 const WHO = [
-  "architects",
-  "designers",
-  "developers",
-  "builders",
-  "buyers",
-  "owners",
-  "private",
+  { key: "architects", Icon: Compass },
+  { key: "designers", Icon: Palette },
+  { key: "developers", Icon: Building2 },
+  { key: "builders", Icon: Wrench },
+  { key: "buyers", Icon: ShoppingBag },
+  { key: "owners", Icon: Home },
+  { key: "private", Icon: User },
 ] as const;
+
+const WHO_DESCS: Record<"ru" | "en", Record<string, string>> = {
+  ru: {
+    architects: "Архитекторы, конструкторы и проектировщики жилых и коммерческих объектов",
+    designers: "Дизайнеры интерьеров, декораторы и творческие специалисты",
+    developers: "Застройщики и девелоперы жилой и коммерческой недвижимости",
+    builders: "Строительные и ремонтные компании, подрядчики и субподрядчики",
+    buyers: "Специалисты закупочных служб и представители торговых сетей",
+    owners: "Владельцы объектов, ищущие новых поставщиков и решения",
+    private: "Частные лица, планирующие ремонт или строительство",
+  },
+  en: {
+    architects: "Architects, structural engineers and project designers",
+    designers: "Interior designers, decorators and creative professionals",
+    developers: "Property developers in residential and commercial real estate",
+    builders: "Construction and renovation companies, contractors and subcontractors",
+    buyers: "Procurement specialists and retail chain representatives",
+    owners: "Property owners seeking new suppliers and solutions",
+    private: "Individuals planning renovation or new construction",
+  },
+};
+
 const FIND = [
   { key: "materials", Icon: Boxes },
   { key: "tech", Icon: Cpu },
@@ -43,6 +78,24 @@ const FIND = [
   { key: "partners", Icon: Handshake },
   { key: "ideas", Icon: Lightbulb },
 ] as const;
+
+const FIND_DESCS: Record<"ru" | "en", Record<string, string>> = {
+  ru: {
+    materials: "Строительные и отделочные материалы от 500+ производителей",
+    tech: "Инновационные технологии, умные системы и BIM-решения",
+    suppliers: "Прямые поставщики без посредников — договоры на выставке",
+    partners: "Деловые партнёры и инвесторы для совместных проектов",
+    ideas: "Актуальные тренды дизайна и архитектуры из первых уст",
+  },
+  en: {
+    materials: "Construction and finishing materials from 500+ manufacturers",
+    tech: "Innovative technologies, smart systems and BIM solutions",
+    suppliers: "Direct suppliers, no middlemen — sign contracts on-site",
+    partners: "Business partners and investors for joint projects",
+    ideas: "Current design and architecture trends direct from the source",
+  },
+};
+
 const FAQ = ["1", "2", "3", "4"] as const;
 
 export default async function VisitPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -50,6 +103,7 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
   setRequestLocale(locale as Locale);
   const t = await getTranslations({ locale: locale as Locale, namespace: "VisitPage" });
   const ru = locale === "ru";
+  const lang = ru ? "ru" : "en";
 
   const settings = await getEventSettings();
   const ev = localizeEvent(settings, locale as Locale);
@@ -75,14 +129,14 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
         <Link
           href="/program"
           className="inline-flex items-center rounded-xl font-black text-[12px] tracking-[0.14em] uppercase px-8 py-4 border transition-all duration-200 hover:bg-white/10"
-          style={{ borderColor: "rgba(255,255,255,0.25)", color: "rgba(255,255,255,0.75)" }}
+          style={{ borderColor: "rgba(255,255,255,0.25)", color: "rgba(255,255,255,0.90)" }}
         >
           {ru ? "Программа" : "Programme"}
         </Link>
       </DarkPageHero>
 
       {/* Why */}
-      <section className="relative z-10 py-20">
+      <section className="relative z-10 py-10 sm:py-16">
         <div className="container-neva max-w-3xl text-center mx-auto">
           <ScrollReveal>
             <span
@@ -98,14 +152,22 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
               {t("whyTitle")}
             </h2>
             <p
-              className="text-white/55 leading-relaxed"
-              style={{ fontSize: "clamp(14px, 1.2vw, 18px)", fontFamily: "var(--font-mulish)" }}
+              className="leading-relaxed"
+              style={{
+                color: "rgba(255,255,255,0.85)",
+                fontSize: "clamp(14px, 1.2vw, 18px)",
+                fontFamily: "var(--font-mulish)",
+              }}
             >
               {t("whyText")}
             </p>
             <p
-              className="mt-6 font-bold text-white/30 tracking-[0.14em]"
-              style={{ fontSize: "12px", fontFamily: "var(--font-mulish)" }}
+              className="mt-6 font-bold tracking-[0.14em]"
+              style={{
+                fontSize: "12px",
+                fontFamily: "var(--font-mulish)",
+                color: "rgba(255,255,255,0.60)",
+              }}
             >
               {dateRange} · {ev.city.toUpperCase()} · {ev.venue.toUpperCase()}
             </p>
@@ -115,7 +177,7 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
 
       {/* Who */}
       <section
-        className="relative z-10 py-20 border-t"
+        className="relative z-10 py-10 sm:py-16 border-t"
         style={{ borderColor: "rgba(255,255,255,0.06)" }}
       >
         <div className="container-neva">
@@ -133,19 +195,41 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
               {t("whoTitle")}
             </h2>
           </ScrollReveal>
-          <StaggerReveal className="flex flex-wrap gap-3">
-            {WHO.map((k) => (
-              <StaggerItem key={k}>
-                <span
-                  className="text-sm font-semibold px-5 py-2.5 rounded-full border transition-colors"
+          <StaggerReveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {WHO.map(({ key, Icon }) => (
+              <StaggerItem key={key}>
+                <div
+                  className="flex flex-col gap-4 rounded-2xl p-5 h-full transition-colors duration-200"
                   style={{
                     background: "rgba(255,255,255,0.04)",
-                    borderColor: "rgba(255,255,255,0.12)",
-                    color: "rgba(255,255,255,0.75)",
+                    border: "1px solid rgba(255,255,255,0.08)",
                   }}
                 >
-                  {t(`who.${k}`)}
-                </span>
+                  <div
+                    className="size-11 rounded-xl flex items-center justify-center flex-shrink-0"
+                    style={{
+                      background: "rgba(169,236,70,0.08)",
+                      border: "1px solid rgba(169,236,70,0.18)",
+                    }}
+                  >
+                    <Icon className="size-5" style={{ color: "#a9ec46" }} />
+                  </div>
+                  <div>
+                    <p className="font-black text-white text-[15px] leading-tight mb-1.5">
+                      {t(`who.${key}`)}
+                    </p>
+                    <p
+                      style={{
+                        color: "rgba(255,255,255,0.70)",
+                        fontFamily: "var(--font-mulish)",
+                        fontSize: "13px",
+                        lineHeight: "1.55",
+                      }}
+                    >
+                      {WHO_DESCS[lang][key]}
+                    </p>
+                  </div>
+                </div>
               </StaggerItem>
             ))}
           </StaggerReveal>
@@ -154,7 +238,7 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
 
       {/* Find */}
       <section
-        className="relative z-10 py-20 border-t"
+        className="relative z-10 py-10 sm:py-16 border-t"
         style={{ borderColor: "rgba(255,255,255,0.06)" }}
       >
         <div className="container-neva">
@@ -172,11 +256,11 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
               {t("findTitle")}
             </h2>
           </ScrollReveal>
-          <StaggerReveal className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+          <StaggerReveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
             {FIND.map(({ key, Icon }) => (
               <StaggerItem key={key}>
                 <div
-                  className="flex flex-col items-center gap-4 rounded-2xl p-6 text-center"
+                  className="flex flex-col gap-4 rounded-2xl p-6 h-full"
                   style={{
                     background: "rgba(255,255,255,0.04)",
                     border: "1px solid rgba(255,255,255,0.08)",
@@ -191,7 +275,21 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
                   >
                     <Icon className="size-6" style={{ color: "#a9ec46" }} />
                   </div>
-                  <span className="text-sm font-bold text-white/80">{t(`find.${key}`)}</span>
+                  <div>
+                    <p className="font-black text-white text-[15px] leading-tight mb-1.5">
+                      {t(`find.${key}`)}
+                    </p>
+                    <p
+                      style={{
+                        color: "rgba(255,255,255,0.70)",
+                        fontFamily: "var(--font-mulish)",
+                        fontSize: "13px",
+                        lineHeight: "1.55",
+                      }}
+                    >
+                      {FIND_DESCS[lang][key]}
+                    </p>
+                  </div>
                 </div>
               </StaggerItem>
             ))}
@@ -201,7 +299,7 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
 
       {/* FAQ */}
       <section
-        className="relative z-10 py-20 border-t"
+        className="relative z-10 py-10 sm:py-16 border-t"
         style={{ borderColor: "rgba(255,255,255,0.06)" }}
       >
         <div className="container-neva max-w-3xl">
@@ -219,33 +317,7 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
               {t("faqTitle")}
             </h2>
           </ScrollReveal>
-          <div className="space-y-3">
-            {FAQ.map((n, i) => (
-              <Reveal key={n} delay={i * 0.07}>
-                <details
-                  className="group rounded-2xl p-5"
-                  style={{
-                    background: "rgba(255,255,255,0.04)",
-                    border: "1px solid rgba(255,255,255,0.08)",
-                  }}
-                >
-                  <summary className="flex items-center justify-between gap-4 font-black text-white cursor-pointer marker:content-none list-none">
-                    {t(`faq.q${n}`)}
-                    <ChevronDown
-                      className="size-5 flex-shrink-0 transition-transform duration-200 group-open:rotate-180"
-                      style={{ color: "#a9ec46" }}
-                    />
-                  </summary>
-                  <p
-                    className="mt-3 leading-relaxed"
-                    style={{ color: "rgba(255,255,255,0.5)", fontFamily: "var(--font-mulish)" }}
-                  >
-                    {t(`faq.a${n}`)}
-                  </p>
-                </details>
-              </Reveal>
-            ))}
-          </div>
+          <VisitFaqAccordion items={FAQ.map((n) => ({ q: t(`faq.q${n}`), a: t(`faq.a${n}`) }))} />
         </div>
       </section>
 

@@ -12,15 +12,15 @@ import type { ProgramDayWithSessions } from "@/server/services/program";
 const ZONE_COLORS = ["#E11B22", "#a9ec46", "#0066cc", "#7c3aed", "#f59e0b"];
 
 const TYPE_COLORS: Record<string, string> = {
-  lecture: "text-teal-300",
-  workshop: "text-orange-300",
-  conference: "text-blue-300",
-  panel: "text-violet-300",
-  ceremony: "text-emerald-300",
-  presentation: "text-sky-300",
-  networking: "text-pink-300",
-  exhibition: "text-gray-300",
-  default: "text-gray-400",
+  lecture: "text-white",
+  workshop: "text-nb-lime-acid",
+  conference: "text-white",
+  panel: "text-nb-lime-acid",
+  ceremony: "text-brand-red",
+  presentation: "text-white",
+  networking: "text-nb-lime-acid",
+  exhibition: "text-white",
+  default: "text-white/80",
 };
 
 function typeColor(type: string): string {
@@ -110,7 +110,7 @@ export function ProgramPreview({ days }: { days: ProgramDayWithSessions[] }) {
           <div className="mb-6">
             <p
               className="text-[11px] uppercase tracking-[0.14em] mb-3 font-bold"
-              style={{ color: "rgba(255,255,255,0.3)", fontFamily: "var(--font-mulish)" }}
+              style={{ color: "rgba(255,255,255,0.7)", fontFamily: "var(--font-mulish)" }}
             >
               {ru ? "Выберите зону" : "Select zone"}
             </p>
@@ -125,7 +125,7 @@ export function ProgramPreview({ days }: { days: ProgramDayWithSessions[] }) {
                     className="flex items-center gap-2 font-bold text-[13.5px] px-4 py-2 rounded-xl border transition-all duration-200"
                     style={{
                       background: active ? "rgba(169,236,70,0.15)" : "rgba(255,255,255,0.04)",
-                      color: active ? "#a9ec46" : "rgba(255,255,255,0.5)",
+                      color: active ? "#a9ec46" : "rgba(255,255,255,0.85)",
                       borderColor: active ? "rgba(169,236,70,0.4)" : "rgba(255,255,255,0.08)",
                     }}
                   >
@@ -173,7 +173,7 @@ export function ProgramPreview({ days }: { days: ProgramDayWithSessions[] }) {
                   ? { background: "#a9ec46", color: "#0d2d06", borderColor: "#a9ec46" }
                   : {
                       background: "rgba(255,255,255,0.04)",
-                      color: "rgba(255,255,255,0.55)",
+                      color: "rgba(255,255,255,0.85)",
                       borderColor: "rgba(255,255,255,0.08)",
                     }
               }
@@ -187,7 +187,7 @@ export function ProgramPreview({ days }: { days: ProgramDayWithSessions[] }) {
         {visibleSessions.length === 0 ? (
           <div
             className="text-center py-16"
-            style={{ color: "rgba(255,255,255,0.3)", fontFamily: "var(--font-mulish)" }}
+            style={{ color: "rgba(255,255,255,0.7)", fontFamily: "var(--font-mulish)" }}
           >
             {activeHall
               ? ru
@@ -246,7 +246,7 @@ export function ProgramPreview({ days }: { days: ProgramDayWithSessions[] }) {
                       {hall && (
                         <div
                           className="flex items-center gap-1.5"
-                          style={{ color: "rgba(255,255,255,0.35)" }}
+                          style={{ color: "rgba(255,255,255,0.7)" }}
                         >
                           <MapPin className="size-[13px]" />
                           <span style={{ fontFamily: "var(--font-mulish)", fontSize: "13px" }}>
@@ -257,7 +257,7 @@ export function ProgramPreview({ days }: { days: ProgramDayWithSessions[] }) {
                       {s.speakers && s.speakers.length > 0 && (
                         <div
                           className="flex items-center gap-1.5"
-                          style={{ color: "rgba(255,255,255,0.35)" }}
+                          style={{ color: "rgba(255,255,255,0.7)" }}
                         >
                           <Users className="size-[13px]" />
                           <span style={{ fontFamily: "var(--font-mulish)", fontSize: "13px" }}>

@@ -28,6 +28,7 @@ type Section = {
   description: string;
   items: string[];
   bg: string;
+  image: string;
   category: Exclude<Category, "all">;
 };
 
@@ -48,6 +49,8 @@ const SECTIONS_RU: Section[] = [
       "Гидроизоляция и пароизоляция",
     ],
     bg: "linear-gradient(150deg, #1e3a2b 0%, #0a1510 100%)",
+    image:
+      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=800&auto=format&fit=crop",
     category: "materials",
   },
   {
@@ -66,6 +69,8 @@ const SECTIONS_RU: Section[] = [
       "Лепнина, молдинги, декоративные балки",
     ],
     bg: "linear-gradient(150deg, #1a2e38 0%, #0a1510 100%)",
+    image:
+      "https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?q=80&w=800&auto=format&fit=crop",
     category: "materials",
   },
   {
@@ -84,6 +89,8 @@ const SECTIONS_RU: Section[] = [
       "Плинтусы и пороги",
     ],
     bg: "linear-gradient(150deg, #18283a 0%, #0a1510 100%)",
+    image:
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop",
     category: "materials",
   },
   {
@@ -102,6 +109,8 @@ const SECTIONS_RU: Section[] = [
       "Системы «Умный дом» и освещение",
     ],
     bg: "linear-gradient(150deg, #2a3818 0%, #0a1510 100%)",
+    image:
+      "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?q=80&w=800&auto=format&fit=crop",
     category: "solutions",
   },
   {
@@ -120,6 +129,8 @@ const SECTIONS_RU: Section[] = [
       "Декор (зеркала, часы, вазы, картины, арт-объекты)",
     ],
     bg: "linear-gradient(150deg, #20183a 0%, #0a1510 100%)",
+    image:
+      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=800&auto=format&fit=crop",
     category: "solutions",
   },
 ];
@@ -141,6 +152,8 @@ const SECTIONS_EN: Section[] = [
       "Waterproofing and vapour barriers",
     ],
     bg: "linear-gradient(150deg, #1e3a2b 0%, #0a1510 100%)",
+    image:
+      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=800&auto=format&fit=crop",
     category: "materials",
   },
   {
@@ -159,6 +172,8 @@ const SECTIONS_EN: Section[] = [
       "Mouldings, cornices and decorative beams",
     ],
     bg: "linear-gradient(150deg, #1a2e38 0%, #0a1510 100%)",
+    image:
+      "https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?q=80&w=800&auto=format&fit=crop",
     category: "materials",
   },
   {
@@ -177,6 +192,8 @@ const SECTIONS_EN: Section[] = [
       "Skirting boards and thresholds",
     ],
     bg: "linear-gradient(150deg, #18283a 0%, #0a1510 100%)",
+    image:
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop",
     category: "materials",
   },
   {
@@ -195,6 +212,8 @@ const SECTIONS_EN: Section[] = [
       "Smart Home systems and lighting",
     ],
     bg: "linear-gradient(150deg, #2a3818 0%, #0a1510 100%)",
+    image:
+      "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?q=80&w=800&auto=format&fit=crop",
     category: "solutions",
   },
   {
@@ -213,6 +232,8 @@ const SECTIONS_EN: Section[] = [
       "Décor (mirrors, clocks, vases, artwork, art objects)",
     ],
     bg: "linear-gradient(150deg, #20183a 0%, #0a1510 100%)",
+    image:
+      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=800&auto=format&fit=crop",
     category: "solutions",
   },
 ];
@@ -229,12 +250,31 @@ const TABS_EN = [
   { id: "solutions" as Category, label: "Solutions" },
 ];
 
-function SectionCard({ Icon, num, label, sub, description, items, bg }: Omit<Section, "category">) {
+function SectionCard({
+  Icon,
+  num,
+  label,
+  sub,
+  description,
+  items,
+  bg,
+  image,
+}: Omit<Section, "category">) {
   return (
     <div
       className="group relative rounded-3xl overflow-hidden cursor-pointer flex-shrink-0 w-full"
       style={{ background: bg, height: "clamp(300px, 32vw, 480px)" }}
     >
+      {/* Photo layer */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={image}
+        alt=""
+        aria-hidden
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ opacity: 0.22 }}
+      />
+
       {/* Top lime accent bar on hover */}
       <div
         className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -287,7 +327,7 @@ function SectionCard({ Icon, num, label, sub, description, items, bg }: Omit<Sec
             {label}
           </p>
           <p
-            className="text-white/40 text-[12px] tracking-wide"
+            className="text-white/75 text-[12px] tracking-wide"
             style={{ fontFamily: "var(--font-mulish)" }}
           >
             {sub}
@@ -407,13 +447,13 @@ export function AboutSectionsDark() {
                 <>
                   Что представлено
                   <br />
-                  <span style={{ color: "rgba(255,255,255,0.28)" }}>на выставке.</span>
+                  <span style={{ color: "#ffffff" }}>на выставке.</span>
                 </>
               ) : (
                 <>
                   What&apos;s on
                   <br />
-                  <span style={{ color: "rgba(255,255,255,0.28)" }}>display.</span>
+                  <span style={{ color: "#ffffff" }}>display.</span>
                 </>
               )}
             </h2>
@@ -489,7 +529,7 @@ export function AboutSectionsDark() {
                     className="font-black tracking-tight transition-colors duration-200 pb-1"
                     style={{
                       fontSize: "clamp(15px, 1.6vw, 22px)",
-                      color: active ? "#ffffff" : "rgba(255,255,255,0.22)",
+                      color: active ? "#ffffff" : "rgba(255,255,255,0.65)",
                       borderBottom: active ? "2px solid #a9ec46" : "2px solid transparent",
                       background: "none",
                       cursor: "pointer",

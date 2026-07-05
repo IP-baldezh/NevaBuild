@@ -94,7 +94,7 @@ export function CtaBanner({ categories = [], dateRange, venue, city }: CtaBanner
               type="button"
               onClick={() => setExhibitorOpen(true)}
               className="inline-flex items-center justify-center gap-2.5 font-bold text-[15px] sm:text-[16px] border-2 px-8 py-4 rounded-2xl transition-all duration-200 touch-manipulation hover:border-white/40 hover:text-white"
-              style={{ borderColor: "rgba(255,255,255,0.18)", color: "rgba(255,255,255,0.65)" }}
+              style={{ borderColor: "rgba(255,255,255,0.25)", color: "rgba(255,255,255,0.90)" }}
             >
               {ru ? "Участвовать как экспонент" : "Exhibit at NevaBuild"}
             </button>
@@ -107,7 +107,7 @@ export function CtaBanner({ categories = [], dateRange, venue, city }: CtaBanner
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.28 }}
               className="text-[13px] font-medium tracking-wide"
-              style={{ color: "rgba(255,255,255,0.22)", fontFamily: "var(--font-mulish)" }}
+              style={{ color: "rgba(255,255,255,0.65)", fontFamily: "var(--font-mulish)" }}
             >
               {meta}
             </m.p>
