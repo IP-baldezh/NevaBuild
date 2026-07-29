@@ -2,7 +2,7 @@
 set -e
 
 echo "→ Применяю миграции Prisma..."
-npx prisma migrate deploy
+node node_modules/prisma/build/index.js migrate deploy
 
 if [ "$BOOTSTRAP" = "true" ]; then
   echo "→ Бутстрап: админ + настройки события..."
