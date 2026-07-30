@@ -2,8 +2,7 @@
 
 import { m } from "framer-motion";
 import { useLocale } from "next-intl";
-import { ArrowRight, Calendar, Mic, Users } from "lucide-react";
-import { Link } from "@/i18n/navigation";
+import { Calendar, Mic, Users } from "lucide-react";
 import type { Locale } from "@/i18n/routing";
 
 const FEATURES_RU = [
@@ -53,7 +52,7 @@ export function AboutBusinessCard() {
                 className="font-black text-white leading-tight mb-5"
                 style={{ fontSize: "clamp(24px, 3vw, 44px)" }}
               >
-                {ru ? "200+ событий за 4 дня" : "200+ events over 4 days"}
+                {ru ? "30+ событий за 4 дня" : "30+ events over 4 days"}
               </h2>
               <p
                 className="leading-relaxed mb-8"
@@ -67,14 +66,6 @@ export function AboutBusinessCard() {
                   ? "В течение всех дней выставку НеваБилд сопровождает насыщенная деловая программа: форумы, конференции, мастер-классы и круглые столы с участием ведущих экспертов строительной отрасли."
                   : "Throughout all exhibition days, NevaBuild is accompanied by a rich business programme: forums, conferences, masterclasses and roundtables featuring leading experts in the construction industry."}
               </p>
-              <Link
-                href="/program"
-                className="group inline-flex items-center gap-3 font-black text-[13px] tracking-[0.12em] uppercase px-7 py-4 rounded-xl transition-all duration-200 hover:-translate-y-0.5"
-                style={{ background: "#a9ec46", color: "#0d2d06" }}
-              >
-                {ru ? "Смотреть программу" : "View Programme"}
-                <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
-              </Link>
             </div>
 
             {/* Right — feature pills */}

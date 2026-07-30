@@ -3,7 +3,6 @@
 import { useState, useCallback } from "react";
 import { m, AnimatePresence } from "framer-motion";
 import { useLocale } from "next-intl";
-import { Link } from "@/i18n/navigation";
 import {
   Layers,
   Palette,
@@ -11,14 +10,11 @@ import {
   Sofa,
   SquareDashedBottom,
   ArrowUpRight,
-  ArrowRight,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { Locale } from "@/i18n/routing";
-
-type Category = "all" | "materials" | "solutions";
 
 type Section = {
   Icon: LucideIcon;
@@ -29,7 +25,6 @@ type Section = {
   items: string[];
   bg: string;
   image: string;
-  category: Exclude<Category, "all">;
 };
 
 const SECTIONS_RU: Section[] = [
@@ -51,7 +46,6 @@ const SECTIONS_RU: Section[] = [
     bg: "linear-gradient(150deg, #1e3a2b 0%, #0a1510 100%)",
     image:
       "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=800&auto=format&fit=crop",
-    category: "materials",
   },
   {
     Icon: Palette,
@@ -71,7 +65,6 @@ const SECTIONS_RU: Section[] = [
     bg: "linear-gradient(150deg, #1a2e38 0%, #0a1510 100%)",
     image:
       "https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?q=80&w=800&auto=format&fit=crop",
-    category: "materials",
   },
   {
     Icon: SquareDashedBottom,
@@ -91,7 +84,6 @@ const SECTIONS_RU: Section[] = [
     bg: "linear-gradient(150deg, #18283a 0%, #0a1510 100%)",
     image:
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop",
-    category: "materials",
   },
   {
     Icon: Wrench,
@@ -111,7 +103,6 @@ const SECTIONS_RU: Section[] = [
     bg: "linear-gradient(150deg, #2a3818 0%, #0a1510 100%)",
     image:
       "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?q=80&w=800&auto=format&fit=crop",
-    category: "solutions",
   },
   {
     Icon: Sofa,
@@ -131,7 +122,6 @@ const SECTIONS_RU: Section[] = [
     bg: "linear-gradient(150deg, #20183a 0%, #0a1510 100%)",
     image:
       "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=800&auto=format&fit=crop",
-    category: "solutions",
   },
 ];
 
@@ -154,7 +144,6 @@ const SECTIONS_EN: Section[] = [
     bg: "linear-gradient(150deg, #1e3a2b 0%, #0a1510 100%)",
     image:
       "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=800&auto=format&fit=crop",
-    category: "materials",
   },
   {
     Icon: Palette,
@@ -174,7 +163,6 @@ const SECTIONS_EN: Section[] = [
     bg: "linear-gradient(150deg, #1a2e38 0%, #0a1510 100%)",
     image:
       "https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?q=80&w=800&auto=format&fit=crop",
-    category: "materials",
   },
   {
     Icon: SquareDashedBottom,
@@ -194,7 +182,6 @@ const SECTIONS_EN: Section[] = [
     bg: "linear-gradient(150deg, #18283a 0%, #0a1510 100%)",
     image:
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop",
-    category: "materials",
   },
   {
     Icon: Wrench,
@@ -214,7 +201,6 @@ const SECTIONS_EN: Section[] = [
     bg: "linear-gradient(150deg, #2a3818 0%, #0a1510 100%)",
     image:
       "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?q=80&w=800&auto=format&fit=crop",
-    category: "solutions",
   },
   {
     Icon: Sofa,
@@ -234,32 +220,10 @@ const SECTIONS_EN: Section[] = [
     bg: "linear-gradient(150deg, #20183a 0%, #0a1510 100%)",
     image:
       "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=800&auto=format&fit=crop",
-    category: "solutions",
   },
 ];
 
-const TABS_RU = [
-  { id: "all" as Category, label: "Все разделы" },
-  { id: "materials" as Category, label: "Материалы" },
-  { id: "solutions" as Category, label: "Решения" },
-];
-
-const TABS_EN = [
-  { id: "all" as Category, label: "All Sections" },
-  { id: "materials" as Category, label: "Materials" },
-  { id: "solutions" as Category, label: "Solutions" },
-];
-
-function SectionCard({
-  Icon,
-  num,
-  label,
-  sub,
-  description,
-  items,
-  bg,
-  image,
-}: Omit<Section, "category">) {
+function SectionCard({ Icon, num, label, sub, description, items, bg, image }: Section) {
   return (
     <div
       className="group relative rounded-3xl overflow-hidden cursor-pointer flex-shrink-0 w-full"
@@ -388,26 +352,16 @@ export function AboutSectionsDark() {
   const locale = useLocale() as Locale;
   const ru = locale === "ru";
   const sections = ru ? SECTIONS_RU : SECTIONS_EN;
-  const tabs = ru ? TABS_RU : TABS_EN;
 
-  const [activeTab, setActiveTab] = useState<Category>("all");
   const [slideIndex, setSlideIndex] = useState(0);
   const [direction, setDirection] = useState(1);
 
-  const filtered =
-    activeTab === "all" ? sections : sections.filter((s) => s.category === activeTab);
-  const totalPages = Math.ceil(filtered.length / CARDS_PER_PAGE);
+  const totalPages = Math.ceil(sections.length / CARDS_PER_PAGE);
   const safeIndex = Math.min(slideIndex, totalPages - 1);
-  const visibleCards = filtered.slice(
+  const visibleCards = sections.slice(
     safeIndex * CARDS_PER_PAGE,
     safeIndex * CARDS_PER_PAGE + CARDS_PER_PAGE,
   );
-
-  const handleTab = useCallback((tab: Category) => {
-    setActiveTab(tab);
-    setSlideIndex(0);
-    setDirection(1);
-  }, []);
 
   const handlePrev = useCallback(() => {
     setDirection(-1);
@@ -419,7 +373,7 @@ export function AboutSectionsDark() {
     setSlideIndex((i) => Math.min(totalPages - 1, i + 1));
   }, [totalPages]);
 
-  const sliderKey = `${activeTab}-${safeIndex}`;
+  const sliderKey = safeIndex.toString();
 
   return (
     <section id="s-sections" className="relative z-10 py-10 sm:py-20">
@@ -437,7 +391,7 @@ export function AboutSectionsDark() {
               className="text-[11px] uppercase tracking-[0.28em] mb-4 block font-bold"
               style={{ color: "#a9ec46", fontFamily: "var(--font-mulish)" }}
             >
-              {ru ? "Тематика выставки" : "Exhibition Topics"}
+              {ru ? "Разделы выставки" : "Exhibition Sections"}
             </span>
             <h2
               className="font-black text-white leading-[1.02]"
@@ -459,87 +413,57 @@ export function AboutSectionsDark() {
             </h2>
           </div>
 
-          {/* Right column: arrows+dots above, tabs below */}
-          <div className="flex flex-col gap-4 items-start md:items-end md:pt-9">
-            {/* Arrows + dots */}
-            <div className="flex items-center gap-3">
-              <button
-                type="button"
-                onClick={handlePrev}
-                disabled={safeIndex === 0}
-                className="size-10 rounded-full border flex items-center justify-center transition-all duration-200 disabled:opacity-30"
-                style={{
-                  borderColor: "rgba(255,255,255,0.15)",
-                  color: "#fff",
-                  background: "rgba(255,255,255,0.04)",
-                }}
-                aria-label={ru ? "Назад" : "Previous"}
-              >
-                <ChevronLeft className="size-4" />
-              </button>
-
-              <div className="flex items-center gap-2">
-                {Array.from({ length: totalPages }).map((_, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    onClick={() => {
-                      setDirection(i > safeIndex ? 1 : -1);
-                      setSlideIndex(i);
-                    }}
-                    className="rounded-full transition-all duration-300"
-                    style={{
-                      width: i === safeIndex ? "24px" : "8px",
-                      height: "8px",
-                      background: i === safeIndex ? "#E11B22" : "rgba(255,255,255,0.2)",
-                    }}
-                    aria-label={`${ru ? "Страница" : "Page"} ${i + 1}`}
-                  />
-                ))}
-              </div>
-
-              <button
-                type="button"
-                onClick={handleNext}
-                disabled={safeIndex >= totalPages - 1}
-                className="size-10 rounded-full border flex items-center justify-center transition-all duration-200 disabled:opacity-30"
-                style={{
-                  borderColor: "rgba(255,255,255,0.15)",
-                  color: "#fff",
-                  background: "rgba(255,255,255,0.04)",
-                }}
-                aria-label={ru ? "Вперёд" : "Next"}
-              >
-                <ChevronRight className="size-4" />
-              </button>
-            </div>
-
-            {/* Tabs */}
-            <div
-              className="flex gap-5 items-baseline border-b pb-2"
-              style={{ borderColor: "rgba(255,255,255,0.08)" }}
+          {/* Arrows + dots */}
+          <div className="flex items-center gap-3 md:pt-9">
+            <button
+              type="button"
+              onClick={handlePrev}
+              disabled={safeIndex === 0}
+              className="size-10 rounded-full border flex items-center justify-center transition-all duration-200 disabled:opacity-30"
+              style={{
+                borderColor: "rgba(255,255,255,0.15)",
+                color: "#fff",
+                background: "rgba(255,255,255,0.04)",
+              }}
+              aria-label={ru ? "Назад" : "Previous"}
             >
-              {tabs.map((tab) => {
-                const active = tab.id === activeTab;
-                return (
-                  <button
-                    key={tab.id}
-                    type="button"
-                    onClick={() => handleTab(tab.id)}
-                    className="font-black tracking-tight transition-colors duration-200 pb-1"
-                    style={{
-                      fontSize: "clamp(15px, 1.6vw, 22px)",
-                      color: active ? "#ffffff" : "rgba(255,255,255,0.65)",
-                      borderBottom: active ? "2px solid #a9ec46" : "2px solid transparent",
-                      background: "none",
-                      cursor: "pointer",
-                    }}
-                  >
-                    {tab.label}
-                  </button>
-                );
-              })}
+              <ChevronLeft className="size-4" />
+            </button>
+
+            <div className="flex items-center gap-2">
+              {Array.from({ length: totalPages }).map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => {
+                    setDirection(i > safeIndex ? 1 : -1);
+                    setSlideIndex(i);
+                  }}
+                  className="rounded-full transition-all duration-300"
+                  style={{
+                    width: i === safeIndex ? "24px" : "8px",
+                    height: "8px",
+                    background: i === safeIndex ? "#E11B22" : "rgba(255,255,255,0.2)",
+                  }}
+                  aria-label={`${ru ? "Страница" : "Page"} ${i + 1}`}
+                />
+              ))}
             </div>
+
+            <button
+              type="button"
+              onClick={handleNext}
+              disabled={safeIndex >= totalPages - 1}
+              className="size-10 rounded-full border flex items-center justify-center transition-all duration-200 disabled:opacity-30"
+              style={{
+                borderColor: "rgba(255,255,255,0.15)",
+                color: "#fff",
+                background: "rgba(255,255,255,0.04)",
+              }}
+              aria-label={ru ? "Вперёд" : "Next"}
+            >
+              <ChevronRight className="size-4" />
+            </button>
           </div>
         </m.div>
 
@@ -569,18 +493,6 @@ export function AboutSectionsDark() {
                 ))}
             </m.div>
           </AnimatePresence>
-        </div>
-
-        {/* CTA */}
-        <div className="mt-10 flex justify-end">
-          <Link
-            href="/exhibitors"
-            className="group inline-flex items-center gap-3 px-8 py-4 rounded-full font-black text-[13px] tracking-[0.12em] uppercase transition-all duration-200 hover:gap-4"
-            style={{ background: "#a9ec46", color: "#0d2d06" }}
-          >
-            {ru ? "Каталог участников" : "Exhibitor Directory"}
-            <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
-          </Link>
         </div>
       </div>
     </section>
