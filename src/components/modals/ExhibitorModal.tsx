@@ -115,7 +115,9 @@ export function ExhibitorModal({ open, onClose, categories = [] }: ExhibitorModa
           className="font-black text-white leading-tight mb-2"
           style={{ fontSize: "clamp(22px, 3vw, 30px)" }}
         >
-          {ru ? "Забронировать стенд" : "Book a Stand"}
+          {ru
+            ? "Подберите стенд и спланируйте участие"
+            : "Choose Your Stand and Plan Your Participation"}
         </h2>
         <p className="text-white/50 text-[14px]" style={{ fontFamily: "var(--font-mulish)" }}>
           {ru

@@ -13,6 +13,7 @@ import { AboutStatsDark } from "@/components/about/AboutStatsDark";
 import { AboutForWhomDark } from "@/components/about/AboutForWhomDark";
 import { AboutBusinessCard } from "@/components/about/AboutBusinessCard";
 import { AboutSectionsDark } from "@/components/about/AboutSectionsDark";
+import { AboutAmbassadors } from "@/components/about/AboutAmbassadors";
 import { AboutCtaDark } from "@/components/about/AboutCtaDark";
 import { PartnersSection } from "@/components/home/PartnersSection";
 import type { StatItem } from "@/components/home/StatsGrid";
@@ -97,6 +98,8 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       <AboutStatsDark stats={stats} />
 
       <AboutForWhomDark />
+
+      <AboutAmbassadors />
 
       <AboutBusinessCard />
 

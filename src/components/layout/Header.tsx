@@ -71,9 +71,20 @@ export function Header() {
         )}
       >
         <div className="container-neva flex h-[72px] items-center justify-between gap-6">
-          <Link href="/" aria-label="NEVA BUILD — на главную">
-            <Logo white={useWhite} />
-          </Link>
+          {LANDING_MODE ? (
+            <button
+              type="button"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              aria-label="NEVA BUILD — наверх"
+              className="cursor-pointer"
+            >
+              <Logo white={useWhite} />
+            </button>
+          ) : (
+            <Link href="/" aria-label="NEVA BUILD — на главную">
+              <Logo white={useWhite} />
+            </Link>
+          )}
 
           {!LANDING_MODE && (
             <nav

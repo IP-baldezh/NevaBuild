@@ -1,9 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import { m } from "framer-motion";
 import { useLocale } from "next-intl";
 import type { Locale } from "@/i18n/routing";
-import { Link } from "@/i18n/navigation";
+import { VisitorModal } from "@/components/modals/VisitorModal";
+import { ExhibitorModal } from "@/components/modals/ExhibitorModal";
 
 const DATA = {
   ru: {
@@ -44,6 +46,8 @@ export function AboutForWhomDark() {
   const locale = useLocale() as Locale;
   const ru = locale === "ru";
   const d = DATA[ru ? "ru" : "en"];
+  const [visitorOpen, setVisitorOpen] = useState(false);
+  const [exhibitorOpen, setExhibitorOpen] = useState(false);
 
   return (
     <section
@@ -59,7 +63,7 @@ export function AboutForWhomDark() {
         className="block text-xs uppercase tracking-[0.18em] font-bold mb-4"
         style={{ color: "#a9ec46" }}
       >
-        {ru ? "Участники" : "Participants"}
+        {ru ? "Участие" : "Participation"}
       </m.span>
 
       <m.h2
@@ -130,13 +134,14 @@ export function AboutForWhomDark() {
             ))}
           </ul>
 
-          <Link
-            href="/tickets"
+          <button
+            type="button"
+            onClick={() => setVisitorOpen(true)}
             className="inline-flex items-center justify-center rounded-xl font-black text-[11px] tracking-[0.18em] uppercase px-6 py-4 transition-all duration-200 hover:brightness-110 touch-manipulation"
             style={{ background: "#a9ec46", color: "#0d2d06" }}
           >
             {ru ? "Зарегистрироваться" : "Register Now"}
-          </Link>
+          </button>
         </m.div>
 
         {/* Exhibitors */}
@@ -186,15 +191,28 @@ export function AboutForWhomDark() {
             ))}
           </ul>
 
-          <Link
-            href="/exhibit"
+          <button
+            type="button"
+            onClick={() => setExhibitorOpen(true)}
             className="inline-flex items-center justify-center rounded-xl font-bold text-[11px] tracking-[0.14em] uppercase px-6 py-4 border transition-all duration-200 hover:bg-white/10 touch-manipulation"
             style={{ color: "rgba(255,255,255,0.75)", borderColor: "rgba(255,255,255,0.22)" }}
           >
             {ru ? "Забронировать стенд" : "Book a Stand"}
-          </Link>
+          </button>
         </m.div>
       </div>
+
+      <VisitorModal
+        open={visitorOpen}
+        onClose={() => setVisitorOpen(false)}
+        title={ru ? "Стать участником\nи получить билет" : "Become a Participant\nand Get a Ticket"}
+        subtitle={
+          ru
+            ? "Оставьте заявку — мы пришлём билет и всю нужную информацию"
+            : "Leave a request — we'll send you a ticket and all the details"
+        }
+      />
+      <ExhibitorModal open={exhibitorOpen} onClose={() => setExhibitorOpen(false)} />
     </section>
   );
 }
