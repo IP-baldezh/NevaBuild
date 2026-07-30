@@ -468,6 +468,7 @@ async function main() {
   }
 
   // --- Partners / ambassadors ---
+  await prisma.partner.deleteMany();
   const partners = [
     {
       name: "Анна Соколова",
@@ -524,7 +525,10 @@ async function main() {
           roleEn: p.roleEn,
           descriptionRu: p.company || undefined,
           descriptionEn: p.company || undefined,
-          photoUrl: p.photo || undefined,
+          // AMBASSADOR = person photo → photoUrl; SPONSOR/PARTNER = company logo → logoUrl
+          ...(p.type === "AMBASSADOR"
+            ? { photoUrl: p.photo || undefined }
+            : { logoUrl: p.photo || undefined }),
           sortOrder: i,
           isActive: true,
         },
@@ -1110,6 +1114,7 @@ async function main() {
     },
   ];
 
+  await prisma.news.deleteMany();
   for (const n of news) {
     const publishedAt = new Date();
     publishedAt.setDate(publishedAt.getDate() - n.daysAgo);

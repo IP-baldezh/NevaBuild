@@ -18,9 +18,11 @@ import type { Locale } from "@/i18n/routing";
 interface VisitorModalProps {
   open: boolean;
   onClose: () => void;
+  title?: string;
+  subtitle?: string;
 }
 
-export function VisitorModal({ open, onClose }: VisitorModalProps) {
+export function VisitorModal({ open, onClose, title, subtitle }: VisitorModalProps) {
   const t = useTranslations("Forms");
   const locale = useLocale() as Locale;
   const ru = locale === "ru";
@@ -88,19 +90,31 @@ export function VisitorModal({ open, onClose }: VisitorModalProps) {
         </span>
         <h2
           className="relative z-10 font-black leading-tight mb-2"
-          style={{ fontSize: "clamp(22px, 3vw, 28px)", color: "#0d2d06" }}
+          style={{ fontSize: "clamp(22px, 3vw, 28px)", color: "#0d2d06", whiteSpace: "pre-line" }}
         >
-          {ru ? "Регистрация" : "Registration"}
-          <br />
-          {ru ? "для профессионалов" : "for professionals"}
+          {title ??
+            (ru ? (
+              <>
+                Регистрация
+                <br />
+                для профессионалов
+              </>
+            ) : (
+              <>
+                Registration
+                <br />
+                for professionals
+              </>
+            ))}
         </h2>
         <p
           className="relative z-10 text-[14px]"
           style={{ color: "rgba(14,45,8,0.65)", fontFamily: "var(--font-mulish)" }}
         >
-          {ru
-            ? "Зарегистрируйтесь онлайн — проходите без очереди"
-            : "Register online — skip the queue at the entrance"}
+          {subtitle ??
+            (ru
+              ? "Зарегистрируйтесь онлайн — проходите без очереди"
+              : "Register online — skip the queue at the entrance")}
         </p>
       </div>
 
