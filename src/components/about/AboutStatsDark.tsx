@@ -111,9 +111,9 @@ export function AboutStatsDark({ stats }: Props) {
                 )}
               </span>
               <span
-                className="font-black"
+                className="font-black shrink-0 whitespace-nowrap"
                 style={{
-                  fontSize: "clamp(1.8rem, 2.8vw, 3rem)",
+                  fontSize: "clamp(1.1rem, 5vw, 3rem)",
                   color: s.value != null ? "#a9ec46" : "rgba(255,255,255,0.15)",
                   lineHeight: 1,
                 }}

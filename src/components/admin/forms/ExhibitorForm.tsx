@@ -8,6 +8,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { SelectNative } from "@/components/ui/select-native";
 import { SubmitButton } from "@/components/admin/SubmitButton";
 import { Panel } from "@/components/admin/AdminUI";
+import { ImagePickerField } from "@/components/admin/ImagePickerField";
+import { GalleryPickerField } from "@/components/admin/GalleryPickerField";
 
 export function ExhibitorForm({
   exhibitor,
@@ -62,8 +64,8 @@ export function ExhibitorForm({
           <FormField label="Сайт" htmlFor="website">
             <Input id="website" name="website" defaultValue={e?.website ?? ""} />
           </FormField>
-          <FormField label="Логотип URL" htmlFor="logoUrl">
-            <Input id="logoUrl" name="logoUrl" defaultValue={e?.logoUrl ?? ""} />
+          <FormField label="Логотип">
+            <ImagePickerField name="logoUrl" defaultValue={e?.logoUrl ?? ""} />
           </FormField>
           <FormField label="Email" htmlFor="email">
             <Input id="email" name="email" defaultValue={e?.email ?? ""} />
@@ -79,8 +81,8 @@ export function ExhibitorForm({
         <FormField label="Описание (EN)" htmlFor="descriptionEn">
           <Textarea id="descriptionEn" name="descriptionEn" defaultValue={e?.descriptionEn ?? ""} />
         </FormField>
-        <FormField label="Галерея (URL по строке)" htmlFor="gallery">
-          <Textarea id="gallery" name="gallery" defaultValue={(e?.gallery ?? []).join("\n")} />
+        <FormField label="Галерея">
+          <GalleryPickerField name="gallery" defaultValue={e?.gallery ?? []} />
         </FormField>
 
         <div>

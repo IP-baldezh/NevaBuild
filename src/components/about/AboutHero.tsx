@@ -14,7 +14,8 @@ type Props = {
   city: string;
 };
 
-const MARQUEE = "NEVA BUILD · NEVA BUILD · NEVA BUILD · NEVA BUILD · NEVA BUILD · NEVA BUILD · ";
+const MARQUEE_RU = "НЕВА БИЛД · НЕВА БИЛД · НЕВА БИЛД · НЕВА БИЛД · НЕВА БИЛД · НЕВА БИЛД · ";
+const MARQUEE_EN = "NEVA BUILD · NEVA BUILD · NEVA BUILD · NEVA BUILD · NEVA BUILD · NEVA BUILD · ";
 
 export function AboutHero({ lead, dateRange, venue, city }: Props) {
   const locale = useLocale() as Locale;
@@ -108,11 +109,13 @@ export function AboutHero({ lead, dateRange, venue, city }: Props) {
         style={{ height: "clamp(70px, 12vw, 155px)" }}
         aria-hidden
       >
-        <m.div
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{ duration: 24, ease: "linear", repeat: Infinity }}
+        <div
           className="flex whitespace-nowrap absolute bottom-0 left-0"
-          style={{ width: "max-content" }}
+          style={{
+            width: "max-content",
+            animation: "neva-marquee 24s linear infinite",
+            willChange: "transform",
+          }}
         >
           <span
             className="font-black text-white"
@@ -123,7 +126,7 @@ export function AboutHero({ lead, dateRange, venue, city }: Props) {
               opacity: 0.9,
             }}
           >
-            {MARQUEE}
+            {ru ? MARQUEE_RU : MARQUEE_EN}
           </span>
           <span
             className="font-black text-white"
@@ -133,10 +136,11 @@ export function AboutHero({ lead, dateRange, venue, city }: Props) {
               letterSpacing: "-0.02em",
               opacity: 0.9,
             }}
+            aria-hidden
           >
-            {MARQUEE}
+            {ru ? MARQUEE_RU : MARQUEE_EN}
           </span>
-        </m.div>
+        </div>
       </div>
 
       <VisitorModal

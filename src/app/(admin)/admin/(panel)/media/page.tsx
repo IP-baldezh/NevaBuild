@@ -1,11 +1,14 @@
-import Image from "next/image";
 import { prisma } from "@/lib/db";
-import { uploadMedia } from "@/server/actions/admin/media";
-import { deleteMedia } from "@/server/actions/admin/content";
+import { uploadMedia, deleteMediaAsset } from "@/server/actions/admin/media";
 import { PageHeader, Panel } from "@/components/admin/AdminUI";
 import { SubmitButton } from "@/components/admin/SubmitButton";
 
 export const dynamic = "force-dynamic";
+
+async function doUpload(fd: FormData) {
+  "use server";
+  await uploadMedia(fd);
+}
 
 export default async function AdminMediaPage() {
   const assets = await prisma.mediaAsset.findMany({ orderBy: { createdAt: "desc" } });
@@ -15,7 +18,7 @@ export default async function AdminMediaPage() {
       <PageHeader title="Медиа" description="Загрузка изображений (логотипы, обложки, фото)" />
 
       <Panel className="mb-6 p-6">
-        <form action={uploadMedia} className="flex flex-wrap items-center gap-4">
+        <form action={doUpload} className="flex flex-wrap items-center gap-4">
           <input
             type="file"
             name="file"
@@ -26,8 +29,8 @@ export default async function AdminMediaPage() {
           <SubmitButton>Загрузить</SubmitButton>
         </form>
         <p className="mt-2 text-xs text-muted-foreground">
-          Файл сохраняется в /public/uploads. Скопируйте URL и вставьте в нужное поле (логотип,
-          обложка).
+          Файл сохраняется в /public/uploads. Используйте пикер изображений в формах или скопируйте
+          URL из карточки ниже.
         </p>
       </Panel>
 
@@ -37,9 +40,12 @@ export default async function AdminMediaPage() {
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {assets.map((a) => (
             <Panel key={a.id} className="overflow-hidden">
-              <div className="relative aspect-video bg-muted">
-                {a.mimeType.startsWith("image/") && (
-                  <Image src={a.url} alt={a.filename} fill className="object-contain" />
+              <div className="aspect-video bg-muted flex items-center justify-center">
+                {a.mimeType.startsWith("image/") ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={a.url} alt={a.filename} className="h-full w-full object-contain" />
+                ) : (
+                  <span className="text-xs text-muted-foreground">{a.mimeType}</span>
                 )}
               </div>
               <div className="p-3">
@@ -50,8 +56,12 @@ export default async function AdminMediaPage() {
                 />
                 <div className="mt-2 flex items-center justify-between text-xs text-muted-foreground">
                   <span>{Math.round(a.size / 1024)} КБ</span>
-                  <form action={deleteMedia}>
-                    <input type="hidden" name="id" value={a.id} />
+                  <form
+                    action={async () => {
+                      "use server";
+                      await deleteMediaAsset(a.id);
+                    }}
+                  >
                     <button className="text-destructive hover:underline">удалить</button>
                   </form>
                 </div>

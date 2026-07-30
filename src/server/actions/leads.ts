@@ -1,5 +1,6 @@
 "use server";
 
+import { z } from "zod";
 import { LeadType } from "@prisma/client";
 import { prisma } from "@/lib/db";
 import { notifyOrganizerLead } from "@/lib/email";
@@ -96,6 +97,32 @@ export async function submitVisitorRegistration(input: VisitorInput): Promise<Ac
     return { ok: true };
   } catch (e) {
     console.error("[submitVisitorRegistration]", e);
+    return { ok: false, error: "server" };
+  }
+}
+
+/** Подписка на рассылку. */
+export async function submitNewsletter(email: string): Promise<ActionResult> {
+  const parsed = z.email({ message: "email" }).safeParse(email.trim());
+  if (!parsed.success) return { ok: false, error: "validation" };
+
+  try {
+    await prisma.lead.create({
+      data: {
+        type: LeadType.SUBSCRIPTION,
+        fullName: "Подписчик",
+        email: parsed.data,
+      },
+    });
+
+    await notifyOrganizerLead({
+      title: "Подписка на рассылку",
+      fields: { Email: parsed.data },
+    }).catch((e) => console.error("[email] notify failed", e));
+
+    return { ok: true };
+  } catch (e) {
+    console.error("[submitNewsletter]", e);
     return { ok: false, error: "server" };
   }
 }

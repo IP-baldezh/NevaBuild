@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { SelectNative } from "@/components/ui/select-native";
 import { SubmitButton } from "@/components/admin/SubmitButton";
 import { Panel } from "@/components/admin/AdminUI";
+import { ImagePickerField } from "@/components/admin/ImagePickerField";
 
 export function NewsForm({ news }: { news?: News | null }) {
   return (
@@ -24,12 +25,8 @@ export function NewsForm({ news }: { news?: News | null }) {
           <FormField label="Slug" htmlFor="slug">
             <Input id="slug" name="slug" defaultValue={news?.slug} placeholder="авто из EN" />
           </FormField>
-          <FormField label="Обложка URL" htmlFor="coverImageUrl">
-            <Input
-              id="coverImageUrl"
-              name="coverImageUrl"
-              defaultValue={news?.coverImageUrl ?? ""}
-            />
+          <FormField label="Обложка">
+            <ImagePickerField name="coverImageUrl" defaultValue={news?.coverImageUrl ?? ""} />
           </FormField>
           <FormField label="Категория (RU)" htmlFor="categoryRu">
             <Input id="categoryRu" name="categoryRu" defaultValue={news?.categoryRu ?? ""} />

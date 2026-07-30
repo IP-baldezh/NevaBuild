@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { SelectNative } from "@/components/ui/select-native";
 import { SubmitButton } from "@/components/admin/SubmitButton";
+import { ImagePickerField } from "@/components/admin/ImagePickerField";
 
 export const dynamic = "force-dynamic";
 
@@ -91,8 +92,8 @@ export default async function AdminPartnersPage({
                 defaultValue={e?.descriptionRu ?? ""}
               />
             </FormField>
-            <FormField label="Логотип URL" htmlFor="logoUrl">
-              <Input id="logoUrl" name="logoUrl" defaultValue={e?.logoUrl ?? ""} />
+            <FormField label="Логотип">
+              <ImagePickerField name="logoUrl" defaultValue={e?.logoUrl ?? ""} />
             </FormField>
             <FormField label="Сайт" htmlFor="website">
               <Input id="website" name="website" defaultValue={e?.website ?? ""} />
