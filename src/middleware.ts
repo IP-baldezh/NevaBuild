@@ -1,31 +1,33 @@
 import createMiddleware from "next-intl/middleware";
 import { type NextRequest, NextResponse } from "next/server";
 import { routing } from "./i18n/routing";
+import { LANDING_MODE } from "./config/launch";
 
 const intlMiddleware = createMiddleware(routing);
 
-// Страницы, которые ещё не готовы — редирект на главную.
-// Убрать нужный маршрут из списка, когда страница будет готова к публикации.
-const COMING_SOON = [
-  "/about",
-  "/news",
-  "/exhibitors",
-  "/program",
-  "/contacts",
-  "/exhibit",
-  "/tickets",
-];
+// Страницы скрытые в обычном режиме (ещё не готовы).
+const COMING_SOON = ["/news", "/exhibitors", "/program", "/contacts", "/exhibit", "/tickets"];
 
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Определяем локаль из пути (/ru/... или /en/...)
   const localeMatch = pathname.match(/^\/(ru|en)(\/|$)/);
   const locale = localeMatch ? localeMatch[1] : "ru";
   const withoutLocale = localeMatch ? pathname.slice(localeMatch[0].length - 1) || "/" : pathname;
 
-  if (COMING_SOON.some((r) => withoutLocale === r || withoutLocale.startsWith(r + "/"))) {
-    return NextResponse.redirect(new URL(`/${locale}`, request.url));
+  if (LANDING_MODE) {
+    // В режиме лендинга: / → /about, все страницы кроме /about → /about
+    if (
+      withoutLocale === "/" ||
+      COMING_SOON.some((r) => withoutLocale === r || withoutLocale.startsWith(r + "/"))
+    ) {
+      return NextResponse.redirect(new URL(`/${locale}/about`, request.url));
+    }
+  } else {
+    // Обычный режим: скрываем неготовые страницы, редирект на главную
+    if (COMING_SOON.some((r) => withoutLocale === r || withoutLocale.startsWith(r + "/"))) {
+      return NextResponse.redirect(new URL(`/${locale}`, request.url));
+    }
   }
 
   return intlMiddleware(request);

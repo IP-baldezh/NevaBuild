@@ -7,6 +7,7 @@ import { Link, usePathname } from "@/i18n/navigation";
 import { Logo } from "./Logo";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { cn } from "@/lib/utils";
+import { LANDING_MODE } from "@/config/launch";
 
 const NAV_ITEMS = [
   { key: "about", href: "/about" },
@@ -74,58 +75,64 @@ export function Header() {
             <Logo white={useWhite} />
           </Link>
 
-          <nav
-            className="hidden items-center gap-1 xl:flex flex-1 justify-center"
-            aria-label="Главное меню"
-          >
-            {NAV_ITEMS.map((item) => {
-              const isActive = (pathname as string) === item.href;
-              return (
-                <Link
-                  key={item.key}
-                  href={item.href}
-                  className={cn(
-                    "font-semibold text-[14px] whitespace-nowrap px-3 py-2 rounded-lg transition-all duration-200",
-                    useWhite
-                      ? isActive
-                        ? "text-white bg-white/15"
-                        : "text-white/85 hover:text-white hover:bg-white/15"
-                      : isActive
-                        ? "text-nb-green bg-nb-bg-light"
-                        : "text-nb-dark hover:text-nb-lime-acid hover:bg-nb-bg-light",
-                  )}
-                >
-                  {t(item.key)}
-                </Link>
-              );
-            })}
-          </nav>
+          {!LANDING_MODE && (
+            <nav
+              className="hidden items-center gap-1 xl:flex flex-1 justify-center"
+              aria-label="Главное меню"
+            >
+              {NAV_ITEMS.map((item) => {
+                const isActive = (pathname as string) === item.href;
+                return (
+                  <Link
+                    key={item.key}
+                    href={item.href}
+                    className={cn(
+                      "font-semibold text-[14px] whitespace-nowrap px-3 py-2 rounded-lg transition-all duration-200",
+                      useWhite
+                        ? isActive
+                          ? "text-white bg-white/15"
+                          : "text-white/85 hover:text-white hover:bg-white/15"
+                        : isActive
+                          ? "text-nb-green bg-nb-bg-light"
+                          : "text-nb-dark hover:text-nb-lime-acid hover:bg-nb-bg-light",
+                    )}
+                  >
+                    {t(item.key)}
+                  </Link>
+                );
+              })}
+            </nav>
+          )}
 
           <div className="hidden items-center gap-3 lg:flex flex-none">
             <LanguageSwitcher transparent={useWhite} />
-            <Link
-              href="/exhibit"
-              className={cn(
-                "inline-flex items-center justify-center gap-2 border px-6 py-3 rounded-xl text-[14px] font-bold transition-all duration-200",
-                useWhite
-                  ? "border-white/40 text-white hover:border-white hover:bg-white/10"
-                  : "border-nb-border text-nb-dark hover:border-nb-lime-acid hover:text-nb-green-dark hover:bg-nb-bg-light",
-              )}
-            >
-              {t("exhibit")}
-            </Link>
-            <Link
-              href="/tickets"
-              className={cn(
-                "inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-[14px] font-bold transition-all duration-200 hover:-translate-y-0.5",
-                useWhite
-                  ? "text-white shadow-[0_6px_20px_rgba(225,27,34,0.40)]"
-                  : "text-white shadow-[0_4px_12px_rgba(225,27,34,0.25)]",
-              )}
-              style={{ background: "#E11B22" }}
-            >
-              {t("getTicket")}
-            </Link>
+            {!LANDING_MODE && (
+              <>
+                <Link
+                  href="/exhibit"
+                  className={cn(
+                    "inline-flex items-center justify-center gap-2 border px-6 py-3 rounded-xl text-[14px] font-bold transition-all duration-200",
+                    useWhite
+                      ? "border-white/40 text-white hover:border-white hover:bg-white/10"
+                      : "border-nb-border text-nb-dark hover:border-nb-lime-acid hover:text-nb-green-dark hover:bg-nb-bg-light",
+                  )}
+                >
+                  {t("exhibit")}
+                </Link>
+                <Link
+                  href="/tickets"
+                  className={cn(
+                    "inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-[14px] font-bold transition-all duration-200 hover:-translate-y-0.5",
+                    useWhite
+                      ? "text-white shadow-[0_6px_20px_rgba(225,27,34,0.40)]"
+                      : "text-white shadow-[0_4px_12px_rgba(225,27,34,0.25)]",
+                  )}
+                  style={{ background: "#E11B22" }}
+                >
+                  {t("getTicket")}
+                </Link>
+              </>
+            )}
           </div>
 
           <button
@@ -178,42 +185,45 @@ export function Header() {
           className="flex flex-1 flex-col px-5 py-2 md:px-10 overflow-y-auto"
           aria-label="Мобильное меню"
         >
-          {NAV_ITEMS.map((item) => (
-            <Link
-              key={item.key}
-              href={item.href}
-              onClick={() => setOpen(false)}
-              className={cn(
-                "flex items-center gap-4 py-4 text-2xl font-black uppercase tracking-tight transition-colors",
-                pathname === item.href ? "text-nb-lime-acid" : "text-white/75 hover:text-white",
-              )}
-              style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}
-            >
-              {t(item.key)}
-            </Link>
-          ))}
+          {!LANDING_MODE &&
+            NAV_ITEMS.map((item) => (
+              <Link
+                key={item.key}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className={cn(
+                  "flex items-center gap-4 py-4 text-2xl font-black uppercase tracking-tight transition-colors",
+                  pathname === item.href ? "text-nb-lime-acid" : "text-white/75 hover:text-white",
+                )}
+                style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}
+              >
+                {t(item.key)}
+              </Link>
+            ))}
         </nav>
 
-        <div
-          className="flex flex-col gap-3 p-5 md:px-10 flex-none"
-          style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}
-        >
-          <Link
-            href="/exhibit"
-            onClick={() => setOpen(false)}
-            className="inline-flex h-14 items-center justify-center rounded-2xl text-sm font-semibold uppercase tracking-wide text-white/80 transition-colors hover:text-nb-lime-acid"
-            style={{ border: "1px solid rgba(255,255,255,0.2)" }}
+        {!LANDING_MODE && (
+          <div
+            className="flex flex-col gap-3 p-5 md:px-10 flex-none"
+            style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}
           >
-            {t("exhibit")}
-          </Link>
-          <Link
-            href="/tickets"
-            onClick={() => setOpen(false)}
-            className="inline-flex h-14 items-center justify-center rounded-2xl bg-brand-red text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:opacity-90"
-          >
-            {t("getTicket")}
-          </Link>
-        </div>
+            <Link
+              href="/exhibit"
+              onClick={() => setOpen(false)}
+              className="inline-flex h-14 items-center justify-center rounded-2xl text-sm font-semibold uppercase tracking-wide text-white/80 transition-colors hover:text-nb-lime-acid"
+              style={{ border: "1px solid rgba(255,255,255,0.2)" }}
+            >
+              {t("exhibit")}
+            </Link>
+            <Link
+              href="/tickets"
+              onClick={() => setOpen(false)}
+              className="inline-flex h-14 items-center justify-center rounded-2xl bg-brand-red text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:opacity-90"
+            >
+              {t("getTicket")}
+            </Link>
+          </div>
+        )}
       </div>
     </>
   );
