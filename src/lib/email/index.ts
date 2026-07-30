@@ -41,7 +41,8 @@ export async function sendMail({ to, subject, html, text }: MailInput) {
   return { sent: true };
 }
 
-const ORGANIZER = () => process.env.ORGANIZER_EMAIL ?? "info@neva-expo.ru";
+const ORGANIZER = () =>
+  process.env.ADMIN_EMAIL ?? process.env.ORGANIZER_EMAIL ?? "info@neva-expo.ru";
 
 /** Уведомление организатору о новой заявке. */
 export async function notifyOrganizerLead(data: {

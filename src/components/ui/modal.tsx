@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { AnimatePresence, m } from "framer-motion";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -13,6 +14,12 @@ interface ModalProps {
 }
 
 export function Modal({ open, onClose, children, size = "md" }: ModalProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   useEffect(() => {
     if (!open) return;
     const handler = (e: KeyboardEvent) => {
@@ -29,7 +36,7 @@ export function Modal({ open, onClose, children, size = "md" }: ModalProps) {
     };
   }, [open]);
 
-  return (
+  const content = (
     <AnimatePresence>
       {open && (
         <div
@@ -65,6 +72,9 @@ export function Modal({ open, onClose, children, size = "md" }: ModalProps) {
       )}
     </AnimatePresence>
   );
+
+  if (!mounted) return null;
+  return createPortal(content, document.body);
 }
 
 export function ModalCloseButton({

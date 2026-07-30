@@ -115,6 +115,13 @@ export function Header() {
             </nav>
           )}
 
+          {/* Language switcher on mobile (LANDING_MODE only — no burger, so show inline) */}
+          {LANDING_MODE && (
+            <div className="lg:hidden">
+              <LanguageSwitcher transparent={useWhite} />
+            </div>
+          )}
+
           <div className="hidden items-center gap-3 lg:flex flex-none">
             <LanguageSwitcher transparent={useWhite} />
             {!LANDING_MODE && (
@@ -146,20 +153,22 @@ export function Header() {
             )}
           </div>
 
-          <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            className={cn(
-              "inline-flex size-10 items-center justify-center border lg:hidden transition-colors",
-              useWhite
-                ? "border-white/40 text-white hover:bg-white/15"
-                : "border-border text-foreground",
-            )}
-            aria-label={open ? t("close") : t("menu")}
-            aria-expanded={open}
-          >
-            {open ? <X className="size-5" /> : <Menu className="size-5" />}
-          </button>
+          {!LANDING_MODE && (
+            <button
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              className={cn(
+                "inline-flex size-10 items-center justify-center border lg:hidden transition-colors",
+                useWhite
+                  ? "border-white/40 text-white hover:bg-white/15"
+                  : "border-border text-foreground",
+              )}
+              aria-label={open ? t("close") : t("menu")}
+              aria-expanded={open}
+            >
+              {open ? <X className="size-5" /> : <Menu className="size-5" />}
+            </button>
+          )}
         </div>
       </header>
 

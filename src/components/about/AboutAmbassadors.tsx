@@ -5,7 +5,7 @@ import { m } from "framer-motion";
 import { useLocale } from "next-intl";
 import { Star } from "lucide-react";
 import type { Locale } from "@/i18n/routing";
-import { ExhibitorModal } from "@/components/modals/ExhibitorModal";
+import { SimpleLeadModal } from "@/components/modals/SimpleLeadModal";
 
 export function AboutAmbassadors() {
   const locale = useLocale() as Locale;
@@ -75,7 +75,17 @@ export function AboutAmbassadors() {
         </m.div>
       </div>
 
-      <ExhibitorModal open={exhibitorOpen} onClose={() => setExhibitorOpen(false)} />
+      <SimpleLeadModal
+        open={exhibitorOpen}
+        onClose={() => setExhibitorOpen(false)}
+        eyebrowRu="NEVA BUILD 2027 · АМБАССАДОРЫ"
+        eyebrowEn="NEVA BUILD 2027 · AMBASSADORS"
+        titleRu="Станьте лицом выставки"
+        titleEn="Become the face of the exhibition"
+        subtitleRu="Оставьте заявку — мы свяжемся с вами в течение рабочего дня"
+        subtitleEn="Leave a request — we will contact you within the working day"
+        notifyTitle="Заявка амбассадора"
+      />
     </section>
   );
 }

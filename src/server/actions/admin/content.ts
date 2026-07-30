@@ -42,6 +42,7 @@ export async function deleteCategory(fd: FormData) {
   await guard();
   await prisma.exhibitorCategory.delete({ where: { id: s(fd, "id") } });
   revalidatePath("/admin/categories");
+  revalidatePath("/", "layout");
 }
 
 // ============================= Партнёры =============================
@@ -70,6 +71,7 @@ export async function deletePartner(fd: FormData) {
   await guard();
   await prisma.partner.delete({ where: { id: s(fd, "id") } });
   revalidatePath("/admin/partners");
+  revalidatePath("/", "layout");
 }
 
 // ============================= Билеты =============================
@@ -98,6 +100,7 @@ export async function deleteTicketProduct(fd: FormData) {
   await guard();
   await prisma.ticketProduct.delete({ where: { id: s(fd, "id") } });
   revalidatePath("/admin/tickets");
+  revalidatePath("/", "layout");
 }
 
 // ============================= Новости =============================
@@ -130,6 +133,7 @@ export async function deleteNews(fd: FormData) {
   await guard();
   await prisma.news.delete({ where: { id: s(fd, "id") } });
   revalidatePath("/admin/news");
+  revalidatePath("/", "layout");
 }
 
 // ============================= Участники =============================
@@ -180,6 +184,7 @@ export async function deleteExhibitor(fd: FormData) {
   await guard();
   await prisma.exhibitor.delete({ where: { id: s(fd, "id") } });
   revalidatePath("/admin/exhibitors");
+  revalidatePath("/", "layout");
 }
 
 // ============================= Программа =============================
@@ -202,6 +207,7 @@ export async function deleteProgramDay(fd: FormData) {
   await guard();
   await prisma.programDay.delete({ where: { id: s(fd, "id") } });
   revalidatePath("/admin/program");
+  revalidatePath("/", "layout");
 }
 
 export async function saveSpeaker(fd: FormData) {
@@ -270,6 +276,7 @@ export async function deleteSession(fd: FormData) {
   await guard();
   await prisma.programSession.delete({ where: { id: s(fd, "id") } });
   revalidatePath("/admin/program");
+  revalidatePath("/", "layout");
 }
 
 // ============================= Медиа =============================

@@ -21,7 +21,7 @@ export default async function AdminCategoriesPage({
 
   return (
     <>
-      <PageHeader title="Категории участников" description="Разделы выставки" />
+      <PageHeader title="Разделы выставки" />
       <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
         <Panel className="overflow-x-auto">
           <table className="w-full text-sm">

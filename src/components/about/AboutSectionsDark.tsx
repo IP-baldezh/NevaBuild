@@ -413,8 +413,8 @@ export function AboutSectionsDark() {
             </h2>
           </div>
 
-          {/* Arrows + dots */}
-          <div className="flex items-center gap-3 md:pt-9">
+          {/* Arrows + dots (desktop only) */}
+          <div className="hidden sm:flex items-center gap-3 md:pt-9">
             <button
               type="button"
               onClick={handlePrev}
@@ -467,8 +467,15 @@ export function AboutSectionsDark() {
           </div>
         </m.div>
 
-        {/* Slider */}
-        <div className="relative overflow-hidden">
+        {/* Mobile: all cards as a simple list */}
+        <div className="sm:hidden grid grid-cols-1 gap-4">
+          {sections.map((s) => (
+            <SectionCard key={s.num} {...s} />
+          ))}
+        </div>
+
+        {/* Desktop: paginated slider */}
+        <div className="hidden sm:block relative overflow-hidden">
           <AnimatePresence mode="wait" initial={false} custom={direction}>
             <m.div
               key={sliderKey}
@@ -482,7 +489,7 @@ export function AboutSectionsDark() {
               animate="center"
               exit="exit"
               transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5"
+              className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"
             >
               {visibleCards.map((s) => (
                 <SectionCard key={s.num} {...s} />
