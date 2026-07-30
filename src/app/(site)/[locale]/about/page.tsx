@@ -82,7 +82,6 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       value: ev.programDays,
       suffix: "",
       label: tStats("days"),
-      sub: locale === "ru" ? "деловой программы" : "business programme",
       locale,
     },
   ];

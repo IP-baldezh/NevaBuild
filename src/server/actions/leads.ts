@@ -7,9 +7,11 @@ import {
   participationSchema,
   contactSchema,
   visitorSchema,
+  simpleLeadSchema,
   type ParticipationInput,
   type ContactInput,
   type VisitorInput,
+  type SimpleLeadInput,
 } from "@/lib/validations/forms";
 
 export type ActionResult = { ok: true } | { ok: false; error: string };
@@ -94,6 +96,44 @@ export async function submitVisitorRegistration(input: VisitorInput): Promise<Ac
     return { ok: true };
   } catch (e) {
     console.error("[submitVisitorRegistration]", e);
+    return { ok: false, error: "server" };
+  }
+}
+
+/** Простая заявка (амбассадор / партнёр). */
+export async function submitSimpleLead(
+  input: SimpleLeadInput,
+  notifyTitle: string,
+): Promise<ActionResult> {
+  if (input.hp) return { ok: true };
+
+  const parsed = simpleLeadSchema.safeParse(input);
+  if (!parsed.success) return { ok: false, error: "validation" };
+  const d = parsed.data;
+
+  try {
+    await prisma.lead.create({
+      data: {
+        type: LeadType.CONTACT,
+        fullName: d.fullName,
+        phone: d.phone,
+        email: d.email,
+        message: notifyTitle,
+      },
+    });
+
+    await notifyOrganizerLead({
+      title: notifyTitle,
+      fields: {
+        Имя: d.fullName,
+        Телефон: d.phone,
+        Email: d.email,
+      },
+    }).catch((e) => console.error("[email] notify failed", e));
+
+    return { ok: true };
+  } catch (e) {
+    console.error("[submitSimpleLead]", e);
     return { ok: false, error: "server" };
   }
 }

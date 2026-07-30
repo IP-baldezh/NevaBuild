@@ -45,6 +45,16 @@ export const contactSchema = z.object({
 });
 export type ContactInput = z.infer<typeof contactSchema>;
 
+/** Простая заявка (амбассадор / партнёр) — только имя, телефон, email. */
+export const simpleLeadSchema = z.object({
+  fullName: z.string().trim().min(2, required),
+  phone: z.string().trim().min(5, phoneMsg),
+  email: z.email(emailMsg),
+  consent: z.boolean().refine((v) => v === true, consentMsg),
+  hp: z.string().optional(),
+});
+export type SimpleLeadInput = z.infer<typeof simpleLeadSchema>;
+
 /** Оформление заказа билета. */
 export const ticketOrderSchema = z.object({
   ticketProductId: z.string().min(1, required),

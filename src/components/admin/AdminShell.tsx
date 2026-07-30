@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 import {
   LayoutDashboard,
-  Settings,
+  CalendarCheck,
   Building2,
   Tags,
   CalendarDays,
@@ -20,13 +20,14 @@ import {
   Menu,
   X,
   ExternalLink,
+  ImageIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Role } from "@prisma/client";
 
 const NAV = [
   { href: "/admin", label: "Дашборд", icon: LayoutDashboard, exact: true },
-  { href: "/admin/settings", label: "Настройки", icon: Settings },
+  { href: "/admin/settings", label: "Событие", icon: CalendarCheck },
   { href: "/admin/exhibitors", label: "Участники", icon: Building2 },
   { href: "/admin/categories", label: "Категории", icon: Tags },
   { href: "/admin/program", label: "Программа", icon: CalendarDays },
@@ -35,6 +36,7 @@ const NAV = [
   { href: "/admin/orders", label: "Заказы", icon: ShoppingCart },
   { href: "/admin/leads", label: "Заявки", icon: Inbox },
   { href: "/admin/partners", label: "Партнёры", icon: Handshake },
+  { href: "/admin/media", label: "Медиа", icon: ImageIcon },
   { href: "/admin/users", label: "Пользователи", icon: Users },
 ];
 

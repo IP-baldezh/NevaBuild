@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useLocale } from "next-intl";
 import type { Partner } from "@prisma/client";
-import { ExhibitorModal } from "@/components/modals/ExhibitorModal";
+import { SimpleLeadModal } from "@/components/modals/SimpleLeadModal";
 
 export function PartnersSection({ partners }: { partners: Partner[] }) {
   const locale = useLocale();
@@ -67,7 +67,17 @@ export function PartnersSection({ partners }: { partners: Partner[] }) {
         )}
       </div>
 
-      <ExhibitorModal open={exhibitorOpen} onClose={() => setExhibitorOpen(false)} />
+      <SimpleLeadModal
+        open={exhibitorOpen}
+        onClose={() => setExhibitorOpen(false)}
+        eyebrowRu="NEVA BUILD 2027 · ПАРТНЁРСТВО"
+        eyebrowEn="NEVA BUILD 2027 · PARTNERSHIP"
+        titleRu="Стать партнёром выставки"
+        titleEn="Become an Exhibition Partner"
+        subtitleRu="Оставьте заявку — мы свяжемся с вами в течение рабочего дня"
+        subtitleEn="Leave a request — we will contact you within the working day"
+        notifyTitle="Заявка партнёра"
+      />
     </section>
   );
 }
