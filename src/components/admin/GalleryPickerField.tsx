@@ -37,16 +37,8 @@ export function GalleryPickerField({ name, defaultValue = [] }: Props) {
     }
   }
 
-  function closeDialog() {
-    setOpen(false);
-  }
-
   function toggleAsset(url: string) {
     setUrls((prev) => (prev.includes(url) ? prev.filter((u) => u !== url) : [...prev, url]));
-  }
-
-  function removeUrl(url: string) {
-    setUrls((prev) => prev.filter((u) => u !== url));
   }
 
   async function handleFileUpload(file: File) {
@@ -77,19 +69,24 @@ export function GalleryPickerField({ name, defaultValue = [] }: Props) {
     open && mounted
       ? createPortal(
           <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
-            <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={closeDialog} />
+            <div
+              className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+              onClick={() => setOpen(false)}
+            />
             <div className="relative z-10 w-full max-w-2xl bg-white rounded-2xl shadow-2xl flex flex-col max-h-[85dvh]">
+              {/* Header */}
               <div className="flex items-center justify-between px-6 py-4 border-b shrink-0">
                 <h2 className="font-semibold text-base">Добавить в галерею</h2>
                 <button
                   type="button"
-                  onClick={closeDialog}
+                  onClick={() => setOpen(false)}
                   className="size-8 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-500 transition-colors"
                 >
                   <X className="size-4" />
                 </button>
               </div>
 
+              {/* Tabs */}
               <div className="flex border-b px-6 shrink-0">
                 {(["library", "upload"] as const).map((t) => (
                   <button
@@ -107,70 +104,68 @@ export function GalleryPickerField({ name, defaultValue = [] }: Props) {
                 ))}
               </div>
 
+              {/* Content */}
               <div className="overflow-y-auto flex-1 p-6">
-                {tab === "library" && (
-                  <>
-                    {loadingAssets ? (
-                      <div className="flex items-center justify-center py-16">
-                        <Loader2 className="size-6 animate-spin text-gray-400" />
+                {tab === "library" &&
+                  (loadingAssets ? (
+                    <div className="flex items-center justify-center py-16">
+                      <Loader2 className="size-6 animate-spin text-gray-400" />
+                    </div>
+                  ) : assets.length === 0 ? (
+                    <div className="flex flex-col items-center justify-center py-16 text-gray-400 gap-3">
+                      <Images className="size-10" />
+                      <p className="text-sm">Нет загруженных изображений</p>
+                      <button
+                        type="button"
+                        onClick={() => setTab("upload")}
+                        className="text-sm text-black underline underline-offset-2"
+                      >
+                        Загрузить первое
+                      </button>
+                    </div>
+                  ) : (
+                    <>
+                      <p className="mb-3 text-xs text-gray-500">
+                        Нажмите на изображения чтобы выбрать несколько
+                      </p>
+                      <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                        {assets.map((a) => {
+                          const selected = urls.includes(a.url);
+                          return (
+                            <button
+                              key={a.id}
+                              type="button"
+                              title={a.filename}
+                              onClick={() => toggleAsset(a.url)}
+                              className={`relative aspect-square rounded-xl overflow-hidden border-2 transition-all hover:border-gray-400 ${
+                                selected
+                                  ? "border-black ring-2 ring-black ring-offset-1"
+                                  : "border-gray-200"
+                              }`}
+                            >
+                              {a.mimeType.startsWith("image/") ? (
+                                // eslint-disable-next-line @next/next/no-img-element
+                                <img
+                                  src={a.url}
+                                  alt={a.filename}
+                                  className="w-full h-full object-contain bg-gray-50"
+                                />
+                              ) : (
+                                <div className="w-full h-full bg-gray-100 flex items-center justify-center">
+                                  <ImageIcon className="size-6 text-gray-400" />
+                                </div>
+                              )}
+                              {selected && (
+                                <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                                  <Check className="size-6 text-white" />
+                                </div>
+                              )}
+                            </button>
+                          );
+                        })}
                       </div>
-                    ) : assets.length === 0 ? (
-                      <div className="flex flex-col items-center justify-center py-16 text-gray-400 gap-3">
-                        <Images className="size-10" />
-                        <p className="text-sm">Нет загруженных изображений</p>
-                        <button
-                          type="button"
-                          onClick={() => setTab("upload")}
-                          className="text-sm text-black underline underline-offset-2"
-                        >
-                          Загрузить первое
-                        </button>
-                      </div>
-                    ) : (
-                      <>
-                        <p className="mb-3 text-xs text-gray-500">
-                          Нажмите на изображения чтобы выбрать несколько
-                        </p>
-                        <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
-                          {assets.map((a) => {
-                            const selected = urls.includes(a.url);
-                            return (
-                              <button
-                                key={a.id}
-                                type="button"
-                                onClick={() => toggleAsset(a.url)}
-                                title={a.filename}
-                                className={`relative aspect-square rounded-xl overflow-hidden border-2 transition-all hover:border-gray-400 ${
-                                  selected
-                                    ? "border-black ring-2 ring-black ring-offset-1"
-                                    : "border-gray-200"
-                                }`}
-                              >
-                                {a.mimeType.startsWith("image/") ? (
-                                  // eslint-disable-next-line @next/next/no-img-element
-                                  <img
-                                    src={a.url}
-                                    alt={a.filename}
-                                    className="w-full h-full object-contain bg-gray-50"
-                                  />
-                                ) : (
-                                  <div className="w-full h-full bg-gray-100 flex items-center justify-center">
-                                    <ImageIcon className="size-6 text-gray-400" />
-                                  </div>
-                                )}
-                                {selected && (
-                                  <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                                    <Check className="size-6 text-white" />
-                                  </div>
-                                )}
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </>
-                    )}
-                  </>
-                )}
+                    </>
+                  ))}
 
                 {tab === "upload" && (
                   <div className="flex flex-col items-center gap-4">
@@ -182,9 +177,9 @@ export function GalleryPickerField({ name, defaultValue = [] }: Props) {
                       onDragLeave={() => setDragOver(false)}
                       onDrop={handleDrop}
                       onClick={() => !uploading && fileRef.current?.click()}
-                      className={`w-full border-2 border-dashed rounded-xl p-12 flex flex-col items-center gap-3 cursor-pointer transition-colors ${
-                        uploading ? "pointer-events-none opacity-60" : ""
-                      } ${dragOver ? "border-black bg-gray-50" : "border-gray-200 hover:border-gray-400"}`}
+                      className={`w-full border-2 border-dashed rounded-xl p-12 flex flex-col items-center gap-3 cursor-pointer transition-colors
+                        ${uploading ? "pointer-events-none opacity-60" : ""}
+                        ${dragOver ? "border-black bg-gray-50" : "border-gray-200 hover:border-gray-400"}`}
                     >
                       {uploading ? (
                         <Loader2 className="size-8 text-gray-400 animate-spin" />
@@ -203,18 +198,19 @@ export function GalleryPickerField({ name, defaultValue = [] }: Props) {
                       className="hidden"
                       disabled={uploading}
                       onChange={(e) => {
-                        const file = e.target.files?.[0];
-                        if (file) handleFileUpload(file);
+                        const f = e.target.files?.[0];
+                        if (f) handleFileUpload(f);
                       }}
                     />
                   </div>
                 )}
               </div>
 
+              {/* Footer */}
               <div className="flex justify-end px-6 py-4 border-t shrink-0">
                 <button
                   type="button"
-                  onClick={closeDialog}
+                  onClick={() => setOpen(false)}
                   className="h-9 rounded-full bg-black text-white px-5 text-sm font-medium hover:bg-black/80 transition-colors"
                 >
                   Готово
@@ -242,7 +238,7 @@ export function GalleryPickerField({ name, defaultValue = [] }: Props) {
               />
               <button
                 type="button"
-                onClick={() => removeUrl(url)}
+                onClick={() => setUrls((prev) => prev.filter((_, j) => j !== i))}
                 className="absolute -top-1.5 -right-1.5 size-5 rounded-full bg-black text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
                 title="Удалить"
               >
