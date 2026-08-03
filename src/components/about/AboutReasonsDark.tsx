@@ -278,7 +278,7 @@ function MobileSnapCard({
   return (
     <div
       style={{
-        height: "100dvh",
+        height: "clamp(460px, 80dvh, 680px)",
         scrollSnapAlign: "start",
         scrollSnapStop: "always",
         position: "relative",
@@ -462,7 +462,7 @@ export function AboutReasonsDark() {
         /* Mobile: full-screen vertical snap scroll */
         <div
           style={{
-            height: "100dvh",
+            height: "clamp(460px, 80dvh, 680px)",
             overflowY: "scroll",
             scrollSnapType: "y mandatory",
             scrollbarWidth: "none",

@@ -17,7 +17,8 @@ COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 # DATABASE_URL не нужен для сборки (сервисы данных устойчивы к отсутствию БД),
 # но Prisma Client генерируется через build-скрипт.
-RUN npm run build
+RUN --mount=type=cache,id=nextjs-build-cache,target=/app/.next/cache \
+    npm run build
 
 # --- runner: продакшн-образ ---
 FROM node:20-alpine AS runner

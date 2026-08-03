@@ -14,7 +14,7 @@ services:
   nextjs:
     build: .
     restart: always
-    env_file: .env.production
+    env_file: .env
     environment:
       DATABASE_URL: postgresql://nevabuild:${POSTGRES_PASSWORD}@postgres:5432/nevabuild
     volumes:
