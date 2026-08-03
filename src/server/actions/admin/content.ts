@@ -25,24 +25,65 @@ async function guard() {
 export async function saveCategory(fd: FormData) {
   await guard();
   const id = s(fd, "id");
-  const data = {
-    slug: s(fd, "slug") || slugify(s(fd, "titleEn") || s(fd, "titleRu")),
-    titleRu: s(fd, "titleRu"),
-    titleEn: s(fd, "titleEn"),
-    icon: s(fd, "icon") || null,
-    sortOrder: n(fd, "sortOrder"),
-  };
-  if (id) await prisma.exhibitorCategory.update({ where: { id }, data });
-  else await prisma.exhibitorCategory.create({ data });
-  revalidatePath("/admin/categories");
-  revalidatePath("/", "layout");
+  const slug = s(fd, "slug") || slugify(s(fd, "titleEn") || s(fd, "titleRu"));
+  const titleRu = s(fd, "titleRu");
+  const titleEn = s(fd, "titleEn");
+  const subRu = s(fd, "subRu") || null;
+  const subEn = s(fd, "subEn") || null;
+  const icon = s(fd, "icon") || null;
+  const imageUrl = s(fd, "imageUrl") || null;
+  const sortOrder = n(fd, "sortOrder");
+  const isVisibleRaw = fd.get("isVisible");
+  const isVisible = isVisibleRaw === null ? true : isVisibleRaw === "true" || isVisibleRaw === "on";
+
+  if (id) {
+    await prisma.$executeRaw`
+      UPDATE "ExhibitorCategory"
+      SET "slug"=${slug}, "titleRu"=${titleRu}, "titleEn"=${titleEn},
+          "subRu"=${subRu}, "subEn"=${subEn},
+          "icon"=${icon}, "imageUrl"=${imageUrl}, "sortOrder"=${sortOrder},
+          "isVisible"=${isVisible}
+      WHERE "id"=${id}
+    `;
+  } else {
+    await prisma.$executeRaw`
+      INSERT INTO "ExhibitorCategory" ("id","slug","titleRu","titleEn","subRu","subEn","icon","imageUrl","sortOrder","isVisible")
+      VALUES (gen_random_uuid()::text, ${slug}, ${titleRu}, ${titleEn}, ${subRu}, ${subEn}, ${icon}, ${imageUrl}, ${sortOrder}, ${isVisible})
+    `;
+  }
+  revalidateCategories();
+}
+
+export async function toggleCategoryVisibility(id: string, isVisible: boolean) {
+  await guard();
+  await prisma.$executeRaw`UPDATE "ExhibitorCategory" SET "isVisible"=${isVisible} WHERE "id"=${id}`;
+  revalidateCategories();
 }
 
 export async function deleteCategory(fd: FormData) {
   await guard();
   await prisma.exhibitorCategory.delete({ where: { id: s(fd, "id") } });
+  revalidateCategories();
+}
+
+export async function saveCategoryOrder(ids: string[]) {
+  await guard();
+  await Promise.all(
+    ids.map((id, index) =>
+      prisma.exhibitorCategory.update({ where: { id }, data: { sortOrder: index } }),
+    ),
+  );
+  revalidateCategories();
+}
+
+function revalidateCategories() {
   revalidatePath("/admin/categories");
-  revalidatePath("/", "layout");
+  for (const locale of ["ru", "en"]) {
+    revalidatePath(`/${locale}`);
+    revalidatePath(`/${locale}/about`);
+    revalidatePath(`/${locale}/exhibit`);
+    revalidatePath(`/${locale}/exhibitors`);
+  }
 }
 
 // ============================= Партнёры =============================

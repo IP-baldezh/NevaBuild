@@ -13,8 +13,24 @@ const ITEMS = [
   "ЭКСПОФОРУМ",
 ];
 
-function Dot() {
-  return <span className="mx-6 size-1.5 shrink-0 rounded-full " aria-hidden />;
+function LogoSep() {
+  return (
+    <svg
+      className="mx-5 shrink-0"
+      width="14"
+      height="14"
+      viewBox="0 0 32 32"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
+    >
+      <path d="M11.2598 17.7973V32H32.0004V17.1145L22.2228 11.4786L11.2598 17.7973Z" fill="black" />
+      <path
+        d="M6.5772 15.0587L6.46703 14.8446L22.0811 5.84455L22.2222 6.11914L22.3633 5.84455L31.9999 11.3991V1.78083e-07H0V32H6.51847V15.0587H6.5772Z"
+        fill="black"
+      />
+    </svg>
+  );
 }
 
 export function MarqueeTicker({ className }: { className?: string }) {
@@ -32,9 +48,10 @@ export function MarqueeTicker({ className }: { className?: string }) {
             <span
               key={item}
               className="flex shrink-0 items-center text-[11px] font-bold uppercase tracking-[0.35em] text-black"
+              style={{ fontFamily: "var(--font-mulish)" }}
             >
               {item}
-              <Dot />
+              <LogoSep />
             </span>
           ))}
         </Marquee>

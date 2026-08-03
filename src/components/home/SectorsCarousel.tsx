@@ -163,7 +163,7 @@ export function SectorsCarousel({ categories }: { categories: ExhibitorCategory[
     id: c.id,
     label: pick(locale, c.titleRu, c.titleEn),
     icon: SECTOR_ICONS[i % SECTOR_ICONS.length],
-    image: SECTOR_IMAGES[c.slug] ?? DEFAULT_IMAGE,
+    image: c.imageUrl ?? SECTOR_IMAGES[c.slug] ?? DEFAULT_IMAGE,
     description: ru
       ? (DESCRIPTIONS_RU[c.slug] ?? pick(locale, c.titleRu, c.titleEn))
       : (DESCRIPTIONS_EN[c.slug] ?? pick(locale, c.titleRu, c.titleEn)),

@@ -66,8 +66,8 @@ export function AboutStatsDark({ stats }: Props) {
             style={{ color: "rgba(255,255,255,0.80)", fontFamily: "var(--font-mulish)" }}
           >
             {ru
-              ? "Главная строительная выставка Северо-Запада. Четыре дня, сотни участников, десятки тысяч решений."
-              : "The premier construction exhibition of the Northwest. Four days, hundreds of exhibitors, tens of thousands of solutions."}
+              ? "Главная строительная выставка Северо-Запада. Три дня, сотни участников, тысячи решений для отрасли."
+              : "The premier construction exhibition of the Northwest. Three days, hundreds of exhibitors, thousands of industry solutions."}
           </m.p>
         </div>
 

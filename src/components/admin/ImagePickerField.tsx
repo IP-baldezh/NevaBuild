@@ -8,9 +8,10 @@ import { uploadMedia, fetchMediaAssets, type MediaAssetItem } from "@/server/act
 type Props = {
   name: string;
   defaultValue?: string;
+  onChange?: (url: string) => void;
 };
 
-export function ImagePickerField({ name, defaultValue = "" }: Props) {
+export function ImagePickerField({ name, defaultValue = "", onChange }: Props) {
   const [value, setValue] = useState(defaultValue);
   const [open, setOpen] = useState(false);
   const [tab, setTab] = useState<"library" | "upload">("library");
@@ -45,6 +46,7 @@ export function ImagePickerField({ name, defaultValue = "" }: Props) {
       const result = await uploadMedia(fd);
       if (result?.url) {
         setValue(result.url);
+        onChange?.(result.url);
         setOpen(false);
       }
     } finally {
@@ -126,6 +128,7 @@ export function ImagePickerField({ name, defaultValue = "" }: Props) {
                           title={a.filename}
                           onClick={() => {
                             setValue(a.url);
+                            onChange?.(a.url);
                             setOpen(false);
                           }}
                           className={`relative aspect-square rounded-xl overflow-hidden border-2 transition-all hover:border-gray-400 ${
@@ -223,7 +226,10 @@ export function ImagePickerField({ name, defaultValue = "" }: Props) {
             </button>
             <button
               type="button"
-              onClick={() => setValue("")}
+              onClick={() => {
+                setValue("");
+                onChange?.("");
+              }}
               title="Удалить"
               className="size-8 rounded-full border border-gray-200 bg-white flex items-center justify-center hover:bg-gray-50 transition-colors"
             >

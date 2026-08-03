@@ -6,15 +6,15 @@ import { Calendar, Mic, Users } from "lucide-react";
 import type { Locale } from "@/i18n/routing";
 
 const FEATURES_RU = [
-  { Icon: Calendar, label: "Форумы и конференции" },
-  { Icon: Mic, label: "Мастер-классы и воркшопы" },
-  { Icon: Users, label: "Круглые столы экспертов" },
+  { Icon: Calendar, label: "Архитектурный лекторий и BIM-воркшопы с сертификатами" },
+  { Icon: Mic, label: "Дилерская гостиная и биржа деловых контактов" },
+  { Icon: Users, label: "Торжественная церемония вручения отраслевой премии" },
 ];
 
 const FEATURES_EN = [
-  { Icon: Calendar, label: "Forums and conferences" },
-  { Icon: Mic, label: "Masterclasses and workshops" },
-  { Icon: Users, label: "Expert roundtables" },
+  { Icon: Calendar, label: "Architectural lecture hall and BIM workshops with certificates" },
+  { Icon: Mic, label: "Dealer lounge and business contact exchange" },
+  { Icon: Users, label: "Solemn ceremony of the industry award" },
 ];
 
 export function AboutBusinessCard() {
@@ -52,7 +52,9 @@ export function AboutBusinessCard() {
                 className="font-black text-white leading-tight mb-5"
                 style={{ fontSize: "clamp(24px, 3vw, 44px)" }}
               >
-                {ru ? "30+ событий за 4 дня" : "30+ events over 4 days"}
+                {ru
+                  ? "Диалог, который формирует повестку отрасли — не на три дня, а на весь год"
+                  : "A dialogue that shapes the industry agenda — not just for three days, but for the whole year"}
               </h2>
               <p
                 className="leading-relaxed mb-8"
@@ -62,9 +64,36 @@ export function AboutBusinessCard() {
                   fontSize: "clamp(13px, 1.1vw, 16px)",
                 }}
               >
-                {ru
-                  ? "В течение всех дней выставку НеваБилд сопровождает насыщенная деловая программа: форумы, конференции, мастер-классы и круглые столы с участием ведущих экспертов строительной отрасли."
-                  : "Throughout all exhibition days, NevaBuild is accompanied by a rich business programme: forums, conferences, masterclasses and roundtables featuring leading experts in the construction industry."}
+                {ru ? (
+                  <>
+                    Деловая программа NEVA BUILD EXPO построена вокруг трёх направлений —
+                    архитектура и городская среда, бизнес и технологии в строительстве, дизайн и
+                    интерьер. Каждый день работает несколько параллельных треков: для архитекторов и
+                    девелоперов, для строителей и поставщиков, а также форматы для широкой
+                    аудитории.
+                    <br />
+                    <br />В программе — пленарные сессии и архитектурный лекторий с российскими и
+                    зарубежными экспертами, дилерская гостиная и биржа деловых контактов,
+                    BIM-воркшопы и мастер-классы с сертификатами, фестиваль инноваций в дизайне и
+                    материалах, ландшафтный трек и арт-зона с независимыми галереями. Деловую
+                    программу завершает торжественная церемония вручения отраслевой премии.
+                  </>
+                ) : (
+                  <>
+                    The NEVA BUILD EXPO business programme is built around three tracks —
+                    architecture and urban environment, business and construction technology, design
+                    and interior. Each day runs several parallel streams: for architects and
+                    developers, for builders and suppliers, and formats for the wider audience.
+                    <br />
+                    <br />
+                    The programme includes plenary sessions and an architectural lecture hall with
+                    Russian and international experts, a dealer lounge and business contact
+                    exchange, BIM workshops and masterclasses with certificates, an innovation
+                    festival in design and materials, a landscape track and an art zone with
+                    independent galleries. The business programme concludes with a solemn industry
+                    award ceremony.
+                  </>
+                )}
               </p>
             </div>
 

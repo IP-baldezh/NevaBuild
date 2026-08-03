@@ -16,11 +16,8 @@ export default function middleware(request: NextRequest) {
   const withoutLocale = localeMatch ? pathname.slice(localeMatch[0].length - 1) || "/" : pathname;
 
   if (LANDING_MODE) {
-    // В режиме лендинга: / → /about, все страницы кроме /about → /about
-    if (
-      withoutLocale === "/" ||
-      COMING_SOON.some((r) => withoutLocale === r || withoutLocale.startsWith(r + "/"))
-    ) {
+    // В режиме лендинга: пускаем только /about, всё остальное → /about
+    if (withoutLocale !== "/about" && !withoutLocale.startsWith("/about/")) {
       return NextResponse.redirect(new URL(`/${locale}/about`, request.url));
     }
   } else {
