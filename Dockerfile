@@ -1,7 +1,7 @@
 # ===== NEVA BUILD — multi-stage Dockerfile (Next.js standalone) =====
 
 # --- deps: установка зависимостей ---
-FROM node:20-slim AS deps
+FROM node:20 AS deps
 RUN apt-get update && apt-get install -y --no-install-recommends openssl && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 COPY package.json package-lock.json* ./
@@ -9,7 +9,7 @@ COPY prisma ./prisma
 RUN npm ci
 
 # --- builder: сборка приложения ---
-FROM node:20-slim AS builder
+FROM node:20 AS builder
 RUN apt-get update && apt-get install -y --no-install-recommends openssl && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
