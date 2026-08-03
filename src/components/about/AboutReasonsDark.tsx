@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { m, useScroll, useTransform } from "framer-motion";
 import type { MotionValue } from "framer-motion";
@@ -74,13 +74,27 @@ const REASONS_EN = [
 ];
 
 const CARD_IMAGES = [
-  "https://images.unsplash.com/photo-1655121109751-20a78309dc2e?q=80&w=1400&auto=format&fit=crop" /* Нева + здание, Санкт-Петербург */,
-  "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1400&auto=format&fit=crop" /* деловые люди за столом */,
-  "https://images.unsplash.com/photo-1599707254554-027aeb4deacd?q=80&w=1400&auto=format&fit=crop" /* строительство, кран + здание */,
-  "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1400&auto=format&fit=crop" /* докладчик перед аудиторией */,
-  "https://images.unsplash.com/photo-1622675363311-3e1904dc1885?q=80&w=1400&auto=format&fit=crop" /* встреча команды за столом */,
-  "https://images.unsplash.com/photo-1713779490284-a81ff6a8ffae?q=80&w=1400&auto=format&fit=crop" /* человек в музейном зале */,
+  "https://images.unsplash.com/photo-1655121109751-20a78309dc2e?q=75&w=1200&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=75&w=1200&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1599707254554-027aeb4deacd?q=75&w=1200&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=75&w=1200&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1622675363311-3e1904dc1885?q=75&w=1200&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1713779490284-a81ff6a8ffae?q=75&w=1200&auto=format&fit=crop",
 ];
+
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+  return isMobile;
+}
+
+// ─── Desktop: stacking scroll card ───────────────────────────────────────────
 
 function StackCard({
   num,
@@ -113,6 +127,7 @@ function StackCard({
         inset: 0,
         y,
         zIndex: index,
+        willChange: "transform",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -125,34 +140,29 @@ function StackCard({
           maxWidth: 1440,
           height: "clamp(420px, 75vh, 680px)",
           padding: "clamp(28px, 4vw, 64px)",
-          /* Liquid glass base */
           background: "rgba(10, 24, 14, 0.60)",
-          backdropFilter: "blur(24px)",
-          WebkitBackdropFilter: "blur(24px)",
+          backdropFilter: "blur(14px)",
+          WebkitBackdropFilter: "blur(14px)",
           border: "1px solid rgba(255, 255, 255, 0.10)",
           boxShadow: [
-            "inset 0 1.5px 0 rgba(255, 255, 255, 0.18)" /* top specular */,
-            "inset 0 -1px 0 rgba(255, 255, 255, 0.04)" /* bottom rim */,
-            "inset 1px 0 0 rgba(255, 255, 255, 0.06)" /* left rim */,
-            "inset -1px 0 0 rgba(255, 255, 255, 0.03)" /* right rim */,
-            "0 0 0 0.5px rgba(255, 255, 255, 0.06)" /* outer ring */,
-            "0 32px 80px rgba(0, 0, 0, 0.55)" /* depth shadow */,
-            "0 8px 32px rgba(0, 0, 0, 0.35)" /* soft shadow */,
+            "inset 0 1.5px 0 rgba(255, 255, 255, 0.18)",
+            "inset 0 -1px 0 rgba(255, 255, 255, 0.04)",
+            "0 0 0 0.5px rgba(255, 255, 255, 0.06)",
+            "0 24px 60px rgba(0, 0, 0, 0.50)",
           ].join(", "),
           position: "relative",
           overflow: "hidden",
         }}
       >
-        {/* Background image under glass */}
         <Image
           src={image}
           alt=""
           aria-hidden
           fill
-          sizes="100vw"
+          sizes="(max-width: 1024px) 100vw, 1440px"
           style={{ objectFit: "cover", objectPosition: "center", opacity: 0.32 }}
         />
-        {/* Top specular highlight — simulates glass curvature */}
+        {/* Top specular highlight */}
         <div
           style={{
             position: "absolute",
@@ -166,7 +176,7 @@ function StackCard({
             pointerEvents: "none",
           }}
         />
-        {/* Lime refraction tint — top-left angular light */}
+        {/* Lime refraction tint */}
         <div
           style={{
             position: "absolute",
@@ -177,7 +187,7 @@ function StackCard({
             pointerEvents: "none",
           }}
         />
-        {/* Bottom inner shadow — glass thickness illusion */}
+        {/* Bottom shadow */}
         <div
           style={{
             position: "absolute",
@@ -191,7 +201,7 @@ function StackCard({
           }}
         />
 
-        {/* Top row: large number */}
+        {/* Number */}
         <div className="mb-auto">
           <span
             className="font-black leading-none select-none"
@@ -206,8 +216,8 @@ function StackCard({
           </span>
         </div>
 
-        {/* Bottom: title + body + dots */}
-        <div className="mt-auto">
+        {/* Title + body + dots */}
+        <div className="mt-auto" style={{ position: "relative" }}>
           <h3
             className="font-black text-white leading-tight mb-4"
             style={{ fontSize: "clamp(22px, 2.8vw, 52px)" }}
@@ -225,8 +235,6 @@ function StackCard({
           >
             {body}
           </p>
-
-          {/* Progress dots */}
           <div className="flex items-center gap-2">
             {Array.from({ length: total }).map((_, i) => (
               <span
@@ -248,11 +256,161 @@ function StackCard({
   );
 }
 
+// ─── Mobile: full-screen vertical snap card ───────────────────────────────────
+
+function MobileSnapCard({
+  num,
+  title,
+  body,
+  image,
+  index,
+  total,
+  isFirst,
+}: {
+  num: string;
+  title: string;
+  body: string;
+  image: string;
+  index: number;
+  total: number;
+  isFirst: boolean;
+}) {
+  return (
+    <div
+      style={{
+        height: "100dvh",
+        scrollSnapAlign: "start",
+        scrollSnapStop: "always",
+        position: "relative",
+        overflow: "hidden",
+        background: "rgb(10, 24, 14)",
+      }}
+    >
+      <Image
+        src={image}
+        alt=""
+        aria-hidden
+        fill
+        sizes="100vw"
+        style={{ objectFit: "cover", objectPosition: "center", opacity: 0.3 }}
+      />
+      {/* Lime tint */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "linear-gradient(135deg, rgba(169,236,70,0.08) 0%, transparent 55%)",
+          pointerEvents: "none",
+        }}
+      />
+      {/* Bottom gradient for legibility */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: "65%",
+          background:
+            "linear-gradient(0deg, rgba(5,14,8,0.92) 0%, rgba(5,14,8,0.40) 60%, transparent 100%)",
+          pointerEvents: "none",
+        }}
+      />
+      {/* Content */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          display: "flex",
+          flexDirection: "column",
+          padding: "clamp(28px, 7vw, 48px)",
+          paddingBottom: "clamp(40px, 10vw, 64px)",
+        }}
+      >
+        {/* Number */}
+        <span
+          className="font-black select-none"
+          style={{
+            fontSize: "clamp(64px, 22vw, 120px)",
+            color: "rgba(169,236,70,0.50)",
+            fontFamily: "var(--font-mulish)",
+            lineHeight: 0.85,
+          }}
+        >
+          {num}
+        </span>
+
+        {/* Title + body + dots pushed to bottom */}
+        <div style={{ marginTop: "auto" }}>
+          <h3
+            className="font-black text-white leading-tight mb-3"
+            style={{ fontSize: "clamp(22px, 5.5vw, 32px)" }}
+          >
+            {title}
+          </h3>
+          <p
+            className="leading-relaxed mb-6"
+            style={{
+              color: "rgba(255,255,255,0.80)",
+              fontFamily: "var(--font-mulish)",
+              fontSize: "clamp(14px, 3.5vw, 16px)",
+            }}
+          >
+            {body}
+          </p>
+          {/* Progress dots */}
+          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            {Array.from({ length: total }).map((_, i) => (
+              <span
+                key={i}
+                style={{
+                  display: "block",
+                  width: i === index ? 24 : 6,
+                  height: 6,
+                  borderRadius: 3,
+                  background: i <= index ? "#a9ec46" : "rgba(255,255,255,0.20)",
+                  transition: "all 0.3s",
+                }}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Swipe hint on first card */}
+        {isFirst && (
+          <div
+            aria-hidden
+            style={{
+              position: "absolute",
+              bottom: "clamp(28px, 6vw, 44px)",
+              right: "clamp(24px, 6vw, 40px)",
+              opacity: 0.55,
+            }}
+          >
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <path
+                d="M11 3v16M11 19l-5-5M11 19l5-5"
+                stroke="#a9ec46"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ─── Main component ───────────────────────────────────────────────────────────
+
 export function AboutReasonsDark() {
   const locale = useLocale() as Locale;
   const ru = locale === "ru";
   const reasons = ru ? REASONS_RU : REASONS_EN;
   const total = reasons.length;
+  const isMobile = useIsMobile();
 
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -260,48 +418,58 @@ export function AboutReasonsDark() {
     offset: ["start start", "end end"],
   });
 
+  const heading = (
+    <div className="container-neva py-10 sm:py-20">
+      <m.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <span
+          className="text-[11px] uppercase tracking-[0.28em] mb-4 block font-bold"
+          style={{ color: "#a9ec46", fontFamily: "var(--font-mulish)" }}
+        >
+          {ru ? "Почему стоит прийти" : "Why attend"}
+        </span>
+        <h2
+          className="font-black text-white leading-[1.02]"
+          style={{ fontSize: "clamp(32px, 5vw, 68px)" }}
+        >
+          {ru ? (
+            <>
+              6 причин прийти
+              <br />
+              <span style={{ color: "rgba(255,255,255,0.45)" }}>на выставку.</span>
+            </>
+          ) : (
+            <>
+              6 reasons to
+              <br />
+              <span style={{ color: "rgba(255,255,255,0.45)" }}>attend.</span>
+            </>
+          )}
+        </h2>
+      </m.div>
+    </div>
+  );
+
   return (
     <section className="relative z-10 border-t" style={{ borderColor: "rgba(255,255,255,0.07)" }}>
-      {/* Heading — scrolls away naturally before stacking zone starts */}
-      <div className="container-neva py-10 sm:py-20">
-        <m.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <span
-            className="text-[11px] uppercase tracking-[0.28em] mb-4 block font-bold"
-            style={{ color: "#a9ec46", fontFamily: "var(--font-mulish)" }}
-          >
-            {ru ? "Почему стоит прийти" : "Why attend"}
-          </span>
-          <h2
-            className="font-black text-white leading-[1.02]"
-            style={{ fontSize: "clamp(32px, 5vw, 68px)" }}
-          >
-            {ru ? (
-              <>
-                6 причин прийти
-                <br />
-                <span style={{ color: "rgba(255,255,255,0.45)" }}>на выставку.</span>
-              </>
-            ) : (
-              <>
-                6 reasons to
-                <br />
-                <span style={{ color: "rgba(255,255,255,0.45)" }}>attend.</span>
-              </>
-            )}
-          </h2>
-        </m.div>
-      </div>
+      {heading}
 
-      {/* Stacking scroll zone: total * 100vh tall, sticky viewport inside */}
-      <div ref={containerRef} style={{ height: `${total * 100}vh` }}>
-        <div style={{ position: "sticky", top: 0, height: "100svh", overflow: "hidden" }}>
+      {isMobile ? (
+        /* Mobile: full-screen vertical snap scroll */
+        <div
+          style={{
+            height: "100dvh",
+            overflowY: "scroll",
+            scrollSnapType: "y mandatory",
+            scrollbarWidth: "none",
+          }}
+        >
           {reasons.map((r, i) => (
-            <StackCard
+            <MobileSnapCard
               key={r.num}
               num={r.num}
               title={r.title}
@@ -309,11 +477,29 @@ export function AboutReasonsDark() {
               image={CARD_IMAGES[i]}
               index={i}
               total={total}
-              scrollYProgress={scrollYProgress}
+              isFirst={i === 0}
             />
           ))}
         </div>
-      </div>
+      ) : (
+        /* Desktop: stacking scroll effect */
+        <div ref={containerRef} style={{ height: `${total * 100}vh` }}>
+          <div style={{ position: "sticky", top: 0, height: "100svh", overflow: "hidden" }}>
+            {reasons.map((r, i) => (
+              <StackCard
+                key={r.num}
+                num={r.num}
+                title={r.title}
+                body={r.body}
+                image={CARD_IMAGES[i]}
+                index={i}
+                total={total}
+                scrollYProgress={scrollYProgress}
+              />
+            ))}
+          </div>
+        </div>
+      )}
     </section>
   );
 }
