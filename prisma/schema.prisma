@@ -124,8 +124,12 @@ model ExhibitorCategory {
   slug       String                      @unique
   titleRu    String
   titleEn    String
+  subRu      String?
+  subEn      String?
   icon       String?
+  imageUrl   String?
   sortOrder  Int                         @default(0)
+  isVisible  Boolean                     @default(true)
   exhibitors ExhibitorCategoryRelation[]
 }
 
