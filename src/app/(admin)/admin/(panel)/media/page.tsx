@@ -1,9 +1,15 @@
 import { prisma } from "@/lib/db";
 import { uploadMedia, deleteMediaAsset } from "@/server/actions/admin/media";
+import { uploadMedia, deleteMediaAsset } from "@/server/actions/admin/media";
 import { PageHeader, Panel } from "@/components/admin/AdminUI";
 import { SubmitButton } from "@/components/admin/SubmitButton";
 
 export const dynamic = "force-dynamic";
+
+async function doUpload(fd: FormData) {
+  "use server";
+  await uploadMedia(fd);
+}
 
 async function doUpload(fd: FormData) {
   "use server";
@@ -19,6 +25,7 @@ export default async function AdminMediaPage() {
 
       <Panel className="mb-6 p-6">
         <form action={doUpload} className="flex flex-wrap items-center gap-4">
+        <form action={doUpload} className="flex flex-wrap items-center gap-4">
           <input
             type="file"
             name="file"
@@ -29,8 +36,7 @@ export default async function AdminMediaPage() {
           <SubmitButton>Загрузить</SubmitButton>
         </form>
         <p className="mt-2 text-xs text-muted-foreground">
-          Файл сохраняется в /public/uploads. Используйте пикер изображений в формах или скопируйте
-          URL из карточки ниже.
+          Файл сохраняется в /public/uploads. Используйте пикер в формах или скопируйте URL отсюда.
         </p>
       </Panel>
 
@@ -40,6 +46,12 @@ export default async function AdminMediaPage() {
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {assets.map((a) => (
             <Panel key={a.id} className="overflow-hidden">
+              <div className="aspect-video bg-muted flex items-center justify-center">
+                {a.mimeType.startsWith("image/") ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={a.url} alt={a.filename} className="h-full w-full object-contain" />
+                ) : (
+                  <span className="text-xs text-muted-foreground">{a.mimeType}</span>
               <div className="aspect-video bg-muted flex items-center justify-center">
                 {a.mimeType.startsWith("image/") ? (
                   // eslint-disable-next-line @next/next/no-img-element
@@ -56,6 +68,12 @@ export default async function AdminMediaPage() {
                 />
                 <div className="mt-2 flex items-center justify-between text-xs text-muted-foreground">
                   <span>{Math.round(a.size / 1024)} КБ</span>
+                  <form
+                    action={async () => {
+                      "use server";
+                      await deleteMediaAsset(a.id);
+                    }}
+                  >
                   <form
                     action={async () => {
                       "use server";

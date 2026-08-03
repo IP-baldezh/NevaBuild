@@ -37,10 +37,6 @@ export function ImagePickerField({ name, defaultValue = "" }: Props) {
     }
   }
 
-  function closeDialog() {
-    setOpen(false);
-  }
-
   async function handleFileUpload(file: File) {
     setUploading(true);
     try {
@@ -49,7 +45,7 @@ export function ImagePickerField({ name, defaultValue = "" }: Props) {
       const result = await uploadMedia(fd);
       if (result?.url) {
         setValue(result.url);
-        closeDialog();
+        setOpen(false);
       }
     } finally {
       setUploading(false);
@@ -67,19 +63,24 @@ export function ImagePickerField({ name, defaultValue = "" }: Props) {
     open && mounted
       ? createPortal(
           <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
-            <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={closeDialog} />
+            <div
+              className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+              onClick={() => setOpen(false)}
+            />
             <div className="relative z-10 w-full max-w-2xl bg-white rounded-2xl shadow-2xl flex flex-col max-h-[85dvh]">
+              {/* Header */}
               <div className="flex items-center justify-between px-6 py-4 border-b shrink-0">
                 <h2 className="font-semibold text-base">Выбрать изображение</h2>
                 <button
                   type="button"
-                  onClick={closeDialog}
+                  onClick={() => setOpen(false)}
                   className="size-8 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-500 transition-colors"
                 >
                   <X className="size-4" />
                 </button>
               </div>
 
+              {/* Tabs */}
               <div className="flex border-b px-6 shrink-0">
                 {(["library", "upload"] as const).map((t) => (
                   <button
@@ -97,65 +98,63 @@ export function ImagePickerField({ name, defaultValue = "" }: Props) {
                 ))}
               </div>
 
+              {/* Content */}
               <div className="overflow-y-auto flex-1 p-6">
-                {tab === "library" && (
-                  <>
-                    {loadingAssets ? (
-                      <div className="flex items-center justify-center py-16">
-                        <Loader2 className="size-6 animate-spin text-gray-400" />
-                      </div>
-                    ) : assets.length === 0 ? (
-                      <div className="flex flex-col items-center justify-center py-16 text-gray-400 gap-3">
-                        <Images className="size-10" />
-                        <p className="text-sm">Нет загруженных изображений</p>
+                {tab === "library" &&
+                  (loadingAssets ? (
+                    <div className="flex items-center justify-center py-16">
+                      <Loader2 className="size-6 animate-spin text-gray-400" />
+                    </div>
+                  ) : assets.length === 0 ? (
+                    <div className="flex flex-col items-center justify-center py-16 text-gray-400 gap-3">
+                      <Images className="size-10" />
+                      <p className="text-sm">Нет загруженных изображений</p>
+                      <button
+                        type="button"
+                        onClick={() => setTab("upload")}
+                        className="text-sm text-black underline underline-offset-2"
+                      >
+                        Загрузить первое
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                      {assets.map((a) => (
                         <button
+                          key={a.id}
                           type="button"
-                          onClick={() => setTab("upload")}
-                          className="text-sm text-black underline underline-offset-2"
+                          title={a.filename}
+                          onClick={() => {
+                            setValue(a.url);
+                            setOpen(false);
+                          }}
+                          className={`relative aspect-square rounded-xl overflow-hidden border-2 transition-all hover:border-gray-400 ${
+                            value === a.url
+                              ? "border-black ring-2 ring-black ring-offset-1"
+                              : "border-gray-200"
+                          }`}
                         >
-                          Загрузить первое
+                          {a.mimeType.startsWith("image/") ? (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                              src={a.url}
+                              alt={a.filename}
+                              className="w-full h-full object-contain bg-gray-50"
+                            />
+                          ) : (
+                            <div className="w-full h-full bg-gray-100 flex items-center justify-center">
+                              <ImageIcon className="size-6 text-gray-400" />
+                            </div>
+                          )}
+                          {value === a.url && (
+                            <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                              <Check className="size-6 text-white" />
+                            </div>
+                          )}
                         </button>
-                      </div>
-                    ) : (
-                      <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
-                        {assets.map((a) => (
-                          <button
-                            key={a.id}
-                            type="button"
-                            onClick={() => {
-                              setValue(a.url);
-                              closeDialog();
-                            }}
-                            title={a.filename}
-                            className={`relative aspect-square rounded-xl overflow-hidden border-2 transition-all hover:border-gray-400 ${
-                              value === a.url
-                                ? "border-black ring-2 ring-black ring-offset-1"
-                                : "border-gray-200"
-                            }`}
-                          >
-                            {a.mimeType.startsWith("image/") ? (
-                              // eslint-disable-next-line @next/next/no-img-element
-                              <img
-                                src={a.url}
-                                alt={a.filename}
-                                className="w-full h-full object-contain bg-gray-50"
-                              />
-                            ) : (
-                              <div className="w-full h-full bg-gray-100 flex items-center justify-center">
-                                <ImageIcon className="size-6 text-gray-400" />
-                              </div>
-                            )}
-                            {value === a.url && (
-                              <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                                <Check className="size-6 text-white" />
-                              </div>
-                            )}
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </>
-                )}
+                      ))}
+                    </div>
+                  ))}
 
                 {tab === "upload" && (
                   <div className="flex flex-col items-center gap-4">
@@ -167,9 +166,9 @@ export function ImagePickerField({ name, defaultValue = "" }: Props) {
                       onDragLeave={() => setDragOver(false)}
                       onDrop={handleDrop}
                       onClick={() => !uploading && fileRef.current?.click()}
-                      className={`w-full border-2 border-dashed rounded-xl p-12 flex flex-col items-center gap-3 cursor-pointer transition-colors ${
-                        uploading ? "pointer-events-none opacity-60" : ""
-                      } ${dragOver ? "border-black bg-gray-50" : "border-gray-200 hover:border-gray-400"}`}
+                      className={`w-full border-2 border-dashed rounded-xl p-12 flex flex-col items-center gap-3 cursor-pointer transition-colors
+                        ${uploading ? "pointer-events-none opacity-60" : ""}
+                        ${dragOver ? "border-black bg-gray-50" : "border-gray-200 hover:border-gray-400"}`}
                     >
                       {uploading ? (
                         <Loader2 className="size-8 text-gray-400 animate-spin" />
@@ -188,8 +187,8 @@ export function ImagePickerField({ name, defaultValue = "" }: Props) {
                       className="hidden"
                       disabled={uploading}
                       onChange={(e) => {
-                        const file = e.target.files?.[0];
-                        if (file) handleFileUpload(file);
+                        const f = e.target.files?.[0];
+                        if (f) handleFileUpload(f);
                       }}
                     />
                   </div>

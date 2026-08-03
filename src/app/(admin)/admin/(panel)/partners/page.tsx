@@ -120,7 +120,7 @@ export default async function AdminPartnersPage({
               {e && (
                 <Link
                   href="/admin/partners"
-                  className="h-11 rounded-full border px-5 text-sm leading-[2.75rem] hover:bg-secondary"
+                  className="h-11 rounded-full border px-5 text-sm leading-[2.75rum] hover:bg-secondary"
                 >
                   Отмена
                 </Link>
