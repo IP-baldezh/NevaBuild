@@ -95,6 +95,9 @@ export default async function AdminPartnersPage({
             <FormField label="Логотип">
               <ImagePickerField name="logoUrl" defaultValue={e?.logoUrl ?? ""} />
             </FormField>
+            <FormField label="Фото">
+              <ImagePickerField name="photoUrl" defaultValue={e?.photoUrl ?? ""} />
+            </FormField>
             <FormField label="Сайт" htmlFor="website">
               <Input id="website" name="website" defaultValue={e?.website ?? ""} />
             </FormField>

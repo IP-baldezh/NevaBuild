@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { m } from "framer-motion";
 import { useLocale } from "next-intl";
 import type { Locale } from "@/i18n/routing";
@@ -14,8 +14,41 @@ type Props = {
   city: string;
 };
 
-const MARQUEE_RU = "НЕВА БИЛД · НЕВА БИЛД · НЕВА БИЛД · НЕВА БИЛД · НЕВА БИЛД · НЕВА БИЛД · ";
-const MARQUEE_EN = "NEVA BUILD · NEVA BUILD · NEVA BUILD · NEVA BUILD · NEVA BUILD · NEVA BUILD · ";
+function LogoSep() {
+  return (
+    <svg
+      viewBox="0 0 32 32"
+      fill="none"
+      aria-hidden
+      style={{
+        height: "0.52em",
+        width: "auto",
+        flexShrink: 0,
+        margin: "0 0.38em",
+        verticalAlign: "middle",
+      }}
+    >
+      <path d="M11.2598 17.7973V32H32.0004V17.1145L22.2228 11.4786L11.2598 17.7973Z" fill="white" />
+      <path
+        d="M6.5772 15.0587L6.46703 14.8446L22.0811 5.84455L22.2222 6.11914L22.3633 5.84455L31.9999 11.3991V1.78083e-07H0V32H6.51847V15.0587H6.5772Z"
+        fill="white"
+      />
+    </svg>
+  );
+}
+
+function TickerItems({ text }: { text: string }) {
+  return (
+    <>
+      {Array.from({ length: 7 }, (_, i) => (
+        <Fragment key={i}>
+          <span>{text}</span>
+          <LogoSep />
+        </Fragment>
+      ))}
+    </>
+  );
+}
 
 export function AboutHero({ lead, dateRange, venue, city }: Props) {
   const locale = useLocale() as Locale;
@@ -110,36 +143,28 @@ export function AboutHero({ lead, dateRange, venue, city }: Props) {
         aria-hidden
       >
         <div
-          className="flex whitespace-nowrap absolute bottom-0 left-0"
+          className="flex items-end whitespace-nowrap absolute bottom-0 left-0"
           style={{
             width: "max-content",
             animation: "neva-marquee 24s linear infinite",
             willChange: "transform",
           }}
         >
-          <span
-            className="font-black text-white"
-            style={{
-              fontSize: "clamp(70px, 12vw, 155px)",
-              lineHeight: 0.88,
-              letterSpacing: "-0.02em",
-              opacity: 0.9,
-            }}
-          >
-            {ru ? MARQUEE_RU : MARQUEE_EN}
-          </span>
-          <span
-            className="font-black text-white"
-            style={{
-              fontSize: "clamp(70px, 12vw, 155px)",
-              lineHeight: 0.88,
-              letterSpacing: "-0.02em",
-              opacity: 0.9,
-            }}
-            aria-hidden
-          >
-            {ru ? MARQUEE_RU : MARQUEE_EN}
-          </span>
+          {[0, 1].map((copy) => (
+            <span
+              key={copy}
+              className="inline-flex items-center font-black text-white"
+              style={{
+                fontSize: "clamp(70px, 12vw, 155px)",
+                lineHeight: 0.88,
+                letterSpacing: "-0.02em",
+                opacity: 0.9,
+                fontFamily: "var(--font-mulish)",
+              }}
+            >
+              <TickerItems text={ru ? "НЕВА БИЛД" : "NEVA BUILD"} />
+            </span>
+          ))}
         </div>
       </div>
 

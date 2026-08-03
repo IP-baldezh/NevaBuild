@@ -20,7 +20,6 @@ import {
   Menu,
   X,
   ExternalLink,
-  ImageIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Role } from "@prisma/client";
@@ -36,7 +35,6 @@ const NAV = [
   { href: "/admin/orders", label: "Заказы", icon: ShoppingCart },
   { href: "/admin/leads", label: "Заявки", icon: Inbox },
   { href: "/admin/partners", label: "Партнёры", icon: Handshake },
-  { href: "/admin/media", label: "Медиа", icon: ImageIcon },
   { href: "/admin/users", label: "Пользователи", icon: Users },
 ];
 

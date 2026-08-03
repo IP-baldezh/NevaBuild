@@ -5,6 +5,7 @@ import { buildAlternates } from "@/lib/seo";
 import { getEventSettings, localizeEvent } from "@/server/services/event";
 import { formatDateRange } from "@/lib/format";
 import { getPartners } from "@/server/services/partners";
+import { getExhibitorCategories } from "@/server/services/exhibitors";
 
 import { AboutBackground } from "@/components/about/AboutBackground";
 import { AboutHero } from "@/components/about/AboutHero";
@@ -12,6 +13,7 @@ import { AboutIntroBlock } from "@/components/about/AboutIntroBlock";
 import { AboutStatsDark } from "@/components/about/AboutStatsDark";
 import { AboutForWhomDark } from "@/components/about/AboutForWhomDark";
 import { AboutBusinessCard } from "@/components/about/AboutBusinessCard";
+import { AboutReasonsDark } from "@/components/about/AboutReasonsDark";
 import { AboutSectionsDark } from "@/components/about/AboutSectionsDark";
 import { AboutAmbassadors } from "@/components/about/AboutAmbassadors";
 import { AboutCtaDark } from "@/components/about/AboutCtaDark";
@@ -43,7 +45,11 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
   const tAboutPage = await getTranslations({ locale: locale as Locale, namespace: "AboutPage" });
   const tStats = await getTranslations({ locale: locale as Locale, namespace: "Stats" });
 
-  const [settings, partners] = await Promise.all([getEventSettings(), getPartners()]);
+  const [settings, partners, categories] = await Promise.all([
+    getEventSettings(),
+    getPartners(),
+    getExhibitorCategories(),
+  ]);
   const ev = localizeEvent(settings, locale as Locale);
 
   const dateRange = formatDateRange(ev.dateStart, ev.dateEnd, locale as Locale);
@@ -54,21 +60,27 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       value: ev.visitorCount,
       suffix: "+",
       label: tStats("visitors"),
-      sub: locale === "ru" ? "за 4 дня" : "over 4 days",
+      sub: locale === "ru" ? "за 3 дня" : "over 3 days",
       locale,
     },
     {
       value: ev.exhibitorCount,
       suffix: "+",
       label: tStats("companies"),
-      sub: locale === "ru" ? "из 35 стран" : "from 35 countries",
+      sub:
+        locale === "ru"
+          ? "производителей, дистрибьюторов и застройщиков России и зарубежных стран"
+          : "manufacturers, distributors and developers from Russia and abroad",
       locale,
     },
     {
       value: ev.areaSize,
       suffix: sqm,
       label: tStats("area"),
-      sub: locale === "ru" ? "в 3 павильонах" : "in 3 pavilions",
+      sub:
+        locale === "ru"
+          ? "выставочные залы, практические зоны"
+          : "exhibition halls and practical zones",
       locale,
     },
     {
@@ -102,7 +114,9 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
 
       <AboutBusinessCard />
 
-      <AboutSectionsDark />
+      <AboutReasonsDark />
+
+      <AboutSectionsDark categories={categories} />
 
       <PartnersSection partners={partners} />
 

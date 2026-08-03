@@ -60,7 +60,7 @@
     "title": "NEVA BUILD in numbers",
     "visitors": "visitors",
     "companies": "exhibiting companies",
-    "area": "exhibition area",
+    "area": "exhibition space",
     "events": "business program events",
     "days": "days of business program"
   },
@@ -193,7 +193,7 @@
   },
   "AboutPage": {
     "title": "About NEVA BUILD",
-    "lead": "Where the North-West building industry meets innovation.",
+    "lead": "A new architecture of dialogue and collaboration for the construction industry.",
     "descriptionTitle": "What is NEVA BUILD",
     "audienceTitle": "Who it is for",
     "audience": {

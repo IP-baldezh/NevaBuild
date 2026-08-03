@@ -44,7 +44,7 @@ export function AboutCtaDark({ dateRange, venue, city }: Props) {
           <>
             Станьте частью
             <br />
-            главного события.
+            масштабного события.
           </>
         ) : (
           <>

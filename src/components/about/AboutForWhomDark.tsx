@@ -9,35 +9,47 @@ import { ExhibitorModal } from "@/components/modals/ExhibitorModal";
 
 const DATA = {
   ru: {
+    visitorsHeading: "Откройте главную точку сборки отрасли",
+    visitorsDesc:
+      "Три дня, где впервые в Петербурге на одной площадке встречаются архитекторы, девелоперы, строители, дизайнеры, производители материалов и городские структуры.",
     visitors: [
-      "Архитекторы и дизайнеры интерьеров",
-      "Застройщики и девелоперы",
-      "Инженеры и технические специалисты",
-      "Закупщики строительных материалов",
-      "Руководители строительных компаний",
+      "Бесплатный вход для профессионалов отрасли",
+      "Архитектурный лекторий с ведущими российскими и международными экспертами",
+      "Практические мастер-классы и BIM-воркшопы с сертификатами",
+      "Дилерская гостиная и биржа деловых контактов «поставщик → покупатель»",
+      "Онлайн-регистрация без очереди на входе",
     ],
+    exhibitorsHeading: "Найдите клиентов среди тех, кто принимает решения",
+    exhibitorsDesc:
+      "Прямой выход на девелоперов, архитекторов, дистрибьюторов, строителей и частных заказчиков — с форматами участия под любой масштаб бизнеса.",
     exhibitors: [
-      "Производители стройматериалов",
-      "Поставщики инженерных решений",
-      "Дизайн-студии и архбюро",
-      "Компании-экспортёры из 35 стран",
-      "Технологические стартапы отрасли",
+      "Прямой доступ к профессиональной b2b-аудитории: от дистрибьюторов и застройщиков до архитектурных бюро",
+      "Форматы участия под любой бюджет — от стандартного стенда до премиального",
+      "Участие в деловой программе: тематические сессии, мастер-классы, партнёрские коллаборации",
+      "Биржа контактов и матчмейкинг для встреч с девелоперами и дилерами",
+      "Специальные условия для генеральных партнёров и производителей материалов",
     ],
   },
   en: {
+    visitorsHeading: "Discover the industry's key meeting point",
+    visitorsDesc:
+      "Three days where architects, developers, builders, designers, material manufacturers and city authorities meet on one platform — for the first time in St. Petersburg.",
     visitors: [
-      "Architects and interior designers",
-      "Property developers",
-      "Engineers and technical specialists",
-      "Construction materials buyers",
-      "Construction company executives",
+      "Free entry for industry professionals",
+      "Architectural lecture hall with leading Russian and international experts",
+      "Practical masterclasses and BIM workshops with certificates",
+      "Dealer lounge and business contact exchange «supplier → buyer»",
+      "Online registration with no queues at the entrance",
     ],
+    exhibitorsHeading: "Find clients among decision-makers",
+    exhibitorsDesc:
+      "Direct access to developers, architects, distributors, builders and private clients — with participation formats for any business scale.",
     exhibitors: [
-      "Construction materials manufacturers",
-      "Engineering solutions suppliers",
-      "Design studios and architecture firms",
-      "Exporters from 35 countries",
-      "Industry technology startups",
+      "Direct access to a professional b2b audience: from distributors and developers to architectural bureaus",
+      "Participation formats for any budget — from standard stands to premium",
+      "Participation in the business programme: thematic sessions, masterclasses, partner collaborations",
+      "Contact exchange and matchmaking for meetings with developers and dealers",
+      "Special conditions for general partners and material manufacturers",
     ],
   },
 };
@@ -45,7 +57,7 @@ const DATA = {
 export function AboutForWhomDark() {
   const locale = useLocale() as Locale;
   const ru = locale === "ru";
-  const d = DATA[ru ? "ru" : "en"];
+  const d = DATA[ru ? "ru" : "en"] as typeof DATA.ru;
   const [visitorOpen, setVisitorOpen] = useState(false);
   const [exhibitorOpen, setExhibitorOpen] = useState(false);
 
@@ -107,11 +119,17 @@ export function AboutForWhomDark() {
               {ru ? "Посетителям" : "For visitors"}
             </span>
             <h3
-              className="font-black text-white mt-2 leading-[0.95]"
-              style={{ fontSize: "clamp(1.5rem, 2.2vw, 2.2rem)" }}
+              className="font-black text-white mt-2 leading-[1.05]"
+              style={{ fontSize: "clamp(1.2rem, 1.8vw, 1.8rem)" }}
             >
-              {ru ? "Профессионалы отрасли" : "Industry Professionals"}
+              {d.visitorsHeading}
             </h3>
+            <p
+              className="mt-3 text-sm leading-snug"
+              style={{ color: "rgba(255,255,255,0.65)", fontFamily: "var(--font-mulish)" }}
+            >
+              {d.visitorsDesc}
+            </p>
           </div>
 
           <ul className="flex flex-col gap-3 flex-1">
@@ -164,11 +182,17 @@ export function AboutForWhomDark() {
               {ru ? "Экспонентам" : "For exhibitors"}
             </span>
             <h3
-              className="font-black text-white mt-2 leading-[0.95]"
-              style={{ fontSize: "clamp(1.5rem, 2.2vw, 2.2rem)" }}
+              className="font-black text-white mt-2 leading-[1.05]"
+              style={{ fontSize: "clamp(1.2rem, 1.8vw, 1.8rem)" }}
             >
-              {ru ? "Компании и бренды" : "Companies & Brands"}
+              {d.exhibitorsHeading}
             </h3>
+            <p
+              className="mt-3 text-sm leading-snug"
+              style={{ color: "rgba(255,255,255,0.65)", fontFamily: "var(--font-mulish)" }}
+            >
+              {d.exhibitorsDesc}
+            </p>
           </div>
 
           <ul className="flex flex-col gap-3 flex-1">

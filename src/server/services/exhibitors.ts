@@ -1,5 +1,5 @@
 import "server-only";
-import { Prisma, type ExhibitorStatus } from "@prisma/client";
+import { Prisma, type ExhibitorStatus, type ExhibitorCategory } from "@prisma/client";
 import { prisma } from "@/lib/db";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars -- used via typeof for Prisma type inference
@@ -68,11 +68,12 @@ export async function getExhibitorBySlug(slug: string) {
   }
 }
 
-export async function getExhibitorCategories() {
+export async function getExhibitorCategories(): Promise<ExhibitorCategory[]> {
   try {
-    return await prisma.exhibitorCategory.findMany({
-      orderBy: { sortOrder: "asc" },
-    });
+    return await prisma.$queryRaw<ExhibitorCategory[]>`
+      SELECT "id","slug","titleRu","titleEn","subRu","subEn","icon","imageUrl","sortOrder","isVisible"
+      FROM "ExhibitorCategory" WHERE "isVisible" = true ORDER BY "sortOrder" ASC
+    `;
   } catch {
     return [];
   }

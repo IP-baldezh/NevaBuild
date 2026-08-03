@@ -66,7 +66,7 @@ export function AboutIntroBlock() {
           {/* Right — text + list */}
           <div>
             <p
-              className="leading-relaxed mb-8"
+              className="leading-relaxed mb-5"
               style={{
                 color: "rgba(255,255,255,0.85)",
                 fontFamily: "var(--font-mulish)",
@@ -74,8 +74,20 @@ export function AboutIntroBlock() {
               }}
             >
               {ru
-                ? "НеваБилд создана для взаимодействия производителей и поставщиков строительных и отделочных материалов, дизайнеров, архитекторов, специалистов оптовых и розничных организаций, строительных и ремонтных компаний со своими клиентами и партнерами."
-                : "NevaBuild was created to connect manufacturers and suppliers of construction and finishing materials with designers, architects, wholesale and retail specialists, and construction and renovation companies — with their clients and partners."}
+                ? "NEVA BUILD EXPO — новая международная b2b-выставка строительной отрасли, архитектуры и дизайна интерьера, объединяющая Санкт-Петербург и весь Северо-Западный регион. Мы создаём не очередное отраслевое мероприятие, а уникальную точку пересечения глубинной специфики города, системных вызовов современного строительства и практических интересов всех участников рынка — от поставщиков стройматериалов до девелоперов, архитекторов, дизайнеров и общественных институтов."
+                : "NEVA BUILD EXPO is a new international b2b exhibition of the construction industry, architecture and interior design, bringing together St. Petersburg and the entire North-West region. We are creating not just another industry event, but a unique intersection of the city's deep specifics, systemic challenges of modern construction, and the practical interests of all market participants — from building material suppliers to developers, architects, designers and public institutions."}
+            </p>
+            <p
+              className="leading-relaxed mb-8"
+              style={{
+                color: "rgba(255,255,255,0.70)",
+                fontFamily: "var(--font-mulish)",
+                fontSize: "clamp(13px, 1.05vw, 16px)",
+              }}
+            >
+              {ru
+                ? "Впервые в Петербурге на одной площадке встречаются производители и дистрибьюторы строительных материалов, строители и подрядчики, архитекторы и девелоперы, дизайнеры интерьеров и предметного дизайна — а также представители городских структур и профессиональное сообщество."
+                : "For the first time in St. Petersburg, manufacturers and distributors of building materials, builders and contractors, architects and developers, interior and product designers meet on one platform — alongside city representatives and the professional community."}
             </p>
 
             <p

@@ -12,9 +12,75 @@ import {
   ArrowUpRight,
   ChevronLeft,
   ChevronRight,
+  Building2,
+  Zap,
+  Home,
+  Compass,
+  Wifi,
+  Shield,
+  Package,
+  Paintbrush,
+  Hammer,
+  HardHat,
+  Lightbulb,
+  Thermometer,
+  Wind,
+  Droplets,
+  Settings,
+  Factory,
+  Warehouse,
+  LayoutGrid,
+  PaintBucket,
+  Ruler,
+  DoorOpen,
+  Truck,
+  Cpu,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { CategoryCard } from "@/components/categories/CategoryCard";
+
+const ICON_MAP: Record<string, LucideIcon> = {
+  Layers,
+  Palette,
+  Wrench,
+  Sofa,
+  SquareDashedBottom,
+  Building2,
+  Zap,
+  Home,
+  Compass,
+  Wifi,
+  Shield,
+  Package,
+  Paintbrush,
+  Hammer,
+  HardHat,
+  Lightbulb,
+  Thermometer,
+  Wind,
+  Droplets,
+  Settings,
+  Factory,
+  Warehouse,
+  LayoutGrid,
+  PaintBucket,
+  Ruler,
+  DoorOpen,
+  Truck,
+  Cpu,
+};
+
+const EXTRA_BGS = [
+  "linear-gradient(150deg, #1e3a2b 0%, #0a1510 100%)",
+  "linear-gradient(150deg, #2a1e3a 0%, #0a0a15 100%)",
+  "linear-gradient(150deg, #3a2a1e 0%, #150a05 100%)",
+  "linear-gradient(150deg, #1e2a3a 0%, #050a15 100%)",
+  "linear-gradient(150deg, #3a1e2a 0%, #15050a 100%)",
+  "linear-gradient(150deg, #2a3a1e 0%, #0a1505 100%)",
+  "linear-gradient(150deg, #1e3a3a 0%, #051515 100%)",
+];
 import type { Locale } from "@/i18n/routing";
+import type { ExhibitorCategory } from "@prisma/client";
 
 type Section = {
   Icon: LucideIcon;
@@ -225,78 +291,21 @@ const SECTIONS_EN: Section[] = [
 
 function SectionCard({ Icon, num, label, sub, description, items, bg, image }: Section) {
   return (
-    <div
-      className="group relative rounded-3xl overflow-hidden cursor-pointer flex-shrink-0 w-full"
-      style={{ background: bg, height: "clamp(300px, 32vw, 480px)" }}
+    <CategoryCard
+      num={num}
+      Icon={Icon}
+      label={label}
+      sub={sub}
+      image={image || undefined}
+      bg={bg}
+      className="cursor-pointer"
     >
-      {/* Photo layer */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={image}
-        alt=""
-        aria-hidden
-        className="absolute inset-0 w-full h-full object-cover"
-        style={{ opacity: 0.22 }}
-      />
-
-      {/* Top lime accent bar on hover */}
-      <div
-        className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        style={{ background: "#a9ec46" }}
-        aria-hidden
-      />
-
       {/* Arrow top-right */}
       <div
         className="absolute top-5 right-5 z-20 size-10 rounded-full border flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         style={{ borderColor: "rgba(169,236,70,0.4)", background: "rgba(169,236,70,0.08)" }}
       >
         <ArrowUpRight className="size-4" style={{ color: "#a9ec46" }} />
-      </div>
-
-      {/* Decorative number */}
-      <div
-        className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
-        aria-hidden
-      >
-        <span
-          className="font-black text-white"
-          style={{ fontSize: "clamp(80px, 14vw, 180px)", opacity: 0.04, lineHeight: 1 }}
-        >
-          {num}
-        </span>
-      </div>
-
-      {/* Bottom gradient */}
-      <div
-        className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none"
-        style={{ background: "linear-gradient(to top, rgba(0,0,0,0.65), transparent)" }}
-        aria-hidden
-      />
-
-      {/* Default content */}
-      <div className="absolute inset-0 flex flex-col justify-between p-6 sm:p-8 z-10">
-        <div
-          className="size-11 rounded-xl flex items-center justify-center border transition-colors duration-300"
-          style={{ background: "rgba(169,236,70,0.06)", borderColor: "rgba(169,236,70,0.18)" }}
-        >
-          <Icon className="size-5" style={{ color: "#a9ec46" }} />
-        </div>
-
-        <div>
-          <p
-            className="font-black text-white leading-tight mb-2"
-            style={{ fontSize: "clamp(16px, 1.6vw, 22px)" }}
-          >
-            {label}
-          </p>
-          <p
-            className="text-white/75 text-[12px] tracking-wide"
-            style={{ fontFamily: "var(--font-mulish)" }}
-          >
-            {sub}
-          </p>
-        </div>
       </div>
 
       {/* Hover lime overlay */}
@@ -342,16 +351,36 @@ function SectionCard({ Icon, num, label, sub, description, items, bg, image }: S
           )}
         </div>
       </div>
-    </div>
+    </CategoryCard>
   );
 }
 
 const CARDS_PER_PAGE = 3;
 
-export function AboutSectionsDark() {
+export function AboutSectionsDark({ categories = [] }: { categories?: ExhibitorCategory[] }) {
   const locale = useLocale() as Locale;
   const ru = locale === "ru";
-  const sections = ru ? SECTIONS_RU : SECTIONS_EN;
+  const baseSections = ru ? SECTIONS_RU : SECTIONS_EN;
+
+  // When DB has categories, map over ALL of them (not capped at baseSections.length)
+  const sections: Section[] =
+    categories.length > 0
+      ? categories.map((cat, i) => {
+          const base = baseSections[i];
+          const ResolvedIcon = ICON_MAP[cat.icon ?? ""] ?? base?.Icon ?? Layers;
+          const dbSub = ru ? cat.subRu : cat.subEn;
+          return {
+            Icon: ResolvedIcon,
+            num: String(i + 1).padStart(2, "0"),
+            label: ru ? cat.titleRu : cat.titleEn,
+            sub: dbSub || base?.sub || (ru ? cat.titleRu : cat.titleEn),
+            description: base?.description ?? "",
+            items: base?.items ?? [],
+            bg: base?.bg ?? EXTRA_BGS[i % EXTRA_BGS.length],
+            image: cat.imageUrl ?? base?.image ?? "",
+          };
+        })
+      : baseSections;
 
   const [slideIndex, setSlideIndex] = useState(0);
   const [direction, setDirection] = useState(1);
@@ -419,15 +448,15 @@ export function AboutSectionsDark() {
               type="button"
               onClick={handlePrev}
               disabled={safeIndex === 0}
-              className="size-10 rounded-full border flex items-center justify-center transition-all duration-200 disabled:opacity-30"
+              className="size-11 rounded-full border-2 flex items-center justify-center transition-all duration-200 disabled:opacity-25 hover:scale-105"
               style={{
-                borderColor: "rgba(255,255,255,0.15)",
-                color: "#fff",
-                background: "rgba(255,255,255,0.04)",
+                borderColor: safeIndex === 0 ? "rgba(255,255,255,0.25)" : "rgba(169,236,70,0.7)",
+                color: safeIndex === 0 ? "#fff" : "#a9ec46",
+                background: safeIndex === 0 ? "rgba(255,255,255,0.06)" : "rgba(169,236,70,0.10)",
               }}
               aria-label={ru ? "Назад" : "Previous"}
             >
-              <ChevronLeft className="size-4" />
+              <ChevronLeft className="size-5" />
             </button>
 
             <div className="flex items-center gap-2">
@@ -441,9 +470,9 @@ export function AboutSectionsDark() {
                   }}
                   className="rounded-full transition-all duration-300"
                   style={{
-                    width: i === safeIndex ? "24px" : "8px",
+                    width: i === safeIndex ? "28px" : "8px",
                     height: "8px",
-                    background: i === safeIndex ? "#E11B22" : "rgba(255,255,255,0.2)",
+                    background: i === safeIndex ? "#a9ec46" : "rgba(255,255,255,0.30)",
                   }}
                   aria-label={`${ru ? "Страница" : "Page"} ${i + 1}`}
                 />
@@ -454,15 +483,17 @@ export function AboutSectionsDark() {
               type="button"
               onClick={handleNext}
               disabled={safeIndex >= totalPages - 1}
-              className="size-10 rounded-full border flex items-center justify-center transition-all duration-200 disabled:opacity-30"
+              className="size-11 rounded-full border-2 flex items-center justify-center transition-all duration-200 disabled:opacity-25 hover:scale-105"
               style={{
-                borderColor: "rgba(255,255,255,0.15)",
-                color: "#fff",
-                background: "rgba(255,255,255,0.04)",
+                borderColor:
+                  safeIndex >= totalPages - 1 ? "rgba(255,255,255,0.25)" : "rgba(169,236,70,0.7)",
+                color: safeIndex >= totalPages - 1 ? "#fff" : "#a9ec46",
+                background:
+                  safeIndex >= totalPages - 1 ? "rgba(255,255,255,0.06)" : "rgba(169,236,70,0.10)",
               }}
               aria-label={ru ? "Вперёд" : "Next"}
             >
-              <ChevronRight className="size-4" />
+              <ChevronRight className="size-5" />
             </button>
           </div>
         </m.div>
