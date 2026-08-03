@@ -1,36 +1,34 @@
 # ===== NEVA BUILD — multi-stage Dockerfile (Next.js standalone) =====
 
 # --- deps: установка зависимостей ---
-FROM node:20-alpine AS deps
-RUN apk add --no-cache libc6-compat openssl
+FROM node:20-slim AS deps
+RUN apt-get update && apt-get install -y --no-install-recommends openssl && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 COPY package.json package-lock.json* ./
 COPY prisma ./prisma
 RUN npm ci
 
 # --- builder: сборка приложения ---
-FROM node:20-alpine AS builder
-RUN apk add --no-cache libc6-compat openssl
+FROM node:20-slim AS builder
+RUN apt-get update && apt-get install -y --no-install-recommends openssl && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
-# DATABASE_URL не нужен для сборки (сервисы данных устойчивы к отсутствию БД),
-# но Prisma Client генерируется через build-скрипт.
 RUN --mount=type=cache,id=nextjs-build-cache,target=/app/.next/cache \
     npm run build
 
 # --- runner: продакшн-образ ---
-FROM node:20-alpine AS runner
-RUN apk add --no-cache openssl
+FROM node:20-slim AS runner
+RUN apt-get update && apt-get install -y --no-install-recommends openssl && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
 
-RUN addgroup --system --gid 1001 nodejs \
-  && adduser --system --uid 1001 nextjs
+RUN groupadd --system --gid 1001 nodejs \
+  && useradd --system --uid 1001 --gid 1001 --no-create-home nextjs
 
 # Standalone-сборка Next.js
 COPY --from=builder /app/public ./public
