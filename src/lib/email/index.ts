@@ -1,5 +1,6 @@
 import "server-only";
 import nodemailer, { type Transporter } from "nodemailer";
+import { buildNotificationHtml, buildTicketHtml } from "./templates";
 
 let transporter: Transporter | null = null;
 
@@ -50,17 +51,10 @@ export async function notifyOrganizerLead(data: {
   title: string;
   fields: Record<string, string | undefined>;
 }) {
-  const rows = Object.entries(data.fields)
-    .filter(([, v]) => v)
-    .map(
-      ([k, v]) =>
-        `<tr><td style="padding:4px 12px 4px 0;color:#666">${k}</td><td style="padding:4px 0"><b>${v}</b></td></tr>`,
-    )
-    .join("");
   await sendMail({
     to: ORGANIZER(),
-    subject: `NEVA BUILD — ${data.title}`,
-    html: `<h2>${data.title}</h2><table>${rows}</table>`,
+    subject: `НЕВА BUILD — ${data.title}`,
+    html: buildNotificationHtml(data),
     text: Object.entries(data.fields)
       .filter(([, v]) => v)
       .map(([k, v]) => `${k}: ${v}`)
@@ -78,14 +72,8 @@ export async function sendTicketEmail(data: {
 }) {
   await sendMail({
     to: data.to,
-    subject: "NEVA BUILD — ваш билет",
-    html: `
-      <h2>Спасибо за покупку, ${data.fullName}!</h2>
-      <p>Ваш билет: <b>${data.productTitle}</b></p>
-      <p>Код билета: <b>${data.ticketCode}</b></p>
-      <p>Покажите QR-код на входе:</p>
-      <img src="${data.qrDataUrl}" alt="QR" width="220" height="220" />
-    `,
-    text: `Ваш билет ${data.productTitle}. Код: ${data.ticketCode}`,
+    subject: "НЕВА BUILD — ваш билет",
+    html: buildTicketHtml(data),
+    text: `Ваш билет: ${data.productTitle}\nКод билета: ${data.ticketCode}\nПокажите QR-код или продиктуйте код на входе.`,
   });
 }
