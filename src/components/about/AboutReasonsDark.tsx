@@ -202,7 +202,7 @@ function StackCard({
         />
 
         {/* Number */}
-        <div className="mb-auto">
+        <div className="mb-auto" style={{ position: "relative", zIndex: 2 }}>
           <span
             className="font-black leading-none select-none"
             style={{
@@ -217,7 +217,7 @@ function StackCard({
         </div>
 
         {/* Title + body + dots */}
-        <div className="mt-auto" style={{ position: "relative" }}>
+        <div className="mt-auto" style={{ position: "relative", zIndex: 2 }}>
           <h3
             className="font-black text-white leading-tight mb-4"
             style={{ fontSize: "clamp(22px, 2.8vw, 52px)" }}
