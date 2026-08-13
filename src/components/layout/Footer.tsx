@@ -163,12 +163,13 @@ export function Footer() {
                 {t("privacy")}
               </Link>
               <span className="text-white/15 hidden sm:block">·</span>
-              <Link
-                href="/legal/terms"
+              <a
+                href="/oferta.docx"
+                download
                 className="text-xs text-white/55 hover:text-white/85 transition-colors hidden sm:block"
               >
                 {t("termsUse")}
-              </Link>
+              </a>
               <span className="text-white/15 hidden sm:block">·</span>
 
               {/* Social icons */}

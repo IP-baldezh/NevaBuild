@@ -143,6 +143,7 @@ export function TicketCheckout({ products }: { products: TicketProduct[] }) {
             label={tf("offerConsent")}
             error={err("offerConsent")}
             invalid={!!errors.offerConsent}
+            downloadHref="/oferta.docx"
           />
 
           {serverError && (
@@ -167,12 +168,14 @@ function Consent({
   label,
   error,
   invalid,
+  downloadHref,
 }: {
   control: ReturnType<typeof useForm<TicketOrderInput>>["control"];
   name: "consent" | "offerConsent";
   label: string;
   error?: string;
   invalid: boolean;
+  downloadHref?: string;
 }) {
   return (
     <div>
@@ -187,7 +190,22 @@ function Consent({
               aria-invalid={invalid}
               className="mt-0.5"
             />
-            <span>{label}</span>
+            <span>
+              {label}
+              {downloadHref && (
+                <>
+                  {" "}
+                  <a
+                    href={downloadHref}
+                    download
+                    onClick={(e) => e.stopPropagation()}
+                    className="underline underline-offset-2 hover:text-foreground transition-colors"
+                  >
+                    (скачать)
+                  </a>
+                </>
+              )}
+            </span>
           </label>
         )}
       />
