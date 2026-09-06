@@ -55,7 +55,9 @@ async function main() {
   // --- EventSettings (singleton) ---
   await prisma.eventSettings.upsert({
     where: { id: "default" },
-    update: {},
+    update: {
+      social: EVENT_DEFAULTS.social,
+    },
     create: {
       id: "default",
       titleRu: EVENT_DEFAULTS.titleRu,

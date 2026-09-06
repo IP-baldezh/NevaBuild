@@ -35,7 +35,7 @@ export const EVENT_DEFAULTS = {
   organizerEn: "Idealist LLC",
   social: {
     telegram: "https://t.me/nevabuild",
-    vk: "https://vk.com/nevabuild",
+    vk: "",
     youtube: "",
     website: "https://nevabuildexpo.ru",
   },

@@ -1,149 +1,210 @@
 # NEVA BUILD — платформа выставки
 
-Сайт международной строительно-интерьерной выставки и форума **NEVA BUILD / НЕВА БИЛД**
-(КВЦ «Экспофорум», Санкт-Петербург).
+Сайт международной строительно-интерьерной выставки и форума **NEVA BUILD / НЕВА БИЛД** (КВЦ «Экспофорум», Санкт-Петербург).
 
-Полноценная платформа: публичный сайт на **RU/EN**, каталог участников, деловая программа,
-онлайн-продажа билетов через **ЮKassa**, админ-панель управления контентом и заготовка под личные кабинеты.
+Полноценная веб-платформа: публичный сайт с поддержкой двух языков (**RU/EN**), каталог участников, интерактивная деловая программа, онлайн-продажа билетов через **ЮKassa**, панель управления (админка) и заготовка под личные кабинеты.
 
-## Стек
+---
 
-- **Next.js 15** (App Router) + **React 19** + **TypeScript**
-- **PostgreSQL** + **Prisma ORM**
-- **Tailwind CSS v4** + **shadcn/ui** (компоненты), **Framer Motion** (анимации)
-- **next-intl** — мультиязычность RU/EN (`/ru`, `/en`)
-- **Auth.js (NextAuth v5)** — авторизация админки (Credentials + JWT, роли)
-- **ЮKassa** — приём платежей за билеты
-- **Docker / Docker Compose** — деплой на VPS/VDS
+## Стек технологий
 
-## Архитектура
+- **Фреймворк:** Next.js 15 (App Router, Server Actions, Standalone output) + React 19 + TypeScript
+- **База данных и ORM:** PostgreSQL 16 + Prisma ORM
+- **Стилизация и UI:** Tailwind CSS v4 + Radix UI / shadcn/ui + Framer Motion
+- **Интернационализация (i18n):** next-intl (маршруты `/ru` и `/en`)
+- **Аутентификация:** NextAuth.js v5 / Auth.js (JWT-сессии, роли пользователей)
+- **Платежи:** ЮKassa (с mock-режимом для локальной разработки)
+- **Контейнеризация:** Docker & Docker Compose
 
-Монолит на Next.js без отдельного бэкенда:
-- **Server Components** — чтение данных; **Server Actions** — мутации форм и админки;
-- **Route Handlers** (`/api/*`) — только для HTTP-эндпоинтов: создание платежа и webhook ЮKassa;
-- Сервисный слой `src/server/services/*` отделён от UI — готов к выносу в API при появлении ЛК/CRM;
-- Контент локализуется параллельными полями `*Ru` / `*En`.
+---
 
-## Структура проекта
+## Вариант 1. Запуск для локальной разработки (Быстрый старт)
+
+Этот вариант используется при разработке: исходный код запускается на вашем компьютере с поддержкой Hot-Reload (мгновенное применение правок), а база данных PostgreSQL работает в Docker.
+
+### 1. Что должно быть установлено на компьютере
+1. **Node.js** (версия 20 или выше) — скачайте с [nodejs.org](https://nodejs.org/).
+2. **Docker Desktop** (для Windows/macOS) или **Docker Engine** (для Linux) — убедитесь, что Docker запущен.
+   - *Для Windows:* в настройках Docker Desktop должна быть включена интеграция с WSL 2.
+
+---
+
+### 2. Пошаговые шаги запуска
+
+#### Шаг 1. Откройте терминал в папке с проектом и установите зависимости
+```bash
+npm install
+```
+
+#### Шаг 2. Создайте файл конфигурации `.env`
+Скопируйте файл с примером настроек:
+- **В Windows (PowerShell):**
+  ```powershell
+  Copy-Item .env.example .env
+  ```
+- **В Linux / macOS / Git Bash:**
+  ```bash
+  cp .env.example .env
+  ```
+> **Примечание:** В созданном файле `.env` уже прописаны все стандартные значения для локального запуска. Менять их не обязательно, проект готов к старту.
+
+#### Шаг 3. Запустите базу данных PostgreSQL в Docker
+Выполните команду в терминале:
+```bash
+docker compose up -d postgres
+```
+*Убедиться, что база поднялась и работает:*
+```bash
+docker ps
+```
+*(В столбце STATUS у контейнера `nevabuild-postgres-1` должно быть `Up`)*
+
+#### Шаг 4. Инициализируйте базу данных (схема и миграции)
+Сгенерируйте клиент Prisma и примените структуру таблиц:
+```bash
+npm run prisma:generate
+npm run prisma:deploy
+```
+
+#### Шаг 5. Заполните базу демонстрационными данными (Seed)
+Команда создаст учетную запись администратора, структуру выставки, категории, участников, новости и билеты:
+```bash
+npm run db:seed
+```
+
+#### Шаг 6. Запустите сервер разработки
+```bash
+npm run dev
+```
+
+---
+
+### 3. Куда переходить после запуска
+
+- **Публичный сайт:** [http://localhost:3000](http://localhost:3000) (автоматически перенаправит на русскую версию `/ru`)
+- **Панель администратора:** [http://localhost:3000/admin](http://localhost:3000/admin)
+  - **Email:** `admin@nevabuildexpo.ru`
+  - **Пароль:** `ChangeMe123!`
+- **Просмотр базы данных через веб-интерфейс (Prisma Studio):**
+  В отдельном окне терминала выполните:
+  ```bash
+  npm run prisma:studio
+  ```
+  и откройте [http://localhost:5555](http://localhost:5555).
+
+---
+
+## Вариант 2. Запуск Production-сборки в Docker
+
+Этот вариант используется для деплоя на сервер (VPS/VDS) или для проверки боевой сборки приложения целиком в изолированных контейнерах (Next.js + PostgreSQL).
+
+### Шаг 1. Подготовка `.env` файла
+Создайте и настройте `.env` файл на сервере:
+- **`AUTH_SECRET`** — сгенерируйте надежный секретный ключ:
+  ```bash
+  openssl rand -base64 32
+  ```
+- **`NEXT_PUBLIC_SITE_URL`** — укажите ваш рабочий домен (например, `https://nevabuildexpo.ru`).
+- **`ADMIN_PASSWORD`** и **`POSTGRES_PASSWORD`** — задайте надежные пароли.
+
+### Шаг 2. Сборка и запуск контейнеров
+```bash
+docker compose up -d --build
+```
+> **Что происходит автоматически при старте:**
+> 1. Собирается легковесный standalone-образ Next.js.
+> 2. Запускается PostgreSQL и ждет проверки здоровья (`healthcheck`).
+> 3. Контейнер приложения автоматически накатывает миграции Prisma и создает первого администратора (бутстрап).
+
+### Шаг 3. (Опционально) Полное демо-наполнение базы на проде
+Если вы хотите заполнить базу всеми демо-данными:
+```bash
+# Если Node.js есть на сервере:
+npm run db:seed
+```
+
+### Шаг 4. Остановка контейнеров
+```bash
+docker compose down
+```
+
+### Домен и автоматический HTTPS (Caddy)
+В проект встроен готовый сервис обратного прокси Caddy, который автоматически выпускает бесплатные SSL-сертификаты Let's Encrypt:
+1. Направьте DNS A-записи вашего домена на IP сервера.
+2. В файле [Caddyfile](Caddyfile) укажите ваш домен и email.
+3. Запустите Docker Compose с профилем `proxy`:
+   ```bash
+   docker compose --profile proxy up -d --build
+   ```
+
+---
+
+## Описание переменных окружения (`.env`)
+
+| Переменная | Описание | Значение по умолчанию | Обязательно для Production? |
+|---|---|---|:---:|
+| `DATABASE_URL` | Строка подключения к PostgreSQL | `postgresql://neva:neva@localhost:5432/nevabuild?schema=public` | Да |
+| `AUTH_SECRET` | Ключ шифрования сессий и JWT админки | `neva_build_development_secret_key_...` | Да (`openssl rand -base64 32`) |
+| `NEXT_PUBLIC_SITE_URL` | Полный публичный URL сайта | `http://localhost:3000` | Да (`https://your-domain.ru`) |
+| `ADMIN_EMAIL` | Email главного администратора | `admin@nevabuildexpo.ru` | Да |
+| `ADMIN_PASSWORD` | Пароль администратора при первом старте | `ChangeMe123!` | Да |
+| `ADMIN_NAME` | Имя администратора | `Администратор` | Нет |
+| `SMTP_HOST`, `SMTP_USER`, `SMTP_PASSWORD`, `SMTP_PORT` | Настройки почтового сервера для писем с билетами и уведомлений | Пусто (без SMTP формы работают, письма логируются в консоль) | Опционально |
+| `YOOKASSA_SHOP_ID`, `YOOKASSA_SECRET_KEY` | Ключи магазина ЮKassa для приема реальных платежей | Пусто (без ключей работает тестовый dev-mock режим мгновенной оплаты) | Для приема платежей |
+| `REDIS_URL` | Строка подключения к Redis (кэш/rate-limit) | Пусто (опционально) | Нет |
+
+---
+
+## Справочник полезных команд
+
+| Команда | Что делает |
+|---|---|
+| `npm run dev` | Запуск приложения в режиме разработки с горячей перезагрузкой |
+| `npm run build` | Компиляция TypeScript и production-сборка Next.js |
+| `npm run start` | Запуск локально собранной production-версии |
+| `npm run prisma:generate` | Обновление типизированного клиента Prisma под текущую схему |
+| `npm run prisma:deploy` | Применение существующих миграций к текущей базе данных |
+| `npm run prisma:migrate` | Создание и применение новой миграции при изменении `schema.prisma` |
+| `npm run prisma:studio` | Запуск визуального редактора таблиц базы данных в браузере |
+| `npm run db:seed` | Наполнение базы данных стартовым контентом |
+| `npm test` | Запуск набора автоматических тестов (Vitest) |
+| `npm run typecheck` | Проверка всех типов проекта (`tsc --noEmit`) |
+| `npm run lint` | Проверка кода линтером ESLint |
+| `npm run check` | Полная проверка кода (форматирование + линтер + типы + тесты) |
+
+---
+
+## Архитектура и структура каталогов
 
 ```
 src/
   app/
-    (site)/[locale]/      # публичный сайт (RU/EN): главная, about, exhibit, visit,
-                          # exhibitors, program, tickets, news, contacts, legal
-    (admin)/admin/        # админ-панель (нелокализованная зона) + login + (panel)/*
-    (account)/account/    # заглушки личных кабинетов (exhibitor/organizer)
-    api/                  # auth, payments/create, payments/yookassa-webhook
-    sitemap.ts, robots.ts, icon.svg
-  components/             # layout, ui, home, exhibitors, program, tickets, news, forms, admin, account
-  lib/                    # db, auth, authz, payments/yookassa, email, qr, validations, i18n-утилиты
+    (site)/[locale]/      # Публичные страницы: главная, о выставке, участникам,
+                          # посетителям, каталог, программа, билеты, новости, контакты
+    (admin)/admin/        # Панель администратора (нелокализованная зона) + вход
+    (account)/account/    # Заготовки под личные кабинеты участников/организаторов
+    api/                  # Обработчики API: платежи ЮKassa, webhook, аутентификация
+  components/             # UI-компоненты (shadcn, формы, секции страниц, шапка, подвал)
+  lib/                    # Утилиты: db (Prisma), auth (NextAuth), платежи, почта, генерация QR
   server/
-    services/             # чтение данных (event, exhibitors, news, program, tickets, orders, ...)
-    actions/              # server actions (формы + админ CRUD)
-  i18n/                   # routing, navigation, request (next-intl)
-  styles/globals.css      # дизайн-токены NEVA BUILD (Tailwind v4)
-messages/                 # ru.json, en.json
-prisma/                   # schema.prisma, migrations/, seed.ts
-scripts/create-admin.mjs  # бутстрап админа для прод-контейнера
+    services/             # Чтение данных из БД (события, участники, программа, новости)
+    actions/              # Серверные экшены (Server Actions): отправка форм и CRUD админки
+  i18n/                   # Конфигурация мультиязычности (next-intl)
+messages/                 # Текстовые переводы интерфейса (ru.json, en.json)
+prisma/                   # schema.prisma (структура таблиц), миграции, seed.ts
 ```
 
-## Быстрый старт (локально)
+---
 
-Требования: Node.js 20+, Docker (для PostgreSQL).
+## Интеграция с ЮKassa (Платежи)
 
-```bash
-# 1. Зависимости
-npm install
+1. **В режиме разработки (Dev-Mock):**
+   Если переменные `YOOKASSA_SHOP_ID` и `YOOKASSA_SECRET_KEY` не заданы в `.env`, система автоматически работает в тестовом режиме: при заказе билета оплата считается успешно завершенной, сразу генерируется QR-код билета.
+2. **В боевом режиме (Production):**
+   Укажите реальные ключи в `.env`, а в личном кабинете ЮKassa настройте Webhook на URL:
+   `https://ваш-домен.ru/api/payments/yookassa-webhook` (события `payment.succeeded`, `payment.canceled`).
 
-# 2. Переменные окружения
-cp .env.example .env
-#   как минимум задайте AUTH_SECRET:  openssl rand -base64 32
-
-# 3. Поднять PostgreSQL (через docker)
-docker run -d --name neva-pg -e POSTGRES_USER=neva -e POSTGRES_PASSWORD=neva \
-  -e POSTGRES_DB=nevabuild -p 5432:5432 postgres:16-alpine
-
-# 4. Миграции + наполнение демо-данными
-npx prisma migrate deploy   # или: npx prisma migrate dev
-npm run db:seed             # админ, настройки, категории, участники, билеты, программа, новости
-
-# 5. Запуск
-npm run dev                 # http://localhost:3000  (редирект на /ru)
-```
-
-Админка: `http://localhost:3000/admin` →
-логин из `.env` (`ADMIN_EMAIL` / `ADMIN_PASSWORD`, по умолчанию `admin@nevabuildexpo.ru` / `ChangeMe123!`).
-
-## Переменные окружения
-
-См. `.env.example`. Ключевые:
-
-| Переменная | Назначение |
-|---|---|
-| `DATABASE_URL` | строка подключения PostgreSQL |
-| `AUTH_SECRET` | секрет Auth.js (`openssl rand -base64 32`) |
-| `NEXT_PUBLIC_SITE_URL` | публичный URL сайта (для SEO, OG, webhook, returnUrl) |
-| `ADMIN_EMAIL` / `ADMIN_PASSWORD` | учётка первого админа (seed/бутстрап) |
-| `SMTP_*`, `ORGANIZER_EMAIL` | почта для уведомлений и билетов (без SMTP письма пропускаются, формы работают) |
-| `YOOKASSA_SHOP_ID` / `YOOKASSA_SECRET_KEY` | ключи ЮKassa (без них — dev-mock оплаты) |
-
-## Деплой через Docker Compose (на российский VPS/VDS)
-
-```bash
-# 1. Перенести проект на сервер, создать .env (см. .env.example)
-#    Обязательно: AUTH_SECRET, NEXT_PUBLIC_SITE_URL=https://ваш-домен,
-#    надёжные ADMIN_PASSWORD и POSTGRES_PASSWORD.
-
-# 2. Сборка и запуск (app + postgres). BOOTSTRAP=true создаст админа при первом старте.
-docker compose up -d --build
-
-# Миграции применяются автоматически (entrypoint → prisma migrate deploy).
-
-# 3. (опц.) Полное демо-наполнение БД:
-docker compose exec app sh -c "node scripts/create-admin.mjs"
-#    либо полный seed из dev-окружения с DATABASE_URL на эту БД: npm run db:seed
-
-# 4. После первого старта можно выключить бутстрап: BOOTSTRAP=false в .env и docker compose up -d
-```
-
-### Домен и HTTPS (Caddy)
-
-1. Направьте A-записи доменов на IP сервера.
-2. Укажите домен и email в `Caddyfile`.
-3. Запустите с профилем proxy:
-   ```bash
-   docker compose --profile proxy up -d --build
-   ```
-   Caddy сам выпустит и продлит TLS-сертификаты (Let's Encrypt).
-
-Альтернативно — внешний Nginx как reverse-proxy на `127.0.0.1:3000`.
-
-### Webhook ЮKassa
-
-1. Получите `YOOKASSA_SHOP_ID` и `YOOKASSA_SECRET_KEY` в ЛК ЮKassa, впишите в `.env`.
-2. В ЛК ЮKassa настройте уведомления (webhook) на:
-   ```
-   {NEXT_PUBLIC_SITE_URL}/api/payments/yookassa-webhook
-   ```
-   события: `payment.succeeded`, `payment.canceled`.
-3. **Безопасность:** ограничьте доступ к webhook по [списку IP ЮKassa](https://yookassa.ru/developers/using-api/webhooks)
-   (на уровне reverse-proxy/файрвола). Статус платежа дополнительно перепроверяется через API.
-
-> Без ключей ЮKassa оплата работает в **dev-mock**: заказ сразу помечается оплаченным и
-> выпускается билет — удобно для тестирования флоу. В проде задайте реальные ключи.
-
-## Полезные команды
-
-```bash
-npm run dev            # дев-сервер
-npm run build          # прод-сборка (prisma generate + next build)
-npm run start          # запуск прод-сборки
-npm run lint           # ESLint
-npm run typecheck      # проверка типов
-npm run db:seed        # демо-наполнение
-npx prisma studio      # GUI к БД
-npx prisma migrate dev # новая миграция при изменении схемы
-```
+---
 
 ## Что реализовано
 
