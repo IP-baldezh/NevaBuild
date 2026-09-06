@@ -18,7 +18,7 @@ services:
     environment:
       DATABASE_URL: postgresql://nevabuild:${POSTGRES_PASSWORD}@postgres:5432/nevabuild
     volumes:
-      - uploads:/app/uploads
+      - uploads:/app/public/uploads
     networks:
       - internal
       - web
