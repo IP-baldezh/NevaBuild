@@ -140,7 +140,7 @@ function StackCard({
           maxWidth: 1440,
           height: "clamp(420px, 75vh, 680px)",
           padding: "clamp(28px, 4vw, 64px)",
-          background: "rgba(10, 24, 14, 0.88)",
+          background: "rgb(10, 24, 14)",
           border: "1px solid rgba(255, 255, 255, 0.10)",
           boxShadow: [
             "inset 0 1.5px 0 rgba(255, 255, 255, 0.18)",

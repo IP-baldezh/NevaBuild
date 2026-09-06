@@ -8,11 +8,10 @@ const MARQUEE = "УЧАСТНИКАМ · NEVA BUILD · FOR EXHIBITORS · NEVA BU
 
 type Props = {
   dateRange: string;
-  venue: string;
   city: string;
 };
 
-export function ExhibitHero({ dateRange, venue, city }: Props) {
+export function ExhibitHero({ dateRange, city }: Props) {
   const locale = useLocale() as Locale;
   const ru = locale === "ru";
   const t = useTranslations("ExhibitPage");
@@ -110,7 +109,7 @@ export function ExhibitHero({ dateRange, venue, city }: Props) {
             className="font-bold text-white/65 mt-8 tracking-[0.14em]"
             style={{ fontSize: "clamp(11px, 0.9vw, 13px)", fontFamily: "var(--font-mulish)" }}
           >
-            {dateRange} / {city.toUpperCase()} · {venue.toUpperCase()}
+            {dateRange} / {city.toUpperCase()}
           </p>
         </m.div>
       </div>

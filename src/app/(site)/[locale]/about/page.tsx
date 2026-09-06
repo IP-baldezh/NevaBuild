@@ -3,7 +3,6 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { buildAlternates } from "@/lib/seo";
 import { getEventSettings, localizeEvent } from "@/server/services/event";
-import { formatDateRange } from "@/lib/format";
 import { getPartners } from "@/server/services/partners";
 import { getExhibitorCategories } from "@/server/services/exhibitors";
 
@@ -52,7 +51,8 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
   ]);
   const ev = localizeEvent(settings, locale as Locale);
 
-  const dateRange = formatDateRange(ev.dateStart, ev.dateEnd, locale as Locale);
+  const year = new Date(ev.dateStart).getFullYear();
+  const dateRange = locale === "ru" ? `${year} г.` : String(year);
   const sqm = locale === "ru" ? " м²" : " m²";
 
   const stats: StatItem[] = [
@@ -102,7 +102,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
     <div className="relative" style={{ background: "#07100a" }}>
       <AboutBackground ids={SECTION_IDS} />
 
-      <AboutHero lead={tAboutPage("lead")} dateRange={dateRange} venue={ev.venue} city={ev.city} />
+      <AboutHero lead={tAboutPage("lead")} dateRange={dateRange} city={ev.city} />
 
       <AboutIntroBlock />
 

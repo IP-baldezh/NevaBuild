@@ -10,7 +10,6 @@ import { ExhibitorModal } from "@/components/modals/ExhibitorModal";
 type Props = {
   lead: string;
   dateRange: string;
-  venue: string;
   city: string;
 };
 
@@ -50,7 +49,7 @@ function TickerItems({ text }: { text: string }) {
   );
 }
 
-export function AboutHero({ lead, dateRange, venue, city }: Props) {
+export function AboutHero({ lead, dateRange, city }: Props) {
   const locale = useLocale() as Locale;
   const ru = locale === "ru";
   const [visitorOpen, setVisitorOpen] = useState(false);
@@ -107,7 +106,7 @@ export function AboutHero({ lead, dateRange, venue, city }: Props) {
             className="font-bold text-white/70 mb-8 tracking-[0.14em]"
             style={{ fontSize: "clamp(11px, 0.9vw, 13px)", fontFamily: "var(--font-mulish)" }}
           >
-            {dateRange} / {city.toUpperCase()} · {venue.toUpperCase()}
+            {dateRange} / {city.toUpperCase()}
           </p>
 
           <m.div

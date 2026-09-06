@@ -3,7 +3,6 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { buildAlternates } from "@/lib/seo";
 import { getEventSettings, localizeEvent } from "@/server/services/event";
-import { formatDateRange } from "@/lib/format";
 import { getExhibitorCategories } from "@/server/services/exhibitors";
 import { getPartners } from "@/server/services/partners";
 
@@ -43,13 +42,14 @@ export default async function ExhibitPage({ params }: { params: Promise<{ locale
     getPartners(),
   ]);
   const ev = localizeEvent(settings, locale as Locale);
-  const dateRange = formatDateRange(ev.dateStart, ev.dateEnd, locale as Locale);
+  const year = new Date(ev.dateStart).getFullYear();
+  const dateRange = locale === "ru" ? `${year} г.` : String(year);
 
   return (
     <div className="relative" style={{ background: "#07100a" }}>
       <ExhibitBackground ids={SECTION_IDS} />
 
-      <ExhibitHero dateRange={dateRange} venue={ev.venue} city={ev.city} />
+      <ExhibitHero dateRange={dateRange} city={ev.city} />
 
       <ExhibitBenefitsDark />
 
