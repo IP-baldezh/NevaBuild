@@ -149,17 +149,33 @@ export function SettingsForm({ settings }: { settings: EventSettings }) {
             <Input
               id="social_telegram"
               name="social_telegram"
+              placeholder="https://t.me/nevabuild"
               defaultValue={social.telegram ?? ""}
             />
           </FormField>
           <FormField label="VK" htmlFor="social_vk">
-            <Input id="social_vk" name="social_vk" defaultValue={social.vk ?? ""} />
+            <Input
+              id="social_vk"
+              name="social_vk"
+              placeholder="https://vk.com/..."
+              defaultValue={social.vk ?? ""}
+            />
           </FormField>
           <FormField label="YouTube" htmlFor="social_youtube">
-            <Input id="social_youtube" name="social_youtube" defaultValue={social.youtube ?? ""} />
+            <Input
+              id="social_youtube"
+              name="social_youtube"
+              placeholder="https://youtube.com/..."
+              defaultValue={social.youtube ?? ""}
+            />
           </FormField>
           <FormField label="Сайт" htmlFor="social_website">
-            <Input id="social_website" name="social_website" defaultValue={social.website ?? ""} />
+            <Input
+              id="social_website"
+              name="social_website"
+              placeholder="https://nevabuildexpo.ru"
+              defaultValue={social.website ?? ""}
+            />
           </FormField>
           <FormField label="Домены (через запятую)" htmlFor="domains" className="sm:col-span-2">
             <Input id="domains" name="domains" defaultValue={settings.domains.join(", ")} />

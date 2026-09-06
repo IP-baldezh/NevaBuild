@@ -47,57 +47,127 @@ prisma/                   # schema.prisma, migrations/, seed.ts
 scripts/create-admin.mjs  # бутстрап админа для прод-контейнера
 ```
 
-## Быстрый старт (локально)
+## Быстрый старт (локальная разработка)
 
-Требования: Node.js 20+, Docker (для PostgreSQL).
+### Требования
+- **Node.js**: версия 20+
+- **Docker Desktop** (с включённым WSL2 на Windows) или Docker Engine на Linux/macOS
+- **npm** (поставляется с Node.js)
 
+---
+
+### Пошаговая инструкция по запуску
+
+#### Шаг 1. Установка зависимостей
 ```bash
-# 1. Зависимости
 npm install
-
-# 2. Переменные окружения
-cp .env.example .env
-#   как минимум задайте AUTH_SECRET:  openssl rand -base64 32
-
-# 3. Поднять PostgreSQL (через docker)
-docker run -d --name neva-pg -e POSTGRES_USER=neva -e POSTGRES_PASSWORD=neva \
-  -e POSTGRES_DB=nevabuild -p 5432:5432 postgres:16-alpine
-
-# 4. Миграции + наполнение демо-данными
-npx prisma migrate deploy   # или: npx prisma migrate dev
-npm run db:seed             # админ, настройки, категории, участники, билеты, программа, новости
-
-# 5. Запуск
-npm run dev                 # http://localhost:3000  (редирект на /ru)
 ```
 
-Админка: `http://localhost:3000/admin` →
-логин из `.env` (`ADMIN_EMAIL` / `ADMIN_PASSWORD`, по умолчанию `admin@nevabuildexpo.ru` / `ChangeMe123!`).
+#### Шаг 2. Настройка переменных окружения
+Скопируйте пример файла конфигурации:
+- **Windows (PowerShell):**
+  ```powershell
+  Copy-Item .env.example .env
+  ```
+- **Linux / macOS / Git Bash:**
+  ```bash
+  cp .env.example .env
+  ```
+
+При необходимости отредактируйте `.env`. Значения по умолчанию уже настроены для локальной разработки:
+- `DATABASE_URL="postgresql://neva:neva@localhost:5432/nevabuild?schema=public"`
+- `AUTH_SECRET="neva_build_development_secret_key_32_characters_minimum"`
+
+#### Шаг 3. Запуск базы данных PostgreSQL в Docker
+Поднимите контейнер базы данных через Docker Compose:
+```bash
+docker compose up -d postgres
+```
+Проверить статус контейнера можно командой:
+```bash
+docker ps
+```
+
+#### Шаг 4. Генерация Prisma Client и применение миграций
+```bash
+npm run prisma:generate
+npm run prisma:deploy
+```
+
+#### Шаг 5. Наполнение базы данных (Seed)
+Заполните базу тестовыми данными (администратор, настройки выставки, категории, участники, программа, билеты, новости):
+```bash
+npm run db:seed
+```
+
+#### Шаг 6. Запуск сервера разработки
+```bash
+npm run dev
+```
+
+Приложение будет доступно по адресу:
+- **Публичный сайт:** [http://localhost:3000](http://localhost:3000) (автоматический редирект на `/ru`)
+- **Админ-панель:** [http://localhost:3000/admin](http://localhost:3000/admin)
+
+Данные для входа в админ-панель по умолчанию:
+- **Email:** `admin@nevabuildexpo.ru`
+- **Пароль:** `ChangeMe123!`
+
+---
+
+## Полезные команды
+
+| Команда | Описание |
+|---|---|
+| `npm run dev` | Запуск Next.js в режиме разработки |
+| `npm run build` | Продакшн-сборка приложения |
+| `npm run start` | Запуск собранного продакшн-приложения |
+| `npm run prisma:studio` | Веб-интерфейс для просмотра и редактирования БД (Prisma Studio) |
+| `npm run prisma:migrate` | Создание и применение новых миграций Prisma (для dev) |
+| `npm run prisma:deploy` | Применение готовых миграций к БД |
+| `npm run db:seed` | Заполнение базы данных начальными данными |
+| `npm test` | Запуск тестов Vitest |
+| `npm run typecheck` | Проверка типов TypeScript (`tsc --noEmit`) |
+| `npm run lint` | Проверка кода линтером ESLint |
+| `npm run check` | Комплексная проверка (форматирование, линтер, типы, тесты) |
+
+---
 
 ## Переменные окружения
 
-См. `.env.example`. Ключевые:
+Все переменные описаны в [.env.example](.env.example). Основные:
 
-| Переменная | Назначение |
-|---|---|
-| `DATABASE_URL` | строка подключения PostgreSQL |
-| `AUTH_SECRET` | секрет Auth.js (`openssl rand -base64 32`) |
-| `NEXT_PUBLIC_SITE_URL` | публичный URL сайта (для SEO, OG, webhook, returnUrl) |
-| `ADMIN_EMAIL` / `ADMIN_PASSWORD` | учётка первого админа (seed/бутстрап) |
-| `SMTP_*`, `ORGANIZER_EMAIL` | почта для уведомлений и билетов (без SMTP письма пропускаются, формы работают) |
-| `YOOKASSA_SHOP_ID` / `YOOKASSA_SECRET_KEY` | ключи ЮKassa (без них — dev-mock оплаты) |
+| Переменная | Назначение | Значение по умолчанию |
+|---|---|---|
+| `DATABASE_URL` | Строка подключения к PostgreSQL | `postgresql://neva:neva@localhost:5432/nevabuild?schema=public` |
+| `AUTH_SECRET` | Секретный ключ для Auth.js / NextAuth | Случайная строка (`openssl rand -base64 32`) |
+| `NEXT_PUBLIC_SITE_URL` | Публичный URL сайта | `http://localhost:3000` |
+| `ADMIN_EMAIL` | Email супер-администратора | `admin@nevabuildexpo.ru` |
+| `ADMIN_PASSWORD` | Пароль супер-администратора | `ChangeMe123!` |
+| `ADMIN_NAME` | Отображаемое имя администратора | `Администратор` |
+| `SMTP_*` | Параметры SMTP-сервера для отправки писем | Опционально (без SMTP формы работают, отправка логируется) |
+| `YOOKASSA_*` | Параметры интеграции с ЮKassa | Опционально (без ключей используется mock-оплата) |
+| `REDIS_URL` | Строка подключения к Redis (кэш/rate-limit) | Опционально |
 
-## Деплой через Docker Compose (на российский VPS/VDS)
+---
+
+## Запуск полного стека через Docker Compose
+
+Для запуска приложения целиком в изолированных контейнерах (PostgreSQL + Next.js):
 
 ```bash
-# 1. Перенести проект на сервер, создать .env (см. .env.example)
-#    Обязательно: AUTH_SECRET, NEXT_PUBLIC_SITE_URL=https://ваш-домен,
-#    надёжные ADMIN_PASSWORD и POSTGRES_PASSWORD.
-
-# 2. Сборка и запуск (app + postgres). BOOTSTRAP=true создаст админа при первом старте.
+# 1. Убедитесь в наличии файла .env
+# 2. Сборка образов и фоновый запуск
 docker compose up -d --build
 
-# Миграции применяются автоматически (entrypoint → prisma migrate deploy).
+# Миграции и создание учетной записи админа выполняются автоматически
+# через docker-entrypoint.sh при старте контейнера app.
+```
+
+Остановка контейнеров:
+```bash
+docker compose down
+```
 
 # 3. (опц.) Полное демо-наполнение БД:
 docker compose exec app sh -c "node scripts/create-admin.mjs"
