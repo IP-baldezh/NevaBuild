@@ -81,6 +81,7 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy-data:/data
       - caddy-config:/config
+      - uploads:/srv/uploads:ro
 
 volumes:
   postgres-data:
