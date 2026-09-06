@@ -127,7 +127,7 @@ function StackCard({
         inset: 0,
         y,
         zIndex: index,
-        willChange: "transform",
+        willChange: index > 0 ? "transform" : undefined,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -140,9 +140,7 @@ function StackCard({
           maxWidth: 1440,
           height: "clamp(420px, 75vh, 680px)",
           padding: "clamp(28px, 4vw, 64px)",
-          background: "rgba(10, 24, 14, 0.60)",
-          backdropFilter: "blur(14px)",
-          WebkitBackdropFilter: "blur(14px)",
+          background: "rgba(10, 24, 14, 0.88)",
           border: "1px solid rgba(255, 255, 255, 0.10)",
           boxShadow: [
             "inset 0 1.5px 0 rgba(255, 255, 255, 0.18)",
@@ -159,43 +157,20 @@ function StackCard({
           alt=""
           aria-hidden
           fill
+          priority={index === 0}
           sizes="(max-width: 1024px) 100vw, 1440px"
           style={{ objectFit: "cover", objectPosition: "center", opacity: 0.32 }}
         />
-        {/* Top specular highlight */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            height: "45%",
-            background:
-              "linear-gradient(180deg, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0.03) 40%, transparent 100%)",
-            borderRadius: "inherit",
-            pointerEvents: "none",
-          }}
-        />
-        {/* Lime refraction tint */}
+        {/* Overlays: specular highlight + lime tint + bottom shadow — combined into one layer */}
         <div
           style={{
             position: "absolute",
             inset: 0,
-            background:
+            background: [
+              "linear-gradient(180deg, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0.03) 40%, transparent 55%)",
               "linear-gradient(135deg, rgba(169,236,70,0.07) 0%, rgba(169,236,70,0.02) 30%, transparent 55%)",
-            borderRadius: "inherit",
-            pointerEvents: "none",
-          }}
-        />
-        {/* Bottom shadow */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: "30%",
-            background: "linear-gradient(0deg, rgba(0,0,0,0.18) 0%, transparent 100%)",
+              "linear-gradient(0deg, rgba(0,0,0,0.18) 0%, transparent 30%)",
+            ].join(", "),
             borderRadius: "inherit",
             pointerEvents: "none",
           }}
@@ -292,6 +267,8 @@ function MobileSnapCard({
         aria-hidden
         fill
         sizes="100vw"
+        priority={isFirst}
+        loading={isFirst ? undefined : "lazy"}
         style={{ objectFit: "cover", objectPosition: "center", opacity: 0.3 }}
       />
       {/* Lime tint */}
