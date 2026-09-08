@@ -198,7 +198,7 @@ export function SectorsCarousel({ categories }: { categories: ExhibitorCategory[
           accentColor="#a9ec46"
           panelBackground="linear-gradient(135deg, #00f0ff 0%, #00ff88 45%, #aaff00 100%)"
           chipTextColor="#E11B22"
-          badgeText="NevaBuild 2027"
+          badgeText="NevaBuild 2028"
         />
       </div>
     </section>

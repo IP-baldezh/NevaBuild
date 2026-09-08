@@ -29,7 +29,7 @@ export function AboutCtaDark({ dateRange, venue, city }: Props) {
         className="block text-xs uppercase tracking-[0.20em] font-bold mb-6"
         style={{ color: "#a9ec46" }}
       >
-        NEVA BUILD 2027
+        NEVA BUILD 2028
       </m.span>
 
       <m.h2

@@ -35,7 +35,7 @@ export function FeatureCarousel({
   accentColor = "#a9ec46",
   panelBackground,
   chipTextColor,
-  badgeText = "NevaBuild 2027",
+  badgeText = "NevaBuild 2028",
   autoPlayInterval = 3000,
 }: FeatureCarouselProps) {
   const [step, setStep] = useState(0);

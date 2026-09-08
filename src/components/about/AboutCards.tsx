@@ -95,7 +95,7 @@ export function AboutCards() {
               style={{ color: "#1a4a0a", fontFamily: "var(--font-mulish)" }}
             >
               {ru
-                ? "Каждый год NEVA BUILD собирает лучших профессионалов строительной отрасли под одной крышей КВЦ Экспофорум."
+                ? "Каждый год NEVA BUILD собирает лучших профессионалов строительной отрасли в Санкт-Петербурге."
                 : "Every year NEVA BUILD brings together the best construction industry professionals under one roof at Expoforum."}
             </p>
             <ul className="flex flex-col gap-3 mb-10 relative z-10">

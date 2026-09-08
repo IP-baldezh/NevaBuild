@@ -39,7 +39,7 @@ export function CtaBanner({ categories = [], dateRange, venue, city }: CtaBanner
             className="text-[11px] uppercase tracking-[0.32em] font-bold mb-6 block"
             style={{ color: "#a9ec46", fontFamily: "var(--font-mulish)" }}
           >
-            NEVA BUILD 2027
+            NEVA BUILD 2028
           </m.span>
 
           <m.h2

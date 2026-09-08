@@ -236,12 +236,12 @@ export function AmbassadorsAlt() {
             {ru ? (
               <>
                 Уже <span className="text-nb-lime-acid font-bold">14 амбассадоров</span> подтвердили
-                участие в NevaBuild 2027
+                участие в NevaBuild 2028
               </>
             ) : (
               <>
                 Already <span className="text-nb-lime-acid font-bold">14 ambassadors</span>{" "}
-                confirmed for NevaBuild 2027
+                confirmed for NevaBuild 2028
               </>
             )}
           </p>

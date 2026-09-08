@@ -59,9 +59,7 @@ export function ContactsMapSection({ venue, city, address, phone, email, social 
 
           <iframe
             src={MAP_SRC}
-            title={
-              ru ? "Карта — КВЦ Экспофорум, Санкт-Петербург" : "Map — Expoforum, Saint Petersburg"
-            }
+            title={ru ? "Карта — Санкт-Петербург" : "Map — Saint Petersburg"}
             className="absolute inset-0 w-full h-full border-0"
             loading="lazy"
             allowFullScreen

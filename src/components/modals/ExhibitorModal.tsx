@@ -109,7 +109,7 @@ export function ExhibitorModal({ open, onClose, categories = [] }: ExhibitorModa
           className="block text-[11px] font-bold uppercase tracking-[3px] mb-3"
           style={{ color: "rgba(169,236,70,0.6)" }}
         >
-          NEVA BUILD 2027 · {ru ? "УЧАСТИЕ СО СТЕНДОМ" : "BOOTH PARTICIPATION"}
+          NEVA BUILD 2028 · {ru ? "УЧАСТИЕ СО СТЕНДОМ" : "BOOTH PARTICIPATION"}
         </span>
         <h2
           className="font-black text-white leading-tight mb-2"

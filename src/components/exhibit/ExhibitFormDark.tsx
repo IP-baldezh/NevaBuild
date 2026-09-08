@@ -29,7 +29,7 @@ export function ExhibitFormDark({ categories }: { categories: ExhibitorCategory[
             className="text-[11px] uppercase tracking-[0.28em] mb-4 block font-bold"
             style={{ color: "#a9ec46", fontFamily: "var(--font-mulish)" }}
           >
-            NEVA BUILD 2027
+            NEVA BUILD 2028
           </span>
           <h2
             className="font-black text-white leading-[0.95] tracking-[-0.03em] mb-4"

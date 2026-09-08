@@ -8,7 +8,7 @@ const REASONS_RU = [
   {
     num: "01",
     title: "Крупнейшая площадка Северо-Запада",
-    desc: "60 000 м² экспозиции в трёх павильонах Экспофорума.",
+    desc: "60 000 м² экспозиционных площадей в Санкт-Петербурге.",
   },
   {
     num: "02",
@@ -41,7 +41,7 @@ const REASONS_EN = [
   {
     num: "01",
     title: "Largest Venue in the Northwest",
-    desc: "60 000 m² across three Expoforum pavilions.",
+    desc: "60 000 m² of exhibition space in Saint Petersburg.",
   },
   {
     num: "02",

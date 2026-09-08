@@ -9,17 +9,17 @@
 export const EVENT_DEFAULTS = {
   titleRu: "Международная строительно-интерьерная выставка и форум",
   titleEn: "International Building & Interior Exhibition and Forum",
-  // Дата редактируется в админке. В мокапах — 18–20 марта 2027.
-  dateStart: "2027-03-18T00:00:00.000Z",
-  dateEnd: "2027-03-20T00:00:00.000Z",
-  venueRu: "КВЦ «Экспофорум», Павильон H",
-  venueEn: "Expoforum, Pavilion H",
+  // Дата редактируется в админке. В мокапах — 2028 год.
+  dateStart: "2028-03-18T00:00:00.000Z",
+  dateEnd: "2028-03-20T00:00:00.000Z",
+  venueRu: "",
+  venueEn: "",
   cityRu: "Санкт-Петербург",
   cityEn: "Saint Petersburg",
   phone: "+7 495 423 39 33",
   email: "info@neva-expo.ru",
-  addressRu: "Санкт-Петербург, Петербургское шоссе, 64/1",
-  addressEn: "Saint Petersburg, Peterburgskoe shosse 64/1",
+  addressRu: "Санкт-Петербург",
+  addressEn: "Saint Petersburg",
   visitorCount: 15000,
   exhibitorCount: 200,
   areaSize: 4000,
@@ -28,9 +28,9 @@ export const EVENT_DEFAULTS = {
   seoTitleRu: "NEVA BUILD — строительно-интерьерная выставка в Санкт-Петербурге",
   seoTitleEn: "NEVA BUILD — Building & Interior Exhibition in Saint Petersburg",
   seoDescriptionRu:
-    "Крупнейшая строительно-интерьерная выставка Северо-Запада России. КВЦ «Экспофорум», Санкт-Петербург.",
+    "Крупнейшая строительно-интерьерная выставка Северо-Запада России. Санкт-Петербург.",
   seoDescriptionEn:
-    "The largest building & interior exhibition in North-West Russia. Expoforum, Saint Petersburg.",
+    "The largest building & interior exhibition in North-West Russia. Saint Petersburg.",
   organizerRu: "ООО «Идеалист»",
   organizerEn: "Idealist LLC",
   social: {

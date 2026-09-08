@@ -7,14 +7,14 @@ import type { Locale } from "@/i18n/routing";
 const CARDS_RU = [
   {
     bigNum: "60К",
-    label: "КВЦ Экспофорум",
-    sublabel: "Санкт-Петербург",
+    label: "Санкт-Петербург",
+    sublabel: "Площадка выставки",
     bg: "linear-gradient(150deg, #1e3a2b 0%, #0a1510 100%)",
     quote:
-      "60 000 м² площади в трёх павильонах. Один из крупнейших выставочных комплексов Северо-Запада. Современная инфраструктура и полный сервис.",
-    quoteInitials: "КВЦ",
-    quoteName: "КВЦ Экспофорум",
-    quoteRole: "Санкт-Петербург, Петербургское ш., 64/1",
+      "Деловой и культурный центр Северо-Запада. Один из крупнейших строительных рынков страны с развитой выставочной инфраструктурой.",
+    quoteInitials: "СПБ",
+    quoteName: "Санкт-Петербург",
+    quoteRole: "Северо-Западный федеральный округ",
     span: "lg:col-span-2",
   },
   {
@@ -23,10 +23,10 @@ const CARDS_RU = [
     sublabel: "Минут от центра",
     bg: "linear-gradient(150deg, #1a2e38 0%, #0a1510 100%)",
     quote:
-      "20 минут от центра города. Прямой автобус от м. Московская, собственная многоуровневая парковка.",
+      "20 минут от центра города. Удобная транспортная доступность и парковочная инфраструктура.",
     quoteInitials: "20м",
     quoteName: "Быстрый доступ",
-    quoteRole: "м. Московская / Экспофорум",
+    quoteRole: "Центр Санкт-Петербурга",
     span: "lg:col-span-1",
   },
   {
@@ -58,14 +58,14 @@ const CARDS_RU = [
 const CARDS_EN = [
   {
     bigNum: "60K",
-    label: "Expoforum Convention Centre",
-    sublabel: "Saint Petersburg",
+    label: "Saint Petersburg",
+    sublabel: "Exhibition city",
     bg: "linear-gradient(150deg, #1e3a2b 0%, #0a1510 100%)",
     quote:
-      "60,000 m² across three pavilions. One of the largest exhibition complexes in the Northwest. Modern infrastructure and full service.",
-    quoteInitials: "ECC",
-    quoteName: "Expoforum Convention Centre",
-    quoteRole: "Saint Petersburg, Peterburgskoe sh., 64/1",
+      "Business and cultural centre of the Northwest. One of Russia's largest construction markets with modern exhibition infrastructure.",
+    quoteInitials: "SPB",
+    quoteName: "Saint Petersburg",
+    quoteRole: "Northwestern Federal District",
     span: "lg:col-span-2",
   },
   {
@@ -74,10 +74,10 @@ const CARDS_EN = [
     sublabel: "Minutes from the city centre",
     bg: "linear-gradient(150deg, #1a2e38 0%, #0a1510 100%)",
     quote:
-      "20 minutes from the city centre. Direct bus from Moskovskaya metro, own multi-level parking.",
+      "20 minutes from the city centre. Convenient transport links and parking infrastructure.",
     quoteInitials: "20m",
     quoteName: "Fast access",
-    quoteRole: "Moskovskaya metro / Expoforum",
+    quoteRole: "Saint Petersburg city centre",
     span: "lg:col-span-1",
   },
   {

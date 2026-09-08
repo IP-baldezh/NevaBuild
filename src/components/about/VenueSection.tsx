@@ -8,8 +8,8 @@ import type { Locale } from "@/i18n/routing";
 const FACTS_RU = [
   {
     icon: Building,
-    title: "Экспофорум",
-    desc: "Крупнейший выставочный комплекс Северо-Запада. 3 павильона, 60 000 м² под одной крышей.",
+    title: "Площадка выставки",
+    desc: "Современная выставочная инфраструктура в Санкт-Петербурге. Точное место проведения будет объявлено ближе к дате.",
   },
   {
     icon: Train,
@@ -26,8 +26,8 @@ const FACTS_RU = [
 const FACTS_EN = [
   {
     icon: Building,
-    title: "Expoforum",
-    desc: "The largest exhibition complex in the Northwest. 3 pavilions, 60,000 m² under one roof.",
+    title: "Exhibition Venue",
+    desc: "Modern exhibition infrastructure in Saint Petersburg. The exact venue will be announced closer to the date.",
   },
   {
     icon: Train,

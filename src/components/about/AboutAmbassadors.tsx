@@ -78,8 +78,8 @@ export function AboutAmbassadors() {
       <SimpleLeadModal
         open={exhibitorOpen}
         onClose={() => setExhibitorOpen(false)}
-        eyebrowRu="NEVA BUILD 2027 · АМБАССАДОРЫ"
-        eyebrowEn="NEVA BUILD 2027 · AMBASSADORS"
+        eyebrowRu="NEVA BUILD 2028 · АМБАССАДОРЫ"
+        eyebrowEn="NEVA BUILD 2028 · AMBASSADORS"
         titleRu="Станьте лицом выставки"
         titleEn="Become the face of the exhibition"
         subtitleRu="Оставьте заявку — мы свяжемся с вами в течение рабочего дня"

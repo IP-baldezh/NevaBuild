@@ -3,7 +3,7 @@
     "siteName": "NEVA BUILD",
     "tagline": "Building Exhibition & Forum",
     "defaultTitle": "NEVA BUILD — International Building & Interior Exhibition and Forum",
-    "defaultDescription": "NEVA BUILD is the largest building & interior exhibition in North-West Russia. Manufacturers, suppliers, architects and designers. Expoforum, Saint Petersburg."
+    "defaultDescription": "NEVA BUILD is the largest building & interior exhibition in North-West Russia. Manufacturers, suppliers, architects and designers. Saint Petersburg."
   },
   "Nav": {
     "about": "About",
@@ -36,7 +36,7 @@
     "required": "required"
   },
   "Hero": {
-    "badge": "13–15 April 2027 · Saint Petersburg",
+    "badge": "2028 · Saint Petersburg",
     "kicker": "International building exhibition",
     "title": "International Building & Interior Exhibition and Forum",
     "subtitle": "Building exhibition",
@@ -44,7 +44,7 @@
     "ctaTicket": "Visit the exhibition",
     "ctaStand": "Become an exhibitor",
     "ctaExhibitors": "View exhibitors",
-    "venue": "Expoforum",
+    "venue": "Saint Petersburg",
     "slogan": "Ideas · Materials · Solutions",
     "scroll": "Scroll down",
     "features": {
@@ -258,9 +258,9 @@
       "q1": "How much is a ticket?",
       "a1": "The price depends on the ticket type. Visitor Pass is basic entry, Business Pass gives access to all days and the business program, VIP Pass includes all privileges. See the tickets page for current prices.",
       "q2": "Where is the exhibition held?",
-      "a2": "Expoforum, Saint Petersburg, Peterburgskoe shosse 64/1.",
+      "a2": "Saint Petersburg. The exact venue will be announced closer to the event date.",
       "q3": "How do I get there?",
-      "a3": "Free shuttles run to Expoforum from Moskovskaya metro station, plus public transport. Parking is available for cars.",
+      "a3": "Transport and route information will be published once the exact venue is confirmed.",
       "q4": "Can I buy a ticket on site?",
       "a4": "Yes, but buying online is faster and queue-free: a ticket with a QR code is emailed to you right after payment."
     }

@@ -70,8 +70,8 @@ export function PartnersSection({ partners }: { partners: Partner[] }) {
       <SimpleLeadModal
         open={exhibitorOpen}
         onClose={() => setExhibitorOpen(false)}
-        eyebrowRu="NEVA BUILD 2027 · ПАРТНЁРСТВО"
-        eyebrowEn="NEVA BUILD 2027 · PARTNERSHIP"
+        eyebrowRu="NEVA BUILD 2028 · ПАРТНЁРСТВО"
+        eyebrowEn="NEVA BUILD 2028 · PARTNERSHIP"
         titleRu="Стать партнёром выставки"
         titleEn="Become an Exhibition Partner"
         subtitleRu="Оставьте заявку — мы свяжемся с вами в течение рабочего дня"

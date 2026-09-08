@@ -12,7 +12,7 @@ import type { Locale } from "@/i18n/routing";
 const SLIDE_MS = 6500;
 const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
-const EVENT_DATE = new Date("2027-03-18T09:00:00");
+const EVENT_DATE = new Date("2028-03-18T09:00:00");
 
 function pad(n: number) {
   return String(n).padStart(2, "0");
@@ -103,10 +103,10 @@ export function Hero({ dateStart, dateEnd, venue, city }: HeroProps) {
         "linear-gradient(90deg, rgba(10,18,12,0.62) 0%, rgba(10,18,12,0.38) 60%, rgba(10,18,12,0.08) 100%)",
       accentGlow:
         "radial-gradient(ellipse 50% 70% at 5% 50%, rgba(169,236,70,0.22) 0%, transparent 60%)",
-      label: ru ? "САНКТ-ПЕТЕРБУРГ · ЭКСПОФОРУМ" : "SAINT-PETERSBURG · EXPOFORUM",
+      label: ru ? "САНКТ-ПЕТЕРБУРГ" : "SAINT-PETERSBURG",
       line1: "NEVA",
       line2: "BUILD",
-      line3: "2027",
+      line3: "2028",
       accentLine: 1,
       body: ru
         ? "Международная строительно-интерьерная выставка Северо-Западного региона"
