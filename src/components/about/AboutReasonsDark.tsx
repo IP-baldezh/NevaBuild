@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
+import type React from "react";
 import Image from "next/image";
 import { m, useScroll, useTransform } from "framer-motion";
 import type { MotionValue } from "framer-motion";
@@ -79,7 +80,7 @@ const CARD_IMAGES = [
   "https://images.unsplash.com/photo-1599707254554-027aeb4deacd?q=75&w=1200&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=75&w=1200&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1622675363311-3e1904dc1885?q=75&w=1200&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1713779490284-a81ff6a8ffae?q=75&w=1200&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1497366216548-37526070297c?q=75&w=1200&auto=format&fit=crop",
 ];
 
 function useIsMobile() {
@@ -231,7 +232,7 @@ function StackCard({
   );
 }
 
-// ─── Mobile: full-screen vertical snap card ───────────────────────────────────
+// ─── Mobile: horizontal swipe full-screen card ───────────────────────────────
 
 function MobileSnapCard({
   num,
@@ -253,7 +254,9 @@ function MobileSnapCard({
   return (
     <div
       style={{
-        height: "clamp(460px, 80dvh, 680px)",
+        width: "100vw",
+        height: "100dvh",
+        flexShrink: 0,
         scrollSnapAlign: "start",
         scrollSnapStop: "always",
         position: "relative",
@@ -287,9 +290,9 @@ function MobileSnapCard({
           bottom: 0,
           left: 0,
           right: 0,
-          height: "65%",
+          height: "60%",
           background:
-            "linear-gradient(0deg, rgba(5,14,8,0.92) 0%, rgba(5,14,8,0.40) 60%, transparent 100%)",
+            "linear-gradient(0deg, rgba(5,14,8,0.95) 0%, rgba(5,14,8,0.55) 55%, transparent 100%)",
           pointerEvents: "none",
         }}
       />
@@ -301,14 +304,14 @@ function MobileSnapCard({
           display: "flex",
           flexDirection: "column",
           padding: "clamp(28px, 7vw, 48px)",
-          paddingBottom: "clamp(40px, 10vw, 64px)",
+          paddingBottom: "clamp(48px, 12vw, 72px)",
         }}
       >
         {/* Number */}
         <span
           className="font-black select-none"
           style={{
-            fontSize: "clamp(64px, 22vw, 120px)",
+            fontSize: "clamp(72px, 24vw, 130px)",
             color: "rgba(169,236,70,0.50)",
             fontFamily: "var(--font-mulish)",
             lineHeight: 0.85,
@@ -321,7 +324,7 @@ function MobileSnapCard({
         <div style={{ marginTop: "auto" }}>
           <h3
             className="font-black text-white leading-tight mb-3"
-            style={{ fontSize: "clamp(22px, 5.5vw, 32px)" }}
+            style={{ fontSize: "clamp(20px, 5.5vw, 30px)" }}
           >
             {title}
           </h3>
@@ -330,7 +333,7 @@ function MobileSnapCard({
             style={{
               color: "rgba(255,255,255,0.80)",
               fontFamily: "var(--font-mulish)",
-              fontSize: "clamp(14px, 3.5vw, 16px)",
+              fontSize: "clamp(13px, 3.5vw, 15px)",
             }}
           >
             {body}
@@ -353,20 +356,20 @@ function MobileSnapCard({
           </div>
         </div>
 
-        {/* Swipe hint on first card */}
+        {/* Swipe hint on first card — points right */}
         {isFirst && (
           <div
             aria-hidden
             style={{
               position: "absolute",
-              bottom: "clamp(28px, 6vw, 44px)",
+              bottom: "clamp(52px, 12vw, 72px)",
               right: "clamp(24px, 6vw, 40px)",
               opacity: 0.55,
             }}
           >
             <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
               <path
-                d="M11 3v16M11 19l-5-5M11 19l5-5"
+                d="M3 11h16M19 11l-5-5M19 11l-5 5"
                 stroke="#a9ec46"
                 strokeWidth="1.5"
                 strokeLinecap="round"
@@ -436,14 +439,20 @@ export function AboutReasonsDark() {
       {heading}
 
       {isMobile ? (
-        /* Mobile: full-screen vertical snap scroll */
+        /* Mobile: full-screen horizontal swipe (no conflict with page scroll) */
         <div
-          style={{
-            height: "clamp(460px, 80dvh, 680px)",
-            overflowY: "scroll",
-            scrollSnapType: "y mandatory",
-            scrollbarWidth: "none",
-          }}
+          style={
+            {
+              display: "flex",
+              width: "100%",
+              height: "100dvh",
+              overflowX: "scroll",
+              overflowY: "hidden",
+              scrollSnapType: "x mandatory",
+              scrollbarWidth: "none",
+              WebkitOverflowScrolling: "touch",
+            } as React.CSSProperties
+          }
         >
           {reasons.map((r, i) => (
             <MobileSnapCard
