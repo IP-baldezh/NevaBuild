@@ -255,7 +255,7 @@ function MobileSnapCard({
     <div
       style={{
         width: "100vw",
-        height: "100dvh",
+        height: "clamp(480px, 72dvh, 680px)",
         flexShrink: 0,
         scrollSnapAlign: "start",
         scrollSnapStop: "always",
@@ -439,13 +439,13 @@ export function AboutReasonsDark() {
       {heading}
 
       {isMobile ? (
-        /* Mobile: full-screen horizontal swipe (no conflict with page scroll) */
+        /* Mobile: horizontal swipe carousel */
         <div
           style={
             {
               display: "flex",
               width: "100%",
-              height: "100dvh",
+              height: "clamp(480px, 72dvh, 680px)",
               overflowX: "scroll",
               overflowY: "hidden",
               scrollSnapType: "x mandatory",
